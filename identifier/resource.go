@@ -224,6 +224,14 @@ func (p *Identifier) ResourceType() string {
 	return "GS2::Identifier::Identifier"
 }
 
+func AdministratorAccessGrn() string {
+	return "grn:gs2::system:identifier:securityPolicy:AdministratorAccess"
+}
+
+func ApplicationAccessGrn() string {
+	return "grn:gs2::system:identifier:securityPolicy:ApplicationAccess"
+}
+
 func (p *Identifier) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["UserName"] = p.userName
