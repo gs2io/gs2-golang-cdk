@@ -117,6 +117,7 @@ type Namespace struct {
 	completeMatchmakingTriggerType                string
 	completeMatchmakingTriggerRealtimeNamespaceId *string
 	completeMatchmakingTriggerScriptId            *string
+	changeRatingScript                            *ScriptSetting
 	joinNotification                              *NotificationSetting
 	leaveNotification                             *NotificationSetting
 	completeNotification                          *NotificationSetting
@@ -134,6 +135,7 @@ func NewNamespace(
 	createGatheringTriggerScriptId *string,
 	completeMatchmakingTriggerRealtimeNamespaceId *string,
 	completeMatchmakingTriggerScriptId *string,
+	changeRatingScript *ScriptSetting,
 	joinNotification *NotificationSetting,
 	leaveNotification *NotificationSetting,
 	completeNotification *NotificationSetting,
@@ -151,6 +153,7 @@ func NewNamespace(
 		completeMatchmakingTriggerType:                completeMatchmakingTriggerType,
 		completeMatchmakingTriggerRealtimeNamespaceId: completeMatchmakingTriggerRealtimeNamespaceId,
 		completeMatchmakingTriggerScriptId:            completeMatchmakingTriggerScriptId,
+		changeRatingScript:                            changeRatingScript,
 		joinNotification:                              joinNotification,
 		leaveNotification:                             leaveNotification,
 		completeNotification:                          completeNotification,
@@ -190,6 +193,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.completeMatchmakingTriggerScriptId != nil {
 		properties["CompleteMatchmakingTriggerScriptId"] = p.completeMatchmakingTriggerScriptId
+	}
+	if p.changeRatingScript != nil {
+		properties["ChangeRatingScript"] = p.changeRatingScript.Properties()
 	}
 	if p.joinNotification != nil {
 		properties["JoinNotification"] = p.joinNotification.Properties()
