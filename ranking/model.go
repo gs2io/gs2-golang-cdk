@@ -23,29 +23,32 @@ import (
 var _ = AcquireAction{}
 
 type Ranking struct {
-	rank      int64
-	index     int64
-	userId    string
-	score     int64
-	metadata  *string
-	createdAt int64
+	rank         int64
+	index        int64
+	categoryName string
+	userId       string
+	score        int64
+	metadata     *string
+	createdAt    int64
 }
 
 func NewRanking(
 	rank int64,
 	index int64,
+	categoryName string,
 	userId string,
 	score int64,
 	metadata *string,
 	createdAt int64,
 ) Ranking {
 	data := Ranking{
-		rank:      rank,
-		index:     index,
-		userId:    userId,
-		score:     score,
-		metadata:  metadata,
-		createdAt: createdAt,
+		rank:         rank,
+		index:        index,
+		categoryName: categoryName,
+		userId:       userId,
+		score:        score,
+		metadata:     metadata,
+		createdAt:    createdAt,
 	}
 	return data
 }
@@ -54,6 +57,7 @@ func (p *Ranking) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["Rank"] = p.rank
 	properties["Index"] = p.index
+	properties["CategoryName"] = p.categoryName
 	properties["UserId"] = p.userId
 	properties["Score"] = p.score
 	if p.metadata != nil {
