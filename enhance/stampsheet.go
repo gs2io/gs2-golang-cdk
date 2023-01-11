@@ -26,7 +26,7 @@ func DirectEnhanceByUserId(
 	namespaceName string,
 	rateName string,
 	targetItemSetId string,
-	materials *[]Material,
+	materials []Material,
 	config *[]Config,
 ) AcquireAction {
 	properties := map[string]interface{}{
@@ -35,9 +35,7 @@ func DirectEnhanceByUserId(
 	properties["namespaceName"] = namespaceName
 	properties["rateName"] = rateName
 	properties["targetItemSetId"] = targetItemSetId
-	if materials != nil {
-		properties["materials"] = materials
-	}
+	properties["materials"] = materials
 	if config != nil {
 		properties["config"] = config
 	}
@@ -49,15 +47,11 @@ func DirectEnhanceByUserId(
 
 func DeleteProgressByUserId(
 	namespaceName string,
-	rateName string,
-	progressName string,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["rateName"] = rateName
-	properties["progressName"] = progressName
 	return ConsumeAction{
 		Action:  "Gs2Enhance:DeleteProgressByUserId",
 		Request: properties,

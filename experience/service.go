@@ -26,6 +26,6 @@ func ExperienceNamespace(
 	namespaceName string,
 ) *NamespaceRef {
 	return &NamespaceRef{
-		namespaceName: namespaceName,
+		NamespaceName: namespaceName,
 	}
 }

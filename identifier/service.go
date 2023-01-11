@@ -26,7 +26,7 @@ func IdentifierUser(
 	userName string,
 ) *UserRef {
 	return &UserRef{
-		userName: userName,
+		UserName: userName,
 	}
 }
 
@@ -34,6 +34,6 @@ func IdentifierSecurityPolicy(
 	securityPolicyName string,
 ) *SecurityPolicyRef {
 	return &SecurityPolicyRef{
-		securityPolicyName: securityPolicyName,
+		SecurityPolicyName: securityPolicyName,
 	}
 }

@@ -26,6 +26,6 @@ func EnhanceNamespace(
 	namespaceName string,
 ) *NamespaceRef {
 	return &NamespaceRef{
-		namespaceName: namespaceName,
+		NamespaceName: namespaceName,
 	}
 }

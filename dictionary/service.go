@@ -26,6 +26,6 @@ func DictionaryNamespace(
 	namespaceName string,
 ) *NamespaceRef {
 	return &NamespaceRef{
-		namespaceName: namespaceName,
+		NamespaceName: namespaceName,
 	}
 }

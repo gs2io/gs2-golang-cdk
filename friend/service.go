@@ -26,6 +26,6 @@ func FriendNamespace(
 	namespaceName string,
 ) *NamespaceRef {
 	return &NamespaceRef{
-		namespaceName: namespaceName,
+		NamespaceName: namespaceName,
 	}
 }
