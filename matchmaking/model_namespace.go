@@ -63,6 +63,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description                                   *string
+	EnableRating                                  bool
 	CreateGatheringTriggerRealtimeNamespaceId     *string
 	CreateGatheringTriggerScriptId                *string
 	CompleteMatchmakingTriggerRealtimeNamespaceId *string
@@ -77,7 +78,6 @@ type NamespaceOptions struct {
 func NewNamespace(
 	stack *Stack,
 	name string,
-	enableRating bool,
 	createGatheringTriggerType NamespaceCreateGatheringTriggerType,
 	completeMatchmakingTriggerType NamespaceCompleteMatchmakingTriggerType,
 	options NamespaceOptions,
@@ -85,10 +85,10 @@ func NewNamespace(
 	data := Namespace{
 		stack:                          stack,
 		Name:                           name,
-		EnableRating:                   enableRating,
 		CreateGatheringTriggerType:     createGatheringTriggerType,
 		CompleteMatchmakingTriggerType: completeMatchmakingTriggerType,
 		Description:                    options.Description,
+		EnableRating:                   options.EnableRating,
 		CreateGatheringTriggerRealtimeNamespaceId:     options.CreateGatheringTriggerRealtimeNamespaceId,
 		CreateGatheringTriggerScriptId:                options.CreateGatheringTriggerScriptId,
 		CompleteMatchmakingTriggerRealtimeNamespaceId: options.CompleteMatchmakingTriggerRealtimeNamespaceId,

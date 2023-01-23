@@ -62,6 +62,7 @@ type NamespaceOptions struct {
 	Description        *string
 	AppleKey           *string
 	GoogleKey          *string
+	EnableFakeReceipt  bool
 	CreateWalletScript *ScriptSetting
 	DepositScript      *ScriptSetting
 	WithdrawScript     *ScriptSetting
@@ -74,7 +75,6 @@ func NewNamespace(
 	priority NamespacePriority,
 	shareFree bool,
 	currency NamespaceCurrency,
-	enableFakeReceipt bool,
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
@@ -83,10 +83,10 @@ func NewNamespace(
 		Priority:           priority,
 		ShareFree:          shareFree,
 		Currency:           currency,
-		EnableFakeReceipt:  enableFakeReceipt,
 		Description:        options.Description,
 		AppleKey:           options.AppleKey,
 		GoogleKey:          options.GoogleKey,
+		EnableFakeReceipt:  options.EnableFakeReceipt,
 		CreateWalletScript: options.CreateWalletScript,
 		DepositScript:      options.DepositScript,
 		WithdrawScript:     options.WithdrawScript,

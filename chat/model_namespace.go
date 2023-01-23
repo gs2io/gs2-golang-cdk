@@ -39,6 +39,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description           *string
+	AllowCreateRoom       bool
 	PostMessageScript     *ScriptSetting
 	CreateRoomScript      *ScriptSetting
 	DeleteRoomScript      *ScriptSetting
@@ -51,14 +52,13 @@ type NamespaceOptions struct {
 func NewNamespace(
 	stack *Stack,
 	name string,
-	allowCreateRoom bool,
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
 		stack:                 stack,
 		Name:                  name,
-		AllowCreateRoom:       allowCreateRoom,
 		Description:           options.Description,
+		AllowCreateRoom:       options.AllowCreateRoom,
 		PostMessageScript:     options.PostMessageScript,
 		CreateRoomScript:      options.CreateRoomScript,
 		DeleteRoomScript:      options.DeleteRoomScript,

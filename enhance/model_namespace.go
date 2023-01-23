@@ -34,24 +34,24 @@ type Namespace struct {
 }
 
 type NamespaceOptions struct {
-	Description   *string
-	EnhanceScript *ScriptSetting
-	LogSetting    *LogSetting
+	Description         *string
+	EnableDirectEnhance bool
+	EnhanceScript       *ScriptSetting
+	LogSetting          *LogSetting
 }
 
 func NewNamespace(
 	stack *Stack,
 	name string,
-	enableDirectEnhance bool,
 	transactionSetting TransactionSetting,
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
 		stack:               stack,
 		Name:                name,
-		EnableDirectEnhance: enableDirectEnhance,
 		TransactionSetting:  transactionSetting,
 		Description:         options.Description,
+		EnableDirectEnhance: options.EnableDirectEnhance,
 		EnhanceScript:       options.EnhanceScript,
 		LogSetting:          options.LogSetting,
 	}

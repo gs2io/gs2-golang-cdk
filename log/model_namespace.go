@@ -49,6 +49,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description         *string
+	Type                NamespaceType
 	GcpCredentialJson   *string
 	BigQueryDatasetName *string
 	LogExpireDays       *int32
@@ -61,14 +62,13 @@ type NamespaceOptions struct {
 func NewNamespace(
 	stack *Stack,
 	name string,
-	Type NamespaceType,
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
 		stack:               stack,
 		Name:                name,
-		Type:                Type,
 		Description:         options.Description,
+		Type:                options.Type,
 		GcpCredentialJson:   options.GcpCredentialJson,
 		BigQueryDatasetName: options.BigQueryDatasetName,
 		LogExpireDays:       options.LogExpireDays,

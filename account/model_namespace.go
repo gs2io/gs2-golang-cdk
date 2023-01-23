@@ -37,27 +37,27 @@ type Namespace struct {
 }
 
 type NamespaceOptions struct {
-	Description          *string
-	CreateAccountScript  *ScriptSetting
-	AuthenticationScript *ScriptSetting
-	CreateTakeOverScript *ScriptSetting
-	DoTakeOverScript     *ScriptSetting
-	LogSetting           *LogSetting
+	Description                             *string
+	ChangePasswordIfTakeOver                bool
+	DifferentUserIdForLoginAndDataRetention bool
+	CreateAccountScript                     *ScriptSetting
+	AuthenticationScript                    *ScriptSetting
+	CreateTakeOverScript                    *ScriptSetting
+	DoTakeOverScript                        *ScriptSetting
+	LogSetting                              *LogSetting
 }
 
 func NewNamespace(
 	stack *Stack,
 	name string,
-	changePasswordIfTakeOver bool,
-	differentUserIdForLoginAndDataRetention bool,
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
 		stack:                                   stack,
 		Name:                                    name,
-		ChangePasswordIfTakeOver:                changePasswordIfTakeOver,
-		DifferentUserIdForLoginAndDataRetention: differentUserIdForLoginAndDataRetention,
 		Description:                             options.Description,
+		ChangePasswordIfTakeOver:                options.ChangePasswordIfTakeOver,
+		DifferentUserIdForLoginAndDataRetention: options.DifferentUserIdForLoginAndDataRetention,
 		CreateAccountScript:                     options.CreateAccountScript,
 		AuthenticationScript:                    options.AuthenticationScript,
 		CreateTakeOverScript:                    options.CreateTakeOverScript,

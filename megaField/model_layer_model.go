@@ -23,9 +23,8 @@ import (
 var _ = AcquireAction{}
 
 type LayerModel struct {
-	AreaModelName string
-	Name          string
-	Metadata      *string
+	Name     string
+	Metadata *string
 }
 
 type LayerModelOptions struct {
@@ -33,21 +32,18 @@ type LayerModelOptions struct {
 }
 
 func NewLayerModel(
-	areaModelName string,
 	name string,
 	options LayerModelOptions,
 ) LayerModel {
 	data := LayerModel{
-		AreaModelName: areaModelName,
-		Name:          name,
-		Metadata:      options.Metadata,
+		Name:     name,
+		Metadata: options.Metadata,
 	}
 	return data
 }
 
 func (p *LayerModel) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	properties["AreaModelName"] = p.AreaModelName
 	properties["Name"] = p.Name
 	if p.Metadata != nil {
 		properties["Metadata"] = p.Metadata

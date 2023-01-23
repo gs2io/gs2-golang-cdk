@@ -35,6 +35,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description      *string
+	EnableAutoRun    bool
 	PushNotification *NotificationSetting
 	RunNotification  *NotificationSetting
 	LogSetting       *LogSetting
@@ -43,14 +44,13 @@ type NamespaceOptions struct {
 func NewNamespace(
 	stack *Stack,
 	name string,
-	enableAutoRun bool,
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
 		stack:            stack,
 		Name:             name,
-		EnableAutoRun:    enableAutoRun,
 		Description:      options.Description,
+		EnableAutoRun:    options.EnableAutoRun,
 		PushNotification: options.PushNotification,
 		RunNotification:  options.RunNotification,
 		LogSetting:       options.LogSetting,
