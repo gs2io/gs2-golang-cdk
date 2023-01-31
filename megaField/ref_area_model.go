@@ -27,6 +27,16 @@ type AreaModelRef struct {
 	AreaModelName string
 }
 
+func (p *AreaModelRef) LayerModel(
+	layerModelName string,
+) *LayerModelRef {
+	return &LayerModelRef{
+		NamespaceName:  p.NamespaceName,
+		AreaModelName:  p.AreaModelName,
+		LayerModelName: layerModelName,
+	}
+}
+
 func (p *AreaModelRef) Grn() string {
 	return NewJoin(
 		":",
