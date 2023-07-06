@@ -45,14 +45,12 @@ func ExchangeByUserId(
 
 func DeleteAwaitByUserId(
 	namespaceName string,
-	rateName string,
 	awaitName string,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["rateName"] = rateName
 	properties["awaitName"] = awaitName
 	return ConsumeAction{
 		Action:  "Gs2Exchange:DeleteAwaitByUserId",

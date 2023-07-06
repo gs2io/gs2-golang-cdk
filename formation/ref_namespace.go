@@ -26,15 +26,6 @@ type NamespaceRef struct {
 	NamespaceName string
 }
 
-func (p *NamespaceRef) FormModel(
-	formModelName string,
-) *FormModelRef {
-	return &FormModelRef{
-		NamespaceName: p.NamespaceName,
-		FormModelName: formModelName,
-	}
-}
-
 func (p *NamespaceRef) MoldModel(
 	moldName string,
 ) *MoldModelRef {
