@@ -25,6 +25,7 @@ var _ = AcquireAction{}
 type SlotWithSignaturePropertyType string
 
 const SlotWithSignaturePropertyTypeGs2Inventory = SlotWithSignaturePropertyType("gs2_inventory")
+const SlotWithSignaturePropertyTypeGs2SimpleInventory = SlotWithSignaturePropertyType("gs2_simple_inventory")
 const SlotWithSignaturePropertyTypeGs2Dictionary = SlotWithSignaturePropertyType("gs2_dictionary")
 
 func (p SlotWithSignaturePropertyType) Pointer() *SlotWithSignaturePropertyType {
