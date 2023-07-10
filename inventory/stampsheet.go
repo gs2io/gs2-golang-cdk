@@ -170,3 +170,37 @@ func DeleteReferenceOfByUserId(
 		Request: properties,
 	}
 }
+
+func ConsumeSimpleItemsByUserId(
+	namespaceName string,
+	inventoryName string,
+	consumeCounts []ConsumeCount,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["consumeCounts"] = consumeCounts
+	return ConsumeAction{
+		Action:  "Gs2Inventory:ConsumeSimpleItemsByUserId",
+		Request: properties,
+	}
+}
+
+func AcquireSimpleItemsByUserId(
+	namespaceName string,
+	inventoryName string,
+	acquireCounts []AcquireCount,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["acquireCounts"] = acquireCounts
+	return AcquireAction{
+		Action:  "Gs2Inventory:AcquireSimpleItemsByUserId",
+		Request: properties,
+	}
+}

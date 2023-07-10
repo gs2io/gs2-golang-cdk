@@ -35,6 +35,15 @@ func (p *NamespaceRef) InventoryModel(
 	}
 }
 
+func (p *NamespaceRef) SimpleInventoryModel(
+	inventoryName string,
+) *SimpleInventoryModelRef {
+	return &SimpleInventoryModelRef{
+		NamespaceName: p.NamespaceName,
+		InventoryName: inventoryName,
+	}
+}
+
 func (p *NamespaceRef) Grn() string {
 	return NewJoin(
 		":",

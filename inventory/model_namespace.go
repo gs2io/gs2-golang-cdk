@@ -102,12 +102,14 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 
 func (p *Namespace) MasterData(
 	inventoryModels []InventoryModel,
+	simpleInventoryModels []SimpleInventoryModel,
 
 ) *Namespace {
 	NewCurrentMasterData(
 		p.stack,
 		p.Name,
 		inventoryModels,
+		simpleInventoryModels,
 	).AddDependsOn(
 		p,
 	)

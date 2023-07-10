@@ -74,7 +74,7 @@ type Event struct {
 	Name                  string
 	Metadata              *string
 	ScheduleType          EventScheduleType
-	RepeatType            *EventRepeatType
+	RepeatType            EventRepeatType
 	AbsoluteBegin         *int64
 	AbsoluteEnd           *int64
 	RepeatBeginDayOfMonth *int32
@@ -84,12 +84,10 @@ type Event struct {
 	RepeatBeginHour       *int32
 	RepeatEndHour         *int32
 	RelativeTriggerName   *string
-	RelativeDuration      *int32
 }
 
 type EventOptions struct {
 	Metadata              *string
-	RepeatType            *EventRepeatType
 	AbsoluteBegin         *int64
 	AbsoluteEnd           *int64
 	RepeatBeginDayOfMonth *int32
@@ -99,19 +97,19 @@ type EventOptions struct {
 	RepeatBeginHour       *int32
 	RepeatEndHour         *int32
 	RelativeTriggerName   *string
-	RelativeDuration      *int32
 }
 
 func NewEvent(
 	name string,
 	scheduleType EventScheduleType,
+	repeatType EventRepeatType,
 	options EventOptions,
 ) Event {
 	data := Event{
 		Name:                  name,
 		ScheduleType:          scheduleType,
+		RepeatType:            repeatType,
 		Metadata:              options.Metadata,
-		RepeatType:            options.RepeatType,
 		AbsoluteBegin:         options.AbsoluteBegin,
 		AbsoluteEnd:           options.AbsoluteEnd,
 		RepeatBeginDayOfMonth: options.RepeatBeginDayOfMonth,
@@ -121,7 +119,6 @@ func NewEvent(
 		RepeatBeginHour:       options.RepeatBeginHour,
 		RepeatEndHour:         options.RepeatEndHour,
 		RelativeTriggerName:   options.RelativeTriggerName,
-		RelativeDuration:      options.RelativeDuration,
 	}
 	return data
 }
@@ -140,9 +137,9 @@ func NewEventScheduleTypeIsAbsolute(
 	return NewEvent(
 		name,
 		EventScheduleTypeAbsolute,
+		repeatType,
 		EventOptions{
 			Metadata:      options.Metadata,
-			RepeatType:    &repeatType,
 			AbsoluteBegin: &absoluteBegin,
 			AbsoluteEnd:   &absoluteEnd,
 		},
@@ -155,17 +152,17 @@ type EventScheduleTypeIsRelativeOptions struct {
 
 func NewEventScheduleTypeIsRelative(
 	name string,
+	repeatType EventRepeatType,
 	relativeTriggerName string,
-	relativeDuration int32,
 	options EventScheduleTypeIsRelativeOptions,
 ) Event {
 	return NewEvent(
 		name,
 		EventScheduleTypeRelative,
+		repeatType,
 		EventOptions{
 			Metadata:            options.Metadata,
 			RelativeTriggerName: &relativeTriggerName,
-			RelativeDuration:    &relativeDuration,
 		},
 	)
 }
@@ -182,12 +179,9 @@ func NewEventRepeatTypeIsAlways(
 	return NewEvent(
 		name,
 		scheduleType,
+		EventRepeatTypeAlways,
 		EventOptions{
 			Metadata: options.Metadata,
-			RepeatType: func() *EventRepeatType {
-				v := EventRepeatTypeAlways
-				return &v
-			}(),
 		},
 	)
 }
@@ -206,12 +200,9 @@ func NewEventRepeatTypeIsDaily(
 	return NewEvent(
 		name,
 		scheduleType,
+		EventRepeatTypeDaily,
 		EventOptions{
-			Metadata: options.Metadata,
-			RepeatType: func() *EventRepeatType {
-				v := EventRepeatTypeDaily
-				return &v
-			}(),
+			Metadata:        options.Metadata,
 			RepeatBeginHour: &repeatBeginHour,
 			RepeatEndHour:   &repeatEndHour,
 		},
@@ -234,12 +225,9 @@ func NewEventRepeatTypeIsWeekly(
 	return NewEvent(
 		name,
 		scheduleType,
+		EventRepeatTypeWeekly,
 		EventOptions{
-			Metadata: options.Metadata,
-			RepeatType: func() *EventRepeatType {
-				v := EventRepeatTypeWeekly
-				return &v
-			}(),
+			Metadata:             options.Metadata,
 			RepeatBeginDayOfWeek: &repeatBeginDayOfWeek,
 			RepeatEndDayOfWeek:   &repeatEndDayOfWeek,
 			RepeatBeginHour:      &repeatBeginHour,
@@ -264,12 +252,9 @@ func NewEventRepeatTypeIsMonthly(
 	return NewEvent(
 		name,
 		scheduleType,
+		EventRepeatTypeMonthly,
 		EventOptions{
-			Metadata: options.Metadata,
-			RepeatType: func() *EventRepeatType {
-				v := EventRepeatTypeMonthly
-				return &v
-			}(),
+			Metadata:              options.Metadata,
 			RepeatBeginDayOfMonth: &repeatBeginDayOfMonth,
 			RepeatEndDayOfMonth:   &repeatEndDayOfMonth,
 			RepeatBeginHour:       &repeatBeginHour,
@@ -285,9 +270,7 @@ func (p *Event) Properties() map[string]interface{} {
 		properties["Metadata"] = p.Metadata
 	}
 	properties["ScheduleType"] = p.ScheduleType
-	if p.RepeatType != nil {
-		properties["RepeatType"] = p.RepeatType
-	}
+	properties["RepeatType"] = p.RepeatType
 	if p.AbsoluteBegin != nil {
 		properties["AbsoluteBegin"] = p.AbsoluteBegin
 	}
@@ -314,9 +297,6 @@ func (p *Event) Properties() map[string]interface{} {
 	}
 	if p.RelativeTriggerName != nil {
 		properties["RelativeTriggerName"] = p.RelativeTriggerName
-	}
-	if p.RelativeDuration != nil {
-		properties["RelativeDuration"] = p.RelativeDuration
 	}
 	return properties
 }

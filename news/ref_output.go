@@ -1,4 +1,4 @@
-package formation
+package news
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,29 +22,13 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
+type OutputRef struct {
 	NamespaceName string
+	UploadToken   string
+	OutputName    string
 }
 
-func (p *NamespaceRef) MoldModel(
-	moldName string,
-) *MoldModelRef {
-	return &MoldModelRef{
-		NamespaceName: p.NamespaceName,
-		MoldName:      moldName,
-	}
-}
-
-func (p *NamespaceRef) FormModel(
-	formModelName string,
-) *FormModelRef {
-	return &FormModelRef{
-		NamespaceName: p.NamespaceName,
-		FormModelName: formModelName,
-	}
-}
-
-func (p *NamespaceRef) Grn() string {
+func (p *OutputRef) Grn() string {
 	return NewJoin(
 		":",
 		[]string{
@@ -52,13 +36,17 @@ func (p *NamespaceRef) Grn() string {
 			"gs2",
 			NewGetAttrRegion().String(),
 			NewGetAttrOwnerId().String(),
-			"formation",
+			"news",
 			p.NamespaceName,
+			"progress",
+			p.UploadToken,
+			"output",
+			p.OutputName,
 		},
 	).String()
 }
 
-func (p *NamespaceRef) GrnPointer() *string {
+func (p *OutputRef) GrnPointer() *string {
 	grn := p.Grn()
 	return &grn
 }

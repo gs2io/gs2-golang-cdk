@@ -1,4 +1,4 @@
-package matchmaking
+package news
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,39 +22,41 @@ import (
 
 var _ = AcquireAction{}
 
-type RatingModel struct {
-	Name         string
-	Metadata     *string
-	InitialValue int32
-	Volatility   int32
+type View struct {
+	Contents       []Content
+	RemoveContents []Content
 }
 
-type RatingModelOptions struct {
-	Metadata *string
+type ViewOptions struct {
+	Contents       []Content
+	RemoveContents []Content
 }
 
-func NewRatingModel(
-	name string,
-	initialValue int32,
-	volatility int32,
-	options RatingModelOptions,
-) RatingModel {
-	data := RatingModel{
-		Name:         name,
-		InitialValue: initialValue,
-		Volatility:   volatility,
-		Metadata:     options.Metadata,
+func NewView(
+	options ViewOptions,
+) View {
+	data := View{
+		Contents:       options.Contents,
+		RemoveContents: options.RemoveContents,
 	}
 	return data
 }
 
-func (p *RatingModel) Properties() map[string]interface{} {
+func (p *View) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	properties["Name"] = p.Name
-	if p.Metadata != nil {
-		properties["Metadata"] = p.Metadata
+	{
+		values := make([]map[string]interface{}, len(p.Contents))
+		for i, element := range p.Contents {
+			values[i] = element.Properties()
+		}
+		properties["Contents"] = values
 	}
-	properties["InitialValue"] = p.InitialValue
-	properties["Volatility"] = p.Volatility
+	{
+		values := make([]map[string]interface{}, len(p.RemoveContents))
+		for i, element := range p.RemoveContents {
+			values[i] = element.Properties()
+		}
+		properties["RemoveContents"] = values
+	}
 	return properties
 }

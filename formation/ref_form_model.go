@@ -24,18 +24,18 @@ var _ = AcquireAction{}
 
 type FormModelRef struct {
 	NamespaceName string
-	MoldName      string
 	FormModelName string
 }
 
 func (p *FormModelRef) AcquireActionsToFormProperties(
+	moldName string,
 	index int32,
 	acquireAction AcquireAction,
 	config *[]AcquireActionConfig,
 ) AcquireAction {
 	return AcquireActionsToFormProperties(
 		p.NamespaceName,
-		p.MoldName,
+		moldName,
 		index,
 		acquireAction,
 		config,

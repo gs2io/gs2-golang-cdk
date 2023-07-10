@@ -22,6 +22,12 @@ import (
 
 var _ = AcquireAction{}
 
+type AcquireActionConfigName string
+
+func (p AcquireActionConfigName) Pointer() *AcquireActionConfigName {
+	return &p
+}
+
 type AcquireActionConfig struct {
 	Name   string
 	Config []Config

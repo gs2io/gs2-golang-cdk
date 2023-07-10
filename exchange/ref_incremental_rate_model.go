@@ -1,4 +1,4 @@
-package formation
+package exchange
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,29 +22,12 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
+type IncrementalRateModelRef struct {
 	NamespaceName string
+	RateName      string
 }
 
-func (p *NamespaceRef) MoldModel(
-	moldName string,
-) *MoldModelRef {
-	return &MoldModelRef{
-		NamespaceName: p.NamespaceName,
-		MoldName:      moldName,
-	}
-}
-
-func (p *NamespaceRef) FormModel(
-	formModelName string,
-) *FormModelRef {
-	return &FormModelRef{
-		NamespaceName: p.NamespaceName,
-		FormModelName: formModelName,
-	}
-}
-
-func (p *NamespaceRef) Grn() string {
+func (p *IncrementalRateModelRef) Grn() string {
 	return NewJoin(
 		":",
 		[]string{
@@ -52,13 +35,16 @@ func (p *NamespaceRef) Grn() string {
 			"gs2",
 			NewGetAttrRegion().String(),
 			NewGetAttrOwnerId().String(),
-			"formation",
+			"exchange",
 			p.NamespaceName,
+			"incremental",
+			"model",
+			p.RateName,
 		},
 	).String()
 }
 
-func (p *NamespaceRef) GrnPointer() *string {
+func (p *IncrementalRateModelRef) GrnPointer() *string {
 	grn := p.Grn()
 	return &grn
 }

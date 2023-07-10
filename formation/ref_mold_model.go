@@ -27,16 +27,6 @@ type MoldModelRef struct {
 	MoldName      string
 }
 
-func (p *MoldModelRef) FormModel(
-	formModelName string,
-) *FormModelRef {
-	return &FormModelRef{
-		NamespaceName: p.NamespaceName,
-		MoldName:      p.MoldName,
-		FormModelName: formModelName,
-	}
-}
-
 func (p *MoldModelRef) AddMoldCapacity(
 	capacity int32,
 ) AcquireAction {

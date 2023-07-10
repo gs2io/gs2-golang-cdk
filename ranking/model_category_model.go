@@ -48,11 +48,13 @@ type CategoryModel struct {
 	OrderDirection             CategoryModelOrderDirection
 	Scope                      CategoryModelScope
 	UniqueByUserId             bool
+	Sum                        *bool
 	CalculateFixedTimingHour   *int32
 	CalculateFixedTimingMinute *int32
 	CalculateIntervalMinutes   *int32
 	EntryPeriodEventId         *string
 	AccessPeriodEventId        *string
+	IgnoreUserIds              []string
 	Generation                 *string
 }
 
@@ -60,11 +62,13 @@ type CategoryModelOptions struct {
 	Metadata                   *string
 	MinimumValue               *int64
 	MaximumValue               *int64
+	Sum                        *bool
 	CalculateFixedTimingHour   *int32
 	CalculateFixedTimingMinute *int32
 	CalculateIntervalMinutes   *int32
 	EntryPeriodEventId         *string
 	AccessPeriodEventId        *string
+	IgnoreUserIds              []string
 	Generation                 *string
 }
 
@@ -83,11 +87,13 @@ func NewCategoryModel(
 		Metadata:                   options.Metadata,
 		MinimumValue:               options.MinimumValue,
 		MaximumValue:               options.MaximumValue,
+		Sum:                        options.Sum,
 		CalculateFixedTimingHour:   options.CalculateFixedTimingHour,
 		CalculateFixedTimingMinute: options.CalculateFixedTimingMinute,
 		CalculateIntervalMinutes:   options.CalculateIntervalMinutes,
 		EntryPeriodEventId:         options.EntryPeriodEventId,
 		AccessPeriodEventId:        options.AccessPeriodEventId,
+		IgnoreUserIds:              options.IgnoreUserIds,
 		Generation:                 options.Generation,
 	}
 	return data
@@ -101,6 +107,7 @@ type CategoryModelScopeIsGlobalOptions struct {
 	CalculateFixedTimingMinute *int32
 	EntryPeriodEventId         *string
 	AccessPeriodEventId        *string
+	IgnoreUserIds              []string
 	Generation                 *string
 }
 
@@ -125,6 +132,7 @@ func NewCategoryModelScopeIsGlobal(
 			CalculateIntervalMinutes:   &calculateIntervalMinutes,
 			EntryPeriodEventId:         options.EntryPeriodEventId,
 			AccessPeriodEventId:        options.AccessPeriodEventId,
+			IgnoreUserIds:              options.IgnoreUserIds,
 			Generation:                 options.Generation,
 		},
 	)
@@ -138,6 +146,7 @@ type CategoryModelScopeIsScopedOptions struct {
 	CalculateFixedTimingMinute *int32
 	EntryPeriodEventId         *string
 	AccessPeriodEventId        *string
+	IgnoreUserIds              []string
 	Generation                 *string
 }
 
@@ -160,6 +169,7 @@ func NewCategoryModelScopeIsScoped(
 			CalculateFixedTimingMinute: options.CalculateFixedTimingMinute,
 			EntryPeriodEventId:         options.EntryPeriodEventId,
 			AccessPeriodEventId:        options.AccessPeriodEventId,
+			IgnoreUserIds:              options.IgnoreUserIds,
 			Generation:                 options.Generation,
 		},
 	)
@@ -180,6 +190,9 @@ func (p *CategoryModel) Properties() map[string]interface{} {
 	properties["OrderDirection"] = p.OrderDirection
 	properties["Scope"] = p.Scope
 	properties["UniqueByUserId"] = p.UniqueByUserId
+	if p.Sum != nil {
+		properties["Sum"] = p.Sum
+	}
 	if p.CalculateFixedTimingHour != nil {
 		properties["CalculateFixedTimingHour"] = p.CalculateFixedTimingHour
 	}
@@ -195,6 +208,7 @@ func (p *CategoryModel) Properties() map[string]interface{} {
 	if p.AccessPeriodEventId != nil {
 		properties["AccessPeriodEventId"] = p.AccessPeriodEventId
 	}
+	properties["IgnoreUserIds"] = p.IgnoreUserIds
 	if p.Generation != nil {
 		properties["Generation"] = p.Generation
 	}

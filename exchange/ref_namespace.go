@@ -35,6 +35,15 @@ func (p *NamespaceRef) RateModel(
 	}
 }
 
+func (p *NamespaceRef) IncrementalRateModel(
+	rateName string,
+) *IncrementalRateModelRef {
+	return &IncrementalRateModelRef{
+		NamespaceName: p.NamespaceName,
+		RateName:      rateName,
+	}
+}
+
 func (p *NamespaceRef) CreateAwait(
 	rateName string,
 	count int32,

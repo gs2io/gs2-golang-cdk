@@ -26,15 +26,6 @@ type NamespaceRef struct {
 	NamespaceName string
 }
 
-func (p *NamespaceRef) DisplayItem(
-	displayItemId string,
-) *DisplayItemRef {
-	return &DisplayItemRef{
-		NamespaceName: p.NamespaceName,
-		DisplayItemId: displayItemId,
-	}
-}
-
 func (p *NamespaceRef) Grn() string {
 	return NewJoin(
 		":",

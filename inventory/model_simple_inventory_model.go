@@ -1,4 +1,4 @@
-package matchmaking
+package inventory
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,39 +22,41 @@ import (
 
 var _ = AcquireAction{}
 
-type RatingModel struct {
-	Name         string
-	Metadata     *string
-	InitialValue int32
-	Volatility   int32
+type SimpleInventoryModel struct {
+	Name             string
+	Metadata         *string
+	SimpleItemModels []SimpleItemModel
 }
 
-type RatingModelOptions struct {
+type SimpleInventoryModelOptions struct {
 	Metadata *string
 }
 
-func NewRatingModel(
+func NewSimpleInventoryModel(
 	name string,
-	initialValue int32,
-	volatility int32,
-	options RatingModelOptions,
-) RatingModel {
-	data := RatingModel{
-		Name:         name,
-		InitialValue: initialValue,
-		Volatility:   volatility,
-		Metadata:     options.Metadata,
+	simpleItemModels []SimpleItemModel,
+	options SimpleInventoryModelOptions,
+) SimpleInventoryModel {
+	data := SimpleInventoryModel{
+		Name:             name,
+		SimpleItemModels: simpleItemModels,
+		Metadata:         options.Metadata,
 	}
 	return data
 }
 
-func (p *RatingModel) Properties() map[string]interface{} {
+func (p *SimpleInventoryModel) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["Name"] = p.Name
 	if p.Metadata != nil {
 		properties["Metadata"] = p.Metadata
 	}
-	properties["InitialValue"] = p.InitialValue
-	properties["Volatility"] = p.Volatility
+	{
+		values := make([]map[string]interface{}, len(p.SimpleItemModels))
+		for i, element := range p.SimpleItemModels {
+			values[i] = element.Properties()
+		}
+		properties["SimpleItemModels"] = values
+	}
 	return properties
 }

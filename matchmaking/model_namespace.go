@@ -58,6 +58,7 @@ type Namespace struct {
 	JoinNotification                              *NotificationSetting
 	LeaveNotification                             *NotificationSetting
 	CompleteNotification                          *NotificationSetting
+	ChangeRatingNotification                      *NotificationSetting
 	LogSetting                                    *LogSetting
 }
 
@@ -72,6 +73,7 @@ type NamespaceOptions struct {
 	JoinNotification                              *NotificationSetting
 	LeaveNotification                             *NotificationSetting
 	CompleteNotification                          *NotificationSetting
+	ChangeRatingNotification                      *NotificationSetting
 	LogSetting                                    *LogSetting
 }
 
@@ -97,6 +99,7 @@ func NewNamespace(
 		JoinNotification:                              options.JoinNotification,
 		LeaveNotification:                             options.LeaveNotification,
 		CompleteNotification:                          options.CompleteNotification,
+		ChangeRatingNotification:                      options.ChangeRatingNotification,
 		LogSetting:                                    options.LogSetting,
 	}
 	return &data
@@ -142,6 +145,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.CompleteNotification != nil {
 		properties["CompleteNotification"] = p.CompleteNotification.Properties()
+	}
+	if p.ChangeRatingNotification != nil {
+		properties["ChangeRatingNotification"] = p.ChangeRatingNotification.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()

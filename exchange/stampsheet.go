@@ -43,6 +43,44 @@ func ExchangeByUserId(
 	}
 }
 
+func IncrementalExchangeByUserId(
+	namespaceName string,
+	rateName string,
+	count int32,
+	config *[]Config,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["rateName"] = rateName
+	properties["count"] = count
+	if config != nil {
+		properties["config"] = config
+	}
+	return AcquireAction{
+		Action:  "Gs2Exchange:IncrementalExchangeByUserId",
+		Request: properties,
+	}
+}
+
+func UnlockIncrementalExchangeByUserId(
+	namespaceName string,
+	rateName string,
+	lockTransactionId string,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["rateName"] = rateName
+	properties["lockTransactionId"] = lockTransactionId
+	return AcquireAction{
+		Action:  "Gs2Exchange:UnlockIncrementalExchangeByUserId",
+		Request: properties,
+	}
+}
+
 func DeleteAwaitByUserId(
 	namespaceName string,
 	awaitName string,

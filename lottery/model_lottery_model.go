@@ -14,6 +14,8 @@ or in the "license" file accompanying this file. This file is distributed
 on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 express or implied. See the License for the specific language governing
 permissions and limitations under the License.
+
+deny overwrite
 */
 
 import (
@@ -73,13 +75,13 @@ func NewLotteryModel(
 }
 
 type LotteryModelMethodIsPrizeTableOptions struct {
-	Metadata *string
+	Metadata       *string
+	PrizeTableName *string
 }
 
 func NewLotteryModelMethodIsPrizeTable(
 	name string,
 	mode LotteryModelMode,
-	prizeTableName string,
 	options LotteryModelMethodIsPrizeTableOptions,
 ) LotteryModel {
 	return NewLotteryModel(
@@ -88,19 +90,19 @@ func NewLotteryModelMethodIsPrizeTable(
 		LotteryModelMethodPrizeTable,
 		LotteryModelOptions{
 			Metadata:       options.Metadata,
-			PrizeTableName: &prizeTableName,
+			PrizeTableName: options.PrizeTableName,
 		},
 	)
 }
 
 type LotteryModelMethodIsScriptOptions struct {
-	Metadata *string
+	Metadata                 *string
+	ChoicePrizeTableScriptId *string
 }
 
 func NewLotteryModelMethodIsScript(
 	name string,
 	mode LotteryModelMode,
-	choicePrizeTableScriptId string,
 	options LotteryModelMethodIsScriptOptions,
 ) LotteryModel {
 	return NewLotteryModel(
@@ -109,7 +111,7 @@ func NewLotteryModelMethodIsScript(
 		LotteryModelMethodScript,
 		LotteryModelOptions{
 			Metadata:                 options.Metadata,
-			ChoicePrizeTableScriptId: &choicePrizeTableScriptId,
+			ChoicePrizeTableScriptId: options.ChoicePrizeTableScriptId,
 		},
 	)
 }

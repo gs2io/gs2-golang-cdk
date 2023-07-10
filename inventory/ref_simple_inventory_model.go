@@ -1,4 +1,4 @@
-package formation
+package inventory
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,29 +22,42 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
+type SimpleInventoryModelRef struct {
 	NamespaceName string
+	InventoryName string
 }
 
-func (p *NamespaceRef) MoldModel(
-	moldName string,
-) *MoldModelRef {
-	return &MoldModelRef{
+func (p *SimpleInventoryModelRef) SimpleItemModel(
+	itemName string,
+) *SimpleItemModelRef {
+	return &SimpleItemModelRef{
 		NamespaceName: p.NamespaceName,
-		MoldName:      moldName,
+		InventoryName: p.InventoryName,
+		ItemName:      itemName,
 	}
 }
 
-func (p *NamespaceRef) FormModel(
-	formModelName string,
-) *FormModelRef {
-	return &FormModelRef{
-		NamespaceName: p.NamespaceName,
-		FormModelName: formModelName,
-	}
+func (p *SimpleInventoryModelRef) AcquireSimpleItems(
+	acquireCounts []AcquireCount,
+) AcquireAction {
+	return AcquireSimpleItemsByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		acquireCounts,
+	)
 }
 
-func (p *NamespaceRef) Grn() string {
+func (p *SimpleInventoryModelRef) ConsumeSimpleItems(
+	consumeCounts []ConsumeCount,
+) ConsumeAction {
+	return ConsumeSimpleItemsByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		consumeCounts,
+	)
+}
+
+func (p *SimpleInventoryModelRef) Grn() string {
 	return NewJoin(
 		":",
 		[]string{
@@ -52,13 +65,16 @@ func (p *NamespaceRef) Grn() string {
 			"gs2",
 			NewGetAttrRegion().String(),
 			NewGetAttrOwnerId().String(),
-			"formation",
+			"inventory",
 			p.NamespaceName,
+			"simple",
+			"model",
+			p.InventoryName,
 		},
 	).String()
 }
 
-func (p *NamespaceRef) GrnPointer() *string {
+func (p *SimpleInventoryModelRef) GrnPointer() *string {
 	grn := p.Grn()
 	return &grn
 }

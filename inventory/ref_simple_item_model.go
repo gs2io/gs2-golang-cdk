@@ -1,4 +1,4 @@
-package formation
+package inventory
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,29 +22,13 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
+type SimpleItemModelRef struct {
 	NamespaceName string
+	InventoryName string
+	ItemName      string
 }
 
-func (p *NamespaceRef) MoldModel(
-	moldName string,
-) *MoldModelRef {
-	return &MoldModelRef{
-		NamespaceName: p.NamespaceName,
-		MoldName:      moldName,
-	}
-}
-
-func (p *NamespaceRef) FormModel(
-	formModelName string,
-) *FormModelRef {
-	return &FormModelRef{
-		NamespaceName: p.NamespaceName,
-		FormModelName: formModelName,
-	}
-}
-
-func (p *NamespaceRef) Grn() string {
+func (p *SimpleItemModelRef) Grn() string {
 	return NewJoin(
 		":",
 		[]string{
@@ -52,13 +36,18 @@ func (p *NamespaceRef) Grn() string {
 			"gs2",
 			NewGetAttrRegion().String(),
 			NewGetAttrOwnerId().String(),
-			"formation",
+			"inventory",
 			p.NamespaceName,
+			"simple",
+			"model",
+			p.InventoryName,
+			"item",
+			p.ItemName,
 		},
 	).String()
 }
 
-func (p *NamespaceRef) GrnPointer() *string {
+func (p *SimpleItemModelRef) GrnPointer() *string {
 	grn := p.Grn()
 	return &grn
 }

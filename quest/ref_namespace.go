@@ -48,12 +48,6 @@ func (p *NamespaceRef) CreateProgress(
 	)
 }
 
-func (p *NamespaceRef) DeleteProgress() ConsumeAction {
-	return DeleteProgressByUserId(
-		p.NamespaceName,
-	)
-}
-
 func (p *NamespaceRef) Grn() string {
 	return NewJoin(
 		":",
