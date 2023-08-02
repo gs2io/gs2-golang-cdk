@@ -111,15 +111,15 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 }
 
 func (p *Namespace) MasterData(
-	missionGroupModels []MissionGroupModel,
-	counterModels []CounterModel,
+	groups []MissionGroupModel,
+	counters []CounterModel,
 
 ) *Namespace {
 	NewCurrentMasterData(
 		p.stack,
 		p.Name,
-		missionGroupModels,
-		counterModels,
+		groups,
+		counters,
 	).AddDependsOn(
 		p,
 	)

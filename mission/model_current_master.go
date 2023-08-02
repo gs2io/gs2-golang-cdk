@@ -24,25 +24,25 @@ var _ = AcquireAction{}
 
 type CurrentMasterData struct {
 	CdkResource
-	stack              *Stack
-	version            string
-	namespaceName      string
-	missionGroupModels []MissionGroupModel
-	counterModels      []CounterModel
+	stack         *Stack
+	version       string
+	namespaceName string
+	groups        []MissionGroupModel
+	counters      []CounterModel
 }
 
 func NewCurrentMasterData(
 	stack *Stack,
 	namespaceName string,
-	missionGroupModels []MissionGroupModel,
-	counterModels []CounterModel,
+	groups []MissionGroupModel,
+	counters []CounterModel,
 ) *CurrentMasterData {
 	self := CurrentMasterData{
-		stack:              stack,
-		version:            "2019-05-28",
-		namespaceName:      namespaceName,
-		missionGroupModels: missionGroupModels,
-		counterModels:      counterModels,
+		stack:         stack,
+		version:       "2019-05-28",
+		namespaceName: namespaceName,
+		groups:        groups,
+		counters:      counters,
 	}
 	self.CdkResource = NewCdkResource(&self)
 	stack.AddResource(&self.CdkResource)
@@ -58,20 +58,20 @@ func (p *CurrentMasterData) ResourceType() string {
 }
 
 func (p *CurrentMasterData) Properties() map[string]interface{} {
-	missionGroupModels := make([]map[string]interface{}, len(p.missionGroupModels))
-	for i, item := range p.missionGroupModels {
-		missionGroupModels[i] = item.Properties()
+	groups := make([]map[string]interface{}, len(p.groups))
+	for i, item := range p.groups {
+		groups[i] = item.Properties()
 	}
-	counterModels := make([]map[string]interface{}, len(p.counterModels))
-	for i, item := range p.counterModels {
-		counterModels[i] = item.Properties()
+	counters := make([]map[string]interface{}, len(p.counters))
+	for i, item := range p.counters {
+		counters[i] = item.Properties()
 	}
 	return map[string]interface{}{
 		"NamespaceName": p.namespaceName,
 		"Settings": map[string]interface{}{
-			"version":            p.version,
-			"missionGroupModels": missionGroupModels,
-			"counterModels":      counterModels,
+			"version":  p.version,
+			"groups":   groups,
+			"counters": counters,
 		},
 	}
 }

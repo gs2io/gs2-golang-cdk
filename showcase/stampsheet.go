@@ -21,3 +21,37 @@ import (
 )
 
 var _ = AcquireAction{}
+
+func IncrementPurchaseCountByUserId(
+	namespaceName string,
+	showcaseName string,
+	displayItemName string,
+	count int32,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["showcaseName"] = showcaseName
+	properties["displayItemName"] = displayItemName
+	properties["count"] = count
+	return ConsumeAction{
+		Action:  "Gs2Showcase:IncrementPurchaseCountByUserId",
+		Request: properties,
+	}
+}
+
+func ForceReDrawByUserId(
+	namespaceName string,
+	showcaseName string,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["showcaseName"] = showcaseName
+	return AcquireAction{
+		Action:  "Gs2Showcase:ForceReDrawByUserId",
+		Request: properties,
+	}
+}

@@ -94,12 +94,14 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 
 func (p *Namespace) MasterData(
 	showcases []Showcase,
+	randomShowcases []RandomShowcase,
 
 ) *Namespace {
 	NewCurrentMasterData(
 		p.stack,
 		p.Name,
 		showcases,
+		randomShowcases,
 	).AddDependsOn(
 		p,
 	)

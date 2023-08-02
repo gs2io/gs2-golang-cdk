@@ -78,3 +78,26 @@ func SetRankCapByUserId(
 		Request: properties,
 	}
 }
+
+func MultiplyAcquireActionsByUserId(
+	namespaceName string,
+	experienceName string,
+	propertyId string,
+	rateName string,
+	acquireActions *[]AcquireAction,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["experienceName"] = experienceName
+	properties["propertyId"] = propertyId
+	properties["rateName"] = rateName
+	if acquireActions != nil {
+		properties["acquireActions"] = acquireActions
+	}
+	return AcquireAction{
+		Action:  "Gs2Experience:MultiplyAcquireActionsByUserId",
+		Request: properties,
+	}
+}

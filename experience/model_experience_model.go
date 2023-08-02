@@ -23,16 +23,18 @@ import (
 var _ = AcquireAction{}
 
 type ExperienceModel struct {
-	Name              string
-	Metadata          *string
-	DefaultExperience int64
-	DefaultRankCap    int64
-	MaxRankCap        int64
-	RankThreshold     Threshold
+	Name               string
+	Metadata           *string
+	DefaultExperience  int64
+	DefaultRankCap     int64
+	MaxRankCap         int64
+	RankThreshold      Threshold
+	AcquireActionRates []AcquireActionRate
 }
 
 type ExperienceModelOptions struct {
-	Metadata *string
+	Metadata           *string
+	AcquireActionRates []AcquireActionRate
 }
 
 func NewExperienceModel(
@@ -44,12 +46,13 @@ func NewExperienceModel(
 	options ExperienceModelOptions,
 ) ExperienceModel {
 	data := ExperienceModel{
-		Name:              name,
-		DefaultExperience: defaultExperience,
-		DefaultRankCap:    defaultRankCap,
-		MaxRankCap:        maxRankCap,
-		RankThreshold:     rankThreshold,
-		Metadata:          options.Metadata,
+		Name:               name,
+		DefaultExperience:  defaultExperience,
+		DefaultRankCap:     defaultRankCap,
+		MaxRankCap:         maxRankCap,
+		RankThreshold:      rankThreshold,
+		Metadata:           options.Metadata,
+		AcquireActionRates: options.AcquireActionRates,
 	}
 	return data
 }
@@ -64,5 +67,12 @@ func (p *ExperienceModel) Properties() map[string]interface{} {
 	properties["DefaultRankCap"] = p.DefaultRankCap
 	properties["MaxRankCap"] = p.MaxRankCap
 	properties["RankThreshold"] = p.RankThreshold.Properties()
+	{
+		values := make([]map[string]interface{}, len(p.AcquireActionRates))
+		for i, element := range p.AcquireActionRates {
+			values[i] = element.Properties()
+		}
+		properties["AcquireActionRates"] = values
+	}
 	return properties
 }
