@@ -22,10 +22,22 @@ import (
 
 var _ = AcquireAction{}
 
+type MissionTaskModelTargetResetType string
+
+const MissionTaskModelTargetResetTypeNotReset = MissionTaskModelTargetResetType("notReset")
+const MissionTaskModelTargetResetTypeDaily = MissionTaskModelTargetResetType("daily")
+const MissionTaskModelTargetResetTypeWeekly = MissionTaskModelTargetResetType("weekly")
+const MissionTaskModelTargetResetTypeMonthly = MissionTaskModelTargetResetType("monthly")
+
+func (p MissionTaskModelTargetResetType) Pointer() *MissionTaskModelTargetResetType {
+	return &p
+}
+
 type MissionTaskModel struct {
 	Name                   string
 	Metadata               *string
 	CounterName            string
+	TargetResetType        *MissionTaskModelTargetResetType
 	TargetValue            int64
 	CompleteAcquireActions []AcquireAction
 	ChallengePeriodEventId *string
@@ -34,6 +46,7 @@ type MissionTaskModel struct {
 
 type MissionTaskModelOptions struct {
 	Metadata               *string
+	TargetResetType        *MissionTaskModelTargetResetType
 	CompleteAcquireActions []AcquireAction
 	ChallengePeriodEventId *string
 	PremiseMissionTaskName *string
@@ -50,6 +63,7 @@ func NewMissionTaskModel(
 		CounterName:            counterName,
 		TargetValue:            targetValue,
 		Metadata:               options.Metadata,
+		TargetResetType:        options.TargetResetType,
 		CompleteAcquireActions: options.CompleteAcquireActions,
 		ChallengePeriodEventId: options.ChallengePeriodEventId,
 		PremiseMissionTaskName: options.PremiseMissionTaskName,
@@ -64,6 +78,9 @@ func (p *MissionTaskModel) Properties() map[string]interface{} {
 		properties["Metadata"] = p.Metadata
 	}
 	properties["CounterName"] = p.CounterName
+	if p.TargetResetType != nil {
+		properties["TargetResetType"] = p.TargetResetType
+	}
 	properties["TargetValue"] = p.TargetValue
 	{
 		values := make([]map[string]interface{}, len(p.CompleteAcquireActions))
