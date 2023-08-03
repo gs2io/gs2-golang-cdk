@@ -39,6 +39,18 @@ func (p *BalanceParameterModelRef) ReDrawBalanceParameterStatus(
 	)
 }
 
+func (p *BalanceParameterModelRef) SetBalanceParameterStatus(
+	propertyId string,
+	parameterValues []BalanceParameterValue,
+) AcquireAction {
+	return SetBalanceParameterStatusByUserId(
+		p.NamespaceName,
+		p.ParameterName,
+		propertyId,
+		parameterValues,
+	)
+}
+
 func (p *BalanceParameterModelRef) Grn() string {
 	return NewJoin(
 		":",

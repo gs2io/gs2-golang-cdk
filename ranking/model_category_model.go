@@ -52,6 +52,7 @@ type CategoryModel struct {
 	CalculateFixedTimingHour   *int32
 	CalculateFixedTimingMinute *int32
 	CalculateIntervalMinutes   *int32
+	AdditionalScopes           []Scope
 	EntryPeriodEventId         *string
 	AccessPeriodEventId        *string
 	IgnoreUserIds              []string
@@ -66,6 +67,7 @@ type CategoryModelOptions struct {
 	CalculateFixedTimingHour   *int32
 	CalculateFixedTimingMinute *int32
 	CalculateIntervalMinutes   *int32
+	AdditionalScopes           []Scope
 	EntryPeriodEventId         *string
 	AccessPeriodEventId        *string
 	IgnoreUserIds              []string
@@ -91,6 +93,7 @@ func NewCategoryModel(
 		CalculateFixedTimingHour:   options.CalculateFixedTimingHour,
 		CalculateFixedTimingMinute: options.CalculateFixedTimingMinute,
 		CalculateIntervalMinutes:   options.CalculateIntervalMinutes,
+		AdditionalScopes:           options.AdditionalScopes,
 		EntryPeriodEventId:         options.EntryPeriodEventId,
 		AccessPeriodEventId:        options.AccessPeriodEventId,
 		IgnoreUserIds:              options.IgnoreUserIds,
@@ -105,6 +108,7 @@ type CategoryModelScopeIsGlobalOptions struct {
 	MaximumValue               *int64
 	CalculateFixedTimingHour   *int32
 	CalculateFixedTimingMinute *int32
+	AdditionalScopes           []Scope
 	EntryPeriodEventId         *string
 	AccessPeriodEventId        *string
 	IgnoreUserIds              []string
@@ -130,6 +134,7 @@ func NewCategoryModelScopeIsGlobal(
 			CalculateFixedTimingHour:   options.CalculateFixedTimingHour,
 			CalculateFixedTimingMinute: options.CalculateFixedTimingMinute,
 			CalculateIntervalMinutes:   &calculateIntervalMinutes,
+			AdditionalScopes:           options.AdditionalScopes,
 			EntryPeriodEventId:         options.EntryPeriodEventId,
 			AccessPeriodEventId:        options.AccessPeriodEventId,
 			IgnoreUserIds:              options.IgnoreUserIds,
@@ -144,6 +149,7 @@ type CategoryModelScopeIsScopedOptions struct {
 	MaximumValue               *int64
 	CalculateFixedTimingHour   *int32
 	CalculateFixedTimingMinute *int32
+	AdditionalScopes           []Scope
 	EntryPeriodEventId         *string
 	AccessPeriodEventId        *string
 	IgnoreUserIds              []string
@@ -167,6 +173,7 @@ func NewCategoryModelScopeIsScoped(
 			MaximumValue:               options.MaximumValue,
 			CalculateFixedTimingHour:   options.CalculateFixedTimingHour,
 			CalculateFixedTimingMinute: options.CalculateFixedTimingMinute,
+			AdditionalScopes:           options.AdditionalScopes,
 			EntryPeriodEventId:         options.EntryPeriodEventId,
 			AccessPeriodEventId:        options.AccessPeriodEventId,
 			IgnoreUserIds:              options.IgnoreUserIds,
@@ -201,6 +208,13 @@ func (p *CategoryModel) Properties() map[string]interface{} {
 	}
 	if p.CalculateIntervalMinutes != nil {
 		properties["CalculateIntervalMinutes"] = p.CalculateIntervalMinutes
+	}
+	{
+		values := make([]map[string]interface{}, len(p.AdditionalScopes))
+		for i, element := range p.AdditionalScopes {
+			values[i] = element.Properties()
+		}
+		properties["AdditionalScopes"] = values
 	}
 	if p.EntryPeriodEventId != nil {
 		properties["EntryPeriodEventId"] = p.EntryPeriodEventId

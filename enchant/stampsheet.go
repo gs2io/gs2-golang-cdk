@@ -43,6 +43,25 @@ func ReDrawBalanceParameterStatusByUserId(
 	}
 }
 
+func SetBalanceParameterStatusByUserId(
+	namespaceName string,
+	parameterName string,
+	propertyId string,
+	parameterValues []BalanceParameterValue,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["parameterName"] = parameterName
+	properties["propertyId"] = propertyId
+	properties["parameterValues"] = parameterValues
+	return AcquireAction{
+		Action:  "Gs2Enchant:SetBalanceParameterStatusByUserId",
+		Request: properties,
+	}
+}
+
 func VerifyRarityParameterStatusByUserId(
 	namespaceName string,
 	parameterName string,
@@ -102,6 +121,27 @@ func AddRarityParameterStatusByUserId(
 	properties["count"] = count
 	return AcquireAction{
 		Action:  "Gs2Enchant:AddRarityParameterStatusByUserId",
+		Request: properties,
+	}
+}
+
+func SetRarityParameterStatusByUserId(
+	namespaceName string,
+	parameterName string,
+	propertyId string,
+	parameterValues *[]RarityParameterValue,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["parameterName"] = parameterName
+	properties["propertyId"] = propertyId
+	if parameterValues != nil {
+		properties["parameterValues"] = parameterValues
+	}
+	return AcquireAction{
+		Action:  "Gs2Enchant:SetRarityParameterStatusByUserId",
 		Request: properties,
 	}
 }

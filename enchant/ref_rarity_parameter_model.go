@@ -51,6 +51,18 @@ func (p *RarityParameterModelRef) AddRarityParameterStatus(
 	)
 }
 
+func (p *RarityParameterModelRef) SetRarityParameterStatus(
+	propertyId string,
+	parameterValues *[]RarityParameterValue,
+) AcquireAction {
+	return SetRarityParameterStatusByUserId(
+		p.NamespaceName,
+		p.ParameterName,
+		propertyId,
+		parameterValues,
+	)
+}
+
 func (p *RarityParameterModelRef) VerifyRarityParameterStatus(
 	propertyId string,
 	verifyType string,
