@@ -33,15 +33,16 @@ func (p IncrementalRateModelCalculateType) Pointer() *IncrementalRateModelCalcul
 }
 
 type IncrementalRateModel struct {
-	Name              string
-	Metadata          *string
-	ConsumeAction     ConsumeAction
-	CalculateType     IncrementalRateModelCalculateType
-	BaseValue         *int64
-	CoefficientValue  *int64
-	CalculateScriptId *string
-	ExchangeCountId   string
-	AcquireActions    []AcquireAction
+	Name                 string
+	Metadata             *string
+	ConsumeAction        ConsumeAction
+	CalculateType        IncrementalRateModelCalculateType
+	BaseValue            *int64
+	CoefficientValue     *int64
+	CalculateScriptId    *string
+	ExchangeCountId      string
+	MaximumExchangeCount int32
+	AcquireActions       []AcquireAction
 }
 
 type IncrementalRateModelOptions struct {
@@ -57,18 +58,20 @@ func NewIncrementalRateModel(
 	consumeAction ConsumeAction,
 	calculateType IncrementalRateModelCalculateType,
 	exchangeCountId string,
+	maximumExchangeCount int32,
 	options IncrementalRateModelOptions,
 ) IncrementalRateModel {
 	data := IncrementalRateModel{
-		Name:              name,
-		ConsumeAction:     consumeAction,
-		CalculateType:     calculateType,
-		ExchangeCountId:   exchangeCountId,
-		Metadata:          options.Metadata,
-		BaseValue:         options.BaseValue,
-		CoefficientValue:  options.CoefficientValue,
-		CalculateScriptId: options.CalculateScriptId,
-		AcquireActions:    options.AcquireActions,
+		Name:                 name,
+		ConsumeAction:        consumeAction,
+		CalculateType:        calculateType,
+		ExchangeCountId:      exchangeCountId,
+		MaximumExchangeCount: maximumExchangeCount,
+		Metadata:             options.Metadata,
+		BaseValue:            options.BaseValue,
+		CoefficientValue:     options.CoefficientValue,
+		CalculateScriptId:    options.CalculateScriptId,
+		AcquireActions:       options.AcquireActions,
 	}
 	return data
 }
@@ -82,6 +85,7 @@ func NewIncrementalRateModelCalculateTypeIsLinear(
 	name string,
 	consumeAction ConsumeAction,
 	exchangeCountId string,
+	maximumExchangeCount int32,
 	baseValue int64,
 	coefficientValue int64,
 	options IncrementalRateModelCalculateTypeIsLinearOptions,
@@ -91,6 +95,7 @@ func NewIncrementalRateModelCalculateTypeIsLinear(
 		consumeAction,
 		IncrementalRateModelCalculateTypeLinear,
 		exchangeCountId,
+		maximumExchangeCount,
 		IncrementalRateModelOptions{
 			Metadata:         options.Metadata,
 			BaseValue:        &baseValue,
@@ -109,6 +114,7 @@ func NewIncrementalRateModelCalculateTypeIsPower(
 	name string,
 	consumeAction ConsumeAction,
 	exchangeCountId string,
+	maximumExchangeCount int32,
 	coefficientValue int64,
 	options IncrementalRateModelCalculateTypeIsPowerOptions,
 ) IncrementalRateModel {
@@ -117,6 +123,7 @@ func NewIncrementalRateModelCalculateTypeIsPower(
 		consumeAction,
 		IncrementalRateModelCalculateTypePower,
 		exchangeCountId,
+		maximumExchangeCount,
 		IncrementalRateModelOptions{
 			Metadata:         options.Metadata,
 			CoefficientValue: &coefficientValue,
@@ -134,6 +141,7 @@ func NewIncrementalRateModelCalculateTypeIsGs2Script(
 	name string,
 	consumeAction ConsumeAction,
 	exchangeCountId string,
+	maximumExchangeCount int32,
 	calculateScriptId string,
 	options IncrementalRateModelCalculateTypeIsGs2ScriptOptions,
 ) IncrementalRateModel {
@@ -142,6 +150,7 @@ func NewIncrementalRateModelCalculateTypeIsGs2Script(
 		consumeAction,
 		IncrementalRateModelCalculateTypeGs2Script,
 		exchangeCountId,
+		maximumExchangeCount,
 		IncrementalRateModelOptions{
 			Metadata:          options.Metadata,
 			CalculateScriptId: &calculateScriptId,
@@ -168,6 +177,7 @@ func (p *IncrementalRateModel) Properties() map[string]interface{} {
 		properties["CalculateScriptId"] = p.CalculateScriptId
 	}
 	properties["ExchangeCountId"] = p.ExchangeCountId
+	properties["MaximumExchangeCount"] = p.MaximumExchangeCount
 	{
 		values := make([]map[string]interface{}, len(p.AcquireActions))
 		for i, element := range p.AcquireActions {
