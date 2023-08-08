@@ -23,27 +23,4 @@ import (
 var _ = AcquireAction{}
 
 type MaxStaminaTableRef struct {
-	NamespaceName       string
-	MaxStaminaTableName string
-}
-
-func (p *MaxStaminaTableRef) Grn() string {
-	return NewJoin(
-		":",
-		[]string{
-			"grn",
-			"gs2",
-			NewGetAttrRegion().String(),
-			NewGetAttrOwnerId().String(),
-			"stamina",
-			p.NamespaceName,
-			"maxStaminaTable",
-			p.MaxStaminaTableName,
-		},
-	).String()
-}
-
-func (p *MaxStaminaTableRef) GrnPointer() *string {
-	grn := p.Grn()
-	return &grn
 }

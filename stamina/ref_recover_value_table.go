@@ -23,27 +23,4 @@ import (
 var _ = AcquireAction{}
 
 type RecoverValueTableRef struct {
-	NamespaceName         string
-	RecoverValueTableName string
-}
-
-func (p *RecoverValueTableRef) Grn() string {
-	return NewJoin(
-		":",
-		[]string{
-			"grn",
-			"gs2",
-			NewGetAttrRegion().String(),
-			NewGetAttrOwnerId().String(),
-			"stamina",
-			p.NamespaceName,
-			"recoverValueTable",
-			p.RecoverValueTableName,
-		},
-	).String()
-}
-
-func (p *RecoverValueTableRef) GrnPointer() *string {
-	grn := p.Grn()
-	return &grn
 }

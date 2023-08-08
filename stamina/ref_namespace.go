@@ -26,33 +26,6 @@ type NamespaceRef struct {
 	NamespaceName string
 }
 
-func (p *NamespaceRef) MaxStaminaTable(
-	maxStaminaTableName string,
-) *MaxStaminaTableRef {
-	return &MaxStaminaTableRef{
-		NamespaceName:       p.NamespaceName,
-		MaxStaminaTableName: maxStaminaTableName,
-	}
-}
-
-func (p *NamespaceRef) RecoverIntervalTable(
-	recoverIntervalTableName string,
-) *RecoverIntervalTableRef {
-	return &RecoverIntervalTableRef{
-		NamespaceName:            p.NamespaceName,
-		RecoverIntervalTableName: recoverIntervalTableName,
-	}
-}
-
-func (p *NamespaceRef) RecoverValueTable(
-	recoverValueTableName string,
-) *RecoverValueTableRef {
-	return &RecoverValueTableRef{
-		NamespaceName:         p.NamespaceName,
-		RecoverValueTableName: recoverValueTableName,
-	}
-}
-
 func (p *NamespaceRef) StaminaModel(
 	staminaName string,
 ) *StaminaModelRef {

@@ -23,27 +23,4 @@ import (
 var _ = AcquireAction{}
 
 type RecoverIntervalTableRef struct {
-	NamespaceName            string
-	RecoverIntervalTableName string
-}
-
-func (p *RecoverIntervalTableRef) Grn() string {
-	return NewJoin(
-		":",
-		[]string{
-			"grn",
-			"gs2",
-			NewGetAttrRegion().String(),
-			NewGetAttrOwnerId().String(),
-			"stamina",
-			p.NamespaceName,
-			"recoverIntervalTable",
-			p.RecoverIntervalTableName,
-		},
-	).String()
-}
-
-func (p *RecoverIntervalTableRef) GrnPointer() *string {
-	grn := p.Grn()
-	return &grn
 }
