@@ -29,6 +29,7 @@ type CurrentMasterData struct {
 	namespaceName         string
 	inventoryModels       []InventoryModel
 	simpleInventoryModels []SimpleInventoryModel
+	bigInventoryModels    []BigInventoryModel
 }
 
 func NewCurrentMasterData(
@@ -36,6 +37,7 @@ func NewCurrentMasterData(
 	namespaceName string,
 	inventoryModels []InventoryModel,
 	simpleInventoryModels []SimpleInventoryModel,
+	bigInventoryModels []BigInventoryModel,
 ) *CurrentMasterData {
 	self := CurrentMasterData{
 		stack:                 stack,
@@ -43,6 +45,7 @@ func NewCurrentMasterData(
 		namespaceName:         namespaceName,
 		inventoryModels:       inventoryModels,
 		simpleInventoryModels: simpleInventoryModels,
+		bigInventoryModels:    bigInventoryModels,
 	}
 	self.CdkResource = NewCdkResource(&self)
 	stack.AddResource(&self.CdkResource)
@@ -66,12 +69,17 @@ func (p *CurrentMasterData) Properties() map[string]interface{} {
 	for i, item := range p.simpleInventoryModels {
 		simpleInventoryModels[i] = item.Properties()
 	}
+	bigInventoryModels := make([]map[string]interface{}, len(p.bigInventoryModels))
+	for i, item := range p.bigInventoryModels {
+		bigInventoryModels[i] = item.Properties()
+	}
 	return map[string]interface{}{
 		"NamespaceName": p.namespaceName,
 		"Settings": map[string]interface{}{
 			"version":               p.version,
 			"inventoryModels":       inventoryModels,
 			"simpleInventoryModels": simpleInventoryModels,
+			"bigInventoryModels":    bigInventoryModels,
 		},
 	}
 }

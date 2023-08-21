@@ -22,38 +22,35 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
+type BigItemModelRef struct {
 	NamespaceName string
+	InventoryName string
+	ItemName      string
 }
 
-func (p *NamespaceRef) InventoryModel(
-	inventoryName string,
-) *InventoryModelRef {
-	return &InventoryModelRef{
-		NamespaceName: p.NamespaceName,
-		InventoryName: inventoryName,
-	}
+func (p *BigItemModelRef) AcquireBigItem(
+	acquireCount string,
+) AcquireAction {
+	return AcquireBigItemByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		p.ItemName,
+		acquireCount,
+	)
 }
 
-func (p *NamespaceRef) SimpleInventoryModel(
-	inventoryName string,
-) *SimpleInventoryModelRef {
-	return &SimpleInventoryModelRef{
-		NamespaceName: p.NamespaceName,
-		InventoryName: inventoryName,
-	}
+func (p *BigItemModelRef) ConsumeBigItem(
+	consumeCount string,
+) ConsumeAction {
+	return ConsumeBigItemByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		p.ItemName,
+		consumeCount,
+	)
 }
 
-func (p *NamespaceRef) BigInventoryModel(
-	inventoryName string,
-) *BigInventoryModelRef {
-	return &BigInventoryModelRef{
-		NamespaceName: p.NamespaceName,
-		InventoryName: inventoryName,
-	}
-}
-
-func (p *NamespaceRef) Grn() string {
+func (p *BigItemModelRef) Grn() string {
 	return NewJoin(
 		":",
 		[]string{
@@ -63,11 +60,16 @@ func (p *NamespaceRef) Grn() string {
 			NewGetAttrOwnerId().String(),
 			"inventory",
 			p.NamespaceName,
+			"big",
+			"model",
+			p.InventoryName,
+			"item",
+			p.ItemName,
 		},
 	).String()
 }
 
-func (p *NamespaceRef) GrnPointer() *string {
+func (p *BigItemModelRef) GrnPointer() *string {
 	grn := p.Grn()
 	return &grn
 }

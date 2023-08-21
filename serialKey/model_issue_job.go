@@ -38,10 +38,12 @@ type IssueJob struct {
 	IssueRequestCount int32
 	Status            IssueJobStatus
 	CreatedAt         int64
+	Revision          *int64
 }
 
 type IssueJobOptions struct {
 	Metadata *string
+	Revision *int64
 }
 
 func NewIssueJob(
@@ -59,6 +61,7 @@ func NewIssueJob(
 		Status:            status,
 		CreatedAt:         createdAt,
 		Metadata:          options.Metadata,
+		Revision:          options.Revision,
 	}
 	return data
 }
@@ -73,5 +76,8 @@ func (p *IssueJob) Properties() map[string]interface{} {
 	properties["IssueRequestCount"] = p.IssueRequestCount
 	properties["Status"] = p.Status
 	properties["CreatedAt"] = p.CreatedAt
+	if p.Revision != nil {
+		properties["Revision"] = p.Revision
+	}
 	return properties
 }

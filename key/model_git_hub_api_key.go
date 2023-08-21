@@ -29,10 +29,12 @@ type GitHubApiKey struct {
 	EncryptionKeyName string
 	CreatedAt         int64
 	UpdatedAt         int64
+	Revision          *int64
 }
 
 type GitHubApiKeyOptions struct {
 	Description *string
+	Revision    *int64
 }
 
 func NewGitHubApiKey(
@@ -50,6 +52,7 @@ func NewGitHubApiKey(
 		CreatedAt:         createdAt,
 		UpdatedAt:         updatedAt,
 		Description:       options.Description,
+		Revision:          options.Revision,
 	}
 	return data
 }
@@ -64,5 +67,8 @@ func (p *GitHubApiKey) Properties() map[string]interface{} {
 	properties["EncryptionKeyName"] = p.EncryptionKeyName
 	properties["CreatedAt"] = p.CreatedAt
 	properties["UpdatedAt"] = p.UpdatedAt
+	if p.Revision != nil {
+		properties["Revision"] = p.Revision
+	}
 	return properties
 }

@@ -204,3 +204,41 @@ func AcquireSimpleItemsByUserId(
 		Request: properties,
 	}
 }
+
+func ConsumeBigItemByUserId(
+	namespaceName string,
+	inventoryName string,
+	itemName string,
+	consumeCount string,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["itemName"] = itemName
+	properties["consumeCount"] = consumeCount
+	return ConsumeAction{
+		Action:  "Gs2Inventory:ConsumeBigItemByUserId",
+		Request: properties,
+	}
+}
+
+func AcquireBigItemByUserId(
+	namespaceName string,
+	inventoryName string,
+	itemName string,
+	acquireCount string,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["itemName"] = itemName
+	properties["acquireCount"] = acquireCount
+	return AcquireAction{
+		Action:  "Gs2Inventory:AcquireBigItemByUserId",
+		Request: properties,
+	}
+}

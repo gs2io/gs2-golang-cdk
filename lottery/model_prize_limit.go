@@ -27,9 +27,11 @@ type PrizeLimit struct {
 	DrawnCount int32
 	CreatedAt  int64
 	UpdatedAt  int64
+	Revision   *int64
 }
 
 type PrizeLimitOptions struct {
+	Revision *int64
 }
 
 func NewPrizeLimit(
@@ -44,6 +46,7 @@ func NewPrizeLimit(
 		DrawnCount: drawnCount,
 		CreatedAt:  createdAt,
 		UpdatedAt:  updatedAt,
+		Revision:   options.Revision,
 	}
 	return data
 }
@@ -54,5 +57,8 @@ func (p *PrizeLimit) Properties() map[string]interface{} {
 	properties["DrawnCount"] = p.DrawnCount
 	properties["CreatedAt"] = p.CreatedAt
 	properties["UpdatedAt"] = p.UpdatedAt
+	if p.Revision != nil {
+		properties["Revision"] = p.Revision
+	}
 	return properties
 }

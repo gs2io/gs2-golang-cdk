@@ -103,6 +103,7 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 func (p *Namespace) MasterData(
 	inventoryModels []InventoryModel,
 	simpleInventoryModels []SimpleInventoryModel,
+	bigInventoryModels []BigInventoryModel,
 
 ) *Namespace {
 	NewCurrentMasterData(
@@ -110,6 +111,7 @@ func (p *Namespace) MasterData(
 		p.Name,
 		inventoryModels,
 		simpleInventoryModels,
+		bigInventoryModels,
 	).AddDependsOn(
 		p,
 	)

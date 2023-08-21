@@ -32,6 +32,7 @@ type StampSheetResult struct {
 	NextTransactionId *string
 	CreatedAt         int64
 	TtlAt             int64
+	Revision          *int64
 }
 
 type StampSheetResultOptions struct {
@@ -39,6 +40,7 @@ type StampSheetResultOptions struct {
 	TaskResults       []string
 	SheetResult       *string
 	NextTransactionId *string
+	Revision          *int64
 }
 
 func NewStampSheetResult(
@@ -59,6 +61,7 @@ func NewStampSheetResult(
 		TaskResults:       options.TaskResults,
 		SheetResult:       options.SheetResult,
 		NextTransactionId: options.NextTransactionId,
+		Revision:          options.Revision,
 	}
 	return data
 }
@@ -84,5 +87,8 @@ func (p *StampSheetResult) Properties() map[string]interface{} {
 	}
 	properties["CreatedAt"] = p.CreatedAt
 	properties["TtlAt"] = p.TtlAt
+	if p.Revision != nil {
+		properties["Revision"] = p.Revision
+	}
 	return properties
 }

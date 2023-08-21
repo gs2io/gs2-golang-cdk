@@ -28,9 +28,11 @@ type Progress struct {
 	PatternCount int32
 	CreatedAt    int64
 	UpdatedAt    int64
+	Revision     *int64
 }
 
 type ProgressOptions struct {
+	Revision *int64
 }
 
 func NewProgress(
@@ -47,6 +49,7 @@ func NewProgress(
 		PatternCount: patternCount,
 		CreatedAt:    createdAt,
 		UpdatedAt:    updatedAt,
+		Revision:     options.Revision,
 	}
 	return data
 }
@@ -58,5 +61,8 @@ func (p *Progress) Properties() map[string]interface{} {
 	properties["PatternCount"] = p.PatternCount
 	properties["CreatedAt"] = p.CreatedAt
 	properties["UpdatedAt"] = p.UpdatedAt
+	if p.Revision != nil {
+		properties["Revision"] = p.Revision
+	}
 	return properties
 }

@@ -1,4 +1,4 @@
-package news
+package inventory
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,39 +22,31 @@ import (
 
 var _ = AcquireAction{}
 
-type Output struct {
-	Name      string
-	Text      string
-	CreatedAt int64
-	Revision  *int64
+type BigItemModel struct {
+	Name     string
+	Metadata *string
 }
 
-type OutputOptions struct {
-	Revision *int64
+type BigItemModelOptions struct {
+	Metadata *string
 }
 
-func NewOutput(
+func NewBigItemModel(
 	name string,
-	text string,
-	createdAt int64,
-	options OutputOptions,
-) Output {
-	data := Output{
-		Name:      name,
-		Text:      text,
-		CreatedAt: createdAt,
-		Revision:  options.Revision,
+	options BigItemModelOptions,
+) BigItemModel {
+	data := BigItemModel{
+		Name:     name,
+		Metadata: options.Metadata,
 	}
 	return data
 }
 
-func (p *Output) Properties() map[string]interface{} {
+func (p *BigItemModel) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["Name"] = p.Name
-	properties["Text"] = p.Text
-	properties["CreatedAt"] = p.CreatedAt
-	if p.Revision != nil {
-		properties["Revision"] = p.Revision
+	if p.Metadata != nil {
+		properties["Metadata"] = p.Metadata
 	}
 	return properties
 }
