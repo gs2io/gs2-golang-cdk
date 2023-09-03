@@ -21,3 +21,22 @@ import (
 )
 
 var _ = AcquireAction{}
+
+func TriggerByUserId(
+	namespaceName string,
+	triggerName string,
+	triggerStrategy string,
+	ttl int32,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["triggerName"] = triggerName
+	properties["triggerStrategy"] = triggerStrategy
+	properties["ttl"] = ttl
+	return AcquireAction{
+		Action:  "Gs2Schedule:TriggerByUserId",
+		Request: properties,
+	}
+}
