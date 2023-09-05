@@ -53,3 +53,20 @@ func DeleteReceiveStatusByUserId(
 		Request: properties,
 	}
 }
+
+func UnmarkReceivedByUserId(
+	namespaceName string,
+	bonusModelName string,
+	stepNumber int32,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["bonusModelName"] = bonusModelName
+	properties["stepNumber"] = stepNumber
+	return AcquireAction{
+		Action:  "Gs2LoginReward:UnmarkReceivedByUserId",
+		Request: properties,
+	}
+}

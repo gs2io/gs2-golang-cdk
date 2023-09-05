@@ -22,6 +22,23 @@ import (
 
 var _ = AcquireAction{}
 
+func SubMoldCapacityByUserId(
+	namespaceName string,
+	moldName string,
+	capacity int32,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["moldName"] = moldName
+	properties["capacity"] = capacity
+	return ConsumeAction{
+		Action:  "Gs2Formation:SubMoldCapacityByUserId",
+		Request: properties,
+	}
+}
+
 func AddMoldCapacityByUserId(
 	namespaceName string,
 	moldName string,

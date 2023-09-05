@@ -45,6 +45,25 @@ func CountUpByUserId(
 	}
 }
 
+func CountDownByUserId(
+	namespaceName string,
+	limitName string,
+	counterName string,
+	countDownValue int32,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["limitName"] = limitName
+	properties["counterName"] = counterName
+	properties["countDownValue"] = countDownValue
+	return AcquireAction{
+		Action:  "Gs2Limit:CountDownByUserId",
+		Request: properties,
+	}
+}
+
 func DeleteCounterByUserId(
 	namespaceName string,
 	limitName string,

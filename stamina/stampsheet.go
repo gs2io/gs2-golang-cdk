@@ -22,6 +22,23 @@ import (
 
 var _ = AcquireAction{}
 
+func DecreaseMaxValueByUserId(
+	namespaceName string,
+	staminaName string,
+	decreaseValue int32,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["staminaName"] = staminaName
+	properties["decreaseValue"] = decreaseValue
+	return ConsumeAction{
+		Action:  "Gs2Stamina:DecreaseMaxValueByUserId",
+		Request: properties,
+	}
+}
+
 func ConsumeStaminaByUserId(
 	namespaceName string,
 	staminaName string,

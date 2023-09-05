@@ -77,6 +77,16 @@ func (p *StaminaModelRef) SetRecoverValue(
 	)
 }
 
+func (p *StaminaModelRef) DecreaseMaxValue(
+	decreaseValue int32,
+) ConsumeAction {
+	return DecreaseMaxValueByUserId(
+		p.NamespaceName,
+		p.StaminaName,
+		decreaseValue,
+	)
+}
+
 func (p *StaminaModelRef) ConsumeStamina(
 	consumeValue int32,
 ) ConsumeAction {

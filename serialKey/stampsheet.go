@@ -36,3 +36,18 @@ func UseByUserId(
 		Request: properties,
 	}
 }
+
+func RevertUseByUserId(
+	namespaceName string,
+	code string,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["code"] = code
+	return AcquireAction{
+		Action:  "Gs2SerialKey:RevertUseByUserId",
+		Request: properties,
+	}
+}

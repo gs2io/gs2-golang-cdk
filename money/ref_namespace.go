@@ -26,6 +26,15 @@ type NamespaceRef struct {
 	NamespaceName string
 }
 
+func (p *NamespaceRef) RevertRecordReceipt(
+	receipt string,
+) AcquireAction {
+	return RevertRecordReceipt(
+		p.NamespaceName,
+		receipt,
+	)
+}
+
 func (p *NamespaceRef) RecordReceipt(
 	contentsId string,
 	receipt string,

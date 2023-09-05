@@ -22,6 +22,25 @@ import (
 
 var _ = AcquireAction{}
 
+func DecreaseMaximumIdleMinutesByUserId(
+	namespaceName string,
+	categoryName string,
+	decreaseMinutes *int32,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["categoryName"] = categoryName
+	if decreaseMinutes != nil {
+		properties["decreaseMinutes"] = decreaseMinutes
+	}
+	return ConsumeAction{
+		Action:  "Gs2Idle:DecreaseMaximumIdleMinutesByUserId",
+		Request: properties,
+	}
+}
+
 func IncreaseMaximumIdleMinutesByUserId(
 	namespaceName string,
 	categoryName string,

@@ -41,6 +41,25 @@ func IncrementPurchaseCountByUserId(
 	}
 }
 
+func DecrementPurchaseCountByUserId(
+	namespaceName string,
+	showcaseName string,
+	displayItemName string,
+	count int32,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["showcaseName"] = showcaseName
+	properties["displayItemName"] = displayItemName
+	properties["count"] = count
+	return AcquireAction{
+		Action:  "Gs2Showcase:DecrementPurchaseCountByUserId",
+		Request: properties,
+	}
+}
+
 func ForceReDrawByUserId(
 	namespaceName string,
 	showcaseName string,

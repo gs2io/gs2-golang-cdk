@@ -22,6 +22,44 @@ import (
 
 var _ = AcquireAction{}
 
+func SubExperienceByUserId(
+	namespaceName string,
+	experienceName string,
+	propertyId string,
+	experienceValue int64,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["experienceName"] = experienceName
+	properties["propertyId"] = propertyId
+	properties["experienceValue"] = experienceValue
+	return ConsumeAction{
+		Action:  "Gs2Experience:SubExperienceByUserId",
+		Request: properties,
+	}
+}
+
+func SubRankCapByUserId(
+	namespaceName string,
+	experienceName string,
+	propertyId string,
+	rankCapValue int64,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["experienceName"] = experienceName
+	properties["propertyId"] = propertyId
+	properties["rankCapValue"] = rankCapValue
+	return ConsumeAction{
+		Action:  "Gs2Experience:SubRankCapByUserId",
+		Request: properties,
+	}
+}
+
 func AddExperienceByUserId(
 	namespaceName string,
 	experienceName string,

@@ -37,6 +37,21 @@ func OpenMessageByUserId(
 	}
 }
 
+func DeleteMessageByUserId(
+	namespaceName string,
+	messageName string,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["messageName"] = messageName
+	return ConsumeAction{
+		Action:  "Gs2Inbox:DeleteMessageByUserId",
+		Request: properties,
+	}
+}
+
 func SendMessageByUserId(
 	namespaceName string,
 	metadata string,

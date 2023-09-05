@@ -76,3 +76,18 @@ func RecordReceipt(
 		Request: properties,
 	}
 }
+
+func RevertRecordReceipt(
+	namespaceName string,
+	receipt string,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["receipt"] = receipt
+	return AcquireAction{
+		Action:  "Gs2Money:RevertRecordReceipt",
+		Request: properties,
+	}
+}

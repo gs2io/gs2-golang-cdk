@@ -39,6 +39,40 @@ func ReceiveByUserId(
 	}
 }
 
+func RevertReceiveByUserId(
+	namespaceName string,
+	missionGroupName string,
+	missionTaskName string,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["missionGroupName"] = missionGroupName
+	properties["missionTaskName"] = missionTaskName
+	return AcquireAction{
+		Action:  "Gs2Mission:RevertReceiveByUserId",
+		Request: properties,
+	}
+}
+
+func DecreaseCounterByUserId(
+	namespaceName string,
+	counterName string,
+	value int64,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["counterName"] = counterName
+	properties["value"] = value
+	return ConsumeAction{
+		Action:  "Gs2Mission:DecreaseCounterByUserId",
+		Request: properties,
+	}
+}
+
 func IncreaseCounterByUserId(
 	namespaceName string,
 	counterName string,

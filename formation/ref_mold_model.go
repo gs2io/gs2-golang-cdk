@@ -47,6 +47,16 @@ func (p *MoldModelRef) SetMoldCapacity(
 	)
 }
 
+func (p *MoldModelRef) SubMoldCapacity(
+	capacity int32,
+) ConsumeAction {
+	return SubMoldCapacityByUserId(
+		p.NamespaceName,
+		p.MoldName,
+		capacity,
+	)
+}
+
 func (p *MoldModelRef) Grn() string {
 	return NewJoin(
 		":",

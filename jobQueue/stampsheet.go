@@ -22,6 +22,21 @@ import (
 
 var _ = AcquireAction{}
 
+func DeleteJobByUserId(
+	namespaceName string,
+	jobName string,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["jobName"] = jobName
+	return ConsumeAction{
+		Action:  "Gs2JobQueue:DeleteJobByUserId",
+		Request: properties,
+	}
+}
+
 func PushByUserId(
 	namespaceName string,
 	jobs *[]JobEntry,

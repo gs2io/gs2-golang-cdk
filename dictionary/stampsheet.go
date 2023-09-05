@@ -22,6 +22,23 @@ import (
 
 var _ = AcquireAction{}
 
+func DeleteEntriesByUserId(
+	namespaceName string,
+	entryModelNames *[]string,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	if entryModelNames != nil {
+		properties["entryModelNames"] = entryModelNames
+	}
+	return ConsumeAction{
+		Action:  "Gs2Dictionary:DeleteEntriesByUserId",
+		Request: properties,
+	}
+}
+
 func AddEntriesByUserId(
 	namespaceName string,
 	entryModelNames *[]string,

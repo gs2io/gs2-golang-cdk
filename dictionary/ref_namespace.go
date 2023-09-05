@@ -44,6 +44,15 @@ func (p *NamespaceRef) AddEntries(
 	)
 }
 
+func (p *NamespaceRef) DeleteEntries(
+	entryModelNames *[]string,
+) ConsumeAction {
+	return DeleteEntriesByUserId(
+		p.NamespaceName,
+		entryModelNames,
+	)
+}
+
 func (p *NamespaceRef) Grn() string {
 	return NewJoin(
 		":",

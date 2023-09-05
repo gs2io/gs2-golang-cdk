@@ -37,6 +37,16 @@ func (p *CounterModelRef) IncreaseCounter(
 	)
 }
 
+func (p *CounterModelRef) DecreaseCounter(
+	value int64,
+) ConsumeAction {
+	return DecreaseCounterByUserId(
+		p.NamespaceName,
+		p.CounterName,
+		value,
+	)
+}
+
 func (p *CounterModelRef) Grn() string {
 	return NewJoin(
 		":",

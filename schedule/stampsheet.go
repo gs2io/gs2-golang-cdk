@@ -22,6 +22,21 @@ import (
 
 var _ = AcquireAction{}
 
+func DeleteTriggerByUserId(
+	namespaceName string,
+	triggerName string,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["triggerName"] = triggerName
+	return ConsumeAction{
+		Action:  "Gs2Schedule:DeleteTriggerByUserId",
+		Request: properties,
+	}
+}
+
 func TriggerByUserId(
 	namespaceName string,
 	triggerName string,

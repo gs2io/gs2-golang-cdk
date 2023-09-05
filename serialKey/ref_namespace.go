@@ -35,6 +35,15 @@ func (p *NamespaceRef) CampaignModel(
 	}
 }
 
+func (p *NamespaceRef) RevertUse(
+	code string,
+) AcquireAction {
+	return RevertUseByUserId(
+		p.NamespaceName,
+		code,
+	)
+}
+
 func (p *NamespaceRef) Grn() string {
 	return NewJoin(
 		":",
