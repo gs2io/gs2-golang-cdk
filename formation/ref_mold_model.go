@@ -24,36 +24,31 @@ var _ = AcquireAction{}
 
 type MoldModelRef struct {
 	NamespaceName string
-	MoldName      string
+	MoldModelName string
 }
 
-func (p *MoldModelRef) AddMoldCapacity(
-	capacity int32,
+func (p *MoldModelRef) FormModel(
+	formModelName string,
+) *FormModelRef {
+	return &FormModelRef{
+		NamespaceName: p.NamespaceName,
+		MoldModelName: p.MoldModelName,
+		FormModelName: formModelName,
+	}
+}
+
+func (p *MoldModelRef) AcquireActionsToFormProperties(
+	moldName string,
+	index int32,
+	acquireAction AcquireAction,
+	config *[]AcquireActionConfig,
 ) AcquireAction {
-	return AddMoldCapacityByUserId(
+	return AcquireActionsToFormProperties(
 		p.NamespaceName,
-		p.MoldName,
-		capacity,
-	)
-}
-
-func (p *MoldModelRef) SetMoldCapacity(
-	capacity int32,
-) AcquireAction {
-	return SetMoldCapacityByUserId(
-		p.NamespaceName,
-		p.MoldName,
-		capacity,
-	)
-}
-
-func (p *MoldModelRef) SubMoldCapacity(
-	capacity int32,
-) ConsumeAction {
-	return SubMoldCapacityByUserId(
-		p.NamespaceName,
-		p.MoldName,
-		capacity,
+		moldName,
+		index,
+		acquireAction,
+		config,
 	)
 }
 
@@ -69,7 +64,7 @@ func (p *MoldModelRef) Grn() string {
 			p.NamespaceName,
 			"model",
 			"mold",
-			p.MoldName,
+			p.MoldModelName,
 		},
 	).String()
 }

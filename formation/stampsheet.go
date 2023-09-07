@@ -98,7 +98,7 @@ func AcquireActionsToFormProperties(
 
 func AcquireActionsToPropertyFormProperties(
 	namespaceName string,
-	formModelName string,
+	propertyFormModelName string,
 	propertyId string,
 	acquireAction AcquireAction,
 	config *[]AcquireActionConfig,
@@ -107,7 +107,7 @@ func AcquireActionsToPropertyFormProperties(
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["formModelName"] = formModelName
+	properties["propertyFormModelName"] = propertyFormModelName
 	properties["propertyId"] = propertyId
 	properties["acquireAction"] = acquireAction
 	if config != nil {

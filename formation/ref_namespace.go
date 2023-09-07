@@ -27,21 +27,54 @@ type NamespaceRef struct {
 }
 
 func (p *NamespaceRef) MoldModel(
-	moldName string,
+	moldModelName string,
 ) *MoldModelRef {
 	return &MoldModelRef{
 		NamespaceName: p.NamespaceName,
-		MoldName:      moldName,
+		MoldModelName: moldModelName,
 	}
 }
 
-func (p *NamespaceRef) FormModel(
-	formModelName string,
-) *FormModelRef {
-	return &FormModelRef{
-		NamespaceName: p.NamespaceName,
-		FormModelName: formModelName,
+func (p *NamespaceRef) PropertyFormModel(
+	propertyFormModelName string,
+) *PropertyFormModelRef {
+	return &PropertyFormModelRef{
+		NamespaceName:         p.NamespaceName,
+		PropertyFormModelName: propertyFormModelName,
 	}
+}
+
+func (p *NamespaceRef) AddMoldCapacity(
+	moldName string,
+	capacity int32,
+) AcquireAction {
+	return AddMoldCapacityByUserId(
+		p.NamespaceName,
+		moldName,
+		capacity,
+	)
+}
+
+func (p *NamespaceRef) SetMoldCapacity(
+	moldName string,
+	capacity int32,
+) AcquireAction {
+	return SetMoldCapacityByUserId(
+		p.NamespaceName,
+		moldName,
+		capacity,
+	)
+}
+
+func (p *NamespaceRef) SubMoldCapacity(
+	moldName string,
+	capacity int32,
+) ConsumeAction {
+	return SubMoldCapacityByUserId(
+		p.NamespaceName,
+		moldName,
+		capacity,
+	)
 }
 
 func (p *NamespaceRef) Grn() string {

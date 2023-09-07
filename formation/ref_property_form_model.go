@@ -22,13 +22,26 @@ import (
 
 var _ = AcquireAction{}
 
-type FormModelRef struct {
-	NamespaceName string
-	MoldModelName string
-	FormModelName string
+type PropertyFormModelRef struct {
+	NamespaceName         string
+	PropertyFormModelName string
 }
 
-func (p *FormModelRef) Grn() string {
+func (p *PropertyFormModelRef) AcquireActionsToPropertyFormProperties(
+	propertyId string,
+	acquireAction AcquireAction,
+	config *[]AcquireActionConfig,
+) AcquireAction {
+	return AcquireActionsToPropertyFormProperties(
+		p.NamespaceName,
+		p.PropertyFormModelName,
+		propertyId,
+		acquireAction,
+		config,
+	)
+}
+
+func (p *PropertyFormModelRef) Grn() string {
 	return NewJoin(
 		":",
 		[]string{
@@ -39,16 +52,13 @@ func (p *FormModelRef) Grn() string {
 			"formation",
 			p.NamespaceName,
 			"model",
-			"mold",
-			p.MoldModelName,
-			"model",
-			"form",
-			p.FormModelName,
+			"propertyForm",
+			p.PropertyFormModelName,
 		},
 	).String()
 }
 
-func (p *FormModelRef) GrnPointer() *string {
+func (p *PropertyFormModelRef) GrnPointer() *string {
 	grn := p.Grn()
 	return &grn
 }

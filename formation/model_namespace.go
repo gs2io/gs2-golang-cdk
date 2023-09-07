@@ -102,14 +102,14 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 
 func (p *Namespace) MasterData(
 	moldModels []MoldModel,
-	formModels []FormModel,
+	propertyFormModels []PropertyFormModel,
 
 ) *Namespace {
 	NewCurrentMasterData(
 		p.stack,
 		p.Name,
 		moldModels,
-		formModels,
+		propertyFormModels,
 	).AddDependsOn(
 		p,
 	)

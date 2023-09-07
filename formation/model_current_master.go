@@ -24,25 +24,25 @@ var _ = AcquireAction{}
 
 type CurrentMasterData struct {
 	CdkResource
-	stack         *Stack
-	version       string
-	namespaceName string
-	moldModels    []MoldModel
-	formModels    []FormModel
+	stack              *Stack
+	version            string
+	namespaceName      string
+	moldModels         []MoldModel
+	propertyFormModels []PropertyFormModel
 }
 
 func NewCurrentMasterData(
 	stack *Stack,
 	namespaceName string,
 	moldModels []MoldModel,
-	formModels []FormModel,
+	propertyFormModels []PropertyFormModel,
 ) *CurrentMasterData {
 	self := CurrentMasterData{
-		stack:         stack,
-		version:       "2019-09-09",
-		namespaceName: namespaceName,
-		moldModels:    moldModels,
-		formModels:    formModels,
+		stack:              stack,
+		version:            "2019-09-09",
+		namespaceName:      namespaceName,
+		moldModels:         moldModels,
+		propertyFormModels: propertyFormModels,
 	}
 	self.CdkResource = NewCdkResource(&self)
 	stack.AddResource(&self.CdkResource)
@@ -62,16 +62,16 @@ func (p *CurrentMasterData) Properties() map[string]interface{} {
 	for i, item := range p.moldModels {
 		moldModels[i] = item.Properties()
 	}
-	formModels := make([]map[string]interface{}, len(p.formModels))
-	for i, item := range p.formModels {
-		formModels[i] = item.Properties()
+	propertyFormModels := make([]map[string]interface{}, len(p.propertyFormModels))
+	for i, item := range p.propertyFormModels {
+		propertyFormModels[i] = item.Properties()
 	}
 	return map[string]interface{}{
 		"NamespaceName": p.namespaceName,
 		"Settings": map[string]interface{}{
-			"version":    p.version,
-			"moldModels": moldModels,
-			"formModels": formModels,
+			"version":            p.version,
+			"moldModels":         moldModels,
+			"propertyFormModels": propertyFormModels,
 		},
 	}
 }
