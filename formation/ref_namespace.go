@@ -44,39 +44,6 @@ func (p *NamespaceRef) PropertyFormModel(
 	}
 }
 
-func (p *NamespaceRef) AddMoldCapacity(
-	moldName string,
-	capacity int32,
-) AcquireAction {
-	return AddMoldCapacityByUserId(
-		p.NamespaceName,
-		moldName,
-		capacity,
-	)
-}
-
-func (p *NamespaceRef) SetMoldCapacity(
-	moldName string,
-	capacity int32,
-) AcquireAction {
-	return SetMoldCapacityByUserId(
-		p.NamespaceName,
-		moldName,
-		capacity,
-	)
-}
-
-func (p *NamespaceRef) SubMoldCapacity(
-	moldName string,
-	capacity int32,
-) ConsumeAction {
-	return SubMoldCapacityByUserId(
-		p.NamespaceName,
-		moldName,
-		capacity,
-	)
-}
-
 func (p *NamespaceRef) Grn() string {
 	return NewJoin(
 		":",

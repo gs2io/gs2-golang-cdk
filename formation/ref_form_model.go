@@ -28,6 +28,20 @@ type FormModelRef struct {
 	FormModelName string
 }
 
+func (p *FormModelRef) AcquireActionsToFormProperties(
+	index int32,
+	acquireAction AcquireAction,
+	config *[]AcquireActionConfig,
+) AcquireAction {
+	return AcquireActionsToFormProperties(
+		p.NamespaceName,
+		p.MoldModelName,
+		index,
+		acquireAction,
+		config,
+	)
+}
+
 func (p *FormModelRef) Grn() string {
 	return NewJoin(
 		":",

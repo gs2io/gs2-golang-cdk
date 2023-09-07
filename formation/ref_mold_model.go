@@ -37,18 +37,33 @@ func (p *MoldModelRef) FormModel(
 	}
 }
 
-func (p *MoldModelRef) AcquireActionsToFormProperties(
-	moldName string,
-	index int32,
-	acquireAction AcquireAction,
-	config *[]AcquireActionConfig,
+func (p *MoldModelRef) AddMoldCapacity(
+	capacity int32,
 ) AcquireAction {
-	return AcquireActionsToFormProperties(
+	return AddMoldCapacityByUserId(
 		p.NamespaceName,
-		moldName,
-		index,
-		acquireAction,
-		config,
+		p.MoldModelName,
+		capacity,
+	)
+}
+
+func (p *MoldModelRef) SetMoldCapacity(
+	capacity int32,
+) AcquireAction {
+	return SetMoldCapacityByUserId(
+		p.NamespaceName,
+		p.MoldModelName,
+		capacity,
+	)
+}
+
+func (p *MoldModelRef) SubMoldCapacity(
+	capacity int32,
+) ConsumeAction {
+	return SubMoldCapacityByUserId(
+		p.NamespaceName,
+		p.MoldModelName,
+		capacity,
 	)
 }
 

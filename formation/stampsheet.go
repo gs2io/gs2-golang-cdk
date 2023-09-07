@@ -24,14 +24,14 @@ var _ = AcquireAction{}
 
 func SubMoldCapacityByUserId(
 	namespaceName string,
-	moldName string,
+	moldModelName string,
 	capacity int32,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["moldName"] = moldName
+	properties["moldModelName"] = moldModelName
 	properties["capacity"] = capacity
 	return ConsumeAction{
 		Action:  "Gs2Formation:SubMoldCapacityByUserId",
@@ -41,14 +41,14 @@ func SubMoldCapacityByUserId(
 
 func AddMoldCapacityByUserId(
 	namespaceName string,
-	moldName string,
+	moldModelName string,
 	capacity int32,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["moldName"] = moldName
+	properties["moldModelName"] = moldModelName
 	properties["capacity"] = capacity
 	return AcquireAction{
 		Action:  "Gs2Formation:AddMoldCapacityByUserId",
@@ -58,14 +58,14 @@ func AddMoldCapacityByUserId(
 
 func SetMoldCapacityByUserId(
 	namespaceName string,
-	moldName string,
+	moldModelName string,
 	capacity int32,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["moldName"] = moldName
+	properties["moldModelName"] = moldModelName
 	properties["capacity"] = capacity
 	return AcquireAction{
 		Action:  "Gs2Formation:SetMoldCapacityByUserId",
@@ -75,7 +75,7 @@ func SetMoldCapacityByUserId(
 
 func AcquireActionsToFormProperties(
 	namespaceName string,
-	moldName string,
+	moldModelName string,
 	index int32,
 	acquireAction AcquireAction,
 	config *[]AcquireActionConfig,
@@ -84,7 +84,7 @@ func AcquireActionsToFormProperties(
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["moldName"] = moldName
+	properties["moldModelName"] = moldModelName
 	properties["index"] = index
 	properties["acquireAction"] = acquireAction
 	if config != nil {
