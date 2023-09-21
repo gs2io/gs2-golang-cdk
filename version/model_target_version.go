@@ -24,26 +24,26 @@ var _ = AcquireAction{}
 
 type TargetVersion struct {
 	VersionName string
-	Version     Version
 	Body        *string
 	Signature   *string
+	Version     *Version
 }
 
 type TargetVersionOptions struct {
 	Body      *string
 	Signature *string
+	Version   *Version
 }
 
 func NewTargetVersion(
 	versionName string,
-	version Version,
 	options TargetVersionOptions,
 ) TargetVersion {
 	data := TargetVersion{
 		VersionName: versionName,
-		Version:     version,
 		Body:        options.Body,
 		Signature:   options.Signature,
+		Version:     options.Version,
 	}
 	return data
 }
@@ -51,12 +51,14 @@ func NewTargetVersion(
 func (p *TargetVersion) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["VersionName"] = p.VersionName
-	properties["Version"] = p.Version.Properties()
 	if p.Body != nil {
 		properties["Body"] = p.Body
 	}
 	if p.Signature != nil {
 		properties["Signature"] = p.Signature
+	}
+	if p.Version != nil {
+		properties["Version"] = p.Version.Properties()
 	}
 	return properties
 }
