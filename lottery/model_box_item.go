@@ -23,6 +23,7 @@ import (
 var _ = AcquireAction{}
 
 type BoxItem struct {
+	PrizeId        string
 	AcquireActions []AcquireAction
 	Remaining      int32
 	Initial        int32
@@ -33,11 +34,13 @@ type BoxItemOptions struct {
 }
 
 func NewBoxItem(
+	prizeId string,
 	remaining int32,
 	initial int32,
 	options BoxItemOptions,
 ) BoxItem {
 	data := BoxItem{
+		PrizeId:        prizeId,
 		Remaining:      remaining,
 		Initial:        initial,
 		AcquireActions: options.AcquireActions,
@@ -47,6 +50,7 @@ func NewBoxItem(
 
 func (p *BoxItem) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
+	properties["PrizeId"] = p.PrizeId
 	{
 		values := make([]map[string]interface{}, len(p.AcquireActions))
 		for i, element := range p.AcquireActions {

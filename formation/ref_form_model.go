@@ -25,7 +25,6 @@ var _ = AcquireAction{}
 type FormModelRef struct {
 	NamespaceName string
 	MoldModelName string
-	FormModelName string
 }
 
 func (p *FormModelRef) AcquireActionsToFormProperties(
@@ -55,9 +54,7 @@ func (p *FormModelRef) Grn() string {
 			"model",
 			"mold",
 			p.MoldModelName,
-			"model",
 			"form",
-			p.FormModelName,
 		},
 	).String()
 }

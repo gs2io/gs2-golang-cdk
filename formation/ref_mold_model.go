@@ -27,13 +27,10 @@ type MoldModelRef struct {
 	MoldModelName string
 }
 
-func (p *MoldModelRef) FormModel(
-	formModelName string,
-) *FormModelRef {
+func (p *MoldModelRef) FormModel() *FormModelRef {
 	return &FormModelRef{
 		NamespaceName: p.NamespaceName,
 		MoldModelName: p.MoldModelName,
-		FormModelName: formModelName,
 	}
 }
 
