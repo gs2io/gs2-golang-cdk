@@ -22,6 +22,25 @@ import (
 
 var _ = AcquireAction{}
 
+func VerifyInventoryCurrentMaxCapacityByUserId(
+	namespaceName string,
+	inventoryName string,
+	verifyType string,
+	currentInventoryMaxCapacity int32,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["verifyType"] = verifyType
+	properties["currentInventoryMaxCapacity"] = currentInventoryMaxCapacity
+	return ConsumeAction{
+		Action:  "Gs2Inventory:VerifyInventoryCurrentMaxCapacityByUserId",
+		Request: properties,
+	}
+}
+
 func AddCapacityByUserId(
 	namespaceName string,
 	inventoryName string,
@@ -75,6 +94,31 @@ func ConsumeItemSetByUserId(
 	}
 	return ConsumeAction{
 		Action:  "Gs2Inventory:ConsumeItemSetByUserId",
+		Request: properties,
+	}
+}
+
+func VerifyItemSetByUserId(
+	namespaceName string,
+	inventoryName string,
+	itemName string,
+	verifyType string,
+	count int64,
+	itemSetName *string,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["itemName"] = itemName
+	properties["verifyType"] = verifyType
+	if itemSetName != nil {
+		properties["itemSetName"] = itemSetName
+	}
+	properties["count"] = count
+	return ConsumeAction{
+		Action:  "Gs2Inventory:VerifyItemSetByUserId",
 		Request: properties,
 	}
 }
@@ -188,6 +232,27 @@ func ConsumeSimpleItemsByUserId(
 	}
 }
 
+func VerifySimpleItemByUserId(
+	namespaceName string,
+	inventoryName string,
+	itemName string,
+	verifyType string,
+	count int64,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["itemName"] = itemName
+	properties["verifyType"] = verifyType
+	properties["count"] = count
+	return ConsumeAction{
+		Action:  "Gs2Inventory:VerifySimpleItemByUserId",
+		Request: properties,
+	}
+}
+
 func AcquireSimpleItemsByUserId(
 	namespaceName string,
 	inventoryName string,
@@ -220,6 +285,27 @@ func ConsumeBigItemByUserId(
 	properties["consumeCount"] = consumeCount
 	return ConsumeAction{
 		Action:  "Gs2Inventory:ConsumeBigItemByUserId",
+		Request: properties,
+	}
+}
+
+func VerifyBigItemByUserId(
+	namespaceName string,
+	inventoryName string,
+	itemName string,
+	verifyType string,
+	count string,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["itemName"] = itemName
+	properties["verifyType"] = verifyType
+	properties["count"] = count
+	return ConsumeAction{
+		Action:  "Gs2Inventory:VerifyBigItemByUserId",
 		Request: properties,
 	}
 }

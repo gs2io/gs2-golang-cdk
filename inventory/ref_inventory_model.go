@@ -57,6 +57,18 @@ func (p *InventoryModelRef) SetCapacity(
 	)
 }
 
+func (p *InventoryModelRef) VerifyInventoryCurrentMaxCapacity(
+	verifyType string,
+	currentInventoryMaxCapacity int32,
+) ConsumeAction {
+	return VerifyInventoryCurrentMaxCapacityByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		verifyType,
+		currentInventoryMaxCapacity,
+	)
+}
+
 func (p *InventoryModelRef) Grn() string {
 	return NewJoin(
 		":",

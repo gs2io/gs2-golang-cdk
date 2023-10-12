@@ -53,8 +53,8 @@ func (p *ItemModelRef) AddReferenceOf(
 		p.NamespaceName,
 		p.InventoryName,
 		p.ItemName,
-		itemSetName,
 		referenceOf,
+		itemSetName,
 	)
 }
 
@@ -67,6 +67,21 @@ func (p *ItemModelRef) ConsumeItemSet(
 		p.InventoryName,
 		p.ItemName,
 		consumeCount,
+		itemSetName,
+	)
+}
+
+func (p *ItemModelRef) VerifyItemSet(
+	verifyType string,
+	count int64,
+	itemSetName *string,
+) ConsumeAction {
+	return VerifyItemSetByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		p.ItemName,
+		verifyType,
+		count,
 		itemSetName,
 	)
 }

@@ -50,6 +50,19 @@ func (p *BigItemModelRef) ConsumeBigItem(
 	)
 }
 
+func (p *BigItemModelRef) VerifyBigItem(
+	verifyType string,
+	count string,
+) ConsumeAction {
+	return VerifyBigItemByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		p.ItemName,
+		verifyType,
+		count,
+	)
+}
+
 func (p *BigItemModelRef) Grn() string {
 	return NewJoin(
 		":",

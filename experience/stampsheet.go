@@ -60,6 +60,48 @@ func SubRankCapByUserId(
 	}
 }
 
+func VerifyRankByUserId(
+	namespaceName string,
+	experienceName string,
+	verifyType string,
+	propertyId string,
+	rankValue int64,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["experienceName"] = experienceName
+	properties["verifyType"] = verifyType
+	properties["propertyId"] = propertyId
+	properties["rankValue"] = rankValue
+	return ConsumeAction{
+		Action:  "Gs2Experience:VerifyRankByUserId",
+		Request: properties,
+	}
+}
+
+func VerifyRankCapByUserId(
+	namespaceName string,
+	experienceName string,
+	verifyType string,
+	propertyId string,
+	rankCapValue int64,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["experienceName"] = experienceName
+	properties["verifyType"] = verifyType
+	properties["propertyId"] = propertyId
+	properties["rankCapValue"] = rankCapValue
+	return ConsumeAction{
+		Action:  "Gs2Experience:VerifyRankCapByUserId",
+		Request: properties,
+	}
+}
+
 func AddExperienceByUserId(
 	namespaceName string,
 	experienceName string,

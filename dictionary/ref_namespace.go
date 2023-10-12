@@ -53,6 +53,17 @@ func (p *NamespaceRef) DeleteEntries(
 	)
 }
 
+func (p *NamespaceRef) VerifyEntry(
+	entryModelName string,
+	verifyType string,
+) ConsumeAction {
+	return VerifyEntryByUserId(
+		p.NamespaceName,
+		entryModelName,
+		verifyType,
+	)
+}
+
 func (p *NamespaceRef) Grn() string {
 	return NewJoin(
 		":",

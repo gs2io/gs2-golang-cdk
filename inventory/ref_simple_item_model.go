@@ -28,6 +28,19 @@ type SimpleItemModelRef struct {
 	ItemName      string
 }
 
+func (p *SimpleItemModelRef) VerifySimpleItem(
+	verifyType string,
+	count int64,
+) ConsumeAction {
+	return VerifySimpleItemByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		p.ItemName,
+		verifyType,
+		count,
+	)
+}
+
 func (p *SimpleItemModelRef) Grn() string {
 	return NewJoin(
 		":",

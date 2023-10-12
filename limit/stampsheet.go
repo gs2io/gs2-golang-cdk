@@ -45,6 +45,27 @@ func CountUpByUserId(
 	}
 }
 
+func VerifyCounterByUserId(
+	namespaceName string,
+	limitName string,
+	counterName string,
+	verifyType string,
+	count int32,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["limitName"] = limitName
+	properties["counterName"] = counterName
+	properties["verifyType"] = verifyType
+	properties["count"] = count
+	return ConsumeAction{
+		Action:  "Gs2Limit:VerifyCounterByUserId",
+		Request: properties,
+	}
+}
+
 func CountDownByUserId(
 	namespaceName string,
 	limitName string,
