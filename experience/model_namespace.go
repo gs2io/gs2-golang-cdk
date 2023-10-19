@@ -28,7 +28,7 @@ type Namespace struct {
 	Name                     string
 	Description              *string
 	TransactionSetting       *TransactionSetting
-	ExperienceCapScriptId    *string
+	RankCapScriptId          *string
 	ChangeExperienceScript   *ScriptSetting
 	ChangeRankScript         *ScriptSetting
 	ChangeRankCapScript      *ScriptSetting
@@ -39,7 +39,7 @@ type Namespace struct {
 type NamespaceOptions struct {
 	Description              *string
 	TransactionSetting       *TransactionSetting
-	ExperienceCapScriptId    *string
+	RankCapScriptId          *string
 	ChangeExperienceScript   *ScriptSetting
 	ChangeRankScript         *ScriptSetting
 	ChangeRankCapScript      *ScriptSetting
@@ -57,7 +57,7 @@ func NewNamespace(
 		Name:                     name,
 		Description:              options.Description,
 		TransactionSetting:       options.TransactionSetting,
-		ExperienceCapScriptId:    options.ExperienceCapScriptId,
+		RankCapScriptId:          options.RankCapScriptId,
 		ChangeExperienceScript:   options.ChangeExperienceScript,
 		ChangeRankScript:         options.ChangeRankScript,
 		ChangeRankCapScript:      options.ChangeRankCapScript,
@@ -84,8 +84,8 @@ func (p *Namespace) Properties() map[string]interface{} {
 	if p.TransactionSetting != nil {
 		properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	}
-	if p.ExperienceCapScriptId != nil {
-		properties["ExperienceCapScriptId"] = p.ExperienceCapScriptId
+	if p.RankCapScriptId != nil {
+		properties["RankCapScriptId"] = p.RankCapScriptId
 	}
 	if p.ChangeExperienceScript != nil {
 		properties["ChangeExperienceScript"] = p.ChangeExperienceScript.Properties()
