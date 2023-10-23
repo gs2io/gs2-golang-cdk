@@ -32,7 +32,7 @@ type Namespace struct {
 	ChangeExperienceScript   *ScriptSetting
 	ChangeRankScript         *ScriptSetting
 	ChangeRankCapScript      *ScriptSetting
-	OverflowExperienceScript *ScriptSetting
+	OverflowExperienceScript *string
 	LogSetting               *LogSetting
 }
 
@@ -43,7 +43,7 @@ type NamespaceOptions struct {
 	ChangeExperienceScript   *ScriptSetting
 	ChangeRankScript         *ScriptSetting
 	ChangeRankCapScript      *ScriptSetting
-	OverflowExperienceScript *ScriptSetting
+	OverflowExperienceScript *string
 	LogSetting               *LogSetting
 }
 
@@ -97,7 +97,7 @@ func (p *Namespace) Properties() map[string]interface{} {
 		properties["ChangeRankCapScript"] = p.ChangeRankCapScript.Properties()
 	}
 	if p.OverflowExperienceScript != nil {
-		properties["OverflowExperienceScript"] = p.OverflowExperienceScript.Properties()
+		properties["OverflowExperienceScript"] = p.OverflowExperienceScript
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
