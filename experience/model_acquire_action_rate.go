@@ -22,29 +22,80 @@ import (
 
 var _ = AcquireAction{}
 
+type AcquireActionRateMode string
+
+const AcquireActionRateModeDouble = AcquireActionRateMode("double")
+const AcquireActionRateModeBig = AcquireActionRateMode("big")
+
+func (p AcquireActionRateMode) Pointer() *AcquireActionRateMode {
+	return &p
+}
+
 type AcquireActionRate struct {
-	Name  string
-	Rates []float64
+	Name     string
+	Mode     AcquireActionRateMode
+	Rates    []float64
+	BigRates []string
 }
 
 type AcquireActionRateOptions struct {
+	Rates    []float64
+	BigRates []string
 }
 
 func NewAcquireActionRate(
 	name string,
-	rates []float64,
+	mode AcquireActionRateMode,
 	options AcquireActionRateOptions,
 ) AcquireActionRate {
 	data := AcquireActionRate{
-		Name:  name,
-		Rates: rates,
+		Name:     name,
+		Mode:     mode,
+		Rates:    options.Rates,
+		BigRates: options.BigRates,
 	}
 	return data
+}
+
+type AcquireActionRateModeIsDoubleOptions struct {
+}
+
+func NewAcquireActionRateModeIsDouble(
+	name string,
+	rates []float64,
+	options AcquireActionRateModeIsDoubleOptions,
+) AcquireActionRate {
+	return NewAcquireActionRate(
+		name,
+		AcquireActionRateModeDouble,
+		AcquireActionRateOptions{
+			Rates: rates,
+		},
+	)
+}
+
+type AcquireActionRateModeIsBigOptions struct {
+}
+
+func NewAcquireActionRateModeIsBig(
+	name string,
+	bigRates []string,
+	options AcquireActionRateModeIsBigOptions,
+) AcquireActionRate {
+	return NewAcquireActionRate(
+		name,
+		AcquireActionRateModeBig,
+		AcquireActionRateOptions{
+			BigRates: bigRates,
+		},
+	)
 }
 
 func (p *AcquireActionRate) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["Name"] = p.Name
+	properties["Mode"] = p.Mode
 	properties["Rates"] = p.Rates
+	properties["BigRates"] = p.BigRates
 	return properties
 }
