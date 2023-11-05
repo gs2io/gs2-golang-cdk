@@ -35,27 +35,27 @@ func (p SlotWithSignaturePropertyType) Pointer() *SlotWithSignaturePropertyType 
 type SlotWithSignature struct {
 	Name         string
 	PropertyType SlotWithSignaturePropertyType
-	Body         string
-	Signature    string
+	Body         *string
+	Signature    *string
 	Metadata     *string
 }
 
 type SlotWithSignatureOptions struct {
-	Metadata *string
+	Body      *string
+	Signature *string
+	Metadata  *string
 }
 
 func NewSlotWithSignature(
 	name string,
 	propertyType SlotWithSignaturePropertyType,
-	body string,
-	signature string,
 	options SlotWithSignatureOptions,
 ) SlotWithSignature {
 	data := SlotWithSignature{
 		Name:         name,
 		PropertyType: propertyType,
-		Body:         body,
-		Signature:    signature,
+		Body:         options.Body,
+		Signature:    options.Signature,
 		Metadata:     options.Metadata,
 	}
 	return data
@@ -65,8 +65,12 @@ func (p *SlotWithSignature) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["Name"] = p.Name
 	properties["PropertyType"] = p.PropertyType
-	properties["Body"] = p.Body
-	properties["Signature"] = p.Signature
+	if p.Body != nil {
+		properties["Body"] = p.Body
+	}
+	if p.Signature != nil {
+		properties["Signature"] = p.Signature
+	}
 	if p.Metadata != nil {
 		properties["Metadata"] = p.Metadata
 	}
