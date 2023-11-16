@@ -27,13 +27,13 @@ type Namespace struct {
 	stack                 *Stack
 	Name                  string
 	Description           *string
-	OverflowTriggerScript *ScriptSetting
+	OverflowTriggerScript *string
 	LogSetting            *LogSetting
 }
 
 type NamespaceOptions struct {
 	Description           *string
-	OverflowTriggerScript *ScriptSetting
+	OverflowTriggerScript *string
 	LogSetting            *LogSetting
 }
 
@@ -67,7 +67,7 @@ func (p *Namespace) Properties() map[string]interface{} {
 		properties["Description"] = p.Description
 	}
 	if p.OverflowTriggerScript != nil {
-		properties["OverflowTriggerScript"] = p.OverflowTriggerScript.Properties()
+		properties["OverflowTriggerScript"] = p.OverflowTriggerScript
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()

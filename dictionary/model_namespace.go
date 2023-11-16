@@ -28,14 +28,14 @@ type Namespace struct {
 	Name                 string
 	Description          *string
 	EntryScript          *ScriptSetting
-	DuplicateEntryScript *ScriptSetting
+	DuplicateEntryScript *string
 	LogSetting           *LogSetting
 }
 
 type NamespaceOptions struct {
 	Description          *string
 	EntryScript          *ScriptSetting
-	DuplicateEntryScript *ScriptSetting
+	DuplicateEntryScript *string
 	LogSetting           *LogSetting
 }
 
@@ -73,7 +73,7 @@ func (p *Namespace) Properties() map[string]interface{} {
 		properties["EntryScript"] = p.EntryScript.Properties()
 	}
 	if p.DuplicateEntryScript != nil {
-		properties["DuplicateEntryScript"] = p.DuplicateEntryScript.Properties()
+		properties["DuplicateEntryScript"] = p.DuplicateEntryScript
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
