@@ -34,25 +34,25 @@ type Namespace struct {
 }
 
 type NamespaceOptions struct {
-	Admob       *AdMob
-	UnityAd     *UnityAd
-	Description *string
-	LogSetting  *LogSetting
+	Admob                   *AdMob
+	UnityAd                 *UnityAd
+	Description             *string
+	ChangePointNotification NotificationSetting
+	LogSetting              *LogSetting
 }
 
 func NewNamespace(
 	stack *Stack,
 	name string,
-	changePointNotification NotificationSetting,
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
 		stack:                   stack,
 		Name:                    name,
-		ChangePointNotification: changePointNotification,
 		Admob:                   options.Admob,
 		UnityAd:                 options.UnityAd,
 		Description:             options.Description,
+		ChangePointNotification: options.ChangePointNotification,
 		LogSetting:              options.LogSetting,
 	}
 	return &data

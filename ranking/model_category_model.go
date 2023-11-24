@@ -47,7 +47,7 @@ type CategoryModel struct {
 	MaximumValue               *int64
 	OrderDirection             CategoryModelOrderDirection
 	Scope                      CategoryModelScope
-	UniqueByUserId             bool
+	UniqueByUserId             *bool
 	Sum                        *bool
 	CalculateFixedTimingHour   *int32
 	CalculateFixedTimingMinute *int32
@@ -63,6 +63,7 @@ type CategoryModelOptions struct {
 	Metadata                   *string
 	MinimumValue               *int64
 	MaximumValue               *int64
+	UniqueByUserId             *bool
 	Sum                        *bool
 	CalculateFixedTimingHour   *int32
 	CalculateFixedTimingMinute *int32
@@ -78,17 +79,16 @@ func NewCategoryModel(
 	name string,
 	orderDirection CategoryModelOrderDirection,
 	scope CategoryModelScope,
-	uniqueByUserId bool,
 	options CategoryModelOptions,
 ) CategoryModel {
 	data := CategoryModel{
 		Name:                       name,
 		OrderDirection:             orderDirection,
 		Scope:                      scope,
-		UniqueByUserId:             uniqueByUserId,
 		Metadata:                   options.Metadata,
 		MinimumValue:               options.MinimumValue,
 		MaximumValue:               options.MaximumValue,
+		UniqueByUserId:             options.UniqueByUserId,
 		Sum:                        options.Sum,
 		CalculateFixedTimingHour:   options.CalculateFixedTimingHour,
 		CalculateFixedTimingMinute: options.CalculateFixedTimingMinute,
@@ -126,11 +126,11 @@ func NewCategoryModelScopeIsGlobal(
 		name,
 		orderDirection,
 		CategoryModelScopeGlobal,
-		uniqueByUserId,
 		CategoryModelOptions{
 			Metadata:                   options.Metadata,
 			MinimumValue:               options.MinimumValue,
 			MaximumValue:               options.MaximumValue,
+			UniqueByUserId:             &uniqueByUserId,
 			CalculateFixedTimingHour:   options.CalculateFixedTimingHour,
 			CalculateFixedTimingMinute: options.CalculateFixedTimingMinute,
 			CalculateIntervalMinutes:   &calculateIntervalMinutes,
@@ -159,14 +159,12 @@ type CategoryModelScopeIsScopedOptions struct {
 func NewCategoryModelScopeIsScoped(
 	name string,
 	orderDirection CategoryModelOrderDirection,
-	uniqueByUserId bool,
 	options CategoryModelScopeIsScopedOptions,
 ) CategoryModel {
 	return NewCategoryModel(
 		name,
 		orderDirection,
 		CategoryModelScopeScoped,
-		uniqueByUserId,
 		CategoryModelOptions{
 			Metadata:                   options.Metadata,
 			MinimumValue:               options.MinimumValue,
@@ -196,7 +194,9 @@ func (p *CategoryModel) Properties() map[string]interface{} {
 	}
 	properties["OrderDirection"] = p.OrderDirection
 	properties["Scope"] = p.Scope
-	properties["UniqueByUserId"] = p.UniqueByUserId
+	if p.UniqueByUserId != nil {
+		properties["UniqueByUserId"] = p.UniqueByUserId
+	}
 	if p.Sum != nil {
 		properties["Sum"] = p.Sum
 	}

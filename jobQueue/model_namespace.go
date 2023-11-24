@@ -29,7 +29,7 @@ type Namespace struct {
 	Description      *string
 	EnableAutoRun    bool
 	PushNotification *NotificationSetting
-	RunNotification  *NotificationSetting
+	RunNotification  NotificationSetting
 	LogSetting       *LogSetting
 }
 
@@ -37,7 +37,7 @@ type NamespaceOptions struct {
 	Description      *string
 	EnableAutoRun    bool
 	PushNotification *NotificationSetting
-	RunNotification  *NotificationSetting
+	RunNotification  NotificationSetting
 	LogSetting       *LogSetting
 }
 
@@ -76,9 +76,7 @@ func (p *Namespace) Properties() map[string]interface{} {
 	if p.PushNotification != nil {
 		properties["PushNotification"] = p.PushNotification.Properties()
 	}
-	if p.RunNotification != nil {
-		properties["RunNotification"] = p.RunNotification.Properties()
-	}
+	properties["RunNotification"] = p.RunNotification.Properties()
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
 	}

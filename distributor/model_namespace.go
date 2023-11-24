@@ -28,14 +28,14 @@ type Namespace struct {
 	Name                          string
 	Description                   *string
 	AssumeUserId                  *string
-	AutoRunStampSheetNotification *NotificationSetting
+	AutoRunStampSheetNotification NotificationSetting
 	LogSetting                    *LogSetting
 }
 
 type NamespaceOptions struct {
 	Description                   *string
 	AssumeUserId                  *string
-	AutoRunStampSheetNotification *NotificationSetting
+	AutoRunStampSheetNotification NotificationSetting
 	LogSetting                    *LogSetting
 }
 
@@ -72,9 +72,7 @@ func (p *Namespace) Properties() map[string]interface{} {
 	if p.AssumeUserId != nil {
 		properties["AssumeUserId"] = p.AssumeUserId
 	}
-	if p.AutoRunStampSheetNotification != nil {
-		properties["AutoRunStampSheetNotification"] = p.AutoRunStampSheetNotification.Properties()
-	}
+	properties["AutoRunStampSheetNotification"] = p.AutoRunStampSheetNotification.Properties()
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
 	}

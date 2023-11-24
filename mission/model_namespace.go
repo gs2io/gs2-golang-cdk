@@ -31,7 +31,7 @@ type Namespace struct {
 	MissionCompleteScript  *ScriptSetting
 	CounterIncrementScript *ScriptSetting
 	ReceiveRewardsScript   *ScriptSetting
-	CompleteNotification   *NotificationSetting
+	CompleteNotification   NotificationSetting
 	LogSetting             *LogSetting
 }
 
@@ -40,7 +40,7 @@ type NamespaceOptions struct {
 	MissionCompleteScript  *ScriptSetting
 	CounterIncrementScript *ScriptSetting
 	ReceiveRewardsScript   *ScriptSetting
-	CompleteNotification   *NotificationSetting
+	CompleteNotification   NotificationSetting
 	LogSetting             *LogSetting
 }
 
@@ -88,9 +88,7 @@ func (p *Namespace) Properties() map[string]interface{} {
 	if p.ReceiveRewardsScript != nil {
 		properties["ReceiveRewardsScript"] = p.ReceiveRewardsScript.Properties()
 	}
-	if p.CompleteNotification != nil {
-		properties["CompleteNotification"] = p.CompleteNotification.Properties()
-	}
+	properties["CompleteNotification"] = p.CompleteNotification.Properties()
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
 	}

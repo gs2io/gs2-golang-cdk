@@ -36,8 +36,8 @@ type Namespace struct {
 	DeleteFriendScript         *ScriptSetting
 	UpdateProfileScript        *ScriptSetting
 	FollowNotification         *NotificationSetting
-	ReceiveRequestNotification *NotificationSetting
-	AcceptRequestNotification  *NotificationSetting
+	ReceiveRequestNotification NotificationSetting
+	AcceptRequestNotification  NotificationSetting
 	LogSetting                 *LogSetting
 }
 
@@ -52,8 +52,8 @@ type NamespaceOptions struct {
 	DeleteFriendScript         *ScriptSetting
 	UpdateProfileScript        *ScriptSetting
 	FollowNotification         *NotificationSetting
-	ReceiveRequestNotification *NotificationSetting
-	AcceptRequestNotification  *NotificationSetting
+	ReceiveRequestNotification NotificationSetting
+	AcceptRequestNotification  NotificationSetting
 	LogSetting                 *LogSetting
 }
 
@@ -123,12 +123,8 @@ func (p *Namespace) Properties() map[string]interface{} {
 	if p.FollowNotification != nil {
 		properties["FollowNotification"] = p.FollowNotification.Properties()
 	}
-	if p.ReceiveRequestNotification != nil {
-		properties["ReceiveRequestNotification"] = p.ReceiveRequestNotification.Properties()
-	}
-	if p.AcceptRequestNotification != nil {
-		properties["AcceptRequestNotification"] = p.AcceptRequestNotification.Properties()
-	}
+	properties["ReceiveRequestNotification"] = p.ReceiveRequestNotification.Properties()
+	properties["AcceptRequestNotification"] = p.AcceptRequestNotification.Properties()
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
 	}

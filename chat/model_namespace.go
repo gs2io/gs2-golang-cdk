@@ -33,7 +33,7 @@ type Namespace struct {
 	DeleteRoomScript      *ScriptSetting
 	SubscribeRoomScript   *ScriptSetting
 	UnsubscribeRoomScript *ScriptSetting
-	PostNotification      *NotificationSetting
+	PostNotification      NotificationSetting
 	LogSetting            *LogSetting
 }
 
@@ -45,7 +45,7 @@ type NamespaceOptions struct {
 	DeleteRoomScript      *ScriptSetting
 	SubscribeRoomScript   *ScriptSetting
 	UnsubscribeRoomScript *ScriptSetting
-	PostNotification      *NotificationSetting
+	PostNotification      NotificationSetting
 	LogSetting            *LogSetting
 }
 
@@ -100,9 +100,7 @@ func (p *Namespace) Properties() map[string]interface{} {
 	if p.UnsubscribeRoomScript != nil {
 		properties["UnsubscribeRoomScript"] = p.UnsubscribeRoomScript.Properties()
 	}
-	if p.PostNotification != nil {
-		properties["PostNotification"] = p.PostNotification.Properties()
-	}
+	properties["PostNotification"] = p.PostNotification.Properties()
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
 	}
