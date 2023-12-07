@@ -39,6 +39,17 @@ func (p *BigItemModelRef) AcquireBigItem(
 	)
 }
 
+func (p *BigItemModelRef) SetBigItem(
+	count string,
+) AcquireAction {
+	return SetBigItemByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		p.ItemName,
+		count,
+	)
+}
+
 func (p *BigItemModelRef) ConsumeBigItem(
 	consumeCount string,
 ) ConsumeAction {

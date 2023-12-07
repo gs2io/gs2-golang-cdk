@@ -270,6 +270,23 @@ func AcquireSimpleItemsByUserId(
 	}
 }
 
+func SetSimpleItemsByUserId(
+	namespaceName string,
+	inventoryName string,
+	counts []HeldCount,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["counts"] = counts
+	return AcquireAction{
+		Action:  "Gs2Inventory:SetSimpleItemsByUserId",
+		Request: properties,
+	}
+}
+
 func ConsumeBigItemByUserId(
 	namespaceName string,
 	inventoryName string,
@@ -325,6 +342,25 @@ func AcquireBigItemByUserId(
 	properties["acquireCount"] = acquireCount
 	return AcquireAction{
 		Action:  "Gs2Inventory:AcquireBigItemByUserId",
+		Request: properties,
+	}
+}
+
+func SetBigItemByUserId(
+	namespaceName string,
+	inventoryName string,
+	itemName string,
+	count string,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["itemName"] = itemName
+	properties["count"] = count
+	return AcquireAction{
+		Action:  "Gs2Inventory:SetBigItemByUserId",
 		Request: properties,
 	}
 }

@@ -47,6 +47,16 @@ func (p *SimpleInventoryModelRef) AcquireSimpleItems(
 	)
 }
 
+func (p *SimpleInventoryModelRef) SetSimpleItems(
+	counts []HeldCount,
+) AcquireAction {
+	return SetSimpleItemsByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		counts,
+	)
+}
+
 func (p *SimpleInventoryModelRef) ConsumeSimpleItems(
 	consumeCounts []ConsumeCount,
 ) ConsumeAction {
