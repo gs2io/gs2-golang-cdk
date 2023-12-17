@@ -22,25 +22,38 @@ import (
 
 var _ = AcquireAction{}
 
+type NamespaceSupportSpeculativeExecution string
+
+const NamespaceSupportSpeculativeExecutionEnable = NamespaceSupportSpeculativeExecution("enable")
+const NamespaceSupportSpeculativeExecutionDisable = NamespaceSupportSpeculativeExecution("disable")
+
+func (p NamespaceSupportSpeculativeExecution) Pointer() *NamespaceSupportSpeculativeExecution {
+	return &p
+}
+
 type Namespace struct {
 	CdkResource
-	stack                     *Stack
-	Name                      string
-	Description               *string
-	StartScript               *ScriptSetting
-	PassScript                *ScriptSetting
-	ErrorScript               *ScriptSetting
-	LowestStateMachineVersion *int64
-	LogSetting                *LogSetting
+	stack                       *Stack
+	Name                        string
+	Description                 *string
+	SupportSpeculativeExecution NamespaceSupportSpeculativeExecution
+	TransactionSetting          *TransactionSetting
+	StartScript                 *ScriptSetting
+	PassScript                  *ScriptSetting
+	ErrorScript                 *ScriptSetting
+	LowestStateMachineVersion   *int64
+	LogSetting                  *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description               *string
-	StartScript               *ScriptSetting
-	PassScript                *ScriptSetting
-	ErrorScript               *ScriptSetting
-	LowestStateMachineVersion *int64
-	LogSetting                *LogSetting
+	Description                 *string
+	SupportSpeculativeExecution NamespaceSupportSpeculativeExecution
+	TransactionSetting          *TransactionSetting
+	StartScript                 *ScriptSetting
+	PassScript                  *ScriptSetting
+	ErrorScript                 *ScriptSetting
+	LowestStateMachineVersion   *int64
+	LogSetting                  *LogSetting
 }
 
 func NewNamespace(
@@ -49,14 +62,16 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:                     stack,
-		Name:                      name,
-		Description:               options.Description,
-		StartScript:               options.StartScript,
-		PassScript:                options.PassScript,
-		ErrorScript:               options.ErrorScript,
-		LowestStateMachineVersion: options.LowestStateMachineVersion,
-		LogSetting:                options.LogSetting,
+		stack:                       stack,
+		Name:                        name,
+		Description:                 options.Description,
+		SupportSpeculativeExecution: options.SupportSpeculativeExecution,
+		TransactionSetting:          options.TransactionSetting,
+		StartScript:                 options.StartScript,
+		PassScript:                  options.PassScript,
+		ErrorScript:                 options.ErrorScript,
+		LowestStateMachineVersion:   options.LowestStateMachineVersion,
+		LogSetting:                  options.LogSetting,
 	}
 	return &data
 }
@@ -74,6 +89,10 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["Name"] = p.Name
 	if p.Description != nil {
 		properties["Description"] = p.Description
+	}
+	properties["SupportSpeculativeExecution"] = p.SupportSpeculativeExecution
+	if p.TransactionSetting != nil {
+		properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	}
 	if p.StartScript != nil {
 		properties["StartScript"] = p.StartScript.Properties()

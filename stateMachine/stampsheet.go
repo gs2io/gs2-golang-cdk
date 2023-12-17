@@ -25,6 +25,7 @@ var _ = AcquireAction{}
 func StartStateMachineByUserId(
 	namespaceName string,
 	args string,
+	enableSpeculativeExecution string,
 	ttl *int32,
 ) AcquireAction {
 	properties := map[string]interface{}{
@@ -32,6 +33,7 @@ func StartStateMachineByUserId(
 	}
 	properties["namespaceName"] = namespaceName
 	properties["args"] = args
+	properties["enableSpeculativeExecution"] = enableSpeculativeExecution
 	if ttl != nil {
 		properties["ttl"] = ttl
 	}

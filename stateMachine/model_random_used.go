@@ -22,38 +22,29 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
-	NamespaceName string
+type RandomUsed struct {
+	Category int64
+	Used     int64
 }
 
-func (p *NamespaceRef) StartStateMachine(
-	args string,
-	enableSpeculativeExecution string,
-	ttl *int32,
-) AcquireAction {
-	return StartStateMachineByUserId(
-		p.NamespaceName,
-		args,
-		enableSpeculativeExecution,
-		ttl,
-	)
+type RandomUsedOptions struct {
 }
 
-func (p *NamespaceRef) Grn() string {
-	return NewJoin(
-		":",
-		[]string{
-			"grn",
-			"gs2",
-			NewGetAttrRegion().String(),
-			NewGetAttrOwnerId().String(),
-			"stateMachine",
-			p.NamespaceName,
-		},
-	).String()
+func NewRandomUsed(
+	category int64,
+	used int64,
+	options RandomUsedOptions,
+) RandomUsed {
+	data := RandomUsed{
+		Category: category,
+		Used:     used,
+	}
+	return data
 }
 
-func (p *NamespaceRef) GrnPointer() *string {
-	grn := p.Grn()
-	return &grn
+func (p *RandomUsed) Properties() map[string]interface{} {
+	properties := map[string]interface{}{}
+	properties["Category"] = p.Category
+	properties["Used"] = p.Used
+	return properties
 }

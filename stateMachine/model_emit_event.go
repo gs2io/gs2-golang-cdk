@@ -22,38 +22,33 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
-	NamespaceName string
+type EmitEvent struct {
+	Event      string
+	Parameters string
+	Timestamp  int64
 }
 
-func (p *NamespaceRef) StartStateMachine(
-	args string,
-	enableSpeculativeExecution string,
-	ttl *int32,
-) AcquireAction {
-	return StartStateMachineByUserId(
-		p.NamespaceName,
-		args,
-		enableSpeculativeExecution,
-		ttl,
-	)
+type EmitEventOptions struct {
 }
 
-func (p *NamespaceRef) Grn() string {
-	return NewJoin(
-		":",
-		[]string{
-			"grn",
-			"gs2",
-			NewGetAttrRegion().String(),
-			NewGetAttrOwnerId().String(),
-			"stateMachine",
-			p.NamespaceName,
-		},
-	).String()
+func NewEmitEvent(
+	event string,
+	parameters string,
+	timestamp int64,
+	options EmitEventOptions,
+) EmitEvent {
+	data := EmitEvent{
+		Event:      event,
+		Parameters: parameters,
+		Timestamp:  timestamp,
+	}
+	return data
 }
 
-func (p *NamespaceRef) GrnPointer() *string {
-	grn := p.Grn()
-	return &grn
+func (p *EmitEvent) Properties() map[string]interface{} {
+	properties := map[string]interface{}{}
+	properties["Event"] = p.Event
+	properties["Parameters"] = p.Parameters
+	properties["Timestamp"] = p.Timestamp
+	return properties
 }

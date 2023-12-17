@@ -38,6 +38,7 @@ type NamespaceOptions struct {
 	Description          *string
 	EnableAwaitExchange  bool
 	EnableDirectExchange bool
+	TransactionSetting   TransactionSetting
 	ExchangeScript       *ScriptSetting
 	LogSetting           *LogSetting
 }
@@ -45,16 +46,15 @@ type NamespaceOptions struct {
 func NewNamespace(
 	stack *Stack,
 	name string,
-	transactionSetting TransactionSetting,
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
 		stack:                stack,
 		Name:                 name,
-		TransactionSetting:   transactionSetting,
 		Description:          options.Description,
 		EnableAwaitExchange:  options.EnableAwaitExchange,
 		EnableDirectExchange: options.EnableDirectExchange,
+		TransactionSetting:   options.TransactionSetting,
 		ExchangeScript:       options.ExchangeScript,
 		LogSetting:           options.LogSetting,
 	}
