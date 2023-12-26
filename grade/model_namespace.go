@@ -1,4 +1,4 @@
-package skillTree
+package grade
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -27,17 +27,15 @@ type Namespace struct {
 	stack              *Stack
 	Name               string
 	Description        *string
-	TransactionSetting TransactionSetting
-	ReleaseScript      *ScriptSetting
-	RestrainScript     *ScriptSetting
+	TransactionSetting *TransactionSetting
+	ChangeGradeScript  *ScriptSetting
 	LogSetting         *LogSetting
 }
 
 type NamespaceOptions struct {
 	Description        *string
-	TransactionSetting TransactionSetting
-	ReleaseScript      *ScriptSetting
-	RestrainScript     *ScriptSetting
+	TransactionSetting *TransactionSetting
+	ChangeGradeScript  *ScriptSetting
 	LogSetting         *LogSetting
 }
 
@@ -51,19 +49,18 @@ func NewNamespace(
 		Name:               name,
 		Description:        options.Description,
 		TransactionSetting: options.TransactionSetting,
-		ReleaseScript:      options.ReleaseScript,
-		RestrainScript:     options.RestrainScript,
+		ChangeGradeScript:  options.ChangeGradeScript,
 		LogSetting:         options.LogSetting,
 	}
 	return &data
 }
 
 func (p *Namespace) ResourceName() string {
-	return "SkillTree_Namespace_" + p.Name
+	return "Grade_Namespace_" + p.Name
 }
 
 func (p *Namespace) ResourceType() string {
-	return "GS2::SkillTree::Namespace"
+	return "GS2::Grade::Namespace"
 }
 
 func (p *Namespace) Properties() map[string]interface{} {
@@ -72,12 +69,11 @@ func (p *Namespace) Properties() map[string]interface{} {
 	if p.Description != nil {
 		properties["Description"] = p.Description
 	}
-	properties["TransactionSetting"] = p.TransactionSetting.Properties()
-	if p.ReleaseScript != nil {
-		properties["ReleaseScript"] = p.ReleaseScript.Properties()
+	if p.TransactionSetting != nil {
+		properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	}
-	if p.RestrainScript != nil {
-		properties["RestrainScript"] = p.RestrainScript.Properties()
+	if p.ChangeGradeScript != nil {
+		properties["ChangeGradeScript"] = p.ChangeGradeScript.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
@@ -99,13 +95,13 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 }
 
 func (p *Namespace) MasterData(
-	nodeModels []NodeModel,
+	gradeModels []GradeModel,
 
 ) *Namespace {
 	NewCurrentMasterData(
 		p.stack,
 		p.Name,
-		nodeModels,
+		gradeModels,
 	).AddDependsOn(
 		p,
 	)

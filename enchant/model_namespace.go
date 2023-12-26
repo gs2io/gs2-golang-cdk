@@ -32,21 +32,21 @@ type Namespace struct {
 }
 
 type NamespaceOptions struct {
-	Description *string
-	LogSetting  *LogSetting
+	Description        *string
+	TransactionSetting TransactionSetting
+	LogSetting         *LogSetting
 }
 
 func NewNamespace(
 	stack *Stack,
 	name string,
-	transactionSetting TransactionSetting,
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
 		stack:              stack,
 		Name:               name,
-		TransactionSetting: transactionSetting,
 		Description:        options.Description,
+		TransactionSetting: options.TransactionSetting,
 		LogSetting:         options.LogSetting,
 	}
 	return &data

@@ -1,4 +1,4 @@
-package stateMachine
+package grade
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,21 +22,10 @@ import (
 
 var _ = AcquireAction{}
 
-func StartStateMachineByUserId(
+func GradeNamespace(
 	namespaceName string,
-	args string,
-	ttl *int32,
-) AcquireAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
-	}
-	properties["namespaceName"] = namespaceName
-	properties["args"] = args
-	if ttl != nil {
-		properties["ttl"] = ttl
-	}
-	return AcquireAction{
-		Action:  "Gs2StateMachine:StartStateMachineByUserId",
-		Request: properties,
+) *NamespaceRef {
+	return &NamespaceRef{
+		NamespaceName: namespaceName,
 	}
 }

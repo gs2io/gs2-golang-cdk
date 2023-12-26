@@ -28,13 +28,11 @@ type NamespaceRef struct {
 
 func (p *NamespaceRef) StartStateMachine(
 	args string,
-	enableSpeculativeExecution string,
 	ttl *int32,
 ) AcquireAction {
 	return StartStateMachineByUserId(
 		p.NamespaceName,
 		args,
-		enableSpeculativeExecution,
 		ttl,
 	)
 }

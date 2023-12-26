@@ -36,6 +36,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description         *string
+	TransactionSetting  TransactionSetting
 	StartQuestScript    *ScriptSetting
 	CompleteQuestScript *ScriptSetting
 	FailedQuestScript   *ScriptSetting
@@ -45,14 +46,13 @@ type NamespaceOptions struct {
 func NewNamespace(
 	stack *Stack,
 	name string,
-	transactionSetting TransactionSetting,
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
 		stack:               stack,
 		Name:                name,
-		TransactionSetting:  transactionSetting,
 		Description:         options.Description,
+		TransactionSetting:  options.TransactionSetting,
 		StartQuestScript:    options.StartQuestScript,
 		CompleteQuestScript: options.CompleteQuestScript,
 		FailedQuestScript:   options.FailedQuestScript,

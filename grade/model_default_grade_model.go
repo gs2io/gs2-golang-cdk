@@ -1,4 +1,4 @@
-package stateMachine
+package grade
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,21 +22,29 @@ import (
 
 var _ = AcquireAction{}
 
-func StartStateMachineByUserId(
-	namespaceName string,
-	args string,
-	ttl *int32,
-) AcquireAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
+type DefaultGradeModel struct {
+	PropertyIdRegex   string
+	DefaultGradeValue int64
+}
+
+type DefaultGradeModelOptions struct {
+}
+
+func NewDefaultGradeModel(
+	propertyIdRegex string,
+	defaultGradeValue int64,
+	options DefaultGradeModelOptions,
+) DefaultGradeModel {
+	data := DefaultGradeModel{
+		PropertyIdRegex:   propertyIdRegex,
+		DefaultGradeValue: defaultGradeValue,
 	}
-	properties["namespaceName"] = namespaceName
-	properties["args"] = args
-	if ttl != nil {
-		properties["ttl"] = ttl
-	}
-	return AcquireAction{
-		Action:  "Gs2StateMachine:StartStateMachineByUserId",
-		Request: properties,
-	}
+	return data
+}
+
+func (p *DefaultGradeModel) Properties() map[string]interface{} {
+	properties := map[string]interface{}{}
+	properties["PropertyIdRegex"] = p.PropertyIdRegex
+	properties["DefaultGradeValue"] = p.DefaultGradeValue
+	return properties
 }
