@@ -98,12 +98,14 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 
 func (p *Namespace) MasterData(
 	rateModels []RateModel,
+	unleashRateModels []UnleashRateModel,
 
 ) *Namespace {
 	NewCurrentMasterData(
 		p.stack,
 		p.Name,
 		rateModels,
+		unleashRateModels,
 	).AddDependsOn(
 		p,
 	)

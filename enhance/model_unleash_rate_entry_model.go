@@ -22,43 +22,29 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
-	NamespaceName string
+type UnleashRateEntryModel struct {
+	GradeValue int64
+	NeedCount  int32
 }
 
-func (p *NamespaceRef) UnleashRateModel(
-	rateName string,
-) *UnleashRateModelRef {
-	return &UnleashRateModelRef{
-		NamespaceName: p.NamespaceName,
-		RateName:      rateName,
+type UnleashRateEntryModelOptions struct {
+}
+
+func NewUnleashRateEntryModel(
+	gradeValue int64,
+	needCount int32,
+	options UnleashRateEntryModelOptions,
+) UnleashRateEntryModel {
+	data := UnleashRateEntryModel{
+		GradeValue: gradeValue,
+		NeedCount:  needCount,
 	}
+	return data
 }
 
-func (p *NamespaceRef) RateModel(
-	rateName string,
-) *RateModelRef {
-	return &RateModelRef{
-		NamespaceName: p.NamespaceName,
-		RateName:      rateName,
-	}
-}
-
-func (p *NamespaceRef) Grn() string {
-	return NewJoin(
-		":",
-		[]string{
-			"grn",
-			"gs2",
-			NewGetAttrRegion().String(),
-			NewGetAttrOwnerId().String(),
-			"enhance",
-			p.NamespaceName,
-		},
-	).String()
-}
-
-func (p *NamespaceRef) GrnPointer() *string {
-	grn := p.Grn()
-	return &grn
+func (p *UnleashRateEntryModel) Properties() map[string]interface{} {
+	properties := map[string]interface{}{}
+	properties["GradeValue"] = p.GradeValue
+	properties["NeedCount"] = p.NeedCount
+	return properties
 }

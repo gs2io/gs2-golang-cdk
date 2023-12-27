@@ -25,25 +25,25 @@ var _ = AcquireAction{}
 type GradeEntryModel struct {
 	Metadata               *string
 	RankCapValue           int64
-	PropertyIdRegex        *string
+	PropertyIdRegex        string
 	GradeUpPropertyIdRegex string
 }
 
 type GradeEntryModelOptions struct {
-	Metadata        *string
-	PropertyIdRegex *string
+	Metadata *string
 }
 
 func NewGradeEntryModel(
 	rankCapValue int64,
+	propertyIdRegex string,
 	gradeUpPropertyIdRegex string,
 	options GradeEntryModelOptions,
 ) GradeEntryModel {
 	data := GradeEntryModel{
 		RankCapValue:           rankCapValue,
+		PropertyIdRegex:        propertyIdRegex,
 		GradeUpPropertyIdRegex: gradeUpPropertyIdRegex,
 		Metadata:               options.Metadata,
-		PropertyIdRegex:        options.PropertyIdRegex,
 	}
 	return data
 }
@@ -54,9 +54,7 @@ func (p *GradeEntryModel) Properties() map[string]interface{} {
 		properties["Metadata"] = p.Metadata
 	}
 	properties["RankCapValue"] = p.RankCapValue
-	if p.PropertyIdRegex != nil {
-		properties["PropertyIdRegex"] = p.PropertyIdRegex
-	}
+	properties["PropertyIdRegex"] = p.PropertyIdRegex
 	properties["GradeUpPropertyIdRegex"] = p.GradeUpPropertyIdRegex
 	return properties
 }

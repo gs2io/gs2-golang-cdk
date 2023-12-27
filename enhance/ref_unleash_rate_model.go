@@ -22,29 +22,12 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
+type UnleashRateModelRef struct {
 	NamespaceName string
+	RateName      string
 }
 
-func (p *NamespaceRef) UnleashRateModel(
-	rateName string,
-) *UnleashRateModelRef {
-	return &UnleashRateModelRef{
-		NamespaceName: p.NamespaceName,
-		RateName:      rateName,
-	}
-}
-
-func (p *NamespaceRef) RateModel(
-	rateName string,
-) *RateModelRef {
-	return &RateModelRef{
-		NamespaceName: p.NamespaceName,
-		RateName:      rateName,
-	}
-}
-
-func (p *NamespaceRef) Grn() string {
+func (p *UnleashRateModelRef) Grn() string {
 	return NewJoin(
 		":",
 		[]string{
@@ -54,11 +37,13 @@ func (p *NamespaceRef) Grn() string {
 			NewGetAttrOwnerId().String(),
 			"enhance",
 			p.NamespaceName,
+			"unleashRateModel",
+			p.RateName,
 		},
 	).String()
 }
 
-func (p *NamespaceRef) GrnPointer() *string {
+func (p *UnleashRateModelRef) GrnPointer() *string {
 	grn := p.Grn()
 	return &grn
 }

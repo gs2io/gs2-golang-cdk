@@ -45,6 +45,29 @@ func DirectEnhanceByUserId(
 	}
 }
 
+func UnleashByUserId(
+	namespaceName string,
+	rateName string,
+	targetItemSetId string,
+	materials []string,
+	config *[]Config,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["rateName"] = rateName
+	properties["targetItemSetId"] = targetItemSetId
+	properties["materials"] = materials
+	if config != nil {
+		properties["config"] = config
+	}
+	return AcquireAction{
+		Action:  "Gs2Enhance:UnleashByUserId",
+		Request: properties,
+	}
+}
+
 func DeleteProgressByUserId(
 	namespaceName string,
 ) ConsumeAction {
