@@ -57,6 +57,20 @@ func (p *InventoryModelRef) SetCapacity(
 	)
 }
 
+func (p *InventoryModelRef) AcquireItemSetWithGrade(
+	itemName string,
+	gradeModelId string,
+	gradeValue int64,
+) AcquireAction {
+	return AcquireItemSetWithGradeByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		itemName,
+		gradeModelId,
+		gradeValue,
+	)
+}
+
 func (p *InventoryModelRef) VerifyInventoryCurrentMaxCapacity(
 	verifyType string,
 	currentInventoryMaxCapacity int32,

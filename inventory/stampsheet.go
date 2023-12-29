@@ -150,6 +150,27 @@ func AcquireItemSetByUserId(
 	}
 }
 
+func AcquireItemSetWithGradeByUserId(
+	namespaceName string,
+	inventoryName string,
+	itemName string,
+	gradeModelId string,
+	gradeValue int64,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["itemName"] = itemName
+	properties["gradeModelId"] = gradeModelId
+	properties["gradeValue"] = gradeValue
+	return AcquireAction{
+		Action:  "Gs2Inventory:AcquireItemSetWithGradeByUserId",
+		Request: properties,
+	}
+}
+
 func VerifyReferenceOfByUserId(
 	namespaceName string,
 	inventoryName string,

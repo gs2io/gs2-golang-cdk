@@ -42,3 +42,18 @@ func DrawByUserId(
 		Request: properties,
 	}
 }
+
+func ResetBoxByUserId(
+	namespaceName string,
+	prizeTableName string,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["prizeTableName"] = prizeTableName
+	return AcquireAction{
+		Action:  "Gs2Lottery:ResetBoxByUserId",
+		Request: properties,
+	}
+}
