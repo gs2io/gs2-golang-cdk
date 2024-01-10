@@ -30,7 +30,7 @@ type FormModelRef struct {
 func (p *FormModelRef) AcquireActionsToFormProperties(
 	index int32,
 	acquireAction AcquireAction,
-	config *[]AcquireActionConfig,
+	config *[]Config,
 ) AcquireAction {
 	return AcquireActionsToFormProperties(
 		p.NamespaceName,

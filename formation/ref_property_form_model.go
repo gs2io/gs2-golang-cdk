@@ -30,7 +30,7 @@ type PropertyFormModelRef struct {
 func (p *PropertyFormModelRef) AcquireActionsToPropertyFormProperties(
 	propertyId string,
 	acquireAction AcquireAction,
-	config *[]AcquireActionConfig,
+	config *[]Config,
 ) AcquireAction {
 	return AcquireActionsToPropertyFormProperties(
 		p.NamespaceName,

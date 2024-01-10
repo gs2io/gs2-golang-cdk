@@ -78,7 +78,7 @@ func AcquireActionsToFormProperties(
 	moldModelName string,
 	index int32,
 	acquireAction AcquireAction,
-	config *[]AcquireActionConfig,
+	config *[]Config,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -101,7 +101,7 @@ func AcquireActionsToPropertyFormProperties(
 	propertyFormModelName string,
 	propertyId string,
 	acquireAction AcquireAction,
-	config *[]AcquireActionConfig,
+	config *[]Config,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
