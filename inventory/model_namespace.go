@@ -24,21 +24,25 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack          *Stack
-	Name           string
-	Description    *string
-	AcquireScript  *ScriptSetting
-	OverflowScript *ScriptSetting
-	ConsumeScript  *ScriptSetting
-	LogSetting     *LogSetting
+	stack                   *Stack
+	Name                    string
+	Description             *string
+	AcquireScript           *ScriptSetting
+	OverflowScript          *ScriptSetting
+	ConsumeScript           *ScriptSetting
+	SimpleItemAcquireScript *ScriptSetting
+	SimpleItemConsumeScript *ScriptSetting
+	LogSetting              *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description    *string
-	AcquireScript  *ScriptSetting
-	OverflowScript *ScriptSetting
-	ConsumeScript  *ScriptSetting
-	LogSetting     *LogSetting
+	Description             *string
+	AcquireScript           *ScriptSetting
+	OverflowScript          *ScriptSetting
+	ConsumeScript           *ScriptSetting
+	SimpleItemAcquireScript *ScriptSetting
+	SimpleItemConsumeScript *ScriptSetting
+	LogSetting              *LogSetting
 }
 
 func NewNamespace(
@@ -47,13 +51,15 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:          stack,
-		Name:           name,
-		Description:    options.Description,
-		AcquireScript:  options.AcquireScript,
-		OverflowScript: options.OverflowScript,
-		ConsumeScript:  options.ConsumeScript,
-		LogSetting:     options.LogSetting,
+		stack:                   stack,
+		Name:                    name,
+		Description:             options.Description,
+		AcquireScript:           options.AcquireScript,
+		OverflowScript:          options.OverflowScript,
+		ConsumeScript:           options.ConsumeScript,
+		SimpleItemAcquireScript: options.SimpleItemAcquireScript,
+		SimpleItemConsumeScript: options.SimpleItemConsumeScript,
+		LogSetting:              options.LogSetting,
 	}
 	return &data
 }
@@ -80,6 +86,12 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.ConsumeScript != nil {
 		properties["ConsumeScript"] = p.ConsumeScript.Properties()
+	}
+	if p.SimpleItemAcquireScript != nil {
+		properties["SimpleItemAcquireScript"] = p.SimpleItemAcquireScript.Properties()
+	}
+	if p.SimpleItemConsumeScript != nil {
+		properties["SimpleItemConsumeScript"] = p.SimpleItemConsumeScript.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()

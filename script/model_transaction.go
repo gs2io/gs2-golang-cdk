@@ -23,11 +23,13 @@ import (
 var _ = AcquireAction{}
 
 type Transaction struct {
+	TransactionId  *string
 	ConsumeActions []ConsumeAction
 	AcquireActions []AcquireAction
 }
 
 type TransactionOptions struct {
+	TransactionId  *string
 	ConsumeActions []ConsumeAction
 	AcquireActions []AcquireAction
 }
@@ -36,6 +38,7 @@ func NewTransaction(
 	options TransactionOptions,
 ) Transaction {
 	data := Transaction{
+		TransactionId:  options.TransactionId,
 		ConsumeActions: options.ConsumeActions,
 		AcquireActions: options.AcquireActions,
 	}
@@ -44,6 +47,9 @@ func NewTransaction(
 
 func (p *Transaction) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
+	if p.TransactionId != nil {
+		properties["TransactionId"] = p.TransactionId
+	}
 	{
 		values := make([]map[string]interface{}, len(p.ConsumeActions))
 		for i, element := range p.ConsumeActions {
