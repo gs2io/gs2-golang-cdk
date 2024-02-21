@@ -27,7 +27,9 @@ type StampSheetResult struct {
 	TransactionId     string
 	TaskRequests      []ConsumeAction
 	SheetRequest      AcquireAction
+	TaskResultCodes   []int32
 	TaskResults       []string
+	SheetResultCode   *int32
 	SheetResult       *string
 	NextTransactionId *string
 	CreatedAt         int64
@@ -37,7 +39,9 @@ type StampSheetResult struct {
 
 type StampSheetResultOptions struct {
 	TaskRequests      []ConsumeAction
+	TaskResultCodes   []int32
 	TaskResults       []string
+	SheetResultCode   *int32
 	SheetResult       *string
 	NextTransactionId *string
 	Revision          *int64
@@ -58,7 +62,9 @@ func NewStampSheetResult(
 		CreatedAt:         createdAt,
 		TtlAt:             ttlAt,
 		TaskRequests:      options.TaskRequests,
+		TaskResultCodes:   options.TaskResultCodes,
 		TaskResults:       options.TaskResults,
+		SheetResultCode:   options.SheetResultCode,
 		SheetResult:       options.SheetResult,
 		NextTransactionId: options.NextTransactionId,
 		Revision:          options.Revision,
@@ -78,7 +84,11 @@ func (p *StampSheetResult) Properties() map[string]interface{} {
 		properties["TaskRequests"] = values
 	}
 	properties["SheetRequest"] = p.SheetRequest.Properties()
+	properties["TaskResultCodes"] = p.TaskResultCodes
 	properties["TaskResults"] = p.TaskResults
+	if p.SheetResultCode != nil {
+		properties["SheetResultCode"] = p.SheetResultCode
+	}
 	if p.SheetResult != nil {
 		properties["SheetResult"] = p.SheetResult
 	}

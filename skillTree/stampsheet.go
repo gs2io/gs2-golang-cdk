@@ -24,12 +24,14 @@ var _ = AcquireAction{}
 
 func MarkRestrainByUserId(
 	namespaceName string,
+	propertyId string,
 	nodeModelNames []string,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
+	properties["propertyId"] = propertyId
 	properties["nodeModelNames"] = nodeModelNames
 	return ConsumeAction{
 		Action:  "Gs2SkillTree:MarkRestrainByUserId",
@@ -39,12 +41,14 @@ func MarkRestrainByUserId(
 
 func MarkReleaseByUserId(
 	namespaceName string,
+	propertyId string,
 	nodeModelNames []string,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
+	properties["propertyId"] = propertyId
 	properties["nodeModelNames"] = nodeModelNames
 	return AcquireAction{
 		Action:  "Gs2SkillTree:MarkReleaseByUserId",

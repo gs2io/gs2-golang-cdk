@@ -24,21 +24,23 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack              *Stack
-	Name               string
-	Description        *string
-	TransactionSetting *TransactionSetting
-	UpdateMoldScript   *ScriptSetting
-	UpdateFormScript   *ScriptSetting
-	LogSetting         *LogSetting
+	stack                    *Stack
+	Name                     string
+	Description              *string
+	TransactionSetting       *TransactionSetting
+	UpdateMoldScript         *ScriptSetting
+	UpdateFormScript         *ScriptSetting
+	UpdatePropertyFormScript *ScriptSetting
+	LogSetting               *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description        *string
-	TransactionSetting *TransactionSetting
-	UpdateMoldScript   *ScriptSetting
-	UpdateFormScript   *ScriptSetting
-	LogSetting         *LogSetting
+	Description              *string
+	TransactionSetting       *TransactionSetting
+	UpdateMoldScript         *ScriptSetting
+	UpdateFormScript         *ScriptSetting
+	UpdatePropertyFormScript *ScriptSetting
+	LogSetting               *LogSetting
 }
 
 func NewNamespace(
@@ -47,13 +49,14 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:              stack,
-		Name:               name,
-		Description:        options.Description,
-		TransactionSetting: options.TransactionSetting,
-		UpdateMoldScript:   options.UpdateMoldScript,
-		UpdateFormScript:   options.UpdateFormScript,
-		LogSetting:         options.LogSetting,
+		stack:                    stack,
+		Name:                     name,
+		Description:              options.Description,
+		TransactionSetting:       options.TransactionSetting,
+		UpdateMoldScript:         options.UpdateMoldScript,
+		UpdateFormScript:         options.UpdateFormScript,
+		UpdatePropertyFormScript: options.UpdatePropertyFormScript,
+		LogSetting:               options.LogSetting,
 	}
 	return &data
 }
@@ -80,6 +83,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.UpdateFormScript != nil {
 		properties["UpdateFormScript"] = p.UpdateFormScript.Properties()
+	}
+	if p.UpdatePropertyFormScript != nil {
+		properties["UpdatePropertyFormScript"] = p.UpdatePropertyFormScript.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()

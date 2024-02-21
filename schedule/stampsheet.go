@@ -55,3 +55,20 @@ func TriggerByUserId(
 		Request: properties,
 	}
 }
+
+func VerifyEventByUserId(
+	namespaceName string,
+	eventName string,
+	verifyType string,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["eventName"] = eventName
+	properties["verifyType"] = verifyType
+	return ConsumeAction{
+		Action:  "Gs2Schedule:VerifyEventByUserId",
+		Request: properties,
+	}
+}

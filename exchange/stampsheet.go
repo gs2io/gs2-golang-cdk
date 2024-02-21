@@ -100,6 +100,7 @@ func CreateAwaitByUserId(
 	namespaceName string,
 	rateName string,
 	count int32,
+	config *[]Config,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -107,6 +108,9 @@ func CreateAwaitByUserId(
 	properties["namespaceName"] = namespaceName
 	properties["rateName"] = rateName
 	properties["count"] = count
+	if config != nil {
+		properties["config"] = config
+	}
 	return AcquireAction{
 		Action:  "Gs2Exchange:CreateAwaitByUserId",
 		Request: properties,

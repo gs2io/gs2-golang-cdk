@@ -47,11 +47,13 @@ func (p *NamespaceRef) IncrementalRateModel(
 func (p *NamespaceRef) CreateAwait(
 	rateName string,
 	count int32,
+	config *[]Config,
 ) AcquireAction {
 	return CreateAwaitByUserId(
 		p.NamespaceName,
 		rateName,
 		count,
+		config,
 	)
 }
 

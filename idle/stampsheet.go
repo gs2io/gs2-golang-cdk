@@ -59,3 +59,22 @@ func IncreaseMaximumIdleMinutesByUserId(
 		Request: properties,
 	}
 }
+
+func SetMaximumIdleMinutesByUserId(
+	namespaceName string,
+	categoryName string,
+	maximumIdleMinutes *int32,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["categoryName"] = categoryName
+	if maximumIdleMinutes != nil {
+		properties["maximumIdleMinutes"] = maximumIdleMinutes
+	}
+	return AcquireAction{
+		Action:  "Gs2Idle:SetMaximumIdleMinutesByUserId",
+		Request: properties,
+	}
+}
