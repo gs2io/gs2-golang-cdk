@@ -23,14 +23,16 @@ import (
 var _ = AcquireAction{}
 
 type SeasonModel struct {
-	Name              string
-	Metadata          *string
-	Tiers             []TierModel
-	ExperienceModelId string
+	Name                   string
+	Metadata               *string
+	Tiers                  []TierModel
+	ExperienceModelId      string
+	ChallengePeriodEventId *string
 }
 
 type SeasonModelOptions struct {
-	Metadata *string
+	Metadata               *string
+	ChallengePeriodEventId *string
 }
 
 func NewSeasonModel(
@@ -40,10 +42,11 @@ func NewSeasonModel(
 	options SeasonModelOptions,
 ) SeasonModel {
 	data := SeasonModel{
-		Name:              name,
-		Tiers:             tiers,
-		ExperienceModelId: experienceModelId,
-		Metadata:          options.Metadata,
+		Name:                   name,
+		Tiers:                  tiers,
+		ExperienceModelId:      experienceModelId,
+		Metadata:               options.Metadata,
+		ChallengePeriodEventId: options.ChallengePeriodEventId,
 	}
 	return data
 }
@@ -62,5 +65,8 @@ func (p *SeasonModel) Properties() map[string]interface{} {
 		properties["Tiers"] = values
 	}
 	properties["ExperienceModelId"] = p.ExperienceModelId
+	if p.ChallengePeriodEventId != nil {
+		properties["ChallengePeriodEventId"] = p.ChallengePeriodEventId
+	}
 	return properties
 }

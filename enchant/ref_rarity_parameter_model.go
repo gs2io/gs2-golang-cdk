@@ -68,6 +68,7 @@ func (p *RarityParameterModelRef) VerifyRarityParameterStatus(
 	verifyType string,
 	parameterValueName string,
 	parameterCount int32,
+	multiplyValueSpecifyingQuantity bool,
 ) ConsumeAction {
 	return VerifyRarityParameterStatusByUserId(
 		p.NamespaceName,
@@ -76,6 +77,7 @@ func (p *RarityParameterModelRef) VerifyRarityParameterStatus(
 		verifyType,
 		parameterValueName,
 		parameterCount,
+		multiplyValueSpecifyingQuantity,
 	)
 }
 

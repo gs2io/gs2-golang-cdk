@@ -22,6 +22,15 @@ import (
 
 var _ = AcquireAction{}
 
+type NamespaceEnableDisconnectDetection string
+
+const NamespaceEnableDisconnectDetectionDisable = NamespaceEnableDisconnectDetection("disable")
+const NamespaceEnableDisconnectDetectionEnable = NamespaceEnableDisconnectDetection("enable")
+
+func (p NamespaceEnableDisconnectDetection) Pointer() *NamespaceEnableDisconnectDetection {
+	return &p
+}
+
 type NamespaceCreateGatheringTriggerType string
 
 const NamespaceCreateGatheringTriggerTypeNone = NamespaceCreateGatheringTriggerType("none")
@@ -42,18 +51,32 @@ func (p NamespaceCompleteMatchmakingTriggerType) Pointer() *NamespaceCompleteMat
 	return &p
 }
 
+type NamespaceEnableCollaborateSeasonRating string
+
+const NamespaceEnableCollaborateSeasonRatingEnable = NamespaceEnableCollaborateSeasonRating("enable")
+const NamespaceEnableCollaborateSeasonRatingDisable = NamespaceEnableCollaborateSeasonRating("disable")
+
+func (p NamespaceEnableCollaborateSeasonRating) Pointer() *NamespaceEnableCollaborateSeasonRating {
+	return &p
+}
+
 type Namespace struct {
 	CdkResource
 	stack                                         *Stack
 	Name                                          string
 	Description                                   *string
 	EnableRating                                  bool
+	EnableDisconnectDetection                     NamespaceEnableDisconnectDetection
+	DisconnectDetectionTimeoutSeconds             *int32
 	CreateGatheringTriggerType                    NamespaceCreateGatheringTriggerType
 	CreateGatheringTriggerRealtimeNamespaceId     *string
 	CreateGatheringTriggerScriptId                *string
 	CompleteMatchmakingTriggerType                NamespaceCompleteMatchmakingTriggerType
 	CompleteMatchmakingTriggerRealtimeNamespaceId *string
 	CompleteMatchmakingTriggerScriptId            *string
+	EnableCollaborateSeasonRating                 NamespaceEnableCollaborateSeasonRating
+	CollaborateSeasonRatingNamespaceId            *string
+	CollaborateSeasonRatingTtl                    *int32
 	ChangeRatingScript                            *ScriptSetting
 	JoinNotification                              *NotificationSetting
 	LeaveNotification                             *NotificationSetting
@@ -65,10 +88,15 @@ type Namespace struct {
 type NamespaceOptions struct {
 	Description                                   *string
 	EnableRating                                  bool
+	EnableDisconnectDetection                     NamespaceEnableDisconnectDetection
+	DisconnectDetectionTimeoutSeconds             *int32
 	CreateGatheringTriggerRealtimeNamespaceId     *string
 	CreateGatheringTriggerScriptId                *string
 	CompleteMatchmakingTriggerRealtimeNamespaceId *string
 	CompleteMatchmakingTriggerScriptId            *string
+	EnableCollaborateSeasonRating                 NamespaceEnableCollaborateSeasonRating
+	CollaborateSeasonRatingNamespaceId            *string
+	CollaborateSeasonRatingTtl                    *int32
 	ChangeRatingScript                            *ScriptSetting
 	JoinNotification                              *NotificationSetting
 	LeaveNotification                             *NotificationSetting
@@ -85,16 +113,21 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:                          stack,
-		Name:                           name,
-		CreateGatheringTriggerType:     createGatheringTriggerType,
-		CompleteMatchmakingTriggerType: completeMatchmakingTriggerType,
-		Description:                    options.Description,
-		EnableRating:                   options.EnableRating,
+		stack:                             stack,
+		Name:                              name,
+		CreateGatheringTriggerType:        createGatheringTriggerType,
+		CompleteMatchmakingTriggerType:    completeMatchmakingTriggerType,
+		Description:                       options.Description,
+		EnableRating:                      options.EnableRating,
+		EnableDisconnectDetection:         options.EnableDisconnectDetection,
+		DisconnectDetectionTimeoutSeconds: options.DisconnectDetectionTimeoutSeconds,
 		CreateGatheringTriggerRealtimeNamespaceId:     options.CreateGatheringTriggerRealtimeNamespaceId,
 		CreateGatheringTriggerScriptId:                options.CreateGatheringTriggerScriptId,
 		CompleteMatchmakingTriggerRealtimeNamespaceId: options.CompleteMatchmakingTriggerRealtimeNamespaceId,
 		CompleteMatchmakingTriggerScriptId:            options.CompleteMatchmakingTriggerScriptId,
+		EnableCollaborateSeasonRating:                 options.EnableCollaborateSeasonRating,
+		CollaborateSeasonRatingNamespaceId:            options.CollaborateSeasonRatingNamespaceId,
+		CollaborateSeasonRatingTtl:                    options.CollaborateSeasonRatingTtl,
 		ChangeRatingScript:                            options.ChangeRatingScript,
 		JoinNotification:                              options.JoinNotification,
 		LeaveNotification:                             options.LeaveNotification,
@@ -120,6 +153,10 @@ func (p *Namespace) Properties() map[string]interface{} {
 		properties["Description"] = p.Description
 	}
 	properties["EnableRating"] = p.EnableRating
+	properties["EnableDisconnectDetection"] = p.EnableDisconnectDetection
+	if p.DisconnectDetectionTimeoutSeconds != nil {
+		properties["DisconnectDetectionTimeoutSeconds"] = p.DisconnectDetectionTimeoutSeconds
+	}
 	properties["CreateGatheringTriggerType"] = p.CreateGatheringTriggerType
 	if p.CreateGatheringTriggerRealtimeNamespaceId != nil {
 		properties["CreateGatheringTriggerRealtimeNamespaceId"] = p.CreateGatheringTriggerRealtimeNamespaceId
@@ -133,6 +170,13 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.CompleteMatchmakingTriggerScriptId != nil {
 		properties["CompleteMatchmakingTriggerScriptId"] = p.CompleteMatchmakingTriggerScriptId
+	}
+	properties["EnableCollaborateSeasonRating"] = p.EnableCollaborateSeasonRating
+	if p.CollaborateSeasonRatingNamespaceId != nil {
+		properties["CollaborateSeasonRatingNamespaceId"] = p.CollaborateSeasonRatingNamespaceId
+	}
+	if p.CollaborateSeasonRatingTtl != nil {
+		properties["CollaborateSeasonRatingTtl"] = p.CollaborateSeasonRatingTtl
 	}
 	if p.ChangeRatingScript != nil {
 		properties["ChangeRatingScript"] = p.ChangeRatingScript.Properties()

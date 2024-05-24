@@ -51,6 +51,7 @@ func VerifyCounterByUserId(
 	counterName string,
 	verifyType string,
 	count int32,
+	multiplyValueSpecifyingQuantity bool,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -60,6 +61,7 @@ func VerifyCounterByUserId(
 	properties["counterName"] = counterName
 	properties["verifyType"] = verifyType
 	properties["count"] = count
+	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
 	return ConsumeAction{
 		Action:  "Gs2Limit:VerifyCounterByUserId",
 		Request: properties,

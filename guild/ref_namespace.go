@@ -1,4 +1,4 @@
-package formation
+package guild
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,38 +22,20 @@ import (
 
 var _ = AcquireAction{}
 
-type FormModelRef struct {
+type NamespaceRef struct {
 	NamespaceName string
-	MoldModelName string
 }
 
-func (p *FormModelRef) AcquireActionsToFormProperties(
-	index int32,
-	acquireAction AcquireAction,
-	config *[]Config,
-) AcquireAction {
-	return AcquireActionsToFormProperties(
-		p.NamespaceName,
-		p.MoldModelName,
-		index,
-		acquireAction,
-		config,
-	)
+func (p *NamespaceRef) GuildModel(
+	guildModelName string,
+) *GuildModelRef {
+	return &GuildModelRef{
+		NamespaceName:  p.NamespaceName,
+		GuildModelName: guildModelName,
+	}
 }
 
-func (p *FormModelRef) SetForm(
-	index int32,
-	slots []Slot,
-) AcquireAction {
-	return SetFormByUserId(
-		p.NamespaceName,
-		p.MoldModelName,
-		index,
-		slots,
-	)
-}
-
-func (p *FormModelRef) Grn() string {
+func (p *NamespaceRef) Grn() string {
 	return NewJoin(
 		":",
 		[]string{
@@ -61,17 +43,13 @@ func (p *FormModelRef) Grn() string {
 			"gs2",
 			NewGetAttrRegion().String(),
 			NewGetAttrOwnerId().String(),
-			"formation",
+			"guild",
 			p.NamespaceName,
-			"model",
-			"mold",
-			p.MoldModelName,
-			"form",
 		},
 	).String()
 }
 
-func (p *FormModelRef) GrnPointer() *string {
+func (p *NamespaceRef) GrnPointer() *string {
 	grn := p.Grn()
 	return &grn
 }

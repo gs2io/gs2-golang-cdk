@@ -74,84 +74,92 @@ type Event struct {
 	Name                  string
 	Metadata              *string
 	ScheduleType          EventScheduleType
-	RepeatType            EventRepeatType
 	AbsoluteBegin         *int64
 	AbsoluteEnd           *int64
+	RelativeTriggerName   *string
+	RepeatSetting         RepeatSetting
+	RepeatType            EventRepeatType
 	RepeatBeginDayOfMonth *int32
 	RepeatEndDayOfMonth   *int32
 	RepeatBeginDayOfWeek  *EventRepeatBeginDayOfWeek
 	RepeatEndDayOfWeek    *EventRepeatEndDayOfWeek
 	RepeatBeginHour       *int32
 	RepeatEndHour         *int32
-	RelativeTriggerName   *string
 }
 
 type EventOptions struct {
 	Metadata              *string
 	AbsoluteBegin         *int64
 	AbsoluteEnd           *int64
+	RelativeTriggerName   *string
 	RepeatBeginDayOfMonth *int32
 	RepeatEndDayOfMonth   *int32
 	RepeatBeginDayOfWeek  *EventRepeatBeginDayOfWeek
 	RepeatEndDayOfWeek    *EventRepeatEndDayOfWeek
 	RepeatBeginHour       *int32
 	RepeatEndHour         *int32
-	RelativeTriggerName   *string
 }
 
 func NewEvent(
 	name string,
 	scheduleType EventScheduleType,
+	repeatSetting RepeatSetting,
 	repeatType EventRepeatType,
 	options EventOptions,
 ) Event {
 	data := Event{
 		Name:                  name,
 		ScheduleType:          scheduleType,
+		RepeatSetting:         repeatSetting,
 		RepeatType:            repeatType,
 		Metadata:              options.Metadata,
 		AbsoluteBegin:         options.AbsoluteBegin,
 		AbsoluteEnd:           options.AbsoluteEnd,
+		RelativeTriggerName:   options.RelativeTriggerName,
 		RepeatBeginDayOfMonth: options.RepeatBeginDayOfMonth,
 		RepeatEndDayOfMonth:   options.RepeatEndDayOfMonth,
 		RepeatBeginDayOfWeek:  options.RepeatBeginDayOfWeek,
 		RepeatEndDayOfWeek:    options.RepeatEndDayOfWeek,
 		RepeatBeginHour:       options.RepeatBeginHour,
 		RepeatEndHour:         options.RepeatEndHour,
-		RelativeTriggerName:   options.RelativeTriggerName,
 	}
 	return data
 }
 
 type EventScheduleTypeIsAbsoluteOptions struct {
-	Metadata *string
+	Metadata      *string
+	AbsoluteBegin *int64
+	AbsoluteEnd   *int64
 }
 
 func NewEventScheduleTypeIsAbsolute(
 	name string,
+	repeatSetting RepeatSetting,
 	repeatType EventRepeatType,
-	absoluteBegin int64,
-	absoluteEnd int64,
 	options EventScheduleTypeIsAbsoluteOptions,
 ) Event {
 	return NewEvent(
 		name,
 		EventScheduleTypeAbsolute,
+		repeatSetting,
 		repeatType,
 		EventOptions{
 			Metadata:      options.Metadata,
-			AbsoluteBegin: &absoluteBegin,
-			AbsoluteEnd:   &absoluteEnd,
+			AbsoluteBegin: options.AbsoluteBegin,
+			AbsoluteEnd:   options.AbsoluteEnd,
 		},
 	)
 }
 
 type EventScheduleTypeIsRelativeOptions struct {
-	Metadata *string
+	Metadata      *string
+	AbsoluteBegin *int64
+	AbsoluteEnd   *int64
 }
 
 func NewEventScheduleTypeIsRelative(
 	name string,
+	repeatSetting RepeatSetting,
 	repeatType EventRepeatType,
 	relativeTriggerName string,
 	options EventScheduleTypeIsRelativeOptions,
@@ -159,40 +167,52 @@ func NewEventScheduleTypeIsRelative(
 	return NewEvent(
 		name,
 		EventScheduleTypeRelative,
+		repeatSetting,
 		repeatType,
 		EventOptions{
 			Metadata:            options.Metadata,
+			AbsoluteBegin:       options.AbsoluteBegin,
+			AbsoluteEnd:         options.AbsoluteEnd,
 			RelativeTriggerName: &relativeTriggerName,
 		},
 	)
 }
 
 type EventRepeatTypeIsAlwaysOptions struct {
-	Metadata *string
+	Metadata      *string
+	AbsoluteBegin *int64
+	AbsoluteEnd   *int64
 }
 
 func NewEventRepeatTypeIsAlways(
 	name string,
 	scheduleType EventScheduleType,
+	repeatSetting RepeatSetting,
 	options EventRepeatTypeIsAlwaysOptions,
 ) Event {
 	return NewEvent(
 		name,
 		scheduleType,
+		repeatSetting,
 		EventRepeatTypeAlways,
 		EventOptions{
-			Metadata: options.Metadata,
+			Metadata:      options.Metadata,
+			AbsoluteBegin: options.AbsoluteBegin,
+			AbsoluteEnd:   options.AbsoluteEnd,
 		},
 	)
 }
 
 type EventRepeatTypeIsDailyOptions struct {
-	Metadata *string
+	Metadata      *string
+	AbsoluteBegin *int64
+	AbsoluteEnd   *int64
 }
 
 func NewEventRepeatTypeIsDaily(
 	name string,
 	scheduleType EventScheduleType,
+	repeatSetting RepeatSetting,
 	repeatBeginHour int32,
 	repeatEndHour int32,
 	options EventRepeatTypeIsDailyOptions,
@@ -200,9 +220,12 @@ func NewEventRepeatTypeIsDaily(
 	return NewEvent(
 		name,
 		scheduleType,
+		repeatSetting,
 		EventRepeatTypeDaily,
 		EventOptions{
 			Metadata:        options.Metadata,
+			AbsoluteBegin:   options.AbsoluteBegin,
+			AbsoluteEnd:     options.AbsoluteEnd,
 			RepeatBeginHour: &repeatBeginHour,
 			RepeatEndHour:   &repeatEndHour,
 		},
@@ -210,12 +233,15 @@ func NewEventRepeatTypeIsDaily(
 }
 
 type EventRepeatTypeIsWeeklyOptions struct {
-	Metadata *string
+	Metadata      *string
+	AbsoluteBegin *int64
+	AbsoluteEnd   *int64
 }
 
 func NewEventRepeatTypeIsWeekly(
 	name string,
 	scheduleType EventScheduleType,
+	repeatSetting RepeatSetting,
 	repeatBeginDayOfWeek EventRepeatBeginDayOfWeek,
 	repeatEndDayOfWeek EventRepeatEndDayOfWeek,
 	repeatBeginHour int32,
@@ -225,9 +251,12 @@ func NewEventRepeatTypeIsWeekly(
 	return NewEvent(
 		name,
 		scheduleType,
+		repeatSetting,
 		EventRepeatTypeWeekly,
 		EventOptions{
 			Metadata:             options.Metadata,
+			AbsoluteBegin:        options.AbsoluteBegin,
+			AbsoluteEnd:          options.AbsoluteEnd,
 			RepeatBeginDayOfWeek: &repeatBeginDayOfWeek,
 			RepeatEndDayOfWeek:   &repeatEndDayOfWeek,
 			RepeatBeginHour:      &repeatBeginHour,
@@ -237,12 +266,15 @@ func NewEventRepeatTypeIsWeekly(
 }
 
 type EventRepeatTypeIsMonthlyOptions struct {
-	Metadata *string
+	Metadata      *string
+	AbsoluteBegin *int64
+	AbsoluteEnd   *int64
 }
 
 func NewEventRepeatTypeIsMonthly(
 	name string,
 	scheduleType EventScheduleType,
+	repeatSetting RepeatSetting,
 	repeatBeginDayOfMonth int32,
 	repeatEndDayOfMonth int32,
 	repeatBeginHour int32,
@@ -252,9 +284,12 @@ func NewEventRepeatTypeIsMonthly(
 	return NewEvent(
 		name,
 		scheduleType,
+		repeatSetting,
 		EventRepeatTypeMonthly,
 		EventOptions{
 			Metadata:              options.Metadata,
+			AbsoluteBegin:         options.AbsoluteBegin,
+			AbsoluteEnd:           options.AbsoluteEnd,
 			RepeatBeginDayOfMonth: &repeatBeginDayOfMonth,
 			RepeatEndDayOfMonth:   &repeatEndDayOfMonth,
 			RepeatBeginHour:       &repeatBeginHour,
@@ -270,13 +305,17 @@ func (p *Event) Properties() map[string]interface{} {
 		properties["Metadata"] = p.Metadata
 	}
 	properties["ScheduleType"] = p.ScheduleType
-	properties["RepeatType"] = p.RepeatType
 	if p.AbsoluteBegin != nil {
 		properties["AbsoluteBegin"] = p.AbsoluteBegin
 	}
 	if p.AbsoluteEnd != nil {
 		properties["AbsoluteEnd"] = p.AbsoluteEnd
 	}
+	if p.RelativeTriggerName != nil {
+		properties["RelativeTriggerName"] = p.RelativeTriggerName
+	}
+	properties["RepeatSetting"] = p.RepeatSetting.Properties()
+	properties["RepeatType"] = p.RepeatType
 	if p.RepeatBeginDayOfMonth != nil {
 		properties["RepeatBeginDayOfMonth"] = p.RepeatBeginDayOfMonth
 	}
@@ -294,9 +333,6 @@ func (p *Event) Properties() map[string]interface{} {
 	}
 	if p.RepeatEndHour != nil {
 		properties["RepeatEndHour"] = p.RepeatEndHour
-	}
-	if p.RelativeTriggerName != nil {
-		properties["RelativeTriggerName"] = p.RelativeTriggerName
 	}
 	return properties
 }

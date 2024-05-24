@@ -1,4 +1,4 @@
-package formation
+package guild
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,38 +22,46 @@ import (
 
 var _ = AcquireAction{}
 
-type FormModelRef struct {
-	NamespaceName string
-	MoldModelName string
+type GuildRef struct {
+	NamespaceName  string
+	GuildModelName string
+	GuildName      string
 }
 
-func (p *FormModelRef) AcquireActionsToFormProperties(
-	index int32,
-	acquireAction AcquireAction,
-	config *[]Config,
+func (p *GuildRef) IncreaseMaximumCurrentMaximumMemberCountByGuildName(
+	value *int32,
 ) AcquireAction {
-	return AcquireActionsToFormProperties(
+	return IncreaseMaximumCurrentMaximumMemberCountByGuildName(
 		p.NamespaceName,
-		p.MoldModelName,
-		index,
-		acquireAction,
-		config,
+		p.GuildModelName,
+		p.GuildName,
+		value,
 	)
 }
 
-func (p *FormModelRef) SetForm(
-	index int32,
-	slots []Slot,
+func (p *GuildRef) SetMaximumCurrentMaximumMemberCountByGuildName(
+	value *int32,
 ) AcquireAction {
-	return SetFormByUserId(
+	return SetMaximumCurrentMaximumMemberCountByGuildName(
 		p.NamespaceName,
-		p.MoldModelName,
-		index,
-		slots,
+		p.GuildName,
+		p.GuildModelName,
+		value,
 	)
 }
 
-func (p *FormModelRef) Grn() string {
+func (p *GuildRef) DecreaseMaximumCurrentMaximumMemberCountByGuildName(
+	value *int32,
+) ConsumeAction {
+	return DecreaseMaximumCurrentMaximumMemberCountByGuildName(
+		p.NamespaceName,
+		p.GuildModelName,
+		p.GuildName,
+		value,
+	)
+}
+
+func (p *GuildRef) Grn() string {
 	return NewJoin(
 		":",
 		[]string{
@@ -61,17 +69,16 @@ func (p *FormModelRef) Grn() string {
 			"gs2",
 			NewGetAttrRegion().String(),
 			NewGetAttrOwnerId().String(),
-			"formation",
+			"guild",
 			p.NamespaceName,
-			"model",
-			"mold",
-			p.MoldModelName,
-			"form",
+			"guild",
+			p.GuildModelName,
+			p.GuildName,
 		},
 	).String()
 }
 
-func (p *FormModelRef) GrnPointer() *string {
+func (p *GuildRef) GrnPointer() *string {
 	grn := p.Grn()
 	return &grn
 }

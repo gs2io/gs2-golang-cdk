@@ -22,6 +22,15 @@ import (
 
 var _ = AcquireAction{}
 
+type MissionTaskModelVerifyCompleteType string
+
+const MissionTaskModelVerifyCompleteTypeCounter = MissionTaskModelVerifyCompleteType("counter")
+const MissionTaskModelVerifyCompleteTypeConsumeActions = MissionTaskModelVerifyCompleteType("consumeActions")
+
+func (p MissionTaskModelVerifyCompleteType) Pointer() *MissionTaskModelVerifyCompleteType {
+	return &p
+}
+
 type MissionTaskModelTargetResetType string
 
 const MissionTaskModelTargetResetTypeNotReset = MissionTaskModelTargetResetType("notReset")
@@ -34,41 +43,114 @@ func (p MissionTaskModelTargetResetType) Pointer() *MissionTaskModelTargetResetT
 }
 
 type MissionTaskModel struct {
-	Name                   string
-	Metadata               *string
-	CounterName            string
-	TargetResetType        *MissionTaskModelTargetResetType
-	TargetValue            int64
-	CompleteAcquireActions []AcquireAction
-	ChallengePeriodEventId *string
-	PremiseMissionTaskName *string
+	Name                         string
+	Metadata                     *string
+	VerifyCompleteType           MissionTaskModelVerifyCompleteType
+	TargetCounter                *TargetCounterModel
+	VerifyCompleteConsumeActions []ConsumeAction
+	CompleteAcquireActions       []AcquireAction
+	ChallengePeriodEventId       *string
+	PremiseMissionTaskName       *string
+	CounterName                  string
+	TargetResetType              *MissionTaskModelTargetResetType
+	TargetValue                  int64
 }
 
 type MissionTaskModelOptions struct {
-	Metadata               *string
-	TargetResetType        *MissionTaskModelTargetResetType
-	CompleteAcquireActions []AcquireAction
-	ChallengePeriodEventId *string
-	PremiseMissionTaskName *string
+	Metadata                     *string
+	TargetCounter                *TargetCounterModel
+	VerifyCompleteConsumeActions []ConsumeAction
+	CompleteAcquireActions       []AcquireAction
+	ChallengePeriodEventId       *string
+	PremiseMissionTaskName       *string
+	TargetResetType              *MissionTaskModelTargetResetType
 }
 
 func NewMissionTaskModel(
 	name string,
+	verifyCompleteType MissionTaskModelVerifyCompleteType,
 	counterName string,
 	targetValue int64,
 	options MissionTaskModelOptions,
 ) MissionTaskModel {
 	data := MissionTaskModel{
-		Name:                   name,
-		CounterName:            counterName,
-		TargetValue:            targetValue,
-		Metadata:               options.Metadata,
-		TargetResetType:        options.TargetResetType,
-		CompleteAcquireActions: options.CompleteAcquireActions,
-		ChallengePeriodEventId: options.ChallengePeriodEventId,
-		PremiseMissionTaskName: options.PremiseMissionTaskName,
+		Name:                         name,
+		VerifyCompleteType:           verifyCompleteType,
+		CounterName:                  counterName,
+		TargetValue:                  targetValue,
+		Metadata:                     options.Metadata,
+		TargetCounter:                options.TargetCounter,
+		VerifyCompleteConsumeActions: options.VerifyCompleteConsumeActions,
+		CompleteAcquireActions:       options.CompleteAcquireActions,
+		ChallengePeriodEventId:       options.ChallengePeriodEventId,
+		PremiseMissionTaskName:       options.PremiseMissionTaskName,
+		TargetResetType:              options.TargetResetType,
 	}
 	return data
+}
+
+type MissionTaskModelVerifyCompleteTypeIsCounterOptions struct {
+	Metadata                     *string
+	VerifyCompleteConsumeActions []ConsumeAction
+	CompleteAcquireActions       []AcquireAction
+	ChallengePeriodEventId       *string
+	PremiseMissionTaskName       *string
+	TargetResetType              *MissionTaskModelTargetResetType
+}
+
+func NewMissionTaskModelVerifyCompleteTypeIsCounter(
+	name string,
+	counterName string,
+	targetValue int64,
+	targetCounter TargetCounterModel,
+	options MissionTaskModelVerifyCompleteTypeIsCounterOptions,
+) MissionTaskModel {
+	return NewMissionTaskModel(
+		name,
+		MissionTaskModelVerifyCompleteTypeCounter,
+		counterName,
+		targetValue,
+		MissionTaskModelOptions{
+			Metadata:                     options.Metadata,
+			TargetCounter:                &targetCounter,
+			VerifyCompleteConsumeActions: options.VerifyCompleteConsumeActions,
+			CompleteAcquireActions:       options.CompleteAcquireActions,
+			ChallengePeriodEventId:       options.ChallengePeriodEventId,
+			PremiseMissionTaskName:       options.PremiseMissionTaskName,
+			TargetResetType:              options.TargetResetType,
+		},
+	)
+}
+
+type MissionTaskModelVerifyCompleteTypeIsConsumeActionsOptions struct {
+	Metadata                     *string
+	VerifyCompleteConsumeActions []ConsumeAction
+	CompleteAcquireActions       []AcquireAction
+	ChallengePeriodEventId       *string
+	PremiseMissionTaskName       *string
+	TargetResetType              *MissionTaskModelTargetResetType
+}
+
+func NewMissionTaskModelVerifyCompleteTypeIsConsumeActions(
+	name string,
+	counterName string,
+	targetValue int64,
+	options MissionTaskModelVerifyCompleteTypeIsConsumeActionsOptions,
+) MissionTaskModel {
+	return NewMissionTaskModel(
+		name,
+		MissionTaskModelVerifyCompleteTypeConsumeActions,
+		counterName,
+		targetValue,
+		MissionTaskModelOptions{
+			Metadata:                     options.Metadata,
+			VerifyCompleteConsumeActions: options.VerifyCompleteConsumeActions,
+			CompleteAcquireActions:       options.CompleteAcquireActions,
+			ChallengePeriodEventId:       options.ChallengePeriodEventId,
+			PremiseMissionTaskName:       options.PremiseMissionTaskName,
+			TargetResetType:              options.TargetResetType,
+		},
+	)
 }
 
 func (p *MissionTaskModel) Properties() map[string]interface{} {
@@ -77,11 +159,17 @@ func (p *MissionTaskModel) Properties() map[string]interface{} {
 	if p.Metadata != nil {
 		properties["Metadata"] = p.Metadata
 	}
-	properties["CounterName"] = p.CounterName
-	if p.TargetResetType != nil {
-		properties["TargetResetType"] = p.TargetResetType
+	properties["VerifyCompleteType"] = p.VerifyCompleteType
+	if p.TargetCounter != nil {
+		properties["TargetCounter"] = p.TargetCounter.Properties()
 	}
-	properties["TargetValue"] = p.TargetValue
+	{
+		values := make([]map[string]interface{}, len(p.VerifyCompleteConsumeActions))
+		for i, element := range p.VerifyCompleteConsumeActions {
+			values[i] = element.Properties()
+		}
+		properties["VerifyCompleteConsumeActions"] = values
+	}
 	{
 		values := make([]map[string]interface{}, len(p.CompleteAcquireActions))
 		for i, element := range p.CompleteAcquireActions {
@@ -95,5 +183,10 @@ func (p *MissionTaskModel) Properties() map[string]interface{} {
 	if p.PremiseMissionTaskName != nil {
 		properties["PremiseMissionTaskName"] = p.PremiseMissionTaskName
 	}
+	properties["CounterName"] = p.CounterName
+	if p.TargetResetType != nil {
+		properties["TargetResetType"] = p.TargetResetType
+	}
+	properties["TargetValue"] = p.TargetValue
 	return properties
 }

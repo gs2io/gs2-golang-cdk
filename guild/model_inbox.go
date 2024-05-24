@@ -1,4 +1,4 @@
-package matchmaking
+package guild
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,47 +22,43 @@ import (
 
 var _ = AcquireAction{}
 
-type Player struct {
-	UserId      string
-	Attributes  []Attribute
-	RoleName    string
-	DenyUserIds []string
+type Inbox struct {
+	GuildName   string
+	FromUserIds []string
 	CreatedAt   int64
+	UpdatedAt   int64
+	Revision    *int64
 }
 
-type PlayerOptions struct {
-	Attributes  []Attribute
-	DenyUserIds []string
+type InboxOptions struct {
+	FromUserIds []string
+	Revision    *int64
 }
 
-func NewPlayer(
-	userId string,
-	roleName string,
+func NewInbox(
+	guildName string,
 	createdAt int64,
-	options PlayerOptions,
-) Player {
-	data := Player{
-		UserId:      userId,
-		RoleName:    roleName,
+	updatedAt int64,
+	options InboxOptions,
+) Inbox {
+	data := Inbox{
+		GuildName:   guildName,
 		CreatedAt:   createdAt,
-		Attributes:  options.Attributes,
-		DenyUserIds: options.DenyUserIds,
+		UpdatedAt:   updatedAt,
+		FromUserIds: options.FromUserIds,
+		Revision:    options.Revision,
 	}
 	return data
 }
 
-func (p *Player) Properties() map[string]interface{} {
+func (p *Inbox) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	properties["UserId"] = p.UserId
-	{
-		values := make([]map[string]interface{}, len(p.Attributes))
-		for i, element := range p.Attributes {
-			values[i] = element.Properties()
-		}
-		properties["Attributes"] = values
-	}
-	properties["RoleName"] = p.RoleName
-	properties["DenyUserIds"] = p.DenyUserIds
+	properties["GuildName"] = p.GuildName
+	properties["FromUserIds"] = p.FromUserIds
 	properties["CreatedAt"] = p.CreatedAt
+	properties["UpdatedAt"] = p.UpdatedAt
+	if p.Revision != nil {
+		properties["Revision"] = p.Revision
+	}
 	return properties
 }

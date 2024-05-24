@@ -32,23 +32,19 @@ func (p RateModelTimingType) Pointer() *RateModelTimingType {
 }
 
 type RateModel struct {
-	Name               string
-	Metadata           *string
-	ConsumeActions     []ConsumeAction
-	TimingType         RateModelTimingType
-	LockTime           *int32
-	EnableSkip         *bool
-	SkipConsumeActions []ConsumeAction
-	AcquireActions     []AcquireAction
+	Name           string
+	Metadata       *string
+	ConsumeActions []ConsumeAction
+	TimingType     RateModelTimingType
+	LockTime       *int32
+	AcquireActions []AcquireAction
 }
 
 type RateModelOptions struct {
-	Metadata           *string
-	ConsumeActions     []ConsumeAction
-	LockTime           *int32
-	EnableSkip         *bool
-	SkipConsumeActions []ConsumeAction
-	AcquireActions     []AcquireAction
+	Metadata       *string
+	ConsumeActions []ConsumeAction
+	LockTime       *int32
+	AcquireActions []AcquireAction
 }
 
 func NewRateModel(
@@ -57,23 +53,20 @@ func NewRateModel(
 	options RateModelOptions,
 ) RateModel {
 	data := RateModel{
-		Name:               name,
-		TimingType:         timingType,
-		Metadata:           options.Metadata,
-		ConsumeActions:     options.ConsumeActions,
-		LockTime:           options.LockTime,
-		EnableSkip:         options.EnableSkip,
-		SkipConsumeActions: options.SkipConsumeActions,
-		AcquireActions:     options.AcquireActions,
+		Name:           name,
+		TimingType:     timingType,
+		Metadata:       options.Metadata,
+		ConsumeActions: options.ConsumeActions,
+		LockTime:       options.LockTime,
+		AcquireActions: options.AcquireActions,
 	}
 	return data
 }
 
 type RateModelTimingTypeIsImmediateOptions struct {
-	Metadata           *string
-	ConsumeActions     []ConsumeAction
-	SkipConsumeActions []ConsumeAction
-	AcquireActions     []AcquireAction
+	Metadata       *string
+	ConsumeActions []ConsumeAction
+	AcquireActions []AcquireAction
 }
 
 func NewRateModelTimingTypeIsImmediate(
@@ -84,37 +77,32 @@ func NewRateModelTimingTypeIsImmediate(
 		name,
 		RateModelTimingTypeImmediate,
 		RateModelOptions{
-			Metadata:           options.Metadata,
-			ConsumeActions:     options.ConsumeActions,
-			SkipConsumeActions: options.SkipConsumeActions,
-			AcquireActions:     options.AcquireActions,
+			Metadata:       options.Metadata,
+			ConsumeActions: options.ConsumeActions,
+			AcquireActions: options.AcquireActions,
 		},
 	)
 }
 
 type RateModelTimingTypeIsAwaitOptions struct {
-	Metadata           *string
-	ConsumeActions     []ConsumeAction
-	SkipConsumeActions []ConsumeAction
-	AcquireActions     []AcquireAction
+	Metadata       *string
+	ConsumeActions []ConsumeAction
+	AcquireActions []AcquireAction
 }
 
 func NewRateModelTimingTypeIsAwait(
 	name string,
 	lockTime int32,
-	enableSkip bool,
 	options RateModelTimingTypeIsAwaitOptions,
 ) RateModel {
 	return NewRateModel(
 		name,
 		RateModelTimingTypeAwait,
 		RateModelOptions{
-			Metadata:           options.Metadata,
-			ConsumeActions:     options.ConsumeActions,
-			LockTime:           &lockTime,
-			EnableSkip:         &enableSkip,
-			SkipConsumeActions: options.SkipConsumeActions,
-			AcquireActions:     options.AcquireActions,
+			Metadata:       options.Metadata,
+			ConsumeActions: options.ConsumeActions,
+			LockTime:       &lockTime,
+			AcquireActions: options.AcquireActions,
 		},
 	)
 }
@@ -135,16 +123,6 @@ func (p *RateModel) Properties() map[string]interface{} {
 	properties["TimingType"] = p.TimingType
 	if p.LockTime != nil {
 		properties["LockTime"] = p.LockTime
-	}
-	if p.EnableSkip != nil {
-		properties["EnableSkip"] = p.EnableSkip
-	}
-	{
-		values := make([]map[string]interface{}, len(p.SkipConsumeActions))
-		for i, element := range p.SkipConsumeActions {
-			values[i] = element.Properties()
-		}
-		properties["SkipConsumeActions"] = values
 	}
 	{
 		values := make([]map[string]interface{}, len(p.AcquireActions))

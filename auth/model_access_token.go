@@ -23,30 +23,39 @@ import (
 var _ = AcquireAction{}
 
 type AccessToken struct {
-	OwnerId    string
-	Token      string
-	UserId     string
-	Expire     int64
-	TimeOffset int32
+	OwnerId                  string
+	Token                    string
+	UserId                   string
+	RealUserId               string
+	FederationFromUserId     *string
+	FederationPolicyDocument *string
+	Expire                   int64
+	TimeOffset               int32
 }
 
 type AccessTokenOptions struct {
+	FederationFromUserId     *string
+	FederationPolicyDocument *string
 }
 
 func NewAccessToken(
 	ownerId string,
 	token string,
 	userId string,
+	realUserId string,
 	expire int64,
 	timeOffset int32,
 	options AccessTokenOptions,
 ) AccessToken {
 	data := AccessToken{
-		OwnerId:    ownerId,
-		Token:      token,
-		UserId:     userId,
-		Expire:     expire,
-		TimeOffset: timeOffset,
+		OwnerId:                  ownerId,
+		Token:                    token,
+		UserId:                   userId,
+		RealUserId:               realUserId,
+		Expire:                   expire,
+		TimeOffset:               timeOffset,
+		FederationFromUserId:     options.FederationFromUserId,
+		FederationPolicyDocument: options.FederationPolicyDocument,
 	}
 	return data
 }
@@ -56,6 +65,13 @@ func (p *AccessToken) Properties() map[string]interface{} {
 	properties["OwnerId"] = p.OwnerId
 	properties["Token"] = p.Token
 	properties["UserId"] = p.UserId
+	properties["RealUserId"] = p.RealUserId
+	if p.FederationFromUserId != nil {
+		properties["FederationFromUserId"] = p.FederationFromUserId
+	}
+	if p.FederationPolicyDocument != nil {
+		properties["FederationPolicyDocument"] = p.FederationPolicyDocument
+	}
 	properties["Expire"] = p.Expire
 	properties["TimeOffset"] = p.TimeOffset
 	return properties

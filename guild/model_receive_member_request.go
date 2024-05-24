@@ -1,4 +1,4 @@
-package formation
+package guild
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,37 +22,29 @@ import (
 
 var _ = AcquireAction{}
 
-type Slot struct {
-	Name       string
-	PropertyId *string
-	Metadata   *string
+type ReceiveMemberRequest struct {
+	UserId          string
+	TargetGuildName string
 }
 
-type SlotOptions struct {
-	PropertyId *string
-	Metadata   *string
+type ReceiveMemberRequestOptions struct {
 }
 
-func NewSlot(
-	name string,
-	options SlotOptions,
-) Slot {
-	data := Slot{
-		Name:       name,
-		PropertyId: options.PropertyId,
-		Metadata:   options.Metadata,
+func NewReceiveMemberRequest(
+	userId string,
+	targetGuildName string,
+	options ReceiveMemberRequestOptions,
+) ReceiveMemberRequest {
+	data := ReceiveMemberRequest{
+		UserId:          userId,
+		TargetGuildName: targetGuildName,
 	}
 	return data
 }
 
-func (p *Slot) Properties() map[string]interface{} {
+func (p *ReceiveMemberRequest) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	properties["Name"] = p.Name
-	if p.PropertyId != nil {
-		properties["PropertyId"] = p.PropertyId
-	}
-	if p.Metadata != nil {
-		properties["Metadata"] = p.Metadata
-	}
+	properties["UserId"] = p.UserId
+	properties["TargetGuildName"] = p.TargetGuildName
 	return properties
 }

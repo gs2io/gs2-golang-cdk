@@ -37,6 +37,16 @@ func (p *CounterModelRef) IncreaseCounter(
 	)
 }
 
+func (p *CounterModelRef) SetCounter(
+	values *[]ScopedValue,
+) AcquireAction {
+	return SetCounterByUserId(
+		p.NamespaceName,
+		p.CounterName,
+		values,
+	)
+}
+
 func (p *CounterModelRef) DecreaseCounter(
 	value int64,
 ) ConsumeAction {
@@ -44,6 +54,22 @@ func (p *CounterModelRef) DecreaseCounter(
 		p.NamespaceName,
 		p.CounterName,
 		value,
+	)
+}
+
+func (p *CounterModelRef) VerifyCounterValue(
+	verifyType string,
+	resetType string,
+	value int64,
+	multiplyValueSpecifyingQuantity bool,
+) ConsumeAction {
+	return VerifyCounterValueByUserId(
+		p.NamespaceName,
+		p.CounterName,
+		verifyType,
+		resetType,
+		value,
+		multiplyValueSpecifyingQuantity,
 	)
 }
 

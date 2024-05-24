@@ -28,7 +28,10 @@ type Namespace struct {
 	Name                    string
 	Admob                   *AdMob
 	UnityAd                 *UnityAd
+	AppLovinMaxes           []AppLovinMax
 	Description             *string
+	AcquirePointScript      *ScriptSetting
+	ConsumePointScript      *ScriptSetting
 	ChangePointNotification NotificationSetting
 	LogSetting              *LogSetting
 }
@@ -36,7 +39,10 @@ type Namespace struct {
 type NamespaceOptions struct {
 	Admob                   *AdMob
 	UnityAd                 *UnityAd
+	AppLovinMaxes           []AppLovinMax
 	Description             *string
+	AcquirePointScript      *ScriptSetting
+	ConsumePointScript      *ScriptSetting
 	ChangePointNotification NotificationSetting
 	LogSetting              *LogSetting
 }
@@ -51,7 +57,10 @@ func NewNamespace(
 		Name:                    name,
 		Admob:                   options.Admob,
 		UnityAd:                 options.UnityAd,
+		AppLovinMaxes:           options.AppLovinMaxes,
 		Description:             options.Description,
+		AcquirePointScript:      options.AcquirePointScript,
+		ConsumePointScript:      options.ConsumePointScript,
 		ChangePointNotification: options.ChangePointNotification,
 		LogSetting:              options.LogSetting,
 	}
@@ -75,8 +84,21 @@ func (p *Namespace) Properties() map[string]interface{} {
 	if p.UnityAd != nil {
 		properties["UnityAd"] = p.UnityAd.Properties()
 	}
+	{
+		values := make([]map[string]interface{}, len(p.AppLovinMaxes))
+		for i, element := range p.AppLovinMaxes {
+			values[i] = element.Properties()
+		}
+		properties["AppLovinMaxes"] = values
+	}
 	if p.Description != nil {
 		properties["Description"] = p.Description
+	}
+	if p.AcquirePointScript != nil {
+		properties["AcquirePointScript"] = p.AcquirePointScript.Properties()
+	}
+	if p.ConsumePointScript != nil {
+		properties["ConsumePointScript"] = p.ConsumePointScript.Properties()
 	}
 	properties["ChangePointNotification"] = p.ChangePointNotification.Properties()
 	if p.LogSetting != nil {

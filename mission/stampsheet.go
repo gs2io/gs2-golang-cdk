@@ -73,6 +73,29 @@ func DecreaseCounterByUserId(
 	}
 }
 
+func VerifyCounterValueByUserId(
+	namespaceName string,
+	counterName string,
+	verifyType string,
+	resetType string,
+	value int64,
+	multiplyValueSpecifyingQuantity bool,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["counterName"] = counterName
+	properties["verifyType"] = verifyType
+	properties["resetType"] = resetType
+	properties["value"] = value
+	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	return ConsumeAction{
+		Action:  "Gs2Mission:VerifyCounterValueByUserId",
+		Request: properties,
+	}
+}
+
 func IncreaseCounterByUserId(
 	namespaceName string,
 	counterName string,
@@ -86,6 +109,25 @@ func IncreaseCounterByUserId(
 	properties["value"] = value
 	return AcquireAction{
 		Action:  "Gs2Mission:IncreaseCounterByUserId",
+		Request: properties,
+	}
+}
+
+func SetCounterByUserId(
+	namespaceName string,
+	counterName string,
+	values *[]ScopedValue,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["counterName"] = counterName
+	if values != nil {
+		properties["values"] = values
+	}
+	return AcquireAction{
+		Action:  "Gs2Mission:SetCounterByUserId",
 		Request: properties,
 	}
 }

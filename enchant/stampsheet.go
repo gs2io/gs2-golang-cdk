@@ -69,6 +69,7 @@ func VerifyRarityParameterStatusByUserId(
 	verifyType string,
 	parameterValueName string,
 	parameterCount int32,
+	multiplyValueSpecifyingQuantity bool,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -79,6 +80,7 @@ func VerifyRarityParameterStatusByUserId(
 	properties["verifyType"] = verifyType
 	properties["parameterValueName"] = parameterValueName
 	properties["parameterCount"] = parameterCount
+	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
 	return ConsumeAction{
 		Action:  "Gs2Enchant:VerifyRarityParameterStatusByUserId",
 		Request: properties,

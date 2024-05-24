@@ -23,17 +23,19 @@ import (
 var _ = AcquireAction{}
 
 type GlobalMessage struct {
-	Name               string
-	Metadata           string
-	ReadAcquireActions []AcquireAction
-	ExpiresTimeSpan    *TimeSpan
-	ExpiresAt          *int64
+	Name                          string
+	Metadata                      string
+	ReadAcquireActions            []AcquireAction
+	ExpiresTimeSpan               *TimeSpan
+	ExpiresAt                     *int64
+	MessageReceptionPeriodEventId *string
 }
 
 type GlobalMessageOptions struct {
-	ReadAcquireActions []AcquireAction
-	ExpiresTimeSpan    *TimeSpan
-	ExpiresAt          *int64
+	ReadAcquireActions            []AcquireAction
+	ExpiresTimeSpan               *TimeSpan
+	ExpiresAt                     *int64
+	MessageReceptionPeriodEventId *string
 }
 
 func NewGlobalMessage(
@@ -42,11 +44,12 @@ func NewGlobalMessage(
 	options GlobalMessageOptions,
 ) GlobalMessage {
 	data := GlobalMessage{
-		Name:               name,
-		Metadata:           metadata,
-		ReadAcquireActions: options.ReadAcquireActions,
-		ExpiresTimeSpan:    options.ExpiresTimeSpan,
-		ExpiresAt:          options.ExpiresAt,
+		Name:                          name,
+		Metadata:                      metadata,
+		ReadAcquireActions:            options.ReadAcquireActions,
+		ExpiresTimeSpan:               options.ExpiresTimeSpan,
+		ExpiresAt:                     options.ExpiresAt,
+		MessageReceptionPeriodEventId: options.MessageReceptionPeriodEventId,
 	}
 	return data
 }
@@ -67,6 +70,9 @@ func (p *GlobalMessage) Properties() map[string]interface{} {
 	}
 	if p.ExpiresAt != nil {
 		properties["ExpiresAt"] = p.ExpiresAt
+	}
+	if p.MessageReceptionPeriodEventId != nil {
+		properties["MessageReceptionPeriodEventId"] = p.MessageReceptionPeriodEventId
 	}
 	return properties
 }

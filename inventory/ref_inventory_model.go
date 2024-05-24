@@ -74,12 +74,14 @@ func (p *InventoryModelRef) AcquireItemSetWithGrade(
 func (p *InventoryModelRef) VerifyInventoryCurrentMaxCapacity(
 	verifyType string,
 	currentInventoryMaxCapacity int32,
+	multiplyValueSpecifyingQuantity bool,
 ) ConsumeAction {
 	return VerifyInventoryCurrentMaxCapacityByUserId(
 		p.NamespaceName,
 		p.InventoryName,
 		verifyType,
 		currentInventoryMaxCapacity,
+		multiplyValueSpecifyingQuantity,
 	)
 }
 

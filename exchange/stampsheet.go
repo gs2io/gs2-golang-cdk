@@ -116,3 +116,28 @@ func CreateAwaitByUserId(
 		Request: properties,
 	}
 }
+
+func SkipByUserId(
+	namespaceName string,
+	awaitName string,
+	skipType string,
+	minutes *int32,
+	rate *float32,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["awaitName"] = awaitName
+	properties["skipType"] = skipType
+	if minutes != nil {
+		properties["minutes"] = minutes
+	}
+	if rate != nil {
+		properties["rate"] = rate
+	}
+	return AcquireAction{
+		Action:  "Gs2Exchange:SkipByUserId",
+		Request: properties,
+	}
+}

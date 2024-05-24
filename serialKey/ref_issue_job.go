@@ -38,7 +38,7 @@ func (p *IssueJobRef) Grn() string {
 			NewGetAttrOwnerId().String(),
 			"serialKey",
 			p.NamespaceName,
-			"master",
+			"model",
 			"campaign",
 			p.CampaignModelName,
 			"issue",

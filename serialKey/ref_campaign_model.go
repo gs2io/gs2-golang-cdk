@@ -37,7 +37,7 @@ func (p *CampaignModelRef) Grn() string {
 			NewGetAttrOwnerId().String(),
 			"serialKey",
 			p.NamespaceName,
-			"master",
+			"model",
 			"campaign",
 			p.CampaignModelName,
 		},

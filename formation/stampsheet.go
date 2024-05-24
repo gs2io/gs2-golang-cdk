@@ -96,6 +96,25 @@ func AcquireActionsToFormProperties(
 	}
 }
 
+func SetFormByUserId(
+	namespaceName string,
+	moldModelName string,
+	index int32,
+	slots []Slot,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["moldModelName"] = moldModelName
+	properties["index"] = index
+	properties["slots"] = slots
+	return AcquireAction{
+		Action:  "Gs2Formation:SetFormByUserId",
+		Request: properties,
+	}
+}
+
 func AcquireActionsToPropertyFormProperties(
 	namespaceName string,
 	propertyFormModelName string,

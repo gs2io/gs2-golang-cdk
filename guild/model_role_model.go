@@ -1,4 +1,4 @@
-package formation
+package guild
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,37 +22,35 @@ import (
 
 var _ = AcquireAction{}
 
-type Slot struct {
-	Name       string
-	PropertyId *string
-	Metadata   *string
+type RoleModel struct {
+	Name           string
+	Metadata       *string
+	PolicyDocument string
 }
 
-type SlotOptions struct {
-	PropertyId *string
-	Metadata   *string
+type RoleModelOptions struct {
+	Metadata *string
 }
 
-func NewSlot(
+func NewRoleModel(
 	name string,
-	options SlotOptions,
-) Slot {
-	data := Slot{
-		Name:       name,
-		PropertyId: options.PropertyId,
-		Metadata:   options.Metadata,
+	policyDocument string,
+	options RoleModelOptions,
+) RoleModel {
+	data := RoleModel{
+		Name:           name,
+		PolicyDocument: policyDocument,
+		Metadata:       options.Metadata,
 	}
 	return data
 }
 
-func (p *Slot) Properties() map[string]interface{} {
+func (p *RoleModel) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["Name"] = p.Name
-	if p.PropertyId != nil {
-		properties["PropertyId"] = p.PropertyId
-	}
 	if p.Metadata != nil {
 		properties["Metadata"] = p.Metadata
 	}
+	properties["PolicyDocument"] = p.PolicyDocument
 	return properties
 }

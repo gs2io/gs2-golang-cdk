@@ -32,6 +32,8 @@ type Namespace struct {
 	ConsumeScript           *ScriptSetting
 	SimpleItemAcquireScript *ScriptSetting
 	SimpleItemConsumeScript *ScriptSetting
+	BigItemAcquireScript    *ScriptSetting
+	BigItemConsumeScript    *ScriptSetting
 	LogSetting              *LogSetting
 }
 
@@ -42,6 +44,8 @@ type NamespaceOptions struct {
 	ConsumeScript           *ScriptSetting
 	SimpleItemAcquireScript *ScriptSetting
 	SimpleItemConsumeScript *ScriptSetting
+	BigItemAcquireScript    *ScriptSetting
+	BigItemConsumeScript    *ScriptSetting
 	LogSetting              *LogSetting
 }
 
@@ -59,6 +63,8 @@ func NewNamespace(
 		ConsumeScript:           options.ConsumeScript,
 		SimpleItemAcquireScript: options.SimpleItemAcquireScript,
 		SimpleItemConsumeScript: options.SimpleItemConsumeScript,
+		BigItemAcquireScript:    options.BigItemAcquireScript,
+		BigItemConsumeScript:    options.BigItemConsumeScript,
 		LogSetting:              options.LogSetting,
 	}
 	return &data
@@ -92,6 +98,12 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.SimpleItemConsumeScript != nil {
 		properties["SimpleItemConsumeScript"] = p.SimpleItemConsumeScript.Properties()
+	}
+	if p.BigItemAcquireScript != nil {
+		properties["BigItemAcquireScript"] = p.BigItemAcquireScript.Properties()
+	}
+	if p.BigItemConsumeScript != nil {
+		properties["BigItemConsumeScript"] = p.BigItemConsumeScript.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()

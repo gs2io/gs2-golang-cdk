@@ -47,6 +47,7 @@ func VerifyGradeByUserId(
 	verifyType string,
 	propertyId string,
 	gradeValue int64,
+	multiplyValueSpecifyingQuantity bool,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -56,6 +57,7 @@ func VerifyGradeByUserId(
 	properties["verifyType"] = verifyType
 	properties["propertyId"] = propertyId
 	properties["gradeValue"] = gradeValue
+	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
 	return ConsumeAction{
 		Action:  "Gs2Grade:VerifyGradeByUserId",
 		Request: properties,

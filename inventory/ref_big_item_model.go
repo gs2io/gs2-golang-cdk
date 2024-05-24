@@ -64,6 +64,7 @@ func (p *BigItemModelRef) ConsumeBigItem(
 func (p *BigItemModelRef) VerifyBigItem(
 	verifyType string,
 	count string,
+	multiplyValueSpecifyingQuantity bool,
 ) ConsumeAction {
 	return VerifyBigItemByUserId(
 		p.NamespaceName,
@@ -71,6 +72,7 @@ func (p *BigItemModelRef) VerifyBigItem(
 		p.ItemName,
 		verifyType,
 		count,
+		multiplyValueSpecifyingQuantity,
 	)
 }
 

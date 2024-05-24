@@ -66,6 +66,7 @@ func VerifyRankByUserId(
 	verifyType string,
 	propertyId string,
 	rankValue int64,
+	multiplyValueSpecifyingQuantity bool,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -75,6 +76,7 @@ func VerifyRankByUserId(
 	properties["verifyType"] = verifyType
 	properties["propertyId"] = propertyId
 	properties["rankValue"] = rankValue
+	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
 	return ConsumeAction{
 		Action:  "Gs2Experience:VerifyRankByUserId",
 		Request: properties,
@@ -87,6 +89,7 @@ func VerifyRankCapByUserId(
 	verifyType string,
 	propertyId string,
 	rankCapValue int64,
+	multiplyValueSpecifyingQuantity bool,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -96,6 +99,7 @@ func VerifyRankCapByUserId(
 	properties["verifyType"] = verifyType
 	properties["propertyId"] = propertyId
 	properties["rankCapValue"] = rankCapValue
+	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
 	return ConsumeAction{
 		Action:  "Gs2Experience:VerifyRankCapByUserId",
 		Request: properties,
@@ -103,6 +107,29 @@ func VerifyRankCapByUserId(
 }
 
 func AddExperienceByUserId(
+	namespaceName string,
+	experienceName string,
+	propertyId string,
+	experienceValue int64,
+	truncateExperienceWhenRankUp *bool,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["experienceName"] = experienceName
+	properties["propertyId"] = propertyId
+	properties["experienceValue"] = experienceValue
+	if truncateExperienceWhenRankUp != nil {
+		properties["truncateExperienceWhenRankUp"] = truncateExperienceWhenRankUp
+	}
+	return AcquireAction{
+		Action:  "Gs2Experience:AddExperienceByUserId",
+		Request: properties,
+	}
+}
+
+func SetExperienceByUserId(
 	namespaceName string,
 	experienceName string,
 	propertyId string,
@@ -116,7 +143,7 @@ func AddExperienceByUserId(
 	properties["propertyId"] = propertyId
 	properties["experienceValue"] = experienceValue
 	return AcquireAction{
-		Action:  "Gs2Experience:AddExperienceByUserId",
+		Action:  "Gs2Experience:SetExperienceByUserId",
 		Request: properties,
 	}
 }

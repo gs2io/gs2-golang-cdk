@@ -31,6 +31,7 @@ type SimpleItemModelRef struct {
 func (p *SimpleItemModelRef) VerifySimpleItem(
 	verifyType string,
 	count int64,
+	multiplyValueSpecifyingQuantity bool,
 ) ConsumeAction {
 	return VerifySimpleItemByUserId(
 		p.NamespaceName,
@@ -38,6 +39,7 @@ func (p *SimpleItemModelRef) VerifySimpleItem(
 		p.ItemName,
 		verifyType,
 		count,
+		multiplyValueSpecifyingQuantity,
 	)
 }
 
