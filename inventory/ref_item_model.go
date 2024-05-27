@@ -19,96 +19,96 @@ deny overwrite
 */
 
 import (
-    . "github.com/gs2io/gs2-golang-cdk/core"
+	. "github.com/gs2io/gs2-golang-cdk/core"
 )
 
 var _ = AcquireAction{}
 
 type ItemModelRef struct {
-    NamespaceName string
-    InventoryName string
-    ItemName      string
+	NamespaceName string
+	InventoryName string
+	ItemName      string
 }
 
 func (p *ItemModelRef) AcquireItemSet(
-    acquireCount int64,
-    expiresAt int64,
-    createNewItemSet bool,
-    itemSetName *string,
+	acquireCount int64,
+	expiresAt int64,
+	createNewItemSet bool,
+	itemSetName *string,
 ) AcquireAction {
-    return AcquireItemSetByUserId(
-        p.NamespaceName,
-        p.InventoryName,
-        p.ItemName,
-        acquireCount,
-        expiresAt,
-        createNewItemSet,
-        itemSetName,
-    )
+	return AcquireItemSetByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		p.ItemName,
+		acquireCount,
+		expiresAt,
+		createNewItemSet,
+		itemSetName,
+	)
 }
 
 func (p *ItemModelRef) AddReferenceOf(
-    itemSetName string,
-    referenceOf string,
+	itemSetName string,
+	referenceOf string,
 ) AcquireAction {
-    return AddReferenceOfByUserId(
-        p.NamespaceName,
-        p.InventoryName,
-        p.ItemName,
-        referenceOf,
-        itemSetName,
-    )
+	return AddReferenceOfByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		p.ItemName,
+		referenceOf,
+		itemSetName,
+	)
 }
 
 func (p *ItemModelRef) ConsumeItemSet(
-    consumeCount int64,
-    itemSetName *string,
+	consumeCount int64,
+	itemSetName *string,
 ) ConsumeAction {
-    return ConsumeItemSetByUserId(
-        p.NamespaceName,
-        p.InventoryName,
-        p.ItemName,
-        consumeCount,
-        itemSetName,
-    )
+	return ConsumeItemSetByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		p.ItemName,
+		consumeCount,
+		itemSetName,
+	)
 }
 
 func (p *ItemModelRef) VerifyItemSet(
-    verifyType string,
-    count int64,
-    multiplyValueSpecifyingQuantity bool,
-    itemSetName *string,
+	verifyType string,
+	count int64,
+	multiplyValueSpecifyingQuantity bool,
+	itemSetName *string,
 ) ConsumeAction {
-    return VerifyItemSetByUserId(
-        p.NamespaceName,
-        p.InventoryName,
-        p.ItemName,
-        verifyType,
-        count,
-        multiplyValueSpecifyingQuantity,
-        itemSetName,
-    )
+	return VerifyItemSetByUserId(
+		p.NamespaceName,
+		p.InventoryName,
+		p.ItemName,
+		verifyType,
+		count,
+		multiplyValueSpecifyingQuantity,
+		itemSetName,
+	)
 }
 
 func (p *ItemModelRef) Grn() string {
-    return NewJoin(
-        ":",
-        []string{
-            "grn",
-            "gs2",
-            NewGetAttrRegion().String(),
-            NewGetAttrOwnerId().String(),
-            "inventory",
-            p.NamespaceName,
-            "model",
-            p.InventoryName,
-            "item",
-            p.ItemName,
-        },
-    ).String()
+	return NewJoin(
+		":",
+		[]string{
+			"grn",
+			"gs2",
+			NewGetAttrRegion().String(),
+			NewGetAttrOwnerId().String(),
+			"inventory",
+			p.NamespaceName,
+			"model",
+			p.InventoryName,
+			"item",
+			p.ItemName,
+		},
+	).String()
 }
 
 func (p *ItemModelRef) GrnPointer() *string {
-    grn := p.Grn()
-    return &grn
+	grn := p.Grn()
+	return &grn
 }

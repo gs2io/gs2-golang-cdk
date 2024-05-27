@@ -45,16 +45,17 @@ type CategoryModel struct {
 	Metadata                   *string
 	MinimumValue               *int64
 	MaximumValue               *int64
+	Sum                        bool
 	OrderDirection             CategoryModelOrderDirection
 	Scope                      CategoryModelScope
+	GlobalRankingSetting       *GlobalRankingSetting
+	EntryPeriodEventId         *string
+	AccessPeriodEventId        *string
 	UniqueByUserId             *bool
-	Sum                        *bool
 	CalculateFixedTimingHour   *int32
 	CalculateFixedTimingMinute *int32
 	CalculateIntervalMinutes   *int32
 	AdditionalScopes           []Scope
-	EntryPeriodEventId         *string
-	AccessPeriodEventId        *string
 	IgnoreUserIds              []string
 	Generation                 *string
 }
@@ -63,39 +64,41 @@ type CategoryModelOptions struct {
 	Metadata                   *string
 	MinimumValue               *int64
 	MaximumValue               *int64
+	GlobalRankingSetting       *GlobalRankingSetting
+	EntryPeriodEventId         *string
+	AccessPeriodEventId        *string
 	UniqueByUserId             *bool
-	Sum                        *bool
 	CalculateFixedTimingHour   *int32
 	CalculateFixedTimingMinute *int32
 	CalculateIntervalMinutes   *int32
 	AdditionalScopes           []Scope
-	EntryPeriodEventId         *string
-	AccessPeriodEventId        *string
 	IgnoreUserIds              []string
 	Generation                 *string
 }
 
 func NewCategoryModel(
 	name string,
+	sum bool,
 	orderDirection CategoryModelOrderDirection,
 	scope CategoryModelScope,
 	options CategoryModelOptions,
 ) CategoryModel {
 	data := CategoryModel{
 		Name:                       name,
+		Sum:                        sum,
 		OrderDirection:             orderDirection,
 		Scope:                      scope,
 		Metadata:                   options.Metadata,
 		MinimumValue:               options.MinimumValue,
 		MaximumValue:               options.MaximumValue,
+		GlobalRankingSetting:       options.GlobalRankingSetting,
+		EntryPeriodEventId:         options.EntryPeriodEventId,
+		AccessPeriodEventId:        options.AccessPeriodEventId,
 		UniqueByUserId:             options.UniqueByUserId,
-		Sum:                        options.Sum,
 		CalculateFixedTimingHour:   options.CalculateFixedTimingHour,
 		CalculateFixedTimingMinute: options.CalculateFixedTimingMinute,
 		CalculateIntervalMinutes:   options.CalculateIntervalMinutes,
 		AdditionalScopes:           options.AdditionalScopes,
-		EntryPeriodEventId:         options.EntryPeriodEventId,
-		AccessPeriodEventId:        options.AccessPeriodEventId,
 		IgnoreUserIds:              options.IgnoreUserIds,
 		Generation:                 options.Generation,
 	}
@@ -106,37 +109,41 @@ type CategoryModelScopeIsGlobalOptions struct {
 	Metadata                   *string
 	MinimumValue               *int64
 	MaximumValue               *int64
+	EntryPeriodEventId         *string
+	AccessPeriodEventId        *string
 	CalculateFixedTimingHour   *int32
 	CalculateFixedTimingMinute *int32
 	AdditionalScopes           []Scope
-	EntryPeriodEventId         *string
-	AccessPeriodEventId        *string
 	IgnoreUserIds              []string
 	Generation                 *string
 }
 
 func NewCategoryModelScopeIsGlobal(
 	name string,
+	sum bool,
 	orderDirection CategoryModelOrderDirection,
+	globalRankingSetting GlobalRankingSetting,
 	uniqueByUserId bool,
 	calculateIntervalMinutes int32,
 	options CategoryModelScopeIsGlobalOptions,
 ) CategoryModel {
 	return NewCategoryModel(
 		name,
+		sum,
 		orderDirection,
 		CategoryModelScopeGlobal,
 		CategoryModelOptions{
 			Metadata:                   options.Metadata,
 			MinimumValue:               options.MinimumValue,
 			MaximumValue:               options.MaximumValue,
+			GlobalRankingSetting:       &globalRankingSetting,
+			EntryPeriodEventId:         options.EntryPeriodEventId,
+			AccessPeriodEventId:        options.AccessPeriodEventId,
 			UniqueByUserId:             &uniqueByUserId,
 			CalculateFixedTimingHour:   options.CalculateFixedTimingHour,
 			CalculateFixedTimingMinute: options.CalculateFixedTimingMinute,
 			CalculateIntervalMinutes:   &calculateIntervalMinutes,
 			AdditionalScopes:           options.AdditionalScopes,
-			EntryPeriodEventId:         options.EntryPeriodEventId,
-			AccessPeriodEventId:        options.AccessPeriodEventId,
 			IgnoreUserIds:              options.IgnoreUserIds,
 			Generation:                 options.Generation,
 		},
@@ -147,33 +154,35 @@ type CategoryModelScopeIsScopedOptions struct {
 	Metadata                   *string
 	MinimumValue               *int64
 	MaximumValue               *int64
+	EntryPeriodEventId         *string
+	AccessPeriodEventId        *string
 	CalculateFixedTimingHour   *int32
 	CalculateFixedTimingMinute *int32
 	AdditionalScopes           []Scope
-	EntryPeriodEventId         *string
-	AccessPeriodEventId        *string
 	IgnoreUserIds              []string
 	Generation                 *string
 }
 
 func NewCategoryModelScopeIsScoped(
 	name string,
+	sum bool,
 	orderDirection CategoryModelOrderDirection,
 	options CategoryModelScopeIsScopedOptions,
 ) CategoryModel {
 	return NewCategoryModel(
 		name,
+		sum,
 		orderDirection,
 		CategoryModelScopeScoped,
 		CategoryModelOptions{
 			Metadata:                   options.Metadata,
 			MinimumValue:               options.MinimumValue,
 			MaximumValue:               options.MaximumValue,
+			EntryPeriodEventId:         options.EntryPeriodEventId,
+			AccessPeriodEventId:        options.AccessPeriodEventId,
 			CalculateFixedTimingHour:   options.CalculateFixedTimingHour,
 			CalculateFixedTimingMinute: options.CalculateFixedTimingMinute,
 			AdditionalScopes:           options.AdditionalScopes,
-			EntryPeriodEventId:         options.EntryPeriodEventId,
-			AccessPeriodEventId:        options.AccessPeriodEventId,
 			IgnoreUserIds:              options.IgnoreUserIds,
 			Generation:                 options.Generation,
 		},
@@ -192,13 +201,20 @@ func (p *CategoryModel) Properties() map[string]interface{} {
 	if p.MaximumValue != nil {
 		properties["MaximumValue"] = p.MaximumValue
 	}
+	properties["Sum"] = p.Sum
 	properties["OrderDirection"] = p.OrderDirection
 	properties["Scope"] = p.Scope
+	if p.GlobalRankingSetting != nil {
+		properties["GlobalRankingSetting"] = p.GlobalRankingSetting.Properties()
+	}
+	if p.EntryPeriodEventId != nil {
+		properties["EntryPeriodEventId"] = p.EntryPeriodEventId
+	}
+	if p.AccessPeriodEventId != nil {
+		properties["AccessPeriodEventId"] = p.AccessPeriodEventId
+	}
 	if p.UniqueByUserId != nil {
 		properties["UniqueByUserId"] = p.UniqueByUserId
-	}
-	if p.Sum != nil {
-		properties["Sum"] = p.Sum
 	}
 	if p.CalculateFixedTimingHour != nil {
 		properties["CalculateFixedTimingHour"] = p.CalculateFixedTimingHour
@@ -215,12 +231,6 @@ func (p *CategoryModel) Properties() map[string]interface{} {
 			values[i] = element.Properties()
 		}
 		properties["AdditionalScopes"] = values
-	}
-	if p.EntryPeriodEventId != nil {
-		properties["EntryPeriodEventId"] = p.EntryPeriodEventId
-	}
-	if p.AccessPeriodEventId != nil {
-		properties["AccessPeriodEventId"] = p.AccessPeriodEventId
 	}
 	properties["IgnoreUserIds"] = p.IgnoreUserIds
 	if p.Generation != nil {
