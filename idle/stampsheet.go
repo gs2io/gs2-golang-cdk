@@ -78,3 +78,22 @@ func SetMaximumIdleMinutesByUserId(
 		Request: properties,
 	}
 }
+
+func ReceiveByUserId(
+	namespaceName string,
+	categoryName string,
+	config *[]Config,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["categoryName"] = categoryName
+	if config != nil {
+		properties["config"] = config
+	}
+	return AcquireAction{
+		Action:  "Gs2Idle:ReceiveByUserId",
+		Request: properties,
+	}
+}

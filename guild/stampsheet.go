@@ -43,6 +43,50 @@ func DecreaseMaximumCurrentMaximumMemberCountByGuildName(
 	}
 }
 
+func VerifyCurrentMaximumMemberCountByGuildName(
+	namespaceName string,
+	guildModelName string,
+	guildName string,
+	verifyType string,
+	multiplyValueSpecifyingQuantity bool,
+	value *int32,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["guildModelName"] = guildModelName
+	properties["guildName"] = guildName
+	properties["verifyType"] = verifyType
+	if value != nil {
+		properties["value"] = value
+	}
+	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	return ConsumeAction{
+		Action:  "Gs2Guild:VerifyCurrentMaximumMemberCountByGuildName",
+		Request: properties,
+	}
+}
+
+func VerifyIncludeMemberByUserId(
+	namespaceName string,
+	guildModelName string,
+	guildName string,
+	verifyType string,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["guildModelName"] = guildModelName
+	properties["guildName"] = guildName
+	properties["verifyType"] = verifyType
+	return ConsumeAction{
+		Action:  "Gs2Guild:VerifyIncludeMemberByUserId",
+		Request: properties,
+	}
+}
+
 func IncreaseMaximumCurrentMaximumMemberCountByGuildName(
 	namespaceName string,
 	guildModelName string,

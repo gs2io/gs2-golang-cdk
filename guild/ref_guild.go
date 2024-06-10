@@ -61,6 +61,32 @@ func (p *GuildRef) DecreaseMaximumCurrentMaximumMemberCountByGuildName(
 	)
 }
 
+func (p *GuildRef) VerifyCurrentMaximumMemberCountByGuildName(
+	verifyType string,
+	multiplyValueSpecifyingQuantity bool,
+	value *int32,
+) ConsumeAction {
+	return VerifyCurrentMaximumMemberCountByGuildName(
+		p.NamespaceName,
+		p.GuildModelName,
+		p.GuildName,
+		verifyType,
+		value,
+		multiplyValueSpecifyingQuantity,
+	)
+}
+
+func (p *GuildRef) VerifyIncludeMember(
+	verifyType string,
+) ConsumeAction {
+	return VerifyIncludeMemberByUserId(
+		p.NamespaceName,
+		p.GuildModelName,
+		verifyType,
+		p.GuildName,
+	)
+}
+
 func (p *GuildRef) Grn() string {
 	return NewJoin(
 		":",
