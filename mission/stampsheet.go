@@ -39,6 +39,27 @@ func ReceiveByUserId(
 	}
 }
 
+func VerifyCompleteByUserId(
+	namespaceName string,
+	missionGroupName string,
+	verifyType string,
+	missionTaskName string,
+	multiplyValueSpecifyingQuantity bool,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["missionGroupName"] = missionGroupName
+	properties["verifyType"] = verifyType
+	properties["missionTaskName"] = missionTaskName
+	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	return ConsumeAction{
+		Action:  "Gs2Mission:VerifyCompleteByUserId",
+		Request: properties,
+	}
+}
+
 func RevertReceiveByUserId(
 	namespaceName string,
 	missionGroupName string,
