@@ -28,18 +28,21 @@ type CurrentMasterData struct {
 	version       string
 	namespaceName string
 	ratingModels  []RatingModel
+	seasonModels  []SeasonModel
 }
 
 func NewCurrentMasterData(
 	stack *Stack,
 	namespaceName string,
 	ratingModels []RatingModel,
+	seasonModels []SeasonModel,
 ) *CurrentMasterData {
 	self := CurrentMasterData{
 		stack:         stack,
 		version:       "2020-06-24",
 		namespaceName: namespaceName,
 		ratingModels:  ratingModels,
+		seasonModels:  seasonModels,
 	}
 	self.CdkResource = NewCdkResource(&self)
 	stack.AddResource(&self.CdkResource)
@@ -47,11 +50,11 @@ func NewCurrentMasterData(
 }
 
 func (p *CurrentMasterData) ResourceName() string {
-	return "Matchmaking_CurrentRatingModelMaster_" + p.namespaceName
+	return "Matchmaking_CurrentModelMaster_" + p.namespaceName
 }
 
 func (p *CurrentMasterData) ResourceType() string {
-	return "GS2::Matchmaking::CurrentRatingModelMaster"
+	return "GS2::Matchmaking::CurrentModelMaster"
 }
 
 func (p *CurrentMasterData) Properties() map[string]interface{} {
@@ -59,11 +62,16 @@ func (p *CurrentMasterData) Properties() map[string]interface{} {
 	for i, item := range p.ratingModels {
 		ratingModels[i] = item.Properties()
 	}
+	seasonModels := make([]map[string]interface{}, len(p.seasonModels))
+	for i, item := range p.seasonModels {
+		seasonModels[i] = item.Properties()
+	}
 	return map[string]interface{}{
 		"NamespaceName": p.namespaceName,
 		"Settings": map[string]interface{}{
 			"version":      p.version,
 			"ratingModels": ratingModels,
+			"seasonModels": seasonModels,
 		},
 	}
 }

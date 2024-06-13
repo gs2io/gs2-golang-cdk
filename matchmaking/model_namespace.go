@@ -214,12 +214,14 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 
 func (p *Namespace) MasterData(
 	ratingModels []RatingModel,
+	seasonModels []SeasonModel,
 
 ) *Namespace {
 	NewCurrentMasterData(
 		p.stack,
 		p.Name,
 		ratingModels,
+		seasonModels,
 	).AddDependsOn(
 		p,
 	)

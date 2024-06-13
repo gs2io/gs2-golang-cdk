@@ -22,29 +22,12 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
+type SeasonModelRef struct {
 	NamespaceName string
+	SeasonName    string
 }
 
-func (p *NamespaceRef) RatingModel(
-	ratingName string,
-) *RatingModelRef {
-	return &RatingModelRef{
-		NamespaceName: p.NamespaceName,
-		RatingName:    ratingName,
-	}
-}
-
-func (p *NamespaceRef) SeasonModel(
-	seasonName string,
-) *SeasonModelRef {
-	return &SeasonModelRef{
-		NamespaceName: p.NamespaceName,
-		SeasonName:    seasonName,
-	}
-}
-
-func (p *NamespaceRef) Grn() string {
+func (p *SeasonModelRef) Grn() string {
 	return NewJoin(
 		":",
 		[]string{
@@ -54,11 +37,13 @@ func (p *NamespaceRef) Grn() string {
 			NewGetAttrOwnerId().String(),
 			"matchmaking",
 			p.NamespaceName,
+			"model",
+			p.SeasonName,
 		},
 	).String()
 }
 
-func (p *NamespaceRef) GrnPointer() *string {
+func (p *SeasonModelRef) GrnPointer() *string {
 	grn := p.Grn()
 	return &grn
 }
