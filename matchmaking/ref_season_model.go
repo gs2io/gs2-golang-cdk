@@ -27,6 +27,22 @@ type SeasonModelRef struct {
 	SeasonName    string
 }
 
+func (p *SeasonModelRef) VerifyIncludeParticipant(
+	season int64,
+	tier int64,
+	seasonGatheringName string,
+	verifyType string,
+) ConsumeAction {
+	return VerifyIncludeParticipantByUserId(
+		p.NamespaceName,
+		p.SeasonName,
+		season,
+		tier,
+		verifyType,
+		seasonGatheringName,
+	)
+}
+
 func (p *SeasonModelRef) Grn() string {
 	return NewJoin(
 		":",

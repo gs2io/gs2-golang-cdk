@@ -26,6 +26,7 @@ type ClusterRankingModelClusterType string
 
 const ClusterRankingModelClusterTypeRaw = ClusterRankingModelClusterType("Raw")
 const ClusterRankingModelClusterTypeGs2Guild_guild = ClusterRankingModelClusterType("Gs2Guild::Guild")
+const ClusterRankingModelClusterTypeGs2Matchmaking_seasonGathering = ClusterRankingModelClusterType("Gs2Matchmaking::SeasonGathering")
 
 func (p ClusterRankingModelClusterType) Pointer() *ClusterRankingModelClusterType {
 	return &p

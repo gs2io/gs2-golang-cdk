@@ -21,3 +21,26 @@ import (
 )
 
 var _ = AcquireAction{}
+
+func VerifyIncludeParticipantByUserId(
+	namespaceName string,
+	seasonName string,
+	season int64,
+	tier int64,
+	seasonGatheringName string,
+	verifyType string,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["seasonName"] = seasonName
+	properties["season"] = season
+	properties["tier"] = tier
+	properties["seasonGatheringName"] = seasonGatheringName
+	properties["verifyType"] = verifyType
+	return ConsumeAction{
+		Action:  "Gs2Matchmaking:VerifyIncludeParticipantByUserId",
+		Request: properties,
+	}
+}
