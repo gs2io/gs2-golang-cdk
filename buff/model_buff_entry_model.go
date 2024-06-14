@@ -33,8 +33,9 @@ func (p BuffEntryModelTargetType) Pointer() *BuffEntryModelTargetType {
 
 type BuffEntryModelExpression string
 
-const BuffEntryModelExpressionAdd = BuffEntryModelExpression("add")
+const BuffEntryModelExpressionRateAdd = BuffEntryModelExpression("rate_add")
 const BuffEntryModelExpressionMul = BuffEntryModelExpression("mul")
+const BuffEntryModelExpressionValueAdd = BuffEntryModelExpression("value_add")
 
 func (p BuffEntryModelExpression) Pointer() *BuffEntryModelExpression {
 	return &p
