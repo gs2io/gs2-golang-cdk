@@ -22,15 +22,6 @@ import (
 
 var _ = AcquireAction{}
 
-type BuffEntryModelTargetType string
-
-const BuffEntryModelTargetTypeModel = BuffEntryModelTargetType("model")
-const BuffEntryModelTargetTypeAction = BuffEntryModelTargetType("action")
-
-func (p BuffEntryModelTargetType) Pointer() *BuffEntryModelTargetType {
-	return &p
-}
-
 type BuffEntryModelExpression string
 
 const BuffEntryModelExpressionRateAdd = BuffEntryModelExpression("rate_add")
@@ -41,13 +32,22 @@ func (p BuffEntryModelExpression) Pointer() *BuffEntryModelExpression {
 	return &p
 }
 
+type BuffEntryModelTargetType string
+
+const BuffEntryModelTargetTypeModel = BuffEntryModelTargetType("model")
+const BuffEntryModelTargetTypeAction = BuffEntryModelTargetType("action")
+
+func (p BuffEntryModelTargetType) Pointer() *BuffEntryModelTargetType {
+	return &p
+}
+
 type BuffEntryModel struct {
 	Name                       string
 	Metadata                   *string
+	Expression                 BuffEntryModelExpression
 	TargetType                 BuffEntryModelTargetType
 	TargetModel                *BuffTargetModel
 	TargetAction               *BuffTargetAction
-	Expression                 BuffEntryModelExpression
 	Priority                   int32
 	ApplyPeriodScheduleEventId *string
 }
@@ -61,15 +61,15 @@ type BuffEntryModelOptions struct {
 
 func NewBuffEntryModel(
 	name string,
-	targetType BuffEntryModelTargetType,
 	expression BuffEntryModelExpression,
+	targetType BuffEntryModelTargetType,
 	priority int32,
 	options BuffEntryModelOptions,
 ) BuffEntryModel {
 	data := BuffEntryModel{
 		Name:                       name,
-		TargetType:                 targetType,
 		Expression:                 expression,
+		TargetType:                 targetType,
 		Priority:                   priority,
 		Metadata:                   options.Metadata,
 		TargetModel:                options.TargetModel,
@@ -93,8 +93,8 @@ func NewBuffEntryModelTargetTypeIsModel(
 ) BuffEntryModel {
 	return NewBuffEntryModel(
 		name,
-		BuffEntryModelTargetTypeModel,
 		expression,
+		BuffEntryModelTargetTypeModel,
 		priority,
 		BuffEntryModelOptions{
 			Metadata:                   options.Metadata,
@@ -118,8 +118,8 @@ func NewBuffEntryModelTargetTypeIsAction(
 ) BuffEntryModel {
 	return NewBuffEntryModel(
 		name,
-		BuffEntryModelTargetTypeAction,
 		expression,
+		BuffEntryModelTargetTypeAction,
 		priority,
 		BuffEntryModelOptions{
 			Metadata:                   options.Metadata,
@@ -135,6 +135,7 @@ func (p *BuffEntryModel) Properties() map[string]interface{} {
 	if p.Metadata != nil {
 		properties["Metadata"] = p.Metadata
 	}
+	properties["Expression"] = p.Expression
 	properties["TargetType"] = p.TargetType
 	if p.TargetModel != nil {
 		properties["TargetModel"] = p.TargetModel.Properties()
@@ -142,7 +143,6 @@ func (p *BuffEntryModel) Properties() map[string]interface{} {
 	if p.TargetAction != nil {
 		properties["TargetAction"] = p.TargetAction.Properties()
 	}
-	properties["Expression"] = p.Expression
 	properties["Priority"] = p.Priority
 	if p.ApplyPeriodScheduleEventId != nil {
 		properties["ApplyPeriodScheduleEventId"] = p.ApplyPeriodScheduleEventId
