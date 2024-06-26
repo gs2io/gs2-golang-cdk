@@ -24,19 +24,21 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack              *Stack
-	Name               string
-	Description        *string
-	TransactionSetting TransactionSetting
-	ReceiveScript      *ScriptSetting
-	LogSetting         *LogSetting
+	stack                          *Stack
+	Name                           string
+	Description                    *string
+	TransactionSetting             TransactionSetting
+	ReceiveScript                  *ScriptSetting
+	OverrideAcquireActionsScriptId *string
+	LogSetting                     *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description        *string
-	TransactionSetting TransactionSetting
-	ReceiveScript      *ScriptSetting
-	LogSetting         *LogSetting
+	Description                    *string
+	TransactionSetting             TransactionSetting
+	ReceiveScript                  *ScriptSetting
+	OverrideAcquireActionsScriptId *string
+	LogSetting                     *LogSetting
 }
 
 func NewNamespace(
@@ -45,12 +47,13 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:              stack,
-		Name:               name,
-		Description:        options.Description,
-		TransactionSetting: options.TransactionSetting,
-		ReceiveScript:      options.ReceiveScript,
-		LogSetting:         options.LogSetting,
+		stack:                          stack,
+		Name:                           name,
+		Description:                    options.Description,
+		TransactionSetting:             options.TransactionSetting,
+		ReceiveScript:                  options.ReceiveScript,
+		OverrideAcquireActionsScriptId: options.OverrideAcquireActionsScriptId,
+		LogSetting:                     options.LogSetting,
 	}
 	return &data
 }
@@ -72,6 +75,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	if p.ReceiveScript != nil {
 		properties["ReceiveScript"] = p.ReceiveScript.Properties()
+	}
+	if p.OverrideAcquireActionsScriptId != nil {
+		properties["OverrideAcquireActionsScriptId"] = p.OverrideAcquireActionsScriptId
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
