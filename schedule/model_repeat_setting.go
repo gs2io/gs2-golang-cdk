@@ -28,6 +28,7 @@ const RepeatSettingRepeatTypeAlways = RepeatSettingRepeatType("always")
 const RepeatSettingRepeatTypeDaily = RepeatSettingRepeatType("daily")
 const RepeatSettingRepeatTypeWeekly = RepeatSettingRepeatType("weekly")
 const RepeatSettingRepeatTypeMonthly = RepeatSettingRepeatType("monthly")
+const RepeatSettingRepeatTypeCustom = RepeatSettingRepeatType("custom")
 
 func (p RepeatSettingRepeatType) Pointer() *RepeatSettingRepeatType {
 	return &p
@@ -69,6 +70,9 @@ type RepeatSetting struct {
 	EndDayOfWeek    *RepeatSettingEndDayOfWeek
 	BeginHour       *int32
 	EndHour         *int32
+	AnchorTimestamp *int64
+	ActiveDays      *int32
+	InactiveDays    *int32
 }
 
 type RepeatSettingOptions struct {
@@ -78,6 +82,9 @@ type RepeatSettingOptions struct {
 	EndDayOfWeek    *RepeatSettingEndDayOfWeek
 	BeginHour       *int32
 	EndHour         *int32
+	AnchorTimestamp *int64
+	ActiveDays      *int32
+	InactiveDays    *int32
 }
 
 func NewRepeatSetting(
@@ -92,6 +99,9 @@ func NewRepeatSetting(
 		EndDayOfWeek:    options.EndDayOfWeek,
 		BeginHour:       options.BeginHour,
 		EndHour:         options.EndHour,
+		AnchorTimestamp: options.AnchorTimestamp,
+		ActiveDays:      options.ActiveDays,
+		InactiveDays:    options.InactiveDays,
 	}
 	return data
 }
@@ -167,6 +177,25 @@ func NewRepeatSettingRepeatTypeIsMonthly(
 	)
 }
 
+type RepeatSettingRepeatTypeIsCustomOptions struct {
+}
+
+func NewRepeatSettingRepeatTypeIsCustom(
+	anchorTimestamp int64,
+	activeDays int32,
+	inactiveDays int32,
+	options RepeatSettingRepeatTypeIsCustomOptions,
+) RepeatSetting {
+	return NewRepeatSetting(
+		RepeatSettingRepeatTypeCustom,
+		RepeatSettingOptions{
+			AnchorTimestamp: &anchorTimestamp,
+			ActiveDays:      &activeDays,
+			InactiveDays:    &inactiveDays,
+		},
+	)
+}
+
 func (p *RepeatSetting) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["RepeatType"] = p.RepeatType
@@ -187,6 +216,15 @@ func (p *RepeatSetting) Properties() map[string]interface{} {
 	}
 	if p.EndHour != nil {
 		properties["EndHour"] = p.EndHour
+	}
+	if p.AnchorTimestamp != nil {
+		properties["AnchorTimestamp"] = p.AnchorTimestamp
+	}
+	if p.ActiveDays != nil {
+		properties["ActiveDays"] = p.ActiveDays
+	}
+	if p.InactiveDays != nil {
+		properties["InactiveDays"] = p.InactiveDays
 	}
 	return properties
 }
