@@ -22,6 +22,15 @@ import (
 
 var _ = AcquireAction{}
 
+type PasswordEnableTwoFactorAuthentication string
+
+const PasswordEnableTwoFactorAuthenticationRfc6238 = PasswordEnableTwoFactorAuthentication("RFC6238")
+const PasswordEnableTwoFactorAuthenticationDisable = PasswordEnableTwoFactorAuthentication("Disable")
+
+func (p PasswordEnableTwoFactorAuthentication) Pointer() *PasswordEnableTwoFactorAuthentication {
+	return &p
+}
+
 type Password struct {
 	CdkResource
 	stack    *Stack
