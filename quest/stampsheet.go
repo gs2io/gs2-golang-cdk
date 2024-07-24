@@ -38,7 +38,7 @@ func DeleteProgressByUserId(
 func CreateProgressByUserId(
 	namespaceName string,
 	questModelId string,
-	force bool,
+	force *bool,
 	config *[]Config,
 ) AcquireAction {
 	properties := map[string]interface{}{
@@ -46,7 +46,9 @@ func CreateProgressByUserId(
 	}
 	properties["namespaceName"] = namespaceName
 	properties["questModelId"] = questModelId
-	properties["force"] = force
+	if force != nil {
+		properties["force"] = force
+	}
 	if config != nil {
 		properties["config"] = config
 	}

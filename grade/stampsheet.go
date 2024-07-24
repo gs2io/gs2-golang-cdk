@@ -22,33 +22,14 @@ import (
 
 var _ = AcquireAction{}
 
-func SubGradeByUserId(
-	namespaceName string,
-	gradeName string,
-	propertyId string,
-	gradeValue int64,
-) ConsumeAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
-	}
-	properties["namespaceName"] = namespaceName
-	properties["gradeName"] = gradeName
-	properties["propertyId"] = propertyId
-	properties["gradeValue"] = gradeValue
-	return ConsumeAction{
-		Action:  "Gs2Grade:SubGradeByUserId",
-		Request: properties,
-	}
-}
-
 func VerifyGradeByUserId(
 	namespaceName string,
 	gradeName string,
 	verifyType string,
 	propertyId string,
-	gradeValue int64,
-	multiplyValueSpecifyingQuantity bool,
-) ConsumeAction {
+	gradeValue *int64,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
@@ -56,9 +37,13 @@ func VerifyGradeByUserId(
 	properties["gradeName"] = gradeName
 	properties["verifyType"] = verifyType
 	properties["propertyId"] = propertyId
-	properties["gradeValue"] = gradeValue
-	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
-	return ConsumeAction{
+	if gradeValue != nil {
+		properties["gradeValue"] = gradeValue
+	}
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
 		Action:  "Gs2Grade:VerifyGradeByUserId",
 		Request: properties,
 	}
@@ -70,7 +55,7 @@ func VerifyGradeUpMaterialByUserId(
 	verifyType string,
 	propertyId string,
 	materialPropertyId string,
-) ConsumeAction {
+) VerifyAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
@@ -79,8 +64,29 @@ func VerifyGradeUpMaterialByUserId(
 	properties["verifyType"] = verifyType
 	properties["propertyId"] = propertyId
 	properties["materialPropertyId"] = materialPropertyId
-	return ConsumeAction{
+	return VerifyAction{
 		Action:  "Gs2Grade:VerifyGradeUpMaterialByUserId",
+		Request: properties,
+	}
+}
+
+func SubGradeByUserId(
+	namespaceName string,
+	gradeName string,
+	propertyId string,
+	gradeValue *int64,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["gradeName"] = gradeName
+	properties["propertyId"] = propertyId
+	if gradeValue != nil {
+		properties["gradeValue"] = gradeValue
+	}
+	return ConsumeAction{
+		Action:  "Gs2Grade:SubGradeByUserId",
 		Request: properties,
 	}
 }
@@ -89,7 +95,7 @@ func AddGradeByUserId(
 	namespaceName string,
 	gradeName string,
 	propertyId string,
-	gradeValue int64,
+	gradeValue *int64,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -97,7 +103,9 @@ func AddGradeByUserId(
 	properties["namespaceName"] = namespaceName
 	properties["gradeName"] = gradeName
 	properties["propertyId"] = propertyId
-	properties["gradeValue"] = gradeValue
+	if gradeValue != nil {
+		properties["gradeValue"] = gradeValue
+	}
 	return AcquireAction{
 		Action:  "Gs2Grade:AddGradeByUserId",
 		Request: properties,

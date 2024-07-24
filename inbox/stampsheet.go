@@ -24,13 +24,15 @@ var _ = AcquireAction{}
 
 func OpenMessageByUserId(
 	namespaceName string,
-	messageName string,
+	messageName *string,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["messageName"] = messageName
+	if messageName != nil {
+		properties["messageName"] = messageName
+	}
 	return ConsumeAction{
 		Action:  "Gs2Inbox:OpenMessageByUserId",
 		Request: properties,
@@ -39,13 +41,15 @@ func OpenMessageByUserId(
 
 func DeleteMessageByUserId(
 	namespaceName string,
-	messageName string,
+	messageName *string,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["messageName"] = messageName
+	if messageName != nil {
+		properties["messageName"] = messageName
+	}
 	return ConsumeAction{
 		Action:  "Gs2Inbox:DeleteMessageByUserId",
 		Request: properties,

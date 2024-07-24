@@ -22,6 +22,23 @@ import (
 
 var _ = AcquireAction{}
 
+func VerifyEntryByUserId(
+	namespaceName string,
+	entryModelName string,
+	verifyType string,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["entryModelName"] = entryModelName
+	properties["verifyType"] = verifyType
+	return VerifyAction{
+		Action:  "Gs2Dictionary:VerifyEntryByUserId",
+		Request: properties,
+	}
+}
+
 func DeleteEntriesByUserId(
 	namespaceName string,
 	entryModelNames *[]string,
@@ -35,23 +52,6 @@ func DeleteEntriesByUserId(
 	}
 	return ConsumeAction{
 		Action:  "Gs2Dictionary:DeleteEntriesByUserId",
-		Request: properties,
-	}
-}
-
-func VerifyEntryByUserId(
-	namespaceName string,
-	entryModelName string,
-	verifyType string,
-) ConsumeAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
-	}
-	properties["namespaceName"] = namespaceName
-	properties["entryModelName"] = entryModelName
-	properties["verifyType"] = verifyType
-	return ConsumeAction{
-		Action:  "Gs2Dictionary:VerifyEntryByUserId",
 		Request: properties,
 	}
 }

@@ -83,13 +83,15 @@ func UnlockIncrementalExchangeByUserId(
 
 func DeleteAwaitByUserId(
 	namespaceName string,
-	awaitName string,
+	awaitName *string,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["awaitName"] = awaitName
+	if awaitName != nil {
+		properties["awaitName"] = awaitName
+	}
 	return ConsumeAction{
 		Action:  "Gs2Exchange:DeleteAwaitByUserId",
 		Request: properties,
@@ -99,7 +101,7 @@ func DeleteAwaitByUserId(
 func CreateAwaitByUserId(
 	namespaceName string,
 	rateName string,
-	count int32,
+	count *int32,
 	config *[]Config,
 ) AcquireAction {
 	properties := map[string]interface{}{
@@ -107,7 +109,9 @@ func CreateAwaitByUserId(
 	}
 	properties["namespaceName"] = namespaceName
 	properties["rateName"] = rateName
-	properties["count"] = count
+	if count != nil {
+		properties["count"] = count
+	}
 	if config != nil {
 		properties["config"] = config
 	}
@@ -119,8 +123,8 @@ func CreateAwaitByUserId(
 
 func SkipByUserId(
 	namespaceName string,
-	awaitName string,
-	skipType string,
+	awaitName *string,
+	skipType *string,
 	minutes *int32,
 	rate *float32,
 ) AcquireAction {
@@ -128,8 +132,12 @@ func SkipByUserId(
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["awaitName"] = awaitName
-	properties["skipType"] = skipType
+	if awaitName != nil {
+		properties["awaitName"] = awaitName
+	}
+	if skipType != nil {
+		properties["skipType"] = skipType
+	}
 	if minutes != nil {
 		properties["minutes"] = minutes
 	}

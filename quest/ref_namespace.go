@@ -37,7 +37,7 @@ func (p *NamespaceRef) QuestGroupModel(
 
 func (p *NamespaceRef) CreateProgress(
 	questModelId string,
-	force bool,
+	force *bool,
 	config *[]Config,
 ) AcquireAction {
 	return CreateProgressByUserId(

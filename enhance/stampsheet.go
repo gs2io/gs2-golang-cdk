@@ -85,8 +85,8 @@ func CreateProgressByUserId(
 	namespaceName string,
 	rateName string,
 	targetItemSetId string,
-	force bool,
 	materials *[]Material,
+	force *bool,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -97,7 +97,9 @@ func CreateProgressByUserId(
 	if materials != nil {
 		properties["materials"] = materials
 	}
-	properties["force"] = force
+	if force != nil {
+		properties["force"] = force
+	}
 	return AcquireAction{
 		Action:  "Gs2Enhance:CreateProgressByUserId",
 		Request: properties,

@@ -63,9 +63,9 @@ func (p *GuildRef) DecreaseMaximumCurrentMaximumMemberCountByGuildName(
 
 func (p *GuildRef) VerifyCurrentMaximumMemberCountByGuildName(
 	verifyType string,
-	multiplyValueSpecifyingQuantity bool,
 	value *int32,
-) ConsumeAction {
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
 	return VerifyCurrentMaximumMemberCountByGuildName(
 		p.NamespaceName,
 		p.GuildModelName,
@@ -78,12 +78,12 @@ func (p *GuildRef) VerifyCurrentMaximumMemberCountByGuildName(
 
 func (p *GuildRef) VerifyIncludeMember(
 	verifyType string,
-) ConsumeAction {
+) VerifyAction {
 	return VerifyIncludeMemberByUserId(
 		p.NamespaceName,
 		p.GuildModelName,
 		verifyType,
-		p.GuildName,
+		&p.GuildName,
 	)
 }
 

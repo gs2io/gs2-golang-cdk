@@ -22,11 +22,38 @@ import (
 
 var _ = AcquireAction{}
 
+func VerifyCounterByUserId(
+	namespaceName string,
+	limitName string,
+	counterName string,
+	verifyType string,
+	count *int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["limitName"] = limitName
+	properties["counterName"] = counterName
+	properties["verifyType"] = verifyType
+	if count != nil {
+		properties["count"] = count
+	}
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Limit:VerifyCounterByUserId",
+		Request: properties,
+	}
+}
+
 func CountUpByUserId(
 	namespaceName string,
 	limitName string,
 	counterName string,
-	countUpValue int32,
+	countUpValue *int32,
 	maxValue *int32,
 ) ConsumeAction {
 	properties := map[string]interface{}{
@@ -35,7 +62,9 @@ func CountUpByUserId(
 	properties["namespaceName"] = namespaceName
 	properties["limitName"] = limitName
 	properties["counterName"] = counterName
-	properties["countUpValue"] = countUpValue
+	if countUpValue != nil {
+		properties["countUpValue"] = countUpValue
+	}
 	if maxValue != nil {
 		properties["maxValue"] = maxValue
 	}
@@ -45,34 +74,11 @@ func CountUpByUserId(
 	}
 }
 
-func VerifyCounterByUserId(
-	namespaceName string,
-	limitName string,
-	counterName string,
-	verifyType string,
-	count int32,
-	multiplyValueSpecifyingQuantity bool,
-) ConsumeAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
-	}
-	properties["namespaceName"] = namespaceName
-	properties["limitName"] = limitName
-	properties["counterName"] = counterName
-	properties["verifyType"] = verifyType
-	properties["count"] = count
-	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
-	return ConsumeAction{
-		Action:  "Gs2Limit:VerifyCounterByUserId",
-		Request: properties,
-	}
-}
-
 func CountDownByUserId(
 	namespaceName string,
 	limitName string,
 	counterName string,
-	countDownValue int32,
+	countDownValue *int32,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -80,7 +86,9 @@ func CountDownByUserId(
 	properties["namespaceName"] = namespaceName
 	properties["limitName"] = limitName
 	properties["counterName"] = counterName
-	properties["countDownValue"] = countDownValue
+	if countDownValue != nil {
+		properties["countDownValue"] = countDownValue
+	}
 	return AcquireAction{
 		Action:  "Gs2Limit:CountDownByUserId",
 		Request: properties,

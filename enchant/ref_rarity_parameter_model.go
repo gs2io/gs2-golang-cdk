@@ -41,7 +41,7 @@ func (p *RarityParameterModelRef) ReDrawRarityParameterStatus(
 
 func (p *RarityParameterModelRef) AddRarityParameterStatus(
 	propertyId string,
-	count int32,
+	count *int32,
 ) AcquireAction {
 	return AddRarityParameterStatusByUserId(
 		p.NamespaceName,
@@ -66,10 +66,10 @@ func (p *RarityParameterModelRef) SetRarityParameterStatus(
 func (p *RarityParameterModelRef) VerifyRarityParameterStatus(
 	propertyId string,
 	verifyType string,
-	parameterValueName string,
-	parameterCount int32,
-	multiplyValueSpecifyingQuantity bool,
-) ConsumeAction {
+	parameterValueName *string,
+	parameterCount *int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
 	return VerifyRarityParameterStatusByUserId(
 		p.NamespaceName,
 		p.ParameterName,

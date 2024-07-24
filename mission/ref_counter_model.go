@@ -60,9 +60,9 @@ func (p *CounterModelRef) DecreaseCounter(
 func (p *CounterModelRef) VerifyCounterValue(
 	verifyType string,
 	resetType string,
-	value int64,
-	multiplyValueSpecifyingQuantity bool,
-) ConsumeAction {
+	value *int64,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
 	return VerifyCounterValueByUserId(
 		p.NamespaceName,
 		p.CounterName,

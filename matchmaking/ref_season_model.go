@@ -30,9 +30,9 @@ type SeasonModelRef struct {
 func (p *SeasonModelRef) VerifyIncludeParticipant(
 	season int64,
 	tier int64,
-	seasonGatheringName string,
 	verifyType string,
-) ConsumeAction {
+	seasonGatheringName *string,
+) VerifyAction {
 	return VerifyIncludeParticipantByUserId(
 		p.NamespaceName,
 		p.SeasonName,

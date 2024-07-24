@@ -56,7 +56,7 @@ func (p *NamespaceRef) DeleteEntries(
 func (p *NamespaceRef) VerifyEntry(
 	entryModelName string,
 	verifyType string,
-) ConsumeAction {
+) VerifyAction {
 	return VerifyEntryByUserId(
 		p.NamespaceName,
 		entryModelName,

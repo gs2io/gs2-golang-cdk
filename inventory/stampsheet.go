@@ -27,8 +27,8 @@ func VerifyInventoryCurrentMaxCapacityByUserId(
 	inventoryName string,
 	verifyType string,
 	currentInventoryMaxCapacity int32,
-	multiplyValueSpecifyingQuantity bool,
-) ConsumeAction {
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
@@ -36,8 +36,10 @@ func VerifyInventoryCurrentMaxCapacityByUserId(
 	properties["inventoryName"] = inventoryName
 	properties["verifyType"] = verifyType
 	properties["currentInventoryMaxCapacity"] = currentInventoryMaxCapacity
-	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
-	return ConsumeAction{
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
 		Action:  "Gs2Inventory:VerifyInventoryCurrentMaxCapacityByUserId",
 		Request: properties,
 	}
@@ -77,6 +79,35 @@ func SetCapacityByUserId(
 	}
 }
 
+func VerifyItemSetByUserId(
+	namespaceName string,
+	inventoryName string,
+	itemName string,
+	verifyType string,
+	count int64,
+	itemSetName *string,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["itemName"] = itemName
+	properties["verifyType"] = verifyType
+	if itemSetName != nil {
+		properties["itemSetName"] = itemSetName
+	}
+	properties["count"] = count
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Inventory:VerifyItemSetByUserId",
+		Request: properties,
+	}
+}
+
 func ConsumeItemSetByUserId(
 	namespaceName string,
 	inventoryName string,
@@ -100,40 +131,13 @@ func ConsumeItemSetByUserId(
 	}
 }
 
-func VerifyItemSetByUserId(
-	namespaceName string,
-	inventoryName string,
-	itemName string,
-	verifyType string,
-	count int64,
-	multiplyValueSpecifyingQuantity bool,
-	itemSetName *string,
-) ConsumeAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
-	}
-	properties["namespaceName"] = namespaceName
-	properties["inventoryName"] = inventoryName
-	properties["itemName"] = itemName
-	properties["verifyType"] = verifyType
-	if itemSetName != nil {
-		properties["itemSetName"] = itemSetName
-	}
-	properties["count"] = count
-	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
-	return ConsumeAction{
-		Action:  "Gs2Inventory:VerifyItemSetByUserId",
-		Request: properties,
-	}
-}
-
 func AcquireItemSetByUserId(
 	namespaceName string,
 	inventoryName string,
 	itemName string,
 	acquireCount int64,
-	expiresAt int64,
-	createNewItemSet bool,
+	expiresAt *int64,
+	createNewItemSet *bool,
 	itemSetName *string,
 ) AcquireAction {
 	properties := map[string]interface{}{
@@ -143,8 +147,12 @@ func AcquireItemSetByUserId(
 	properties["inventoryName"] = inventoryName
 	properties["itemName"] = itemName
 	properties["acquireCount"] = acquireCount
-	properties["expiresAt"] = expiresAt
-	properties["createNewItemSet"] = createNewItemSet
+	if expiresAt != nil {
+		properties["expiresAt"] = expiresAt
+	}
+	if createNewItemSet != nil {
+		properties["createNewItemSet"] = createNewItemSet
+	}
 	if itemSetName != nil {
 		properties["itemSetName"] = itemSetName
 	}
@@ -179,20 +187,22 @@ func VerifyReferenceOfByUserId(
 	namespaceName string,
 	inventoryName string,
 	itemName string,
-	itemSetName string,
 	referenceOf string,
 	verifyType string,
-) ConsumeAction {
+	itemSetName *string,
+) VerifyAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
 	properties["inventoryName"] = inventoryName
 	properties["itemName"] = itemName
-	properties["itemSetName"] = itemSetName
+	if itemSetName != nil {
+		properties["itemSetName"] = itemSetName
+	}
 	properties["referenceOf"] = referenceOf
 	properties["verifyType"] = verifyType
-	return ConsumeAction{
+	return VerifyAction{
 		Action:  "Gs2Inventory:VerifyReferenceOfByUserId",
 		Request: properties,
 	}
@@ -202,8 +212,8 @@ func AddReferenceOfByUserId(
 	namespaceName string,
 	inventoryName string,
 	itemName string,
-	itemSetName string,
 	referenceOf string,
+	itemSetName *string,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -211,7 +221,9 @@ func AddReferenceOfByUserId(
 	properties["namespaceName"] = namespaceName
 	properties["inventoryName"] = inventoryName
 	properties["itemName"] = itemName
-	properties["itemSetName"] = itemSetName
+	if itemSetName != nil {
+		properties["itemSetName"] = itemSetName
+	}
 	properties["referenceOf"] = referenceOf
 	return AcquireAction{
 		Action:  "Gs2Inventory:AddReferenceOfByUserId",
@@ -223,8 +235,8 @@ func DeleteReferenceOfByUserId(
 	namespaceName string,
 	inventoryName string,
 	itemName string,
-	itemSetName string,
 	referenceOf string,
+	itemSetName *string,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -232,10 +244,37 @@ func DeleteReferenceOfByUserId(
 	properties["namespaceName"] = namespaceName
 	properties["inventoryName"] = inventoryName
 	properties["itemName"] = itemName
-	properties["itemSetName"] = itemSetName
+	if itemSetName != nil {
+		properties["itemSetName"] = itemSetName
+	}
 	properties["referenceOf"] = referenceOf
 	return AcquireAction{
 		Action:  "Gs2Inventory:DeleteReferenceOfByUserId",
+		Request: properties,
+	}
+}
+
+func VerifySimpleItemByUserId(
+	namespaceName string,
+	inventoryName string,
+	itemName string,
+	verifyType string,
+	count int64,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["itemName"] = itemName
+	properties["verifyType"] = verifyType
+	properties["count"] = count
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Inventory:VerifySimpleItemByUserId",
 		Request: properties,
 	}
 }
@@ -253,29 +292,6 @@ func ConsumeSimpleItemsByUserId(
 	properties["consumeCounts"] = consumeCounts
 	return ConsumeAction{
 		Action:  "Gs2Inventory:ConsumeSimpleItemsByUserId",
-		Request: properties,
-	}
-}
-
-func VerifySimpleItemByUserId(
-	namespaceName string,
-	inventoryName string,
-	itemName string,
-	verifyType string,
-	count int64,
-	multiplyValueSpecifyingQuantity bool,
-) ConsumeAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
-	}
-	properties["namespaceName"] = namespaceName
-	properties["inventoryName"] = inventoryName
-	properties["itemName"] = itemName
-	properties["verifyType"] = verifyType
-	properties["count"] = count
-	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
-	return ConsumeAction{
-		Action:  "Gs2Inventory:VerifySimpleItemByUserId",
 		Request: properties,
 	}
 }
@@ -314,6 +330,31 @@ func SetSimpleItemsByUserId(
 	}
 }
 
+func VerifyBigItemByUserId(
+	namespaceName string,
+	inventoryName string,
+	itemName string,
+	verifyType string,
+	count string,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["inventoryName"] = inventoryName
+	properties["itemName"] = itemName
+	properties["verifyType"] = verifyType
+	properties["count"] = count
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Inventory:VerifyBigItemByUserId",
+		Request: properties,
+	}
+}
+
 func ConsumeBigItemByUserId(
 	namespaceName string,
 	inventoryName string,
@@ -329,29 +370,6 @@ func ConsumeBigItemByUserId(
 	properties["consumeCount"] = consumeCount
 	return ConsumeAction{
 		Action:  "Gs2Inventory:ConsumeBigItemByUserId",
-		Request: properties,
-	}
-}
-
-func VerifyBigItemByUserId(
-	namespaceName string,
-	inventoryName string,
-	itemName string,
-	verifyType string,
-	count string,
-	multiplyValueSpecifyingQuantity bool,
-) ConsumeAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
-	}
-	properties["namespaceName"] = namespaceName
-	properties["inventoryName"] = inventoryName
-	properties["itemName"] = itemName
-	properties["verifyType"] = verifyType
-	properties["count"] = count
-	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
-	return ConsumeAction{
-		Action:  "Gs2Inventory:VerifyBigItemByUserId",
 		Request: properties,
 	}
 }

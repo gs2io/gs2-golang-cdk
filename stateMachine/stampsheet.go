@@ -24,14 +24,16 @@ var _ = AcquireAction{}
 
 func StartStateMachineByUserId(
 	namespaceName string,
-	args string,
+	args *string,
 	ttl *int32,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["args"] = args
+	if args != nil {
+		properties["args"] = args
+	}
 	if ttl != nil {
 		properties["ttl"] = ttl
 	}

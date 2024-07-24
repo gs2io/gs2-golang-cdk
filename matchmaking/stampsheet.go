@@ -27,9 +27,9 @@ func VerifyIncludeParticipantByUserId(
 	seasonName string,
 	season int64,
 	tier int64,
-	seasonGatheringName string,
 	verifyType string,
-) ConsumeAction {
+	seasonGatheringName *string,
+) VerifyAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
@@ -37,9 +37,11 @@ func VerifyIncludeParticipantByUserId(
 	properties["seasonName"] = seasonName
 	properties["season"] = season
 	properties["tier"] = tier
-	properties["seasonGatheringName"] = seasonGatheringName
+	if seasonGatheringName != nil {
+		properties["seasonGatheringName"] = seasonGatheringName
+	}
 	properties["verifyType"] = verifyType
-	return ConsumeAction{
+	return VerifyAction{
 		Action:  "Gs2Matchmaking:VerifyIncludeParticipantByUserId",
 		Request: properties,
 	}

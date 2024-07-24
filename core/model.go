@@ -44,6 +44,20 @@ func (p ConsumeAction) Properties() map[string]interface{} {
 	return properties
 }
 
+type VerifyAction struct {
+	Action  string
+	Request map[string]interface{}
+}
+
+func (p VerifyAction) Properties() map[string]interface{} {
+	properties := map[string]interface{}{}
+	properties["action"] = p.Action
+	if p.Request != nil {
+		properties["request"] = p.Request
+	}
+	return properties
+}
+
 type Config struct {
 	Key   string
 	Value string

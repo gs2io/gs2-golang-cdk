@@ -60,14 +60,14 @@ func VerifyEventByUserId(
 	namespaceName string,
 	eventName string,
 	verifyType string,
-) ConsumeAction {
+) VerifyAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
 	properties["eventName"] = eventName
 	properties["verifyType"] = verifyType
-	return ConsumeAction{
+	return VerifyAction{
 		Action:  "Gs2Schedule:VerifyEventByUserId",
 		Request: properties,
 	}

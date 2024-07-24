@@ -24,13 +24,15 @@ var _ = AcquireAction{}
 
 func DeleteJobByUserId(
 	namespaceName string,
-	jobName string,
+	jobName *string,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
-	properties["jobName"] = jobName
+	if jobName != nil {
+		properties["jobName"] = jobName
+	}
 	return ConsumeAction{
 		Action:  "Gs2JobQueue:DeleteJobByUserId",
 		Request: properties,

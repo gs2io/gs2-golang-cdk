@@ -26,7 +26,7 @@ func WithdrawByUserId(
 	namespaceName string,
 	slot int32,
 	count int32,
-	paidOnly bool,
+	paidOnly *bool,
 ) ConsumeAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -34,7 +34,9 @@ func WithdrawByUserId(
 	properties["namespaceName"] = namespaceName
 	properties["slot"] = slot
 	properties["count"] = count
-	properties["paidOnly"] = paidOnly
+	if paidOnly != nil {
+		properties["paidOnly"] = paidOnly
+	}
 	return ConsumeAction{
 		Action:  "Gs2Money:WithdrawByUserId",
 		Request: properties,

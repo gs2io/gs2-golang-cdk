@@ -14,8 +14,6 @@ or in the "license" file accompanying this file. This file is distributed
 on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 express or implied. See the License for the specific language governing
 permissions and limitations under the License.
-
-deny overwrite
 */
 
 import (
@@ -32,8 +30,8 @@ type ItemModelRef struct {
 
 func (p *ItemModelRef) AcquireItemSet(
 	acquireCount int64,
-	expiresAt int64,
-	createNewItemSet bool,
+	expiresAt *int64,
+	createNewItemSet *bool,
 	itemSetName *string,
 ) AcquireAction {
 	return AcquireItemSetByUserId(
@@ -48,8 +46,8 @@ func (p *ItemModelRef) AcquireItemSet(
 }
 
 func (p *ItemModelRef) AddReferenceOf(
-	itemSetName string,
 	referenceOf string,
+	itemSetName *string,
 ) AcquireAction {
 	return AddReferenceOfByUserId(
 		p.NamespaceName,
@@ -76,17 +74,17 @@ func (p *ItemModelRef) ConsumeItemSet(
 func (p *ItemModelRef) VerifyItemSet(
 	verifyType string,
 	count int64,
-	multiplyValueSpecifyingQuantity bool,
 	itemSetName *string,
-) ConsumeAction {
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
 	return VerifyItemSetByUserId(
 		p.NamespaceName,
 		p.InventoryName,
 		p.ItemName,
 		verifyType,
 		count,
-		multiplyValueSpecifyingQuantity,
 		itemSetName,
+		multiplyValueSpecifyingQuantity,
 	)
 }
 

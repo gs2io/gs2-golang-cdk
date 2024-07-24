@@ -27,7 +27,7 @@ type NamespaceRef struct {
 }
 
 func (p *NamespaceRef) StartStateMachine(
-	args string,
+	args *string,
 	ttl *int32,
 ) AcquireAction {
 	return StartStateMachineByUserId(

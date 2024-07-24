@@ -67,10 +67,10 @@ func VerifyRarityParameterStatusByUserId(
 	parameterName string,
 	propertyId string,
 	verifyType string,
-	parameterValueName string,
-	parameterCount int32,
-	multiplyValueSpecifyingQuantity bool,
-) ConsumeAction {
+	parameterValueName *string,
+	parameterCount *int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
@@ -78,10 +78,16 @@ func VerifyRarityParameterStatusByUserId(
 	properties["parameterName"] = parameterName
 	properties["propertyId"] = propertyId
 	properties["verifyType"] = verifyType
-	properties["parameterValueName"] = parameterValueName
-	properties["parameterCount"] = parameterCount
-	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
-	return ConsumeAction{
+	if parameterValueName != nil {
+		properties["parameterValueName"] = parameterValueName
+	}
+	if parameterCount != nil {
+		properties["parameterCount"] = parameterCount
+	}
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
 		Action:  "Gs2Enchant:VerifyRarityParameterStatusByUserId",
 		Request: properties,
 	}
@@ -112,7 +118,7 @@ func AddRarityParameterStatusByUserId(
 	namespaceName string,
 	parameterName string,
 	propertyId string,
-	count int32,
+	count *int32,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -120,7 +126,9 @@ func AddRarityParameterStatusByUserId(
 	properties["namespaceName"] = namespaceName
 	properties["parameterName"] = parameterName
 	properties["propertyId"] = propertyId
-	properties["count"] = count
+	if count != nil {
+		properties["count"] = count
+	}
 	return AcquireAction{
 		Action:  "Gs2Enchant:AddRarityParameterStatusByUserId",
 		Request: properties,

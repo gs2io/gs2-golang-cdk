@@ -22,6 +22,29 @@ import (
 
 var _ = AcquireAction{}
 
+func VerifyCompleteByUserId(
+	namespaceName string,
+	missionGroupName string,
+	verifyType string,
+	missionTaskName string,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["missionGroupName"] = missionGroupName
+	properties["verifyType"] = verifyType
+	properties["missionTaskName"] = missionTaskName
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Mission:VerifyCompleteByUserId",
+		Request: properties,
+	}
+}
+
 func ReceiveByUserId(
 	namespaceName string,
 	missionGroupName string,
@@ -35,27 +58,6 @@ func ReceiveByUserId(
 	properties["missionTaskName"] = missionTaskName
 	return ConsumeAction{
 		Action:  "Gs2Mission:ReceiveByUserId",
-		Request: properties,
-	}
-}
-
-func VerifyCompleteByUserId(
-	namespaceName string,
-	missionGroupName string,
-	verifyType string,
-	missionTaskName string,
-	multiplyValueSpecifyingQuantity bool,
-) ConsumeAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
-	}
-	properties["namespaceName"] = namespaceName
-	properties["missionGroupName"] = missionGroupName
-	properties["verifyType"] = verifyType
-	properties["missionTaskName"] = missionTaskName
-	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
-	return ConsumeAction{
-		Action:  "Gs2Mission:VerifyCompleteByUserId",
 		Request: properties,
 	}
 }
@@ -77,6 +79,33 @@ func RevertReceiveByUserId(
 	}
 }
 
+func VerifyCounterValueByUserId(
+	namespaceName string,
+	counterName string,
+	verifyType string,
+	resetType string,
+	value *int64,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["counterName"] = counterName
+	properties["verifyType"] = verifyType
+	properties["resetType"] = resetType
+	if value != nil {
+		properties["value"] = value
+	}
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Mission:VerifyCounterValueByUserId",
+		Request: properties,
+	}
+}
+
 func DecreaseCounterByUserId(
 	namespaceName string,
 	counterName string,
@@ -90,29 +119,6 @@ func DecreaseCounterByUserId(
 	properties["value"] = value
 	return ConsumeAction{
 		Action:  "Gs2Mission:DecreaseCounterByUserId",
-		Request: properties,
-	}
-}
-
-func VerifyCounterValueByUserId(
-	namespaceName string,
-	counterName string,
-	verifyType string,
-	resetType string,
-	value int64,
-	multiplyValueSpecifyingQuantity bool,
-) ConsumeAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
-	}
-	properties["namespaceName"] = namespaceName
-	properties["counterName"] = counterName
-	properties["verifyType"] = verifyType
-	properties["resetType"] = resetType
-	properties["value"] = value
-	properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
-	return ConsumeAction{
-		Action:  "Gs2Mission:VerifyCounterValueByUserId",
 		Request: properties,
 	}
 }
