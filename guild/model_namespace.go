@@ -32,6 +32,10 @@ type Namespace struct {
 	ChangeMemberNotification   *NotificationSetting
 	ReceiveRequestNotification *NotificationSetting
 	RemoveRequestNotification  *NotificationSetting
+	CreateGuildScript          *ScriptSetting
+	JoinGuildScript            *ScriptSetting
+	LeaveGuildScript           *ScriptSetting
+	ChangeRoleScript           *ScriptSetting
 	LogSetting                 *LogSetting
 }
 
@@ -42,6 +46,10 @@ type NamespaceOptions struct {
 	ChangeMemberNotification   *NotificationSetting
 	ReceiveRequestNotification *NotificationSetting
 	RemoveRequestNotification  *NotificationSetting
+	CreateGuildScript          *ScriptSetting
+	JoinGuildScript            *ScriptSetting
+	LeaveGuildScript           *ScriptSetting
+	ChangeRoleScript           *ScriptSetting
 	LogSetting                 *LogSetting
 }
 
@@ -59,6 +67,10 @@ func NewNamespace(
 		ChangeMemberNotification:   options.ChangeMemberNotification,
 		ReceiveRequestNotification: options.ReceiveRequestNotification,
 		RemoveRequestNotification:  options.RemoveRequestNotification,
+		CreateGuildScript:          options.CreateGuildScript,
+		JoinGuildScript:            options.JoinGuildScript,
+		LeaveGuildScript:           options.LeaveGuildScript,
+		ChangeRoleScript:           options.ChangeRoleScript,
 		LogSetting:                 options.LogSetting,
 	}
 	return &data
@@ -92,6 +104,18 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.RemoveRequestNotification != nil {
 		properties["RemoveRequestNotification"] = p.RemoveRequestNotification.Properties()
+	}
+	if p.CreateGuildScript != nil {
+		properties["CreateGuildScript"] = p.CreateGuildScript.Properties()
+	}
+	if p.JoinGuildScript != nil {
+		properties["JoinGuildScript"] = p.JoinGuildScript.Properties()
+	}
+	if p.LeaveGuildScript != nil {
+		properties["LeaveGuildScript"] = p.LeaveGuildScript.Properties()
+	}
+	if p.ChangeRoleScript != nil {
+		properties["ChangeRoleScript"] = p.ChangeRoleScript.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()

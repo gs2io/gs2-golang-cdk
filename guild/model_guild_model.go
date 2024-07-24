@@ -27,6 +27,7 @@ type GuildModel struct {
 	Metadata                  *string
 	DefaultMaximumMemberCount int32
 	MaximumMemberCount        int32
+	InactivityPeriodDays      int32
 	Roles                     []RoleModel
 	GuildMasterRole           string
 	GuildMemberDefaultRole    string
@@ -41,6 +42,7 @@ func NewGuildModel(
 	name string,
 	defaultMaximumMemberCount int32,
 	maximumMemberCount int32,
+	inactivityPeriodDays int32,
 	roles []RoleModel,
 	guildMasterRole string,
 	guildMemberDefaultRole string,
@@ -51,6 +53,7 @@ func NewGuildModel(
 		Name:                      name,
 		DefaultMaximumMemberCount: defaultMaximumMemberCount,
 		MaximumMemberCount:        maximumMemberCount,
+		InactivityPeriodDays:      inactivityPeriodDays,
 		Roles:                     roles,
 		GuildMasterRole:           guildMasterRole,
 		GuildMemberDefaultRole:    guildMemberDefaultRole,
@@ -68,6 +71,7 @@ func (p *GuildModel) Properties() map[string]interface{} {
 	}
 	properties["DefaultMaximumMemberCount"] = p.DefaultMaximumMemberCount
 	properties["MaximumMemberCount"] = p.MaximumMemberCount
+	properties["InactivityPeriodDays"] = p.InactivityPeriodDays
 	{
 		values := make([]map[string]interface{}, len(p.Roles))
 		for i, element := range p.Roles {
