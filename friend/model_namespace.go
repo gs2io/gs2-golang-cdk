@@ -37,7 +37,10 @@ type Namespace struct {
 	UpdateProfileScript        *ScriptSetting
 	FollowNotification         *NotificationSetting
 	ReceiveRequestNotification NotificationSetting
+	CancelRequestNotification  NotificationSetting
 	AcceptRequestNotification  NotificationSetting
+	RejectRequestNotification  NotificationSetting
+	DeleteFriendNotification   NotificationSetting
 	LogSetting                 *LogSetting
 }
 
@@ -53,7 +56,10 @@ type NamespaceOptions struct {
 	UpdateProfileScript        *ScriptSetting
 	FollowNotification         *NotificationSetting
 	ReceiveRequestNotification NotificationSetting
+	CancelRequestNotification  NotificationSetting
 	AcceptRequestNotification  NotificationSetting
+	RejectRequestNotification  NotificationSetting
+	DeleteFriendNotification   NotificationSetting
 	LogSetting                 *LogSetting
 }
 
@@ -76,7 +82,10 @@ func NewNamespace(
 		UpdateProfileScript:        options.UpdateProfileScript,
 		FollowNotification:         options.FollowNotification,
 		ReceiveRequestNotification: options.ReceiveRequestNotification,
+		CancelRequestNotification:  options.CancelRequestNotification,
 		AcceptRequestNotification:  options.AcceptRequestNotification,
+		RejectRequestNotification:  options.RejectRequestNotification,
+		DeleteFriendNotification:   options.DeleteFriendNotification,
 		LogSetting:                 options.LogSetting,
 	}
 	return &data
@@ -124,7 +133,10 @@ func (p *Namespace) Properties() map[string]interface{} {
 		properties["FollowNotification"] = p.FollowNotification.Properties()
 	}
 	properties["ReceiveRequestNotification"] = p.ReceiveRequestNotification.Properties()
+	properties["CancelRequestNotification"] = p.CancelRequestNotification.Properties()
 	properties["AcceptRequestNotification"] = p.AcceptRequestNotification.Properties()
+	properties["RejectRequestNotification"] = p.RejectRequestNotification.Properties()
+	properties["DeleteFriendNotification"] = p.DeleteFriendNotification.Properties()
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
 	}

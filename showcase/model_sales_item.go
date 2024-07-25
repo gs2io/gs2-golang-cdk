@@ -25,12 +25,14 @@ var _ = AcquireAction{}
 type SalesItem struct {
 	Name           string
 	Metadata       *string
+	VerifyActions  []VerifyAction
 	ConsumeActions []ConsumeAction
 	AcquireActions []AcquireAction
 }
 
 type SalesItemOptions struct {
 	Metadata       *string
+	VerifyActions  []VerifyAction
 	ConsumeActions []ConsumeAction
 }
 
@@ -43,6 +45,7 @@ func NewSalesItem(
 		Name:           name,
 		AcquireActions: acquireActions,
 		Metadata:       options.Metadata,
+		VerifyActions:  options.VerifyActions,
 		ConsumeActions: options.ConsumeActions,
 	}
 	return data
@@ -53,6 +56,13 @@ func (p *SalesItem) Properties() map[string]interface{} {
 	properties["Name"] = p.Name
 	if p.Metadata != nil {
 		properties["Metadata"] = p.Metadata
+	}
+	{
+		values := make([]map[string]interface{}, len(p.VerifyActions))
+		for i, element := range p.VerifyActions {
+			values[i] = element.Properties()
+		}
+		properties["VerifyActions"] = values
 	}
 	{
 		values := make([]map[string]interface{}, len(p.ConsumeActions))

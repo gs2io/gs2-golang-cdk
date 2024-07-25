@@ -58,6 +58,7 @@ type BonusModel struct {
 	Repeat                            *BonusModelRepeat
 	Rewards                           []Reward
 	MissedReceiveRelief               BonusModelMissedReceiveRelief
+	MissedReceiveReliefVerifyActions  []VerifyAction
 	MissedReceiveReliefConsumeActions []ConsumeAction
 }
 
@@ -67,6 +68,7 @@ type BonusModelOptions struct {
 	ResetHour                         *int32
 	Repeat                            *BonusModelRepeat
 	Rewards                           []Reward
+	MissedReceiveReliefVerifyActions  []VerifyAction
 	MissedReceiveReliefConsumeActions []ConsumeAction
 }
 
@@ -85,6 +87,7 @@ func NewBonusModel(
 		ResetHour:                         options.ResetHour,
 		Repeat:                            options.Repeat,
 		Rewards:                           options.Rewards,
+		MissedReceiveReliefVerifyActions:  options.MissedReceiveReliefVerifyActions,
 		MissedReceiveReliefConsumeActions: options.MissedReceiveReliefConsumeActions,
 	}
 	return data
@@ -94,6 +97,7 @@ type BonusModelModeIsScheduleOptions struct {
 	Metadata                          *string
 	PeriodEventId                     *string
 	Rewards                           []Reward
+	MissedReceiveReliefVerifyActions  []VerifyAction
 	MissedReceiveReliefConsumeActions []ConsumeAction
 }
 
@@ -110,6 +114,7 @@ func NewBonusModelModeIsSchedule(
 			Metadata:                          options.Metadata,
 			PeriodEventId:                     options.PeriodEventId,
 			Rewards:                           options.Rewards,
+			MissedReceiveReliefVerifyActions:  options.MissedReceiveReliefVerifyActions,
 			MissedReceiveReliefConsumeActions: options.MissedReceiveReliefConsumeActions,
 		},
 	)
@@ -119,6 +124,7 @@ type BonusModelModeIsStreamingOptions struct {
 	Metadata                          *string
 	PeriodEventId                     *string
 	Rewards                           []Reward
+	MissedReceiveReliefVerifyActions  []VerifyAction
 	MissedReceiveReliefConsumeActions []ConsumeAction
 }
 
@@ -137,6 +143,7 @@ func NewBonusModelModeIsStreaming(
 			PeriodEventId:                     options.PeriodEventId,
 			Repeat:                            &repeat,
 			Rewards:                           options.Rewards,
+			MissedReceiveReliefVerifyActions:  options.MissedReceiveReliefVerifyActions,
 			MissedReceiveReliefConsumeActions: options.MissedReceiveReliefConsumeActions,
 		},
 	)
@@ -146,6 +153,7 @@ type BonusModelMissedReceiveReliefIsEnabledOptions struct {
 	Metadata                          *string
 	PeriodEventId                     *string
 	Rewards                           []Reward
+	MissedReceiveReliefVerifyActions  []VerifyAction
 	MissedReceiveReliefConsumeActions []ConsumeAction
 }
 
@@ -162,6 +170,7 @@ func NewBonusModelMissedReceiveReliefIsEnabled(
 			Metadata:                          options.Metadata,
 			PeriodEventId:                     options.PeriodEventId,
 			Rewards:                           options.Rewards,
+			MissedReceiveReliefVerifyActions:  options.MissedReceiveReliefVerifyActions,
 			MissedReceiveReliefConsumeActions: options.MissedReceiveReliefConsumeActions,
 		},
 	)
@@ -171,6 +180,7 @@ type BonusModelMissedReceiveReliefIsDisabledOptions struct {
 	Metadata                          *string
 	PeriodEventId                     *string
 	Rewards                           []Reward
+	MissedReceiveReliefVerifyActions  []VerifyAction
 	MissedReceiveReliefConsumeActions []ConsumeAction
 }
 
@@ -187,6 +197,7 @@ func NewBonusModelMissedReceiveReliefIsDisabled(
 			Metadata:                          options.Metadata,
 			PeriodEventId:                     options.PeriodEventId,
 			Rewards:                           options.Rewards,
+			MissedReceiveReliefVerifyActions:  options.MissedReceiveReliefVerifyActions,
 			MissedReceiveReliefConsumeActions: options.MissedReceiveReliefConsumeActions,
 		},
 	)
@@ -216,6 +227,13 @@ func (p *BonusModel) Properties() map[string]interface{} {
 		properties["Rewards"] = values
 	}
 	properties["MissedReceiveRelief"] = p.MissedReceiveRelief
+	{
+		values := make([]map[string]interface{}, len(p.MissedReceiveReliefVerifyActions))
+		for i, element := range p.MissedReceiveReliefVerifyActions {
+			values[i] = element.Properties()
+		}
+		properties["MissedReceiveReliefVerifyActions"] = values
+	}
 	{
 		values := make([]map[string]interface{}, len(p.MissedReceiveReliefConsumeActions))
 		for i, element := range p.MissedReceiveReliefConsumeActions {

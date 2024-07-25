@@ -25,7 +25,7 @@ var _ = AcquireAction{}
 type MissionTaskModelVerifyCompleteType string
 
 const MissionTaskModelVerifyCompleteTypeCounter = MissionTaskModelVerifyCompleteType("counter")
-const MissionTaskModelVerifyCompleteTypeConsumeActions = MissionTaskModelVerifyCompleteType("consumeActions")
+const MissionTaskModelVerifyCompleteTypeVerifyActions = MissionTaskModelVerifyCompleteType("verifyActions")
 
 func (p MissionTaskModelVerifyCompleteType) Pointer() *MissionTaskModelVerifyCompleteType {
 	return &p
@@ -47,7 +47,7 @@ type MissionTaskModel struct {
 	Metadata                     *string
 	VerifyCompleteType           MissionTaskModelVerifyCompleteType
 	TargetCounter                *TargetCounterModel
-	VerifyCompleteConsumeActions []ConsumeAction
+	VerifyCompleteConsumeActions []VerifyAction
 	CompleteAcquireActions       []AcquireAction
 	ChallengePeriodEventId       *string
 	PremiseMissionTaskName       *string
@@ -59,7 +59,7 @@ type MissionTaskModel struct {
 type MissionTaskModelOptions struct {
 	Metadata                     *string
 	TargetCounter                *TargetCounterModel
-	VerifyCompleteConsumeActions []ConsumeAction
+	VerifyCompleteConsumeActions []VerifyAction
 	CompleteAcquireActions       []AcquireAction
 	ChallengePeriodEventId       *string
 	PremiseMissionTaskName       *string
@@ -91,7 +91,7 @@ func NewMissionTaskModel(
 
 type MissionTaskModelVerifyCompleteTypeIsCounterOptions struct {
 	Metadata                     *string
-	VerifyCompleteConsumeActions []ConsumeAction
+	VerifyCompleteConsumeActions []VerifyAction
 	CompleteAcquireActions       []AcquireAction
 	ChallengePeriodEventId       *string
 	PremiseMissionTaskName       *string
@@ -122,24 +122,24 @@ func NewMissionTaskModelVerifyCompleteTypeIsCounter(
 	)
 }
 
-type MissionTaskModelVerifyCompleteTypeIsConsumeActionsOptions struct {
+type MissionTaskModelVerifyCompleteTypeIsVerifyActionsOptions struct {
 	Metadata                     *string
-	VerifyCompleteConsumeActions []ConsumeAction
+	VerifyCompleteConsumeActions []VerifyAction
 	CompleteAcquireActions       []AcquireAction
 	ChallengePeriodEventId       *string
 	PremiseMissionTaskName       *string
 	TargetResetType              *MissionTaskModelTargetResetType
 }
 
-func NewMissionTaskModelVerifyCompleteTypeIsConsumeActions(
+func NewMissionTaskModelVerifyCompleteTypeIsVerifyActions(
 	name string,
 	counterName string,
 	targetValue int64,
-	options MissionTaskModelVerifyCompleteTypeIsConsumeActionsOptions,
+	options MissionTaskModelVerifyCompleteTypeIsVerifyActionsOptions,
 ) MissionTaskModel {
 	return NewMissionTaskModel(
 		name,
-		MissionTaskModelVerifyCompleteTypeConsumeActions,
+		MissionTaskModelVerifyCompleteTypeVerifyActions,
 		counterName,
 		targetValue,
 		MissionTaskModelOptions{

@@ -34,6 +34,7 @@ func (p RateModelTimingType) Pointer() *RateModelTimingType {
 type RateModel struct {
 	Name           string
 	Metadata       *string
+	VerifyActions  []VerifyAction
 	ConsumeActions []ConsumeAction
 	TimingType     RateModelTimingType
 	LockTime       *int32
@@ -42,6 +43,7 @@ type RateModel struct {
 
 type RateModelOptions struct {
 	Metadata       *string
+	VerifyActions  []VerifyAction
 	ConsumeActions []ConsumeAction
 	LockTime       *int32
 	AcquireActions []AcquireAction
@@ -56,6 +58,7 @@ func NewRateModel(
 		Name:           name,
 		TimingType:     timingType,
 		Metadata:       options.Metadata,
+		VerifyActions:  options.VerifyActions,
 		ConsumeActions: options.ConsumeActions,
 		LockTime:       options.LockTime,
 		AcquireActions: options.AcquireActions,
@@ -65,6 +68,7 @@ func NewRateModel(
 
 type RateModelTimingTypeIsImmediateOptions struct {
 	Metadata       *string
+	VerifyActions  []VerifyAction
 	ConsumeActions []ConsumeAction
 	AcquireActions []AcquireAction
 }
@@ -78,6 +82,7 @@ func NewRateModelTimingTypeIsImmediate(
 		RateModelTimingTypeImmediate,
 		RateModelOptions{
 			Metadata:       options.Metadata,
+			VerifyActions:  options.VerifyActions,
 			ConsumeActions: options.ConsumeActions,
 			AcquireActions: options.AcquireActions,
 		},
@@ -86,6 +91,7 @@ func NewRateModelTimingTypeIsImmediate(
 
 type RateModelTimingTypeIsAwaitOptions struct {
 	Metadata       *string
+	VerifyActions  []VerifyAction
 	ConsumeActions []ConsumeAction
 	AcquireActions []AcquireAction
 }
@@ -100,6 +106,7 @@ func NewRateModelTimingTypeIsAwait(
 		RateModelTimingTypeAwait,
 		RateModelOptions{
 			Metadata:       options.Metadata,
+			VerifyActions:  options.VerifyActions,
 			ConsumeActions: options.ConsumeActions,
 			LockTime:       &lockTime,
 			AcquireActions: options.AcquireActions,
@@ -112,6 +119,13 @@ func (p *RateModel) Properties() map[string]interface{} {
 	properties["Name"] = p.Name
 	if p.Metadata != nil {
 		properties["Metadata"] = p.Metadata
+	}
+	{
+		values := make([]map[string]interface{}, len(p.VerifyActions))
+		for i, element := range p.VerifyActions {
+			values[i] = element.Properties()
+		}
+		properties["VerifyActions"] = values
 	}
 	{
 		values := make([]map[string]interface{}, len(p.ConsumeActions))

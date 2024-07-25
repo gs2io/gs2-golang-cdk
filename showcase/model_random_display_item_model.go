@@ -25,6 +25,7 @@ var _ = AcquireAction{}
 type RandomDisplayItemModel struct {
 	Name           string
 	Metadata       *string
+	VerifyActions  []VerifyAction
 	ConsumeActions []ConsumeAction
 	AcquireActions []AcquireAction
 	Stock          int32
@@ -33,6 +34,7 @@ type RandomDisplayItemModel struct {
 
 type RandomDisplayItemModelOptions struct {
 	Metadata       *string
+	VerifyActions  []VerifyAction
 	ConsumeActions []ConsumeAction
 }
 
@@ -49,6 +51,7 @@ func NewRandomDisplayItemModel(
 		Stock:          stock,
 		Weight:         weight,
 		Metadata:       options.Metadata,
+		VerifyActions:  options.VerifyActions,
 		ConsumeActions: options.ConsumeActions,
 	}
 	return data
@@ -59,6 +62,13 @@ func (p *RandomDisplayItemModel) Properties() map[string]interface{} {
 	properties["Name"] = p.Name
 	if p.Metadata != nil {
 		properties["Metadata"] = p.Metadata
+	}
+	{
+		values := make([]map[string]interface{}, len(p.VerifyActions))
+		for i, element := range p.VerifyActions {
+			values[i] = element.Properties()
+		}
+		properties["VerifyActions"] = values
 	}
 	{
 		values := make([]map[string]interface{}, len(p.ConsumeActions))

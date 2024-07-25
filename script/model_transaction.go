@@ -24,12 +24,14 @@ var _ = AcquireAction{}
 
 type Transaction struct {
 	TransactionId  *string
+	VerifyActions  []VerifyAction
 	ConsumeActions []ConsumeAction
 	AcquireActions []AcquireAction
 }
 
 type TransactionOptions struct {
 	TransactionId  *string
+	VerifyActions  []VerifyAction
 	ConsumeActions []ConsumeAction
 	AcquireActions []AcquireAction
 }
@@ -39,6 +41,7 @@ func NewTransaction(
 ) Transaction {
 	data := Transaction{
 		TransactionId:  options.TransactionId,
+		VerifyActions:  options.VerifyActions,
 		ConsumeActions: options.ConsumeActions,
 		AcquireActions: options.AcquireActions,
 	}
@@ -49,6 +52,13 @@ func (p *Transaction) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	if p.TransactionId != nil {
 		properties["TransactionId"] = p.TransactionId
+	}
+	{
+		values := make([]map[string]interface{}, len(p.VerifyActions))
+		for i, element := range p.VerifyActions {
+			values[i] = element.Properties()
+		}
+		properties["VerifyActions"] = values
 	}
 	{
 		values := make([]map[string]interface{}, len(p.ConsumeActions))

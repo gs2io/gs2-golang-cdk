@@ -28,6 +28,7 @@ type QuestModel struct {
 	Contents                    []Contents
 	ChallengePeriodEventId      *string
 	FirstCompleteAcquireActions []AcquireAction
+	VerifyActions               []VerifyAction
 	ConsumeActions              []ConsumeAction
 	FailedAcquireActions        []AcquireAction
 	PremiseQuestNames           []string
@@ -37,6 +38,7 @@ type QuestModelOptions struct {
 	Metadata                    *string
 	ChallengePeriodEventId      *string
 	FirstCompleteAcquireActions []AcquireAction
+	VerifyActions               []VerifyAction
 	ConsumeActions              []ConsumeAction
 	FailedAcquireActions        []AcquireAction
 	PremiseQuestNames           []string
@@ -53,6 +55,7 @@ func NewQuestModel(
 		Metadata:                    options.Metadata,
 		ChallengePeriodEventId:      options.ChallengePeriodEventId,
 		FirstCompleteAcquireActions: options.FirstCompleteAcquireActions,
+		VerifyActions:               options.VerifyActions,
 		ConsumeActions:              options.ConsumeActions,
 		FailedAcquireActions:        options.FailedAcquireActions,
 		PremiseQuestNames:           options.PremiseQuestNames,
@@ -82,6 +85,13 @@ func (p *QuestModel) Properties() map[string]interface{} {
 			values[i] = element.Properties()
 		}
 		properties["FirstCompleteAcquireActions"] = values
+	}
+	{
+		values := make([]map[string]interface{}, len(p.VerifyActions))
+		for i, element := range p.VerifyActions {
+			values[i] = element.Properties()
+		}
+		properties["VerifyActions"] = values
 	}
 	{
 		values := make([]map[string]interface{}, len(p.ConsumeActions))

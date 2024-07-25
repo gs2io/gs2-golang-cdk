@@ -25,6 +25,7 @@ var _ = AcquireAction{}
 type NodeModel struct {
 	Name                  string
 	Metadata              *string
+	ReleaseVerifyActions  []VerifyAction
 	ReleaseConsumeActions []ConsumeAction
 	ReturnAcquireActions  []AcquireAction
 	RestrainReturnRate    float32
@@ -33,6 +34,7 @@ type NodeModel struct {
 
 type NodeModelOptions struct {
 	Metadata             *string
+	ReleaseVerifyActions []VerifyAction
 	ReturnAcquireActions []AcquireAction
 	PremiseNodeNames     []string
 }
@@ -48,6 +50,7 @@ func NewNodeModel(
 		ReleaseConsumeActions: releaseConsumeActions,
 		RestrainReturnRate:    restrainReturnRate,
 		Metadata:              options.Metadata,
+		ReleaseVerifyActions:  options.ReleaseVerifyActions,
 		ReturnAcquireActions:  options.ReturnAcquireActions,
 		PremiseNodeNames:      options.PremiseNodeNames,
 	}
@@ -59,6 +62,13 @@ func (p *NodeModel) Properties() map[string]interface{} {
 	properties["Name"] = p.Name
 	if p.Metadata != nil {
 		properties["Metadata"] = p.Metadata
+	}
+	{
+		values := make([]map[string]interface{}, len(p.ReleaseVerifyActions))
+		for i, element := range p.ReleaseVerifyActions {
+			values[i] = element.Properties()
+		}
+		properties["ReleaseVerifyActions"] = values
 	}
 	{
 		values := make([]map[string]interface{}, len(p.ReleaseConsumeActions))
