@@ -64,23 +64,6 @@ func IncrementalExchangeByUserId(
 	}
 }
 
-func UnlockIncrementalExchangeByUserId(
-	namespaceName string,
-	rateName string,
-	lockTransactionId string,
-) AcquireAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
-	}
-	properties["namespaceName"] = namespaceName
-	properties["rateName"] = rateName
-	properties["lockTransactionId"] = lockTransactionId
-	return AcquireAction{
-		Action:  "Gs2Exchange:UnlockIncrementalExchangeByUserId",
-		Request: properties,
-	}
-}
-
 func DeleteAwaitByUserId(
 	namespaceName string,
 	awaitName *string,
