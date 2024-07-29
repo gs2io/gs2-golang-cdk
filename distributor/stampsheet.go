@@ -21,3 +21,64 @@ import (
 )
 
 var _ = AcquireAction{}
+
+func AndExpressionByUserId(
+	namespaceName string,
+	actions *[]VerifyAction,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	if actions != nil {
+		properties["actions"] = actions
+	}
+	return VerifyAction{
+		Action:  "Gs2Distributor:AndExpressionByUserId",
+		Request: properties,
+	}
+}
+
+func OrExpressionByUserId(
+	namespaceName string,
+	actions *[]VerifyAction,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	if actions != nil {
+		properties["actions"] = actions
+	}
+	return VerifyAction{
+		Action:  "Gs2Distributor:OrExpressionByUserId",
+		Request: properties,
+	}
+}
+
+func IfExpressionByUserId(
+	namespaceName string,
+	condition VerifyAction,
+	trueActions *[]ConsumeAction,
+	falseActions *[]ConsumeAction,
+	multiplyValueSpecifyingQuantity *bool,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["condition"] = condition
+	if trueActions != nil {
+		properties["trueActions"] = trueActions
+	}
+	if falseActions != nil {
+		properties["falseActions"] = falseActions
+	}
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return ConsumeAction{
+		Action:  "Gs2Distributor:IfExpressionByUserId",
+		Request: properties,
+	}
+}
