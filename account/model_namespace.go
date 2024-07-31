@@ -113,3 +113,17 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 		"Item.NamespaceId",
 	)
 }
+
+func (p *Namespace) MasterData(
+	takeOverTypeModels []TakeOverTypeModel,
+
+) *Namespace {
+	NewCurrentMasterData(
+		p.stack,
+		p.Name,
+		takeOverTypeModels,
+	).AddDependsOn(
+		p,
+	)
+	return p
+}
