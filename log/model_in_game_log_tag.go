@@ -1,4 +1,4 @@
-package friend
+package log
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,27 +22,29 @@ import (
 
 var _ = AcquireAction{}
 
-func UpdateProfileByUserId(
-	namespaceName string,
-	publicProfile *string,
-	followerProfile *string,
-	friendProfile *string,
-) AcquireAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
+type InGameLogTag struct {
+	Key   string
+	Value string
+}
+
+type InGameLogTagOptions struct {
+}
+
+func NewInGameLogTag(
+	key string,
+	value string,
+	options InGameLogTagOptions,
+) InGameLogTag {
+	data := InGameLogTag{
+		Key:   key,
+		Value: value,
 	}
-	properties["namespaceName"] = namespaceName
-	if publicProfile != nil {
-		properties["publicProfile"] = publicProfile
-	}
-	if followerProfile != nil {
-		properties["followerProfile"] = followerProfile
-	}
-	if friendProfile != nil {
-		properties["friendProfile"] = friendProfile
-	}
-	return AcquireAction{
-		Action:  "Gs2Friend:UpdateProfileByUserId",
-		Request: properties,
-	}
+	return data
+}
+
+func (p *InGameLogTag) Properties() map[string]interface{} {
+	properties := map[string]interface{}{}
+	properties["Key"] = p.Key
+	properties["Value"] = p.Value
+	return properties
 }
