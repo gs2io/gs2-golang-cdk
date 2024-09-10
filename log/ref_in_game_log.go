@@ -1,4 +1,4 @@
-package account
+package log
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,18 +22,7 @@ import (
 
 var _ = AcquireAction{}
 
-func AccountNamespace(
-	namespaceName string,
-) *NamespaceRef {
-	return &NamespaceRef{
-		NamespaceName: namespaceName,
-	}
-}
-
-func AccountBanStatus(
-	name string,
-) *BanStatusRef {
-	return &BanStatusRef{
-		Name: name,
-	}
+type InGameLogRef struct {
+	NamespaceName string
+	RequestId     string
 }

@@ -39,14 +39,16 @@ type Namespace struct {
 	Description           *string
 	SharedFreeCurrency    bool
 	PlatformSetting       PlatformSetting
-	ChangeBalanceScript   *ScriptSetting
+	DepositBalanceScript  *ScriptSetting
+	WithdrawBalanceScript *ScriptSetting
 	LogSetting            *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description         *string
-	ChangeBalanceScript *ScriptSetting
-	LogSetting          *LogSetting
+	Description           *string
+	DepositBalanceScript  *ScriptSetting
+	WithdrawBalanceScript *ScriptSetting
+	LogSetting            *LogSetting
 }
 
 func NewNamespace(
@@ -64,7 +66,8 @@ func NewNamespace(
 		SharedFreeCurrency:    sharedFreeCurrency,
 		PlatformSetting:       platformSetting,
 		Description:           options.Description,
-		ChangeBalanceScript:   options.ChangeBalanceScript,
+		DepositBalanceScript:  options.DepositBalanceScript,
+		WithdrawBalanceScript: options.WithdrawBalanceScript,
 		LogSetting:            options.LogSetting,
 	}
 	return &data
@@ -87,8 +90,11 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	properties["SharedFreeCurrency"] = p.SharedFreeCurrency
 	properties["PlatformSetting"] = p.PlatformSetting.Properties()
-	if p.ChangeBalanceScript != nil {
-		properties["ChangeBalanceScript"] = p.ChangeBalanceScript.Properties()
+	if p.DepositBalanceScript != nil {
+		properties["DepositBalanceScript"] = p.DepositBalanceScript.Properties()
+	}
+	if p.WithdrawBalanceScript != nil {
+		properties["WithdrawBalanceScript"] = p.WithdrawBalanceScript.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
