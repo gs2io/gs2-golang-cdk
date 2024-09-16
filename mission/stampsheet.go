@@ -83,7 +83,9 @@ func VerifyCounterValueByUserId(
 	namespaceName string,
 	counterName string,
 	verifyType string,
-	resetType string,
+	scopeType *string,
+	resetType *string,
+	conditionName *string,
 	value *int64,
 	multiplyValueSpecifyingQuantity *bool,
 ) VerifyAction {
@@ -93,7 +95,15 @@ func VerifyCounterValueByUserId(
 	properties["namespaceName"] = namespaceName
 	properties["counterName"] = counterName
 	properties["verifyType"] = verifyType
-	properties["resetType"] = resetType
+	if scopeType != nil {
+		properties["scopeType"] = scopeType
+	}
+	if resetType != nil {
+		properties["resetType"] = resetType
+	}
+	if conditionName != nil {
+		properties["conditionName"] = conditionName
+	}
 	if value != nil {
 		properties["value"] = value
 	}

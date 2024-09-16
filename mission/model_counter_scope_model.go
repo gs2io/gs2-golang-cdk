@@ -22,6 +22,15 @@ import (
 
 var _ = AcquireAction{}
 
+type CounterScopeModelScopeType string
+
+const CounterScopeModelScopeTypeResetTiming = CounterScopeModelScopeType("resetTiming")
+const CounterScopeModelScopeTypeVerifyAction = CounterScopeModelScopeType("verifyAction")
+
+func (p CounterScopeModelScopeType) Pointer() *CounterScopeModelScopeType {
+	return &p
+}
+
 type CounterScopeModelResetType string
 
 const CounterScopeModelResetTypeNotReset = CounterScopeModelResetType("notReset")
@@ -48,40 +57,87 @@ func (p CounterScopeModelResetDayOfWeek) Pointer() *CounterScopeModelResetDayOfW
 }
 
 type CounterScopeModel struct {
-	ResetType       CounterScopeModelResetType
+	ScopeType       CounterScopeModelScopeType
+	ResetType       *CounterScopeModelResetType
 	ResetDayOfMonth *int32
 	ResetDayOfWeek  *CounterScopeModelResetDayOfWeek
 	ResetHour       *int32
+	ConditionName   *string
+	Condition       *VerifyAction
 }
 
 type CounterScopeModelOptions struct {
+	ResetType       *CounterScopeModelResetType
 	ResetDayOfMonth *int32
 	ResetDayOfWeek  *CounterScopeModelResetDayOfWeek
 	ResetHour       *int32
+	ConditionName   *string
+	Condition       *VerifyAction
 }
 
 func NewCounterScopeModel(
-	resetType CounterScopeModelResetType,
+	scopeType CounterScopeModelScopeType,
 	options CounterScopeModelOptions,
 ) CounterScopeModel {
 	data := CounterScopeModel{
-		ResetType:       resetType,
+		ScopeType:       scopeType,
+		ResetType:       options.ResetType,
 		ResetDayOfMonth: options.ResetDayOfMonth,
 		ResetDayOfWeek:  options.ResetDayOfWeek,
 		ResetHour:       options.ResetHour,
+		ConditionName:   options.ConditionName,
+		Condition:       options.Condition,
 	}
 	return data
+}
+
+type CounterScopeModelScopeTypeIsResetTimingOptions struct {
+}
+
+func NewCounterScopeModelScopeTypeIsResetTiming(
+	resetType CounterScopeModelResetType,
+	options CounterScopeModelScopeTypeIsResetTimingOptions,
+) CounterScopeModel {
+	return NewCounterScopeModel(
+		CounterScopeModelScopeTypeResetTiming,
+		CounterScopeModelOptions{
+			ResetType: &resetType,
+		},
+	)
+}
+
+type CounterScopeModelScopeTypeIsVerifyActionOptions struct {
+}
+
+func NewCounterScopeModelScopeTypeIsVerifyAction(
+	conditionName string,
+	condition VerifyAction,
+	options CounterScopeModelScopeTypeIsVerifyActionOptions,
+) CounterScopeModel {
+	return NewCounterScopeModel(
+		CounterScopeModelScopeTypeVerifyAction,
+		CounterScopeModelOptions{
+			ConditionName: &conditionName,
+			Condition:     &condition,
+		},
+	)
 }
 
 type CounterScopeModelResetTypeIsNotResetOptions struct {
 }
 
 func NewCounterScopeModelResetTypeIsNotReset(
+	scopeType CounterScopeModelScopeType,
 	options CounterScopeModelResetTypeIsNotResetOptions,
 ) CounterScopeModel {
 	return NewCounterScopeModel(
-		CounterScopeModelResetTypeNotReset,
-		CounterScopeModelOptions{},
+		scopeType,
+		CounterScopeModelOptions{
+			ResetType: func() *CounterScopeModelResetType {
+				v := CounterScopeModelResetTypeNotReset
+				return &v
+			}(),
+		},
 	)
 }
 
@@ -89,12 +145,17 @@ type CounterScopeModelResetTypeIsDailyOptions struct {
 }
 
 func NewCounterScopeModelResetTypeIsDaily(
+	scopeType CounterScopeModelScopeType,
 	resetHour int32,
 	options CounterScopeModelResetTypeIsDailyOptions,
 ) CounterScopeModel {
 	return NewCounterScopeModel(
-		CounterScopeModelResetTypeDaily,
+		scopeType,
 		CounterScopeModelOptions{
+			ResetType: func() *CounterScopeModelResetType {
+				v := CounterScopeModelResetTypeDaily
+				return &v
+			}(),
 			ResetHour: &resetHour,
 		},
 	)
@@ -104,13 +165,18 @@ type CounterScopeModelResetTypeIsWeeklyOptions struct {
 }
 
 func NewCounterScopeModelResetTypeIsWeekly(
+	scopeType CounterScopeModelScopeType,
 	resetDayOfWeek CounterScopeModelResetDayOfWeek,
 	resetHour int32,
 	options CounterScopeModelResetTypeIsWeeklyOptions,
 ) CounterScopeModel {
 	return NewCounterScopeModel(
-		CounterScopeModelResetTypeWeekly,
+		scopeType,
 		CounterScopeModelOptions{
+			ResetType: func() *CounterScopeModelResetType {
+				v := CounterScopeModelResetTypeWeekly
+				return &v
+			}(),
 			ResetDayOfWeek: &resetDayOfWeek,
 			ResetHour:      &resetHour,
 		},
@@ -121,13 +187,18 @@ type CounterScopeModelResetTypeIsMonthlyOptions struct {
 }
 
 func NewCounterScopeModelResetTypeIsMonthly(
+	scopeType CounterScopeModelScopeType,
 	resetDayOfMonth int32,
 	resetHour int32,
 	options CounterScopeModelResetTypeIsMonthlyOptions,
 ) CounterScopeModel {
 	return NewCounterScopeModel(
-		CounterScopeModelResetTypeMonthly,
+		scopeType,
 		CounterScopeModelOptions{
+			ResetType: func() *CounterScopeModelResetType {
+				v := CounterScopeModelResetTypeMonthly
+				return &v
+			}(),
 			ResetDayOfMonth: &resetDayOfMonth,
 			ResetHour:       &resetHour,
 		},
@@ -136,7 +207,10 @@ func NewCounterScopeModelResetTypeIsMonthly(
 
 func (p *CounterScopeModel) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	properties["ResetType"] = p.ResetType
+	properties["ScopeType"] = p.ScopeType
+	if p.ResetType != nil {
+		properties["ResetType"] = p.ResetType
+	}
 	if p.ResetDayOfMonth != nil {
 		properties["ResetDayOfMonth"] = p.ResetDayOfMonth
 	}
@@ -145,6 +219,12 @@ func (p *CounterScopeModel) Properties() map[string]interface{} {
 	}
 	if p.ResetHour != nil {
 		properties["ResetHour"] = p.ResetHour
+	}
+	if p.ConditionName != nil {
+		properties["ConditionName"] = p.ConditionName
+	}
+	if p.Condition != nil {
+		properties["Condition"] = p.Condition.Properties()
 	}
 	return properties
 }

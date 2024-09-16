@@ -22,6 +22,15 @@ import (
 
 var _ = AcquireAction{}
 
+type ScopedValueScopeType string
+
+const ScopedValueScopeTypeResetTiming = ScopedValueScopeType("resetTiming")
+const ScopedValueScopeTypeVerifyAction = ScopedValueScopeType("verifyAction")
+
+func (p ScopedValueScopeType) Pointer() *ScopedValueScopeType {
+	return &p
+}
+
 type ScopedValueResetType string
 
 const ScopedValueResetTypeNotReset = ScopedValueResetType("notReset")
@@ -34,34 +43,88 @@ func (p ScopedValueResetType) Pointer() *ScopedValueResetType {
 }
 
 type ScopedValue struct {
-	ResetType   ScopedValueResetType
-	Value       int64
-	NextResetAt *int64
-	UpdatedAt   int64
+	ScopeType     ScopedValueScopeType
+	ResetType     *ScopedValueResetType
+	ConditionName *string
+	Value         int64
+	NextResetAt   *int64
+	UpdatedAt     int64
 }
 
 type ScopedValueOptions struct {
-	NextResetAt *int64
+	ResetType     *ScopedValueResetType
+	ConditionName *string
+	NextResetAt   *int64
 }
 
 func NewScopedValue(
-	resetType ScopedValueResetType,
+	scopeType ScopedValueScopeType,
 	value int64,
 	updatedAt int64,
 	options ScopedValueOptions,
 ) ScopedValue {
 	data := ScopedValue{
-		ResetType:   resetType,
-		Value:       value,
-		UpdatedAt:   updatedAt,
-		NextResetAt: options.NextResetAt,
+		ScopeType:     scopeType,
+		Value:         value,
+		UpdatedAt:     updatedAt,
+		ResetType:     options.ResetType,
+		ConditionName: options.ConditionName,
+		NextResetAt:   options.NextResetAt,
 	}
 	return data
 }
 
+type ScopedValueScopeTypeIsResetTimingOptions struct {
+	NextResetAt *int64
+}
+
+func NewScopedValueScopeTypeIsResetTiming(
+	value int64,
+	updatedAt int64,
+	resetType ScopedValueResetType,
+	options ScopedValueScopeTypeIsResetTimingOptions,
+) ScopedValue {
+	return NewScopedValue(
+		ScopedValueScopeTypeResetTiming,
+		value,
+		updatedAt,
+		ScopedValueOptions{
+			ResetType:   &resetType,
+			NextResetAt: options.NextResetAt,
+		},
+	)
+}
+
+type ScopedValueScopeTypeIsVerifyActionOptions struct {
+	NextResetAt *int64
+}
+
+func NewScopedValueScopeTypeIsVerifyAction(
+	value int64,
+	updatedAt int64,
+	conditionName string,
+	options ScopedValueScopeTypeIsVerifyActionOptions,
+) ScopedValue {
+	return NewScopedValue(
+		ScopedValueScopeTypeVerifyAction,
+		value,
+		updatedAt,
+		ScopedValueOptions{
+			ConditionName: &conditionName,
+			NextResetAt:   options.NextResetAt,
+		},
+	)
+}
+
 func (p *ScopedValue) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	properties["ResetType"] = p.ResetType
+	properties["ScopeType"] = p.ScopeType
+	if p.ResetType != nil {
+		properties["ResetType"] = p.ResetType
+	}
+	if p.ConditionName != nil {
+		properties["ConditionName"] = p.ConditionName
+	}
 	properties["Value"] = p.Value
 	if p.NextResetAt != nil {
 		properties["NextResetAt"] = p.NextResetAt

@@ -22,6 +22,15 @@ import (
 
 var _ = AcquireAction{}
 
+type TargetCounterModelScopeType string
+
+const TargetCounterModelScopeTypeResetTiming = TargetCounterModelScopeType("resetTiming")
+const TargetCounterModelScopeTypeVerifyAction = TargetCounterModelScopeType("verifyAction")
+
+func (p TargetCounterModelScopeType) Pointer() *TargetCounterModelScopeType {
+	return &p
+}
+
 type TargetCounterModelResetType string
 
 const TargetCounterModelResetTypeNotReset = TargetCounterModelResetType("notReset")
@@ -34,33 +43,83 @@ func (p TargetCounterModelResetType) Pointer() *TargetCounterModelResetType {
 }
 
 type TargetCounterModel struct {
-	CounterName string
-	ResetType   *TargetCounterModelResetType
-	Value       int64
+	CounterName   string
+	ScopeType     TargetCounterModelScopeType
+	ResetType     *TargetCounterModelResetType
+	ConditionName *string
+	Value         int64
 }
 
 type TargetCounterModelOptions struct {
-	ResetType *TargetCounterModelResetType
+	ResetType     *TargetCounterModelResetType
+	ConditionName *string
 }
 
 func NewTargetCounterModel(
 	counterName string,
+	scopeType TargetCounterModelScopeType,
 	value int64,
 	options TargetCounterModelOptions,
 ) TargetCounterModel {
 	data := TargetCounterModel{
-		CounterName: counterName,
-		Value:       value,
-		ResetType:   options.ResetType,
+		CounterName:   counterName,
+		ScopeType:     scopeType,
+		Value:         value,
+		ResetType:     options.ResetType,
+		ConditionName: options.ConditionName,
 	}
 	return data
+}
+
+type TargetCounterModelScopeTypeIsResetTimingOptions struct {
+	ResetType *TargetCounterModelResetType
+}
+
+func NewTargetCounterModelScopeTypeIsResetTiming(
+	counterName string,
+	value int64,
+	options TargetCounterModelScopeTypeIsResetTimingOptions,
+) TargetCounterModel {
+	return NewTargetCounterModel(
+		counterName,
+		TargetCounterModelScopeTypeResetTiming,
+		value,
+		TargetCounterModelOptions{
+			ResetType: options.ResetType,
+		},
+	)
+}
+
+type TargetCounterModelScopeTypeIsVerifyActionOptions struct {
+	ResetType *TargetCounterModelResetType
+}
+
+func NewTargetCounterModelScopeTypeIsVerifyAction(
+	counterName string,
+	value int64,
+	conditionName string,
+	options TargetCounterModelScopeTypeIsVerifyActionOptions,
+) TargetCounterModel {
+	return NewTargetCounterModel(
+		counterName,
+		TargetCounterModelScopeTypeVerifyAction,
+		value,
+		TargetCounterModelOptions{
+			ResetType:     options.ResetType,
+			ConditionName: &conditionName,
+		},
+	)
 }
 
 func (p *TargetCounterModel) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["CounterName"] = p.CounterName
+	properties["ScopeType"] = p.ScopeType
 	if p.ResetType != nil {
 		properties["ResetType"] = p.ResetType
+	}
+	if p.ConditionName != nil {
+		properties["ConditionName"] = p.ConditionName
 	}
 	properties["Value"] = p.Value
 	return properties
