@@ -22,6 +22,27 @@ import (
 
 var _ = AcquireAction{}
 
+func VerifyTriggerByUserId(
+	namespaceName string,
+	triggerName string,
+	verifyType string,
+	elapsedMinutes *int32,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["triggerName"] = triggerName
+	properties["verifyType"] = verifyType
+	if elapsedMinutes != nil {
+		properties["elapsedMinutes"] = elapsedMinutes
+	}
+	return VerifyAction{
+		Action:  "Gs2Schedule:VerifyTriggerByUserId",
+		Request: properties,
+	}
+}
+
 func DeleteTriggerByUserId(
 	namespaceName string,
 	triggerName string,
