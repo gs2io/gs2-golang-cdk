@@ -24,15 +24,17 @@ var _ = AcquireAction{}
 
 type Script struct {
 	CdkResource
-	stack         *Stack
-	NamespaceName string
-	Name          string
-	Description   *string
-	Script        string
+	stack                       *Stack
+	NamespaceName               string
+	Name                        string
+	Description                 *string
+	Script                      string
+	DisableStringNumberToNumber bool
 }
 
 type ScriptOptions struct {
-	Description *string
+	Description                 *string
+	DisableStringNumberToNumber bool
 }
 
 func NewScript(
@@ -43,11 +45,12 @@ func NewScript(
 	options ScriptOptions,
 ) *Script {
 	data := Script{
-		stack:         stack,
-		NamespaceName: namespaceName,
-		Name:          name,
-		Script:        script,
-		Description:   options.Description,
+		stack:                       stack,
+		NamespaceName:               namespaceName,
+		Name:                        name,
+		Script:                      script,
+		Description:                 options.Description,
+		DisableStringNumberToNumber: options.DisableStringNumberToNumber,
 	}
 	return &data
 }
@@ -68,6 +71,7 @@ func (p *Script) Properties() map[string]interface{} {
 		properties["Description"] = p.Description
 	}
 	properties["Script"] = p.Script
+	properties["DisableStringNumberToNumber"] = p.DisableStringNumberToNumber
 	return properties
 }
 

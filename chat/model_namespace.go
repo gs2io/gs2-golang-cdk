@@ -28,6 +28,7 @@ type Namespace struct {
 	Name                  string
 	Description           *string
 	AllowCreateRoom       bool
+	MessageLifeTimeDays   int32
 	PostMessageScript     *ScriptSetting
 	CreateRoomScript      *ScriptSetting
 	DeleteRoomScript      *ScriptSetting
@@ -40,6 +41,7 @@ type Namespace struct {
 type NamespaceOptions struct {
 	Description           *string
 	AllowCreateRoom       bool
+	MessageLifeTimeDays   int32
 	PostMessageScript     *ScriptSetting
 	CreateRoomScript      *ScriptSetting
 	DeleteRoomScript      *ScriptSetting
@@ -59,6 +61,7 @@ func NewNamespace(
 		Name:                  name,
 		Description:           options.Description,
 		AllowCreateRoom:       options.AllowCreateRoom,
+		MessageLifeTimeDays:   options.MessageLifeTimeDays,
 		PostMessageScript:     options.PostMessageScript,
 		CreateRoomScript:      options.CreateRoomScript,
 		DeleteRoomScript:      options.DeleteRoomScript,
@@ -85,6 +88,7 @@ func (p *Namespace) Properties() map[string]interface{} {
 		properties["Description"] = p.Description
 	}
 	properties["AllowCreateRoom"] = p.AllowCreateRoom
+	properties["MessageLifeTimeDays"] = p.MessageLifeTimeDays
 	if p.PostMessageScript != nil {
 		properties["PostMessageScript"] = p.PostMessageScript.Properties()
 	}

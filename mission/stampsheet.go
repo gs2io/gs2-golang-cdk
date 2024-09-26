@@ -62,6 +62,23 @@ func ReceiveByUserId(
 	}
 }
 
+func BatchReceiveByUserId(
+	namespaceName string,
+	missionGroupName string,
+	missionTaskNames []string,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["missionGroupName"] = missionGroupName
+	properties["missionTaskNames"] = missionTaskNames
+	return ConsumeAction{
+		Action:  "Gs2Mission:BatchReceiveByUserId",
+		Request: properties,
+	}
+}
+
 func RevertReceiveByUserId(
 	namespaceName string,
 	missionGroupName string,
