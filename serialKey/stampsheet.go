@@ -37,6 +37,23 @@ func UseByUserId(
 	}
 }
 
+func VerifyCodeByUserId(
+	namespaceName string,
+	code string,
+	verifyType string,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["code"] = code
+	properties["verifyType"] = verifyType
+	return ConsumeAction{
+		Action:  "Gs2SerialKey:VerifyCodeByUserId",
+		Request: properties,
+	}
+}
+
 func RevertUseByUserId(
 	namespaceName string,
 	code string,

@@ -27,6 +27,22 @@ type SubscribeRankingModelRef struct {
 	RankingName   string
 }
 
+func (p *SubscribeRankingModelRef) VerifySubscribeRankingScore(
+	verifyType string,
+	score int64,
+	season *int64,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	return VerifySubscribeRankingScoreByUserId(
+		p.NamespaceName,
+		p.RankingName,
+		verifyType,
+		score,
+		season,
+		multiplyValueSpecifyingQuantity,
+	)
+}
+
 func (p *SubscribeRankingModelRef) Grn() string {
 	return NewJoin(
 		":",

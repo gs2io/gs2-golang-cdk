@@ -39,6 +39,24 @@ func (p *ClusterRankingModelRef) CreateClusterRankingReceivedReward(
 	)
 }
 
+func (p *ClusterRankingModelRef) VerifyClusterRankingScore(
+	clusterName string,
+	verifyType string,
+	score int64,
+	season *int64,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	return VerifyClusterRankingScoreByUserId(
+		p.NamespaceName,
+		p.RankingName,
+		clusterName,
+		verifyType,
+		score,
+		season,
+		multiplyValueSpecifyingQuantity,
+	)
+}
+
 func (p *ClusterRankingModelRef) Grn() string {
 	return NewJoin(
 		":",

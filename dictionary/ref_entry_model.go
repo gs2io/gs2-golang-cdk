@@ -23,8 +23,18 @@ import (
 var _ = AcquireAction{}
 
 type EntryModelRef struct {
-	NamespaceName string
-	EntryName     string
+	NamespaceName  string
+	EntryModelName string
+}
+
+func (p *EntryModelRef) VerifyEntry(
+	verifyType string,
+) VerifyAction {
+	return VerifyEntryByUserId(
+		p.NamespaceName,
+		p.EntryModelName,
+		verifyType,
+	)
 }
 
 func (p *EntryModelRef) Grn() string {
@@ -38,7 +48,7 @@ func (p *EntryModelRef) Grn() string {
 			"dictionary",
 			p.NamespaceName,
 			"model",
-			p.EntryName,
+			p.EntryModelName,
 		},
 	).String()
 }

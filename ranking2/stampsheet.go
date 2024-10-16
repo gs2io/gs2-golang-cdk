@@ -22,6 +22,33 @@ import (
 
 var _ = AcquireAction{}
 
+func VerifyGlobalRankingScoreByUserId(
+	namespaceName string,
+	rankingName string,
+	verifyType string,
+	score int64,
+	season *int64,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["rankingName"] = rankingName
+	properties["verifyType"] = verifyType
+	if season != nil {
+		properties["season"] = season
+	}
+	properties["score"] = score
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Ranking2:VerifyGlobalRankingScoreByUserId",
+		Request: properties,
+	}
+}
+
 func CreateGlobalRankingReceivedRewardByUserId(
 	namespaceName string,
 	rankingName string,
@@ -37,6 +64,35 @@ func CreateGlobalRankingReceivedRewardByUserId(
 	}
 	return ConsumeAction{
 		Action:  "Gs2Ranking2:CreateGlobalRankingReceivedRewardByUserId",
+		Request: properties,
+	}
+}
+
+func VerifyClusterRankingScoreByUserId(
+	namespaceName string,
+	rankingName string,
+	clusterName string,
+	verifyType string,
+	score int64,
+	season *int64,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["rankingName"] = rankingName
+	properties["clusterName"] = clusterName
+	properties["verifyType"] = verifyType
+	if season != nil {
+		properties["season"] = season
+	}
+	properties["score"] = score
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Ranking2:VerifyClusterRankingScoreByUserId",
 		Request: properties,
 	}
 }
@@ -58,6 +114,33 @@ func CreateClusterRankingReceivedRewardByUserId(
 	}
 	return ConsumeAction{
 		Action:  "Gs2Ranking2:CreateClusterRankingReceivedRewardByUserId",
+		Request: properties,
+	}
+}
+
+func VerifySubscribeRankingScoreByUserId(
+	namespaceName string,
+	rankingName string,
+	verifyType string,
+	score int64,
+	season *int64,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["rankingName"] = rankingName
+	properties["verifyType"] = verifyType
+	if season != nil {
+		properties["season"] = season
+	}
+	properties["score"] = score
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Ranking2:VerifySubscribeRankingScoreByUserId",
 		Request: properties,
 	}
 }

@@ -83,13 +83,13 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 }
 
 func (p *Namespace) MasterData(
-	categoryModels []CategoryModel,
+	categories []CategoryModel,
 
 ) *Namespace {
 	NewCurrentMasterData(
 		p.stack,
 		p.Name,
-		categoryModels,
+		categories,
 	).AddDependsOn(
 		p,
 	)

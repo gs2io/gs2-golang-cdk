@@ -1,4 +1,4 @@
-package script
+package account
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,37 +22,7 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
+type MasterDataVersionRef struct {
 	NamespaceName string
-}
-
-func (p *NamespaceRef) InvokeScript(
-	scriptId string,
-	args *string,
-	randomStatus *RandomStatus,
-) AcquireAction {
-	return InvokeScript(
-		scriptId,
-		args,
-		randomStatus,
-	)
-}
-
-func (p *NamespaceRef) Grn() string {
-	return NewJoin(
-		":",
-		[]string{
-			"grn",
-			"gs2",
-			NewGetAttrRegion().String(),
-			NewGetAttrOwnerId().String(),
-			"script",
-			p.NamespaceName,
-		},
-	).String()
-}
-
-func (p *NamespaceRef) GrnPointer() *string {
-	grn := p.Grn()
-	return &grn
+	ObjectKey     string
 }

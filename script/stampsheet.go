@@ -21,3 +21,24 @@ import (
 )
 
 var _ = AcquireAction{}
+
+func InvokeScript(
+	scriptId string,
+	args *string,
+	randomStatus *RandomStatus,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["scriptId"] = scriptId
+	if args != nil {
+		properties["args"] = args
+	}
+	if randomStatus != nil {
+		properties["randomStatus"] = randomStatus
+	}
+	return AcquireAction{
+		Action:  "Gs2Script:InvokeScript",
+		Request: properties,
+	}
+}

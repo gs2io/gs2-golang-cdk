@@ -27,7 +27,7 @@ type Namespace struct {
 	stack                      *Stack
 	Name                       string
 	Description                *string
-	IsAutomaticDeletingEnabled *bool
+	IsAutomaticDeletingEnabled bool
 	TransactionSetting         *TransactionSetting
 	ReceiveMessageScript       *ScriptSetting
 	ReadMessageScript          *ScriptSetting
@@ -38,7 +38,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description                *string
-	IsAutomaticDeletingEnabled *bool
+	IsAutomaticDeletingEnabled bool
 	TransactionSetting         *TransactionSetting
 	ReceiveMessageScript       *ScriptSetting
 	ReadMessageScript          *ScriptSetting
@@ -81,9 +81,7 @@ func (p *Namespace) Properties() map[string]interface{} {
 	if p.Description != nil {
 		properties["Description"] = p.Description
 	}
-	if p.IsAutomaticDeletingEnabled != nil {
-		properties["IsAutomaticDeletingEnabled"] = p.IsAutomaticDeletingEnabled
-	}
+	properties["IsAutomaticDeletingEnabled"] = p.IsAutomaticDeletingEnabled
 	if p.TransactionSetting != nil {
 		properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	}

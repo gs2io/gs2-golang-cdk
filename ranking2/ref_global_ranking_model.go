@@ -37,6 +37,22 @@ func (p *GlobalRankingModelRef) CreateGlobalRankingReceivedReward(
 	)
 }
 
+func (p *GlobalRankingModelRef) VerifyGlobalRankingScore(
+	verifyType string,
+	score int64,
+	season *int64,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	return VerifyGlobalRankingScoreByUserId(
+		p.NamespaceName,
+		p.RankingName,
+		verifyType,
+		score,
+		season,
+		multiplyValueSpecifyingQuantity,
+	)
+}
+
 func (p *GlobalRankingModelRef) Grn() string {
 	return NewJoin(
 		":",

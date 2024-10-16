@@ -24,22 +24,22 @@ var _ = AcquireAction{}
 
 type CurrentMasterData struct {
 	CdkResource
-	stack          *Stack
-	version        string
-	namespaceName  string
-	categoryModels []CategoryModel
+	stack         *Stack
+	version       string
+	namespaceName string
+	categories    []CategoryModel
 }
 
 func NewCurrentMasterData(
 	stack *Stack,
 	namespaceName string,
-	categoryModels []CategoryModel,
+	categories []CategoryModel,
 ) *CurrentMasterData {
 	self := CurrentMasterData{
-		stack:          stack,
-		version:        "2019-09-17",
-		namespaceName:  namespaceName,
-		categoryModels: categoryModels,
+		stack:         stack,
+		version:       "2019-09-17",
+		namespaceName: namespaceName,
+		categories:    categories,
 	}
 	self.CdkResource = NewCdkResource(&self)
 	stack.AddResource(&self.CdkResource)
@@ -55,15 +55,15 @@ func (p *CurrentMasterData) ResourceType() string {
 }
 
 func (p *CurrentMasterData) Properties() map[string]interface{} {
-	categoryModels := make([]map[string]interface{}, len(p.categoryModels))
-	for i, item := range p.categoryModels {
-		categoryModels[i] = item.Properties()
+	categories := make([]map[string]interface{}, len(p.categories))
+	for i, item := range p.categories {
+		categories[i] = item.Properties()
 	}
 	return map[string]interface{}{
 		"NamespaceName": p.namespaceName,
 		"Settings": map[string]interface{}{
-			"version":        p.version,
-			"categoryModels": categoryModels,
+			"version":    p.version,
+			"categories": categories,
 		},
 	}
 }

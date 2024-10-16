@@ -27,11 +27,11 @@ type NamespaceRef struct {
 }
 
 func (p *NamespaceRef) EntryModel(
-	entryName string,
+	entryModelName string,
 ) *EntryModelRef {
 	return &EntryModelRef{
-		NamespaceName: p.NamespaceName,
-		EntryName:     entryName,
+		NamespaceName:  p.NamespaceName,
+		EntryModelName: entryModelName,
 	}
 }
 
@@ -50,17 +50,6 @@ func (p *NamespaceRef) DeleteEntries(
 	return DeleteEntriesByUserId(
 		p.NamespaceName,
 		entryModelNames,
-	)
-}
-
-func (p *NamespaceRef) VerifyEntry(
-	entryModelName string,
-	verifyType string,
-) VerifyAction {
-	return VerifyEntryByUserId(
-		p.NamespaceName,
-		entryModelName,
-		verifyType,
 	)
 }
 

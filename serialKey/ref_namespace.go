@@ -44,6 +44,17 @@ func (p *NamespaceRef) RevertUse(
 	)
 }
 
+func (p *NamespaceRef) VerifyCode(
+	code string,
+	verifyType string,
+) ConsumeAction {
+	return VerifyCodeByUserId(
+		p.NamespaceName,
+		code,
+		verifyType,
+	)
+}
+
 func (p *NamespaceRef) Grn() string {
 	return NewJoin(
 		":",

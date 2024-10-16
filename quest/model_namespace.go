@@ -105,13 +105,13 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 }
 
 func (p *Namespace) MasterData(
-	questGroupModels []QuestGroupModel,
+	groups []QuestGroupModel,
 
 ) *Namespace {
 	NewCurrentMasterData(
 		p.stack,
 		p.Name,
-		questGroupModels,
+		groups,
 	).AddDependsOn(
 		p,
 	)
