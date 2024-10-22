@@ -1,4 +1,4 @@
-package account
+package version
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights

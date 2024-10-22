@@ -1,4 +1,4 @@
-package account
+package guard
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,8 +22,25 @@ import (
 
 var _ = AcquireAction{}
 
-type MasterDataVersionRef struct {
+type NamespaceRef struct {
 	NamespaceName string
-	ObjectKey     string
-	VersionId     string
+}
+
+func (p *NamespaceRef) Grn() string {
+	return NewJoin(
+		":",
+		[]string{
+			"grn",
+			"gs2",
+			NewGetAttrRegion().String(),
+			NewGetAttrOwnerId().String(),
+			"guard",
+			p.NamespaceName,
+		},
+	).String()
+}
+
+func (p *NamespaceRef) GrnPointer() *string {
+	grn := p.Grn()
+	return &grn
 }

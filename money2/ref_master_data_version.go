@@ -1,4 +1,4 @@
-package account
+package money2
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
