@@ -20,6 +20,7 @@ deny overwrite
 
 import (
 	. "github.com/gs2io/gs2-golang-cdk/core"
+	"github.com/gs2io/gs2-golang-cdk/guard"
 )
 
 var _ = AcquireAction{}
@@ -67,6 +68,40 @@ func (p *Identifier) Ref(
 		UserName: userName,
 		ClientId: clientId,
 	}
+}
+
+func (p *Identifier) Attach(
+	guardNamespace *guard.Namespace,
+) *Identifier {
+	policy := NewAttachGuard(
+		p.stack,
+		p.UserName,
+		p.GetAttrClientId().String(),
+		guardNamespace.GetAttrNamespaceId().String(),
+		AttachGuardOptions{},
+	)
+	policy.AddDependsOn(
+		p,
+	).AddDependsOn(
+		guardNamespace,
+	)
+	return p
+}
+
+func (p *Identifier) AttachGrn(
+	securityPolicyId string,
+) *Identifier {
+	policy := NewAttachGuard(
+		p.stack,
+		p.UserName,
+		p.GetAttrClientId().String(),
+		securityPolicyId,
+		AttachGuardOptions{},
+	)
+	policy.AddDependsOn(
+		p,
+	)
+	return p
 }
 
 func (p *Identifier) GetAttrClientId() GetAttr {

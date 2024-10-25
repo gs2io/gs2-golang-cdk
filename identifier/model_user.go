@@ -88,6 +88,21 @@ func (p *User) Attach(
 	return p
 }
 
+func (p *User) AttachGrn(
+	securityPolicyId string,
+) *User {
+	policy := NewAttachSecurityPolicy(
+		p.stack,
+		p.Name,
+		securityPolicyId,
+		AttachSecurityPolicyOptions{},
+	)
+	policy.AddDependsOn(
+		p,
+	)
+	return p
+}
+
 func (p *User) Identifier() *Identifier {
 	identifier := NewIdentifier(
 		p.stack,

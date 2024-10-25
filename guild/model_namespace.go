@@ -27,12 +27,14 @@ type Namespace struct {
 	stack                      *Stack
 	Name                       string
 	Description                *string
+	ChangeNotification         *NotificationSetting
 	JoinNotification           *NotificationSetting
 	LeaveNotification          *NotificationSetting
 	ChangeMemberNotification   *NotificationSetting
 	ReceiveRequestNotification *NotificationSetting
 	RemoveRequestNotification  *NotificationSetting
 	CreateGuildScript          *ScriptSetting
+	UpdateGuildScript          *ScriptSetting
 	JoinGuildScript            *ScriptSetting
 	LeaveGuildScript           *ScriptSetting
 	ChangeRoleScript           *ScriptSetting
@@ -41,12 +43,14 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description                *string
+	ChangeNotification         *NotificationSetting
 	JoinNotification           *NotificationSetting
 	LeaveNotification          *NotificationSetting
 	ChangeMemberNotification   *NotificationSetting
 	ReceiveRequestNotification *NotificationSetting
 	RemoveRequestNotification  *NotificationSetting
 	CreateGuildScript          *ScriptSetting
+	UpdateGuildScript          *ScriptSetting
 	JoinGuildScript            *ScriptSetting
 	LeaveGuildScript           *ScriptSetting
 	ChangeRoleScript           *ScriptSetting
@@ -62,12 +66,14 @@ func NewNamespace(
 		stack:                      stack,
 		Name:                       name,
 		Description:                options.Description,
+		ChangeNotification:         options.ChangeNotification,
 		JoinNotification:           options.JoinNotification,
 		LeaveNotification:          options.LeaveNotification,
 		ChangeMemberNotification:   options.ChangeMemberNotification,
 		ReceiveRequestNotification: options.ReceiveRequestNotification,
 		RemoveRequestNotification:  options.RemoveRequestNotification,
 		CreateGuildScript:          options.CreateGuildScript,
+		UpdateGuildScript:          options.UpdateGuildScript,
 		JoinGuildScript:            options.JoinGuildScript,
 		LeaveGuildScript:           options.LeaveGuildScript,
 		ChangeRoleScript:           options.ChangeRoleScript,
@@ -90,6 +96,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	if p.Description != nil {
 		properties["Description"] = p.Description
 	}
+	if p.ChangeNotification != nil {
+		properties["ChangeNotification"] = p.ChangeNotification.Properties()
+	}
 	if p.JoinNotification != nil {
 		properties["JoinNotification"] = p.JoinNotification.Properties()
 	}
@@ -107,6 +116,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.CreateGuildScript != nil {
 		properties["CreateGuildScript"] = p.CreateGuildScript.Properties()
+	}
+	if p.UpdateGuildScript != nil {
+		properties["UpdateGuildScript"] = p.UpdateGuildScript.Properties()
 	}
 	if p.JoinGuildScript != nil {
 		properties["JoinGuildScript"] = p.JoinGuildScript.Properties()
