@@ -104,6 +104,27 @@ func CreateAwaitByUserId(
 	}
 }
 
+func AcquireForceByUserId(
+	namespaceName string,
+	awaitName *string,
+	config *[]Config,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	if awaitName != nil {
+		properties["awaitName"] = awaitName
+	}
+	if config != nil {
+		properties["config"] = config
+	}
+	return AcquireAction{
+		Action:  "Gs2Exchange:AcquireForceByUserId",
+		Request: properties,
+	}
+}
+
 func SkipByUserId(
 	namespaceName string,
 	awaitName *string,
