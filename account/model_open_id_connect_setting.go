@@ -29,6 +29,7 @@ type OpenIdConnectSetting struct {
 	AppleTeamId        *string
 	AppleKeyId         *string
 	ApplePrivateKeyPem *string
+	DoneEndpointUrl    *string
 }
 
 type OpenIdConnectSettingOptions struct {
@@ -36,6 +37,7 @@ type OpenIdConnectSettingOptions struct {
 	AppleTeamId        *string
 	AppleKeyId         *string
 	ApplePrivateKeyPem *string
+	DoneEndpointUrl    *string
 }
 
 func NewOpenIdConnectSetting(
@@ -50,6 +52,7 @@ func NewOpenIdConnectSetting(
 		AppleTeamId:        options.AppleTeamId,
 		AppleKeyId:         options.AppleKeyId,
 		ApplePrivateKeyPem: options.ApplePrivateKeyPem,
+		DoneEndpointUrl:    options.DoneEndpointUrl,
 	}
 	return data
 }
@@ -69,6 +72,9 @@ func (p *OpenIdConnectSetting) Properties() map[string]interface{} {
 	}
 	if p.ApplePrivateKeyPem != nil {
 		properties["ApplePrivateKeyPem"] = p.ApplePrivateKeyPem
+	}
+	if p.DoneEndpointUrl != nil {
+		properties["DoneEndpointUrl"] = p.DoneEndpointUrl
 	}
 	return properties
 }
