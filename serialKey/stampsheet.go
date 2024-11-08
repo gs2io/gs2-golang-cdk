@@ -22,6 +22,23 @@ import (
 
 var _ = AcquireAction{}
 
+func VerifyCodeByUserId(
+	namespaceName string,
+	code string,
+	verifyType string,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["code"] = code
+	properties["verifyType"] = verifyType
+	return VerifyAction{
+		Action:  "Gs2SerialKey:VerifyCodeByUserId",
+		Request: properties,
+	}
+}
+
 func UseByUserId(
 	namespaceName string,
 	code string,
@@ -33,23 +50,6 @@ func UseByUserId(
 	properties["code"] = code
 	return ConsumeAction{
 		Action:  "Gs2SerialKey:UseByUserId",
-		Request: properties,
-	}
-}
-
-func VerifyCodeByUserId(
-	namespaceName string,
-	code string,
-	verifyType string,
-) ConsumeAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
-	}
-	properties["namespaceName"] = namespaceName
-	properties["code"] = code
-	properties["verifyType"] = verifyType
-	return ConsumeAction{
-		Action:  "Gs2SerialKey:VerifyCodeByUserId",
 		Request: properties,
 	}
 }

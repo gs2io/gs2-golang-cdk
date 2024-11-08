@@ -204,6 +204,7 @@ func MultiplyAcquireActionsByUserId(
 	propertyId string,
 	rateName string,
 	acquireActions *[]AcquireAction,
+	baseRate *float32,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -214,6 +215,9 @@ func MultiplyAcquireActionsByUserId(
 	properties["rateName"] = rateName
 	if acquireActions != nil {
 		properties["acquireActions"] = acquireActions
+	}
+	if baseRate != nil {
+		properties["baseRate"] = baseRate
 	}
 	return AcquireAction{
 		Action:  "Gs2Experience:MultiplyAcquireActionsByUserId",

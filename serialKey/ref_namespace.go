@@ -47,7 +47,7 @@ func (p *NamespaceRef) RevertUse(
 func (p *NamespaceRef) VerifyCode(
 	code string,
 	verifyType string,
-) ConsumeAction {
+) VerifyAction {
 	return VerifyCodeByUserId(
 		p.NamespaceName,
 		code,

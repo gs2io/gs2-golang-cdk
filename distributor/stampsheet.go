@@ -22,6 +22,33 @@ import (
 
 var _ = AcquireAction{}
 
+func IfExpressionByUserId(
+	namespaceName string,
+	condition VerifyAction,
+	trueActions *[]ConsumeAction,
+	falseActions *[]ConsumeAction,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["condition"] = condition
+	if trueActions != nil {
+		properties["trueActions"] = trueActions
+	}
+	if falseActions != nil {
+		properties["falseActions"] = falseActions
+	}
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Distributor:IfExpressionByUserId",
+		Request: properties,
+	}
+}
+
 func AndExpressionByUserId(
 	namespaceName string,
 	actions *[]VerifyAction,
@@ -52,33 +79,6 @@ func OrExpressionByUserId(
 	}
 	return VerifyAction{
 		Action:  "Gs2Distributor:OrExpressionByUserId",
-		Request: properties,
-	}
-}
-
-func IfExpressionByUserId(
-	namespaceName string,
-	condition VerifyAction,
-	trueActions *[]ConsumeAction,
-	falseActions *[]ConsumeAction,
-	multiplyValueSpecifyingQuantity *bool,
-) ConsumeAction {
-	properties := map[string]interface{}{
-		"userId": "#{userId}",
-	}
-	properties["namespaceName"] = namespaceName
-	properties["condition"] = condition
-	if trueActions != nil {
-		properties["trueActions"] = trueActions
-	}
-	if falseActions != nil {
-		properties["falseActions"] = falseActions
-	}
-	if multiplyValueSpecifyingQuantity != nil {
-		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
-	}
-	return ConsumeAction{
-		Action:  "Gs2Distributor:IfExpressionByUserId",
 		Request: properties,
 	}
 }
