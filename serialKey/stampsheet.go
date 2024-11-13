@@ -26,12 +26,16 @@ func VerifyCodeByUserId(
 	namespaceName string,
 	code string,
 	verifyType string,
+	campaignModelName *string,
 ) VerifyAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
 	}
 	properties["namespaceName"] = namespaceName
 	properties["code"] = code
+	if campaignModelName != nil {
+		properties["campaignModelName"] = campaignModelName
+	}
 	properties["verifyType"] = verifyType
 	return VerifyAction{
 		Action:  "Gs2SerialKey:VerifyCodeByUserId",
@@ -65,6 +69,25 @@ func RevertUseByUserId(
 	properties["code"] = code
 	return AcquireAction{
 		Action:  "Gs2SerialKey:RevertUseByUserId",
+		Request: properties,
+	}
+}
+
+func IssueOnce(
+	namespaceName string,
+	campaignModelName string,
+	metadata *string,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["campaignModelName"] = campaignModelName
+	if metadata != nil {
+		properties["metadata"] = metadata
+	}
+	return AcquireAction{
+		Action:  "Gs2SerialKey:IssueOnce",
 		Request: properties,
 	}
 }

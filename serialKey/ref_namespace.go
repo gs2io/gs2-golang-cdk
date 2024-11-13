@@ -44,14 +44,27 @@ func (p *NamespaceRef) RevertUse(
 	)
 }
 
+func (p *NamespaceRef) IssueOnce(
+	campaignModelName string,
+	metadata *string,
+) AcquireAction {
+	return IssueOnce(
+		p.NamespaceName,
+		campaignModelName,
+		metadata,
+	)
+}
+
 func (p *NamespaceRef) VerifyCode(
 	code string,
 	verifyType string,
+	campaignModelName *string,
 ) VerifyAction {
 	return VerifyCodeByUserId(
 		p.NamespaceName,
 		code,
 		verifyType,
+		campaignModelName,
 	)
 }
 
