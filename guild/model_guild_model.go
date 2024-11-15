@@ -23,19 +23,23 @@ import (
 var _ = AcquireAction{}
 
 type GuildModel struct {
-	Name                      string
-	Metadata                  *string
-	DefaultMaximumMemberCount int32
-	MaximumMemberCount        int32
-	InactivityPeriodDays      int32
-	Roles                     []RoleModel
-	GuildMasterRole           string
-	GuildMemberDefaultRole    string
-	RejoinCoolTimeMinutes     int32
+	Name                          string
+	Metadata                      *string
+	DefaultMaximumMemberCount     int32
+	MaximumMemberCount            int32
+	InactivityPeriodDays          int32
+	Roles                         []RoleModel
+	GuildMasterRole               string
+	GuildMemberDefaultRole        string
+	RejoinCoolTimeMinutes         int32
+	MaxConcurrentJoinGuilds       *int32
+	MaxConcurrentGuildMasterCount *int32
 }
 
 type GuildModelOptions struct {
-	Metadata *string
+	Metadata                      *string
+	MaxConcurrentJoinGuilds       *int32
+	MaxConcurrentGuildMasterCount *int32
 }
 
 func NewGuildModel(
@@ -50,15 +54,17 @@ func NewGuildModel(
 	options GuildModelOptions,
 ) GuildModel {
 	data := GuildModel{
-		Name:                      name,
-		DefaultMaximumMemberCount: defaultMaximumMemberCount,
-		MaximumMemberCount:        maximumMemberCount,
-		InactivityPeriodDays:      inactivityPeriodDays,
-		Roles:                     roles,
-		GuildMasterRole:           guildMasterRole,
-		GuildMemberDefaultRole:    guildMemberDefaultRole,
-		RejoinCoolTimeMinutes:     rejoinCoolTimeMinutes,
-		Metadata:                  options.Metadata,
+		Name:                          name,
+		DefaultMaximumMemberCount:     defaultMaximumMemberCount,
+		MaximumMemberCount:            maximumMemberCount,
+		InactivityPeriodDays:          inactivityPeriodDays,
+		Roles:                         roles,
+		GuildMasterRole:               guildMasterRole,
+		GuildMemberDefaultRole:        guildMemberDefaultRole,
+		RejoinCoolTimeMinutes:         rejoinCoolTimeMinutes,
+		Metadata:                      options.Metadata,
+		MaxConcurrentJoinGuilds:       options.MaxConcurrentJoinGuilds,
+		MaxConcurrentGuildMasterCount: options.MaxConcurrentGuildMasterCount,
 	}
 	return data
 }
@@ -82,5 +88,11 @@ func (p *GuildModel) Properties() map[string]interface{} {
 	properties["GuildMasterRole"] = p.GuildMasterRole
 	properties["GuildMemberDefaultRole"] = p.GuildMemberDefaultRole
 	properties["RejoinCoolTimeMinutes"] = p.RejoinCoolTimeMinutes
+	if p.MaxConcurrentJoinGuilds != nil {
+		properties["MaxConcurrentJoinGuilds"] = p.MaxConcurrentJoinGuilds
+	}
+	if p.MaxConcurrentGuildMasterCount != nil {
+		properties["MaxConcurrentGuildMasterCount"] = p.MaxConcurrentGuildMasterCount
+	}
 	return properties
 }
