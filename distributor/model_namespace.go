@@ -24,19 +24,21 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack                         *Stack
-	Name                          string
-	Description                   *string
-	AssumeUserId                  *string
-	AutoRunStampSheetNotification NotificationSetting
-	LogSetting                    *LogSetting
+	stack                          *Stack
+	Name                           string
+	Description                    *string
+	AssumeUserId                   *string
+	AutoRunStampSheetNotification  NotificationSetting
+	AutoRunTransactionNotification NotificationSetting
+	LogSetting                     *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description                   *string
-	AssumeUserId                  *string
-	AutoRunStampSheetNotification NotificationSetting
-	LogSetting                    *LogSetting
+	Description                    *string
+	AssumeUserId                   *string
+	AutoRunStampSheetNotification  NotificationSetting
+	AutoRunTransactionNotification NotificationSetting
+	LogSetting                     *LogSetting
 }
 
 func NewNamespace(
@@ -45,12 +47,13 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:                         stack,
-		Name:                          name,
-		Description:                   options.Description,
-		AssumeUserId:                  options.AssumeUserId,
-		AutoRunStampSheetNotification: options.AutoRunStampSheetNotification,
-		LogSetting:                    options.LogSetting,
+		stack:                          stack,
+		Name:                           name,
+		Description:                    options.Description,
+		AssumeUserId:                   options.AssumeUserId,
+		AutoRunStampSheetNotification:  options.AutoRunStampSheetNotification,
+		AutoRunTransactionNotification: options.AutoRunTransactionNotification,
+		LogSetting:                     options.LogSetting,
 	}
 	return &data
 }
@@ -73,6 +76,7 @@ func (p *Namespace) Properties() map[string]interface{} {
 		properties["AssumeUserId"] = p.AssumeUserId
 	}
 	properties["AutoRunStampSheetNotification"] = p.AutoRunStampSheetNotification.Properties()
+	properties["AutoRunTransactionNotification"] = p.AutoRunTransactionNotification.Properties()
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
 	}
