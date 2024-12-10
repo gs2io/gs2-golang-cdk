@@ -40,27 +40,38 @@ func (p VersionModelType) Pointer() *VersionModelType {
 	return &p
 }
 
+type VersionModelApproveRequirement string
+
+const VersionModelApproveRequirementRequired = VersionModelApproveRequirement("required")
+const VersionModelApproveRequirementOptional = VersionModelApproveRequirement("optional")
+
+func (p VersionModelApproveRequirement) Pointer() *VersionModelApproveRequirement {
+	return &p
+}
+
 type VersionModel struct {
-	Name             string
-	Metadata         *string
-	Scope            VersionModelScope
-	Type             VersionModelType
-	CurrentVersion   *Version
-	WarningVersion   *Version
-	ErrorVersion     *Version
-	ScheduleVersions []ScheduleVersion
-	NeedSignature    *bool
-	SignatureKeyId   *string
+	Name               string
+	Metadata           *string
+	Scope              VersionModelScope
+	Type               VersionModelType
+	CurrentVersion     *Version
+	WarningVersion     *Version
+	ErrorVersion       *Version
+	ScheduleVersions   []ScheduleVersion
+	NeedSignature      *bool
+	SignatureKeyId     *string
+	ApproveRequirement *VersionModelApproveRequirement
 }
 
 type VersionModelOptions struct {
-	Metadata         *string
-	CurrentVersion   *Version
-	WarningVersion   *Version
-	ErrorVersion     *Version
-	ScheduleVersions []ScheduleVersion
-	NeedSignature    *bool
-	SignatureKeyId   *string
+	Metadata           *string
+	CurrentVersion     *Version
+	WarningVersion     *Version
+	ErrorVersion       *Version
+	ScheduleVersions   []ScheduleVersion
+	NeedSignature      *bool
+	SignatureKeyId     *string
+	ApproveRequirement *VersionModelApproveRequirement
 }
 
 func NewVersionModel(
@@ -70,16 +81,17 @@ func NewVersionModel(
 	options VersionModelOptions,
 ) VersionModel {
 	data := VersionModel{
-		Name:             name,
-		Scope:            scope,
-		Type:             Type,
-		Metadata:         options.Metadata,
-		CurrentVersion:   options.CurrentVersion,
-		WarningVersion:   options.WarningVersion,
-		ErrorVersion:     options.ErrorVersion,
-		ScheduleVersions: options.ScheduleVersions,
-		NeedSignature:    options.NeedSignature,
-		SignatureKeyId:   options.SignatureKeyId,
+		Name:               name,
+		Scope:              scope,
+		Type:               Type,
+		Metadata:           options.Metadata,
+		CurrentVersion:     options.CurrentVersion,
+		WarningVersion:     options.WarningVersion,
+		ErrorVersion:       options.ErrorVersion,
+		ScheduleVersions:   options.ScheduleVersions,
+		NeedSignature:      options.NeedSignature,
+		SignatureKeyId:     options.SignatureKeyId,
+		ApproveRequirement: options.ApproveRequirement,
 	}
 	return data
 }
@@ -161,6 +173,7 @@ type VersionModelScopeIsActiveOptions struct {
 func NewVersionModelScopeIsActive(
 	name string,
 	Type VersionModelType,
+	approveRequirement VersionModelApproveRequirement,
 	options VersionModelScopeIsActiveOptions,
 ) VersionModel {
 	return NewVersionModel(
@@ -168,8 +181,9 @@ func NewVersionModelScopeIsActive(
 		VersionModelScopeActive,
 		Type,
 		VersionModelOptions{
-			Metadata:         options.Metadata,
-			ScheduleVersions: options.ScheduleVersions,
+			Metadata:           options.Metadata,
+			ScheduleVersions:   options.ScheduleVersions,
+			ApproveRequirement: &approveRequirement,
 		},
 	)
 }
@@ -203,6 +217,9 @@ func (p *VersionModel) Properties() map[string]interface{} {
 	}
 	if p.SignatureKeyId != nil {
 		properties["SignatureKeyId"] = p.SignatureKeyId
+	}
+	if p.ApproveRequirement != nil {
+		properties["ApproveRequirement"] = p.ApproveRequirement
 	}
 	return properties
 }
