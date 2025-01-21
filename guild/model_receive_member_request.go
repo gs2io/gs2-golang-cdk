@@ -25,9 +25,11 @@ var _ = AcquireAction{}
 type ReceiveMemberRequest struct {
 	UserId          string
 	TargetGuildName string
+	Metadata        *string
 }
 
 type ReceiveMemberRequestOptions struct {
+	Metadata *string
 }
 
 func NewReceiveMemberRequest(
@@ -38,6 +40,7 @@ func NewReceiveMemberRequest(
 	data := ReceiveMemberRequest{
 		UserId:          userId,
 		TargetGuildName: targetGuildName,
+		Metadata:        options.Metadata,
 	}
 	return data
 }
@@ -46,5 +49,8 @@ func (p *ReceiveMemberRequest) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["UserId"] = p.UserId
 	properties["TargetGuildName"] = p.TargetGuildName
+	if p.Metadata != nil {
+		properties["Metadata"] = p.Metadata
+	}
 	return properties
 }

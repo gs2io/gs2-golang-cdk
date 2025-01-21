@@ -43,6 +43,8 @@ type Guild struct {
 	Attribute3             *int32
 	Attribute4             *int32
 	Attribute5             *int32
+	Metadata               *string
+	MemberMetadata         *string
 	JoinPolicy             GuildJoinPolicy
 	CustomRoles            []RoleModel
 	GuildMemberDefaultRole *string
@@ -55,6 +57,8 @@ type GuildOptions struct {
 	Attribute3             *int32
 	Attribute4             *int32
 	Attribute5             *int32
+	Metadata               *string
+	MemberMetadata         *string
 	CustomRoles            []RoleModel
 	GuildMemberDefaultRole *string
 	TimeOffsetToken        *string
@@ -81,6 +85,8 @@ func NewGuild(
 		Attribute3:             options.Attribute3,
 		Attribute4:             options.Attribute4,
 		Attribute5:             options.Attribute5,
+		Metadata:               options.Metadata,
+		MemberMetadata:         options.MemberMetadata,
 		CustomRoles:            options.CustomRoles,
 		GuildMemberDefaultRole: options.GuildMemberDefaultRole,
 		TimeOffsetToken:        options.TimeOffsetToken,
@@ -116,6 +122,12 @@ func (p *Guild) Properties() map[string]interface{} {
 	}
 	if p.Attribute5 != nil {
 		properties["Attribute5"] = p.Attribute5
+	}
+	if p.Metadata != nil {
+		properties["Metadata"] = p.Metadata
+	}
+	if p.MemberMetadata != nil {
+		properties["MemberMetadata"] = p.MemberMetadata
 	}
 	properties["JoinPolicy"] = p.JoinPolicy
 	{

@@ -1,4 +1,4 @@
-package guild
+package distributor
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,39 +22,33 @@ import (
 
 var _ = AcquireAction{}
 
-type Member struct {
-	UserId   string
-	RoleName string
-	Metadata *string
-	JoinedAt int64
+type BatchResultPayload struct {
+	RequestId     string
+	StatusCode    int32
+	ResultPayload string
 }
 
-type MemberOptions struct {
-	Metadata *string
+type BatchResultPayloadOptions struct {
 }
 
-func NewMember(
-	userId string,
-	roleName string,
-	joinedAt int64,
-	options MemberOptions,
-) Member {
-	data := Member{
-		UserId:   userId,
-		RoleName: roleName,
-		JoinedAt: joinedAt,
-		Metadata: options.Metadata,
+func NewBatchResultPayload(
+	requestId string,
+	statusCode int32,
+	resultPayload string,
+	options BatchResultPayloadOptions,
+) BatchResultPayload {
+	data := BatchResultPayload{
+		RequestId:     requestId,
+		StatusCode:    statusCode,
+		ResultPayload: resultPayload,
 	}
 	return data
 }
 
-func (p *Member) Properties() map[string]interface{} {
+func (p *BatchResultPayload) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	properties["UserId"] = p.UserId
-	properties["RoleName"] = p.RoleName
-	if p.Metadata != nil {
-		properties["Metadata"] = p.Metadata
-	}
-	properties["JoinedAt"] = p.JoinedAt
+	properties["RequestId"] = p.RequestId
+	properties["StatusCode"] = p.StatusCode
+	properties["ResultPayload"] = p.ResultPayload
 	return properties
 }

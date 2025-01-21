@@ -23,16 +23,18 @@ import (
 var _ = AcquireAction{}
 
 type Inbox struct {
-	GuildName   string
-	FromUserIds []string
-	CreatedAt   int64
-	UpdatedAt   int64
-	Revision    *int64
+	GuildName             string
+	FromUserIds           []string
+	ReceiveMemberRequests []ReceiveMemberRequest
+	CreatedAt             int64
+	UpdatedAt             int64
+	Revision              *int64
 }
 
 type InboxOptions struct {
-	FromUserIds []string
-	Revision    *int64
+	FromUserIds           []string
+	ReceiveMemberRequests []ReceiveMemberRequest
+	Revision              *int64
 }
 
 func NewInbox(
@@ -42,11 +44,12 @@ func NewInbox(
 	options InboxOptions,
 ) Inbox {
 	data := Inbox{
-		GuildName:   guildName,
-		CreatedAt:   createdAt,
-		UpdatedAt:   updatedAt,
-		FromUserIds: options.FromUserIds,
-		Revision:    options.Revision,
+		GuildName:             guildName,
+		CreatedAt:             createdAt,
+		UpdatedAt:             updatedAt,
+		FromUserIds:           options.FromUserIds,
+		ReceiveMemberRequests: options.ReceiveMemberRequests,
+		Revision:              options.Revision,
 	}
 	return data
 }
@@ -55,6 +58,13 @@ func (p *Inbox) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["GuildName"] = p.GuildName
 	properties["FromUserIds"] = p.FromUserIds
+	{
+		values := make([]map[string]interface{}, len(p.ReceiveMemberRequests))
+		for i, element := range p.ReceiveMemberRequests {
+			values[i] = element.Properties()
+		}
+		properties["ReceiveMemberRequests"] = values
+	}
 	properties["CreatedAt"] = p.CreatedAt
 	properties["UpdatedAt"] = p.UpdatedAt
 	if p.Revision != nil {

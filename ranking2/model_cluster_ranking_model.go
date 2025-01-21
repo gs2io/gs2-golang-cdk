@@ -41,17 +41,27 @@ func (p ClusterRankingModelOrderDirection) Pointer() *ClusterRankingModelOrderDi
 	return &p
 }
 
+type ClusterRankingModelRewardCalculationIndex string
+
+const ClusterRankingModelRewardCalculationIndexRank = ClusterRankingModelRewardCalculationIndex("rank")
+const ClusterRankingModelRewardCalculationIndexIndex = ClusterRankingModelRewardCalculationIndex("index")
+
+func (p ClusterRankingModelRewardCalculationIndex) Pointer() *ClusterRankingModelRewardCalculationIndex {
+	return &p
+}
+
 type ClusterRankingModel struct {
-	Name                string
-	Metadata            *string
-	ClusterType         ClusterRankingModelClusterType
-	MinimumValue        *int64
-	MaximumValue        *int64
-	Sum                 bool
-	OrderDirection      ClusterRankingModelOrderDirection
-	EntryPeriodEventId  *string
-	RankingRewards      []RankingReward
-	AccessPeriodEventId *string
+	Name                   string
+	Metadata               *string
+	ClusterType            ClusterRankingModelClusterType
+	MinimumValue           *int64
+	MaximumValue           *int64
+	Sum                    bool
+	OrderDirection         ClusterRankingModelOrderDirection
+	EntryPeriodEventId     *string
+	RankingRewards         []RankingReward
+	AccessPeriodEventId    *string
+	RewardCalculationIndex ClusterRankingModelRewardCalculationIndex
 }
 
 type ClusterRankingModelOptions struct {
@@ -68,19 +78,21 @@ func NewClusterRankingModel(
 	clusterType ClusterRankingModelClusterType,
 	sum bool,
 	orderDirection ClusterRankingModelOrderDirection,
+	rewardCalculationIndex ClusterRankingModelRewardCalculationIndex,
 	options ClusterRankingModelOptions,
 ) ClusterRankingModel {
 	data := ClusterRankingModel{
-		Name:                name,
-		ClusterType:         clusterType,
-		Sum:                 sum,
-		OrderDirection:      orderDirection,
-		Metadata:            options.Metadata,
-		MinimumValue:        options.MinimumValue,
-		MaximumValue:        options.MaximumValue,
-		EntryPeriodEventId:  options.EntryPeriodEventId,
-		RankingRewards:      options.RankingRewards,
-		AccessPeriodEventId: options.AccessPeriodEventId,
+		Name:                   name,
+		ClusterType:            clusterType,
+		Sum:                    sum,
+		OrderDirection:         orderDirection,
+		RewardCalculationIndex: rewardCalculationIndex,
+		Metadata:               options.Metadata,
+		MinimumValue:           options.MinimumValue,
+		MaximumValue:           options.MaximumValue,
+		EntryPeriodEventId:     options.EntryPeriodEventId,
+		RankingRewards:         options.RankingRewards,
+		AccessPeriodEventId:    options.AccessPeriodEventId,
 	}
 	return data
 }
@@ -113,5 +125,6 @@ func (p *ClusterRankingModel) Properties() map[string]interface{} {
 	if p.AccessPeriodEventId != nil {
 		properties["AccessPeriodEventId"] = p.AccessPeriodEventId
 	}
+	properties["RewardCalculationIndex"] = p.RewardCalculationIndex
 	return properties
 }

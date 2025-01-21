@@ -31,16 +31,26 @@ func (p GlobalRankingModelOrderDirection) Pointer() *GlobalRankingModelOrderDire
 	return &p
 }
 
+type GlobalRankingModelRewardCalculationIndex string
+
+const GlobalRankingModelRewardCalculationIndexRank = GlobalRankingModelRewardCalculationIndex("rank")
+const GlobalRankingModelRewardCalculationIndexIndex = GlobalRankingModelRewardCalculationIndex("index")
+
+func (p GlobalRankingModelRewardCalculationIndex) Pointer() *GlobalRankingModelRewardCalculationIndex {
+	return &p
+}
+
 type GlobalRankingModel struct {
-	Name                string
-	Metadata            *string
-	MinimumValue        *int64
-	MaximumValue        *int64
-	Sum                 bool
-	OrderDirection      GlobalRankingModelOrderDirection
-	EntryPeriodEventId  *string
-	RankingRewards      []RankingReward
-	AccessPeriodEventId *string
+	Name                   string
+	Metadata               *string
+	MinimumValue           *int64
+	MaximumValue           *int64
+	Sum                    bool
+	OrderDirection         GlobalRankingModelOrderDirection
+	EntryPeriodEventId     *string
+	RankingRewards         []RankingReward
+	AccessPeriodEventId    *string
+	RewardCalculationIndex GlobalRankingModelRewardCalculationIndex
 }
 
 type GlobalRankingModelOptions struct {
@@ -56,18 +66,20 @@ func NewGlobalRankingModel(
 	name string,
 	sum bool,
 	orderDirection GlobalRankingModelOrderDirection,
+	rewardCalculationIndex GlobalRankingModelRewardCalculationIndex,
 	options GlobalRankingModelOptions,
 ) GlobalRankingModel {
 	data := GlobalRankingModel{
-		Name:                name,
-		Sum:                 sum,
-		OrderDirection:      orderDirection,
-		Metadata:            options.Metadata,
-		MinimumValue:        options.MinimumValue,
-		MaximumValue:        options.MaximumValue,
-		EntryPeriodEventId:  options.EntryPeriodEventId,
-		RankingRewards:      options.RankingRewards,
-		AccessPeriodEventId: options.AccessPeriodEventId,
+		Name:                   name,
+		Sum:                    sum,
+		OrderDirection:         orderDirection,
+		RewardCalculationIndex: rewardCalculationIndex,
+		Metadata:               options.Metadata,
+		MinimumValue:           options.MinimumValue,
+		MaximumValue:           options.MaximumValue,
+		EntryPeriodEventId:     options.EntryPeriodEventId,
+		RankingRewards:         options.RankingRewards,
+		AccessPeriodEventId:    options.AccessPeriodEventId,
 	}
 	return data
 }
@@ -99,5 +111,6 @@ func (p *GlobalRankingModel) Properties() map[string]interface{} {
 	if p.AccessPeriodEventId != nil {
 		properties["AccessPeriodEventId"] = p.AccessPeriodEventId
 	}
+	properties["RewardCalculationIndex"] = p.RewardCalculationIndex
 	return properties
 }
