@@ -55,6 +55,8 @@ func NewNamespace(
 		OverrideAcquireActionsScriptId: options.OverrideAcquireActionsScriptId,
 		LogSetting:                     options.LogSetting,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 

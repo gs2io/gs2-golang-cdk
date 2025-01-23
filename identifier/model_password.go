@@ -52,6 +52,8 @@ func NewPassword(
 		UserName: userName,
 		Password: password,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 

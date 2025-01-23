@@ -79,6 +79,8 @@ func NewNamespace(
 		ChangeRoleScript:           options.ChangeRoleScript,
 		LogSetting:                 options.LogSetting,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 

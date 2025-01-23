@@ -1,4 +1,5 @@
 package account
+
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
 Reserved.
@@ -18,37 +19,37 @@ permissions and limitations under the License.
 import (
 	. "github.com/gs2io/gs2-golang-cdk/core"
 )
+
 var _ = AcquireAction{}
 
 type NamespaceRef struct {
-    NamespaceName string
+	NamespaceName string
 }
 
 func (p *NamespaceRef) TakeOverTypeModel(
-    type string,
+	type_ string,
 ) *TakeOverTypeModelRef {
-    return &TakeOverTypeModelRef {
-        NamespaceName: p.NamespaceName,
-        Type: type,
-    }
+	return &TakeOverTypeModelRef{
+		NamespaceName: p.NamespaceName,
+		Type:          type_,
+	}
 }
 
-
 func (p *NamespaceRef) Grn() string {
-    return NewJoin(
-        ":",
-        []string {
-            "grn",
-            "gs2",
-            NewGetAttrRegion().String(),
-            NewGetAttrOwnerId().String(),
-            "account",
-            p.NamespaceName,
-        },
-    ).String()
+	return NewJoin(
+		":",
+		[]string{
+			"grn",
+			"gs2",
+			NewGetAttrRegion().String(),
+			NewGetAttrOwnerId().String(),
+			"account",
+			p.NamespaceName,
+		},
+	).String()
 }
 
 func (p *NamespaceRef) GrnPointer() *string {
-    grn := p.Grn()
-    return &grn
+	grn := p.Grn()
+	return &grn
 }

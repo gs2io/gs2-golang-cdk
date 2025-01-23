@@ -46,6 +46,8 @@ func NewKey(
 		Name:          name,
 		Description:   options.Description,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 

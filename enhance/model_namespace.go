@@ -52,6 +52,8 @@ func NewNamespace(
 		EnhanceScript:      options.EnhanceScript,
 		LogSetting:         options.LogSetting,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 

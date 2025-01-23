@@ -32,13 +32,13 @@ type PlatformUserOptions struct {
 }
 
 func NewPlatformUser(
-	Type int32,
+	type_ int32,
 	userIdentifier string,
 	userId string,
 	options PlatformUserOptions,
 ) PlatformUser {
 	data := PlatformUser{
-		Type:           Type,
+		Type:           type_,
 		UserIdentifier: userIdentifier,
 		UserId:         userId,
 	}

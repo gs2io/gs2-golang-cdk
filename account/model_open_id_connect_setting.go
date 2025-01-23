@@ -23,21 +23,25 @@ import (
 var _ = AcquireAction{}
 
 type OpenIdConnectSetting struct {
-	ConfigurationPath  string
-	ClientId           string
-	ClientSecret       *string
-	AppleTeamId        *string
-	AppleKeyId         *string
-	ApplePrivateKeyPem *string
-	DoneEndpointUrl    *string
+	ConfigurationPath      string
+	ClientId               string
+	ClientSecret           *string
+	AppleTeamId            *string
+	AppleKeyId             *string
+	ApplePrivateKeyPem     *string
+	DoneEndpointUrl        *string
+	AdditionalScopeValues  []ScopeValue
+	AdditionalReturnValues []string
 }
 
 type OpenIdConnectSettingOptions struct {
-	ClientSecret       *string
-	AppleTeamId        *string
-	AppleKeyId         *string
-	ApplePrivateKeyPem *string
-	DoneEndpointUrl    *string
+	ClientSecret           *string
+	AppleTeamId            *string
+	AppleKeyId             *string
+	ApplePrivateKeyPem     *string
+	DoneEndpointUrl        *string
+	AdditionalScopeValues  []ScopeValue
+	AdditionalReturnValues []string
 }
 
 func NewOpenIdConnectSetting(
@@ -46,13 +50,15 @@ func NewOpenIdConnectSetting(
 	options OpenIdConnectSettingOptions,
 ) OpenIdConnectSetting {
 	data := OpenIdConnectSetting{
-		ConfigurationPath:  configurationPath,
-		ClientId:           clientId,
-		ClientSecret:       options.ClientSecret,
-		AppleTeamId:        options.AppleTeamId,
-		AppleKeyId:         options.AppleKeyId,
-		ApplePrivateKeyPem: options.ApplePrivateKeyPem,
-		DoneEndpointUrl:    options.DoneEndpointUrl,
+		ConfigurationPath:      configurationPath,
+		ClientId:               clientId,
+		ClientSecret:           options.ClientSecret,
+		AppleTeamId:            options.AppleTeamId,
+		AppleKeyId:             options.AppleKeyId,
+		ApplePrivateKeyPem:     options.ApplePrivateKeyPem,
+		DoneEndpointUrl:        options.DoneEndpointUrl,
+		AdditionalScopeValues:  options.AdditionalScopeValues,
+		AdditionalReturnValues: options.AdditionalReturnValues,
 	}
 	return data
 }
@@ -76,5 +82,13 @@ func (p *OpenIdConnectSetting) Properties() map[string]interface{} {
 	if p.DoneEndpointUrl != nil {
 		properties["DoneEndpointUrl"] = p.DoneEndpointUrl
 	}
+	{
+		values := make([]map[string]interface{}, len(p.AdditionalScopeValues))
+		for i, element := range p.AdditionalScopeValues {
+			values[i] = element.Properties()
+		}
+		properties["AdditionalScopeValues"] = values
+	}
+	properties["AdditionalReturnValues"] = p.AdditionalReturnValues
 	return properties
 }

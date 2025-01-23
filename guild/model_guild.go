@@ -91,6 +91,8 @@ func NewGuild(
 		GuildMemberDefaultRole: options.GuildMemberDefaultRole,
 		TimeOffsetToken:        options.TimeOffsetToken,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 

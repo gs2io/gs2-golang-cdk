@@ -46,6 +46,8 @@ func NewMatchSession(
 		SessionName:   options.SessionName,
 		TtlSeconds:    options.TtlSeconds,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 

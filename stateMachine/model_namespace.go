@@ -73,6 +73,8 @@ func NewNamespace(
 		LowestStateMachineVersion:   options.LowestStateMachineVersion,
 		LogSetting:                  options.LogSetting,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 

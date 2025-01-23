@@ -88,6 +88,8 @@ func NewNamespace(
 		DeleteFriendNotification:   options.DeleteFriendNotification,
 		LogSetting:                 options.LogSetting,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 

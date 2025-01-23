@@ -47,12 +47,12 @@ type DisplayItemOptions struct {
 
 func NewDisplayItem(
 	displayItemId string,
-	Type DisplayItemType,
+	type_ DisplayItemType,
 	options DisplayItemOptions,
 ) DisplayItem {
 	data := DisplayItem{
 		DisplayItemId:      displayItemId,
-		Type:               Type,
+		Type:               type_,
 		SalesItem:          options.SalesItem,
 		SalesItemGroup:     options.SalesItemGroup,
 		SalesPeriodEventId: options.SalesPeriodEventId,

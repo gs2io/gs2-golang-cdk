@@ -71,27 +71,27 @@ func (p Config) Properties() map[string]interface{} {
 }
 
 type LogSetting struct {
-	loggingNamespaceId string
+	LoggingNamespaceId string
 }
 
 func NewLogSetting(
 	loggingNamespaceId string,
 ) LogSetting {
 	return LogSetting{
-		loggingNamespaceId: loggingNamespaceId,
+		LoggingNamespaceId: loggingNamespaceId,
 	}
 }
 
 func (p LogSetting) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	properties["LoggingNamespaceId"] = p.loggingNamespaceId
+	properties["LoggingNamespaceId"] = p.LoggingNamespaceId
 	return properties
 }
 
 type NotificationSetting struct {
-	gatewayNamespaceId               string
-	enableTransferMobileNotification *bool
-	sound                            *string
+	GatewayNamespaceId               string
+	EnableTransferMobileNotification *bool
+	Sound                            *string
 }
 
 func NewNotificationSetting(
@@ -100,20 +100,20 @@ func NewNotificationSetting(
 	sound *string,
 ) NotificationSetting {
 	return NotificationSetting{
-		gatewayNamespaceId:               gatewayNamespaceId,
-		enableTransferMobileNotification: enableTransferMobileNotification,
-		sound:                            sound,
+		GatewayNamespaceId:               gatewayNamespaceId,
+		EnableTransferMobileNotification: enableTransferMobileNotification,
+		Sound:                            sound,
 	}
 }
 
 func (p NotificationSetting) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	properties["GatewayNamespaceId"] = p.gatewayNamespaceId
-	if p.enableTransferMobileNotification != nil {
-		properties["EnableTransferMobileNotification"] = *p.enableTransferMobileNotification
+	properties["GatewayNamespaceId"] = p.GatewayNamespaceId
+	if p.EnableTransferMobileNotification != nil {
+		properties["EnableTransferMobileNotification"] = *p.EnableTransferMobileNotification
 	}
-	if p.sound != nil {
-		properties["Sound"] = *p.sound
+	if p.Sound != nil {
+		properties["Sound"] = *p.Sound
 	}
 	return properties
 }
@@ -125,10 +125,10 @@ const ScriptSettingDoneTriggerTargetTypeGs2Script = ScriptSettingDoneTriggerTarg
 const ScriptSettingDoneTriggerTargetTypeAws = ScriptSettingDoneTriggerTargetType("aws")
 
 type ScriptSetting struct {
-	triggerScriptId             *string
-	doneTriggerTargetType       ScriptSettingDoneTriggerTargetType
-	doneTriggerScriptId         *string
-	doneTriggerQueueNamespaceId *string
+	TriggerScriptId             *string
+	DoneTriggerTargetType       ScriptSettingDoneTriggerTargetType
+	DoneTriggerScriptId         *string
+	DoneTriggerQueueNamespaceId *string
 }
 
 func NewScriptSetting(
@@ -138,33 +138,33 @@ func NewScriptSetting(
 	doneTriggerQueueNamespaceId *string,
 ) ScriptSetting {
 	return ScriptSetting{
-		triggerScriptId:             triggerScriptId,
-		doneTriggerTargetType:       doneTriggerTargetType,
-		doneTriggerScriptId:         doneTriggerScriptId,
-		doneTriggerQueueNamespaceId: doneTriggerQueueNamespaceId,
+		TriggerScriptId:             triggerScriptId,
+		DoneTriggerTargetType:       doneTriggerTargetType,
+		DoneTriggerScriptId:         doneTriggerScriptId,
+		DoneTriggerQueueNamespaceId: doneTriggerQueueNamespaceId,
 	}
 }
 
 func (p ScriptSetting) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	if p.triggerScriptId != nil {
-		properties["TriggerScriptId"] = *p.triggerScriptId
+	if p.TriggerScriptId != nil {
+		properties["TriggerScriptId"] = *p.TriggerScriptId
 	}
-	properties["DoneTriggerTargetType"] = p.doneTriggerTargetType
-	if p.doneTriggerScriptId != nil {
-		properties["DoneTriggerScriptId"] = *p.doneTriggerScriptId
+	properties["DoneTriggerTargetType"] = p.DoneTriggerTargetType
+	if p.DoneTriggerScriptId != nil {
+		properties["DoneTriggerScriptId"] = *p.DoneTriggerScriptId
 	}
-	if p.doneTriggerQueueNamespaceId != nil {
-		properties["DoneTriggerQueueNamespaceId"] = *p.doneTriggerQueueNamespaceId
+	if p.DoneTriggerQueueNamespaceId != nil {
+		properties["DoneTriggerQueueNamespaceId"] = *p.DoneTriggerQueueNamespaceId
 	}
 	return properties
 }
 
 type TransactionSetting struct {
-	enableAutoRun          bool
-	distributorNamespaceId *string
-	keyId                  *string
-	queueNamespaceId       *string
+	EnableAutoRun          bool
+	DistributorNamespaceId *string
+	KeyId                  *string
+	QueueNamespaceId       *string
 }
 
 func NewTransactionSetting(
@@ -174,24 +174,24 @@ func NewTransactionSetting(
 	queueNamespaceId *string,
 ) TransactionSetting {
 	return TransactionSetting{
-		enableAutoRun:          enableAutoRun,
-		distributorNamespaceId: distributorNamespaceId,
-		keyId:                  keyId,
-		queueNamespaceId:       queueNamespaceId,
+		EnableAutoRun:          enableAutoRun,
+		DistributorNamespaceId: distributorNamespaceId,
+		KeyId:                  keyId,
+		QueueNamespaceId:       queueNamespaceId,
 	}
 }
 
 func (p TransactionSetting) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	properties["EnableAutoRun"] = p.enableAutoRun
-	if p.distributorNamespaceId != nil {
-		properties["DistributorNamespaceId"] = *p.distributorNamespaceId
+	properties["EnableAutoRun"] = p.EnableAutoRun
+	if p.DistributorNamespaceId != nil {
+		properties["DistributorNamespaceId"] = *p.DistributorNamespaceId
 	}
-	if p.keyId != nil {
-		properties["KeyId"] = *p.keyId
+	if p.KeyId != nil {
+		properties["KeyId"] = *p.KeyId
 	}
-	if p.queueNamespaceId != nil {
-		properties["QueueNamespaceId"] = *p.queueNamespaceId
+	if p.QueueNamespaceId != nil {
+		properties["QueueNamespaceId"] = *p.QueueNamespaceId
 	}
 	return properties
 }

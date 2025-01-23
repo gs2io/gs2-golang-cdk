@@ -33,12 +33,12 @@ type TakeOverTypeModelOptions struct {
 }
 
 func NewTakeOverTypeModel(
-	Type int32,
+	type_ int32,
 	openIdConnectSetting OpenIdConnectSetting,
 	options TakeOverTypeModelOptions,
 ) TakeOverTypeModel {
 	data := TakeOverTypeModel{
-		Type:                 Type,
+		Type:                 type_,
 		OpenIdConnectSetting: openIdConnectSetting,
 		Metadata:             options.Metadata,
 	}

@@ -77,13 +77,13 @@ type VersionModelOptions struct {
 func NewVersionModel(
 	name string,
 	scope VersionModelScope,
-	Type VersionModelType,
+	type_ VersionModelType,
 	options VersionModelOptions,
 ) VersionModel {
 	data := VersionModel{
 		Name:               name,
 		Scope:              scope,
-		Type:               Type,
+		Type:               type_,
 		Metadata:           options.Metadata,
 		CurrentVersion:     options.CurrentVersion,
 		WarningVersion:     options.WarningVersion,
@@ -149,14 +149,14 @@ type VersionModelScopeIsPassiveOptions struct {
 
 func NewVersionModelScopeIsPassive(
 	name string,
-	Type VersionModelType,
+	type_ VersionModelType,
 	needSignature bool,
 	options VersionModelScopeIsPassiveOptions,
 ) VersionModel {
 	return NewVersionModel(
 		name,
 		VersionModelScopePassive,
-		Type,
+		type_,
 		VersionModelOptions{
 			Metadata:         options.Metadata,
 			ScheduleVersions: options.ScheduleVersions,
@@ -172,14 +172,14 @@ type VersionModelScopeIsActiveOptions struct {
 
 func NewVersionModelScopeIsActive(
 	name string,
-	Type VersionModelType,
+	type_ VersionModelType,
 	approveRequirement VersionModelApproveRequirement,
 	options VersionModelScopeIsActiveOptions,
 ) VersionModel {
 	return NewVersionModel(
 		name,
 		VersionModelScopeActive,
-		Type,
+		type_,
 		VersionModelOptions{
 			Metadata:           options.Metadata,
 			ScheduleVersions:   options.ScheduleVersions,

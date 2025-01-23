@@ -37,7 +37,7 @@ type Namespace struct {
 	stack               *Stack
 	Name                string
 	Description         *string
-	Type                NamespaceType
+	Type_               NamespaceType
 	GcpCredentialJson   *string
 	BigQueryDatasetName *string
 	LogExpireDays       *int32
@@ -49,7 +49,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description         *string
-	Type                NamespaceType
+	Type_               NamespaceType
 	GcpCredentialJson   *string
 	BigQueryDatasetName *string
 	LogExpireDays       *int32
@@ -68,7 +68,7 @@ func NewNamespace(
 		stack:               stack,
 		Name:                name,
 		Description:         options.Description,
-		Type:                options.Type,
+		Type_:               options.Type_,
 		GcpCredentialJson:   options.GcpCredentialJson,
 		BigQueryDatasetName: options.BigQueryDatasetName,
 		LogExpireDays:       options.LogExpireDays,
@@ -77,6 +77,8 @@ func NewNamespace(
 		AwsSecretAccessKey:  options.AwsSecretAccessKey,
 		FirehoseStreamName:  options.FirehoseStreamName,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 
@@ -94,7 +96,7 @@ func (p *Namespace) Properties() map[string]interface{} {
 	if p.Description != nil {
 		properties["Description"] = p.Description
 	}
-	properties["Type"] = p.Type
+	properties["Type"] = p.Type_
 	if p.GcpCredentialJson != nil {
 		properties["GcpCredentialJson"] = p.GcpCredentialJson
 	}

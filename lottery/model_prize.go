@@ -50,13 +50,13 @@ type PrizeOptions struct {
 
 func NewPrize(
 	prizeId string,
-	Type PrizeType,
+	type_ PrizeType,
 	weight int32,
 	options PrizeOptions,
 ) Prize {
 	data := Prize{
 		PrizeId:              prizeId,
-		Type:                 Type,
+		Type:                 type_,
 		Weight:               weight,
 		AcquireActions:       options.AcquireActions,
 		DrawnLimit:           options.DrawnLimit,

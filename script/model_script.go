@@ -52,6 +52,8 @@ func NewScript(
 		Description:                 options.Description,
 		DisableStringNumberToNumber: options.DisableStringNumberToNumber,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 

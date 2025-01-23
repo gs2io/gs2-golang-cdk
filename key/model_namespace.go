@@ -46,6 +46,8 @@ func NewNamespace(
 		Description: options.Description,
 		LogSetting:  options.LogSetting,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 
