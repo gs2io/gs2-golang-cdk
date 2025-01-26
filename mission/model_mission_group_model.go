@@ -28,6 +28,7 @@ const MissionGroupModelResetTypeNotReset = MissionGroupModelResetType("notReset"
 const MissionGroupModelResetTypeDaily = MissionGroupModelResetType("daily")
 const MissionGroupModelResetTypeWeekly = MissionGroupModelResetType("weekly")
 const MissionGroupModelResetTypeMonthly = MissionGroupModelResetType("monthly")
+const MissionGroupModelResetTypeDays = MissionGroupModelResetType("days")
 
 func (p MissionGroupModelResetType) Pointer() *MissionGroupModelResetType {
 	return &p
@@ -56,6 +57,8 @@ type MissionGroupModel struct {
 	ResetDayOfWeek                  *MissionGroupModelResetDayOfWeek
 	ResetHour                       *int32
 	CompleteNotificationNamespaceId *string
+	AnchorTimestamp                 *int64
+	Days                            *int32
 }
 
 type MissionGroupModelOptions struct {
@@ -65,6 +68,8 @@ type MissionGroupModelOptions struct {
 	ResetDayOfWeek                  *MissionGroupModelResetDayOfWeek
 	ResetHour                       *int32
 	CompleteNotificationNamespaceId *string
+	AnchorTimestamp                 *int64
+	Days                            *int32
 }
 
 func NewMissionGroupModel(
@@ -81,6 +86,8 @@ func NewMissionGroupModel(
 		ResetDayOfWeek:                  options.ResetDayOfWeek,
 		ResetHour:                       options.ResetHour,
 		CompleteNotificationNamespaceId: options.CompleteNotificationNamespaceId,
+		AnchorTimestamp:                 options.AnchorTimestamp,
+		Days:                            options.Days,
 	}
 	return data
 }
@@ -179,6 +186,31 @@ func NewMissionGroupModelResetTypeIsMonthly(
 	)
 }
 
+type MissionGroupModelResetTypeIsDaysOptions struct {
+	Metadata                        *string
+	Tasks                           []MissionTaskModel
+	CompleteNotificationNamespaceId *string
+}
+
+func NewMissionGroupModelResetTypeIsDays(
+	name string,
+	anchorTimestamp int64,
+	days int32,
+	options MissionGroupModelResetTypeIsDaysOptions,
+) MissionGroupModel {
+	return NewMissionGroupModel(
+		name,
+		MissionGroupModelResetTypeDays,
+		MissionGroupModelOptions{
+			Metadata:                        options.Metadata,
+			Tasks:                           options.Tasks,
+			CompleteNotificationNamespaceId: options.CompleteNotificationNamespaceId,
+			AnchorTimestamp:                 &anchorTimestamp,
+			Days:                            &days,
+		},
+	)
+}
+
 func (p *MissionGroupModel) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["Name"] = p.Name
@@ -204,6 +236,12 @@ func (p *MissionGroupModel) Properties() map[string]interface{} {
 	}
 	if p.CompleteNotificationNamespaceId != nil {
 		properties["CompleteNotificationNamespaceId"] = p.CompleteNotificationNamespaceId
+	}
+	if p.AnchorTimestamp != nil {
+		properties["AnchorTimestamp"] = p.AnchorTimestamp
+	}
+	if p.Days != nil {
+		properties["Days"] = p.Days
 	}
 	return properties
 }

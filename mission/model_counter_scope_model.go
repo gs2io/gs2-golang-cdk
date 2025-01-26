@@ -37,6 +37,7 @@ const CounterScopeModelResetTypeNotReset = CounterScopeModelResetType("notReset"
 const CounterScopeModelResetTypeDaily = CounterScopeModelResetType("daily")
 const CounterScopeModelResetTypeWeekly = CounterScopeModelResetType("weekly")
 const CounterScopeModelResetTypeMonthly = CounterScopeModelResetType("monthly")
+const CounterScopeModelResetTypeDays = CounterScopeModelResetType("days")
 
 func (p CounterScopeModelResetType) Pointer() *CounterScopeModelResetType {
 	return &p
@@ -64,6 +65,8 @@ type CounterScopeModel struct {
 	ResetHour       *int32
 	ConditionName   *string
 	Condition       *VerifyAction
+	AnchorTimestamp *int64
+	Days            *int32
 }
 
 type CounterScopeModelOptions struct {
@@ -73,6 +76,8 @@ type CounterScopeModelOptions struct {
 	ResetHour       *int32
 	ConditionName   *string
 	Condition       *VerifyAction
+	AnchorTimestamp *int64
+	Days            *int32
 }
 
 func NewCounterScopeModel(
@@ -87,6 +92,8 @@ func NewCounterScopeModel(
 		ResetHour:       options.ResetHour,
 		ConditionName:   options.ConditionName,
 		Condition:       options.Condition,
+		AnchorTimestamp: options.AnchorTimestamp,
+		Days:            options.Days,
 	}
 	return data
 }
@@ -205,6 +212,28 @@ func NewCounterScopeModelResetTypeIsMonthly(
 	)
 }
 
+type CounterScopeModelResetTypeIsDaysOptions struct {
+}
+
+func NewCounterScopeModelResetTypeIsDays(
+	scopeType CounterScopeModelScopeType,
+	anchorTimestamp int64,
+	days int32,
+	options CounterScopeModelResetTypeIsDaysOptions,
+) CounterScopeModel {
+	return NewCounterScopeModel(
+		scopeType,
+		CounterScopeModelOptions{
+			ResetType: func() *CounterScopeModelResetType {
+				v := CounterScopeModelResetTypeDays
+				return &v
+			}(),
+			AnchorTimestamp: &anchorTimestamp,
+			Days:            &days,
+		},
+	)
+}
+
 func (p *CounterScopeModel) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["ScopeType"] = p.ScopeType
@@ -225,6 +254,12 @@ func (p *CounterScopeModel) Properties() map[string]interface{} {
 	}
 	if p.Condition != nil {
 		properties["Condition"] = p.Condition.Properties()
+	}
+	if p.AnchorTimestamp != nil {
+		properties["AnchorTimestamp"] = p.AnchorTimestamp
+	}
+	if p.Days != nil {
+		properties["Days"] = p.Days
 	}
 	return properties
 }

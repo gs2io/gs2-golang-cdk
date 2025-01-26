@@ -37,6 +37,7 @@ const MissionTaskModelTargetResetTypeNotReset = MissionTaskModelTargetResetType(
 const MissionTaskModelTargetResetTypeDaily = MissionTaskModelTargetResetType("daily")
 const MissionTaskModelTargetResetTypeWeekly = MissionTaskModelTargetResetType("weekly")
 const MissionTaskModelTargetResetTypeMonthly = MissionTaskModelTargetResetType("monthly")
+const MissionTaskModelTargetResetTypeDays = MissionTaskModelTargetResetType("days")
 
 func (p MissionTaskModelTargetResetType) Pointer() *MissionTaskModelTargetResetType {
 	return &p

@@ -37,6 +37,7 @@ const ScopedValueResetTypeNotReset = ScopedValueResetType("notReset")
 const ScopedValueResetTypeDaily = ScopedValueResetType("daily")
 const ScopedValueResetTypeWeekly = ScopedValueResetType("weekly")
 const ScopedValueResetTypeMonthly = ScopedValueResetType("monthly")
+const ScopedValueResetTypeDays = ScopedValueResetType("days")
 
 func (p ScopedValueResetType) Pointer() *ScopedValueResetType {
 	return &p

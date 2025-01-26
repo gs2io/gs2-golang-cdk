@@ -37,6 +37,7 @@ const TargetCounterModelResetTypeNotReset = TargetCounterModelResetType("notRese
 const TargetCounterModelResetTypeDaily = TargetCounterModelResetType("daily")
 const TargetCounterModelResetTypeWeekly = TargetCounterModelResetType("weekly")
 const TargetCounterModelResetTypeMonthly = TargetCounterModelResetType("monthly")
+const TargetCounterModelResetTypeDays = TargetCounterModelResetType("days")
 
 func (p TargetCounterModelResetType) Pointer() *TargetCounterModelResetType {
 	return &p
