@@ -150,6 +150,23 @@ func DecreaseCounterByUserId(
 	}
 }
 
+func ResetCounterByUserId(
+	namespaceName string,
+	counterName string,
+	scopes []ScopedValue,
+) ConsumeAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["counterName"] = counterName
+	properties["scopes"] = scopes
+	return ConsumeAction{
+		Action:  "Gs2Mission:ResetCounterByUserId",
+		Request: properties,
+	}
+}
+
 func IncreaseCounterByUserId(
 	namespaceName string,
 	counterName string,

@@ -57,6 +57,16 @@ func (p *CounterModelRef) DecreaseCounter(
 	)
 }
 
+func (p *CounterModelRef) ResetCounter(
+	scopes []ScopedValue,
+) ConsumeAction {
+	return ResetCounterByUserId(
+		p.NamespaceName,
+		p.CounterName,
+		scopes,
+	)
+}
+
 func (p *CounterModelRef) VerifyCounterValue(
 	verifyType string,
 	scopeType *string,

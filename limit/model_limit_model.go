@@ -28,6 +28,7 @@ const LimitModelResetTypeNotReset = LimitModelResetType("notReset")
 const LimitModelResetTypeDaily = LimitModelResetType("daily")
 const LimitModelResetTypeWeekly = LimitModelResetType("weekly")
 const LimitModelResetTypeMonthly = LimitModelResetType("monthly")
+const LimitModelResetTypeDays = LimitModelResetType("days")
 
 func (p LimitModelResetType) Pointer() *LimitModelResetType {
 	return &p
@@ -54,6 +55,8 @@ type LimitModel struct {
 	ResetDayOfMonth *int32
 	ResetDayOfWeek  *LimitModelResetDayOfWeek
 	ResetHour       *int32
+	AnchorTimestamp *int64
+	Days            *int32
 }
 
 type LimitModelOptions struct {
@@ -61,6 +64,8 @@ type LimitModelOptions struct {
 	ResetDayOfMonth *int32
 	ResetDayOfWeek  *LimitModelResetDayOfWeek
 	ResetHour       *int32
+	AnchorTimestamp *int64
+	Days            *int32
 }
 
 func NewLimitModel(
@@ -75,6 +80,8 @@ func NewLimitModel(
 		ResetDayOfMonth: options.ResetDayOfMonth,
 		ResetDayOfWeek:  options.ResetDayOfWeek,
 		ResetHour:       options.ResetHour,
+		AnchorTimestamp: options.AnchorTimestamp,
+		Days:            options.Days,
 	}
 	return data
 }
@@ -157,6 +164,27 @@ func NewLimitModelResetTypeIsMonthly(
 	)
 }
 
+type LimitModelResetTypeIsDaysOptions struct {
+	Metadata *string
+}
+
+func NewLimitModelResetTypeIsDays(
+	name string,
+	anchorTimestamp int64,
+	days int32,
+	options LimitModelResetTypeIsDaysOptions,
+) LimitModel {
+	return NewLimitModel(
+		name,
+		LimitModelResetTypeDays,
+		LimitModelOptions{
+			Metadata:        options.Metadata,
+			AnchorTimestamp: &anchorTimestamp,
+			Days:            &days,
+		},
+	)
+}
+
 func (p *LimitModel) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["Name"] = p.Name
@@ -172,6 +200,12 @@ func (p *LimitModel) Properties() map[string]interface{} {
 	}
 	if p.ResetHour != nil {
 		properties["ResetHour"] = p.ResetHour
+	}
+	if p.AnchorTimestamp != nil {
+		properties["AnchorTimestamp"] = p.AnchorTimestamp
+	}
+	if p.Days != nil {
+		properties["Days"] = p.Days
 	}
 	return properties
 }
