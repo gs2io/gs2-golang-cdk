@@ -62,7 +62,8 @@ func TriggerByUserId(
 	namespaceName string,
 	triggerName string,
 	triggerStrategy string,
-	ttl int32,
+	ttl *int32,
+	eventId *string,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -70,7 +71,12 @@ func TriggerByUserId(
 	properties["namespaceName"] = namespaceName
 	properties["triggerName"] = triggerName
 	properties["triggerStrategy"] = triggerStrategy
-	properties["ttl"] = ttl
+	if ttl != nil {
+		properties["ttl"] = ttl
+	}
+	if eventId != nil {
+		properties["eventId"] = eventId
+	}
 	return AcquireAction{
 		Action:  "Gs2Schedule:TriggerByUserId",
 		Request: properties,
