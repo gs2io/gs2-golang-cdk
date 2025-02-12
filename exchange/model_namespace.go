@@ -32,6 +32,7 @@ type Namespace struct {
 	TransactionSetting        TransactionSetting
 	ExchangeScript            *ScriptSetting
 	IncrementalExchangeScript *ScriptSetting
+	AcquireAwaitScript        *ScriptSetting
 	LogSetting                *LogSetting
 }
 
@@ -42,6 +43,7 @@ type NamespaceOptions struct {
 	TransactionSetting        TransactionSetting
 	ExchangeScript            *ScriptSetting
 	IncrementalExchangeScript *ScriptSetting
+	AcquireAwaitScript        *ScriptSetting
 	LogSetting                *LogSetting
 }
 
@@ -59,6 +61,7 @@ func NewNamespace(
 		TransactionSetting:        options.TransactionSetting,
 		ExchangeScript:            options.ExchangeScript,
 		IncrementalExchangeScript: options.IncrementalExchangeScript,
+		AcquireAwaitScript:        options.AcquireAwaitScript,
 		LogSetting:                options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
@@ -88,6 +91,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.IncrementalExchangeScript != nil {
 		properties["IncrementalExchangeScript"] = p.IncrementalExchangeScript.Properties()
+	}
+	if p.AcquireAwaitScript != nil {
+		properties["AcquireAwaitScript"] = p.AcquireAwaitScript.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
