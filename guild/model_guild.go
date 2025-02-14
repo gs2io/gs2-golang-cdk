@@ -14,6 +14,8 @@ or in the "license" file accompanying this file. This file is distributed
 on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 express or implied. See the License for the specific language governing
 permissions and limitations under the License.
+
+deny overwrite
 */
 
 import (
@@ -97,7 +99,7 @@ func NewGuild(
 }
 
 func (p *Guild) ResourceName() string {
-	return "Guild_Guild_" + p.GuildModelName + ':' + p.Name
+	return "Guild_Guild_" + p.GuildModelName + ":" + p.DisplayName
 }
 
 func (p *Guild) ResourceType() string {
@@ -154,7 +156,7 @@ func (p *Guild) Ref(
 	return GuildRef{
 		NamespaceName:  namespaceName,
 		GuildModelName: p.GuildModelName,
-		GuildName:      p.Name,
+		GuildName:      p.DisplayName,
 	}
 }
 
