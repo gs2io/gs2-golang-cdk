@@ -14,6 +14,8 @@ or in the "license" file accompanying this file. This file is distributed
 on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 express or implied. See the License for the specific language governing
 permissions and limitations under the License.
+
+deny overwrite
 */
 
 import (
@@ -52,9 +54,7 @@ type MissionTaskModel struct {
 	CompleteAcquireActions       []AcquireAction
 	ChallengePeriodEventId       *string
 	PremiseMissionTaskName       *string
-	CounterName                  string
 	TargetResetType              *MissionTaskModelTargetResetType
-	TargetValue                  int64
 }
 
 type MissionTaskModelOptions struct {
@@ -70,15 +70,11 @@ type MissionTaskModelOptions struct {
 func NewMissionTaskModel(
 	name string,
 	verifyCompleteType MissionTaskModelVerifyCompleteType,
-	counterName string,
-	targetValue int64,
 	options MissionTaskModelOptions,
 ) MissionTaskModel {
 	data := MissionTaskModel{
 		Name:                         name,
 		VerifyCompleteType:           verifyCompleteType,
-		CounterName:                  counterName,
-		TargetValue:                  targetValue,
 		Metadata:                     options.Metadata,
 		TargetCounter:                options.TargetCounter,
 		VerifyCompleteConsumeActions: options.VerifyCompleteConsumeActions,
@@ -101,16 +97,12 @@ type MissionTaskModelVerifyCompleteTypeIsCounterOptions struct {
 
 func NewMissionTaskModelVerifyCompleteTypeIsCounter(
 	name string,
-	counterName string,
-	targetValue int64,
 	targetCounter TargetCounterModel,
 	options MissionTaskModelVerifyCompleteTypeIsCounterOptions,
 ) MissionTaskModel {
 	return NewMissionTaskModel(
 		name,
 		MissionTaskModelVerifyCompleteTypeCounter,
-		counterName,
-		targetValue,
 		MissionTaskModelOptions{
 			Metadata:                     options.Metadata,
 			TargetCounter:                &targetCounter,
@@ -134,15 +126,11 @@ type MissionTaskModelVerifyCompleteTypeIsVerifyActionsOptions struct {
 
 func NewMissionTaskModelVerifyCompleteTypeIsVerifyActions(
 	name string,
-	counterName string,
-	targetValue int64,
 	options MissionTaskModelVerifyCompleteTypeIsVerifyActionsOptions,
 ) MissionTaskModel {
 	return NewMissionTaskModel(
 		name,
 		MissionTaskModelVerifyCompleteTypeVerifyActions,
-		counterName,
-		targetValue,
 		MissionTaskModelOptions{
 			Metadata:                     options.Metadata,
 			VerifyCompleteConsumeActions: options.VerifyCompleteConsumeActions,
@@ -184,10 +172,5 @@ func (p *MissionTaskModel) Properties() map[string]interface{} {
 	if p.PremiseMissionTaskName != nil {
 		properties["PremiseMissionTaskName"] = p.PremiseMissionTaskName
 	}
-	properties["CounterName"] = p.CounterName
-	if p.TargetResetType != nil {
-		properties["TargetResetType"] = p.TargetResetType
-	}
-	properties["TargetValue"] = p.TargetValue
 	return properties
 }
