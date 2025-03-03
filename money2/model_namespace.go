@@ -33,22 +33,32 @@ func (p NamespaceCurrencyUsagePriority) Pointer() *NamespaceCurrencyUsagePriorit
 
 type Namespace struct {
 	CdkResource
-	stack                 *Stack
-	Name                  string
-	CurrencyUsagePriority NamespaceCurrencyUsagePriority
-	Description           *string
-	SharedFreeCurrency    bool
-	PlatformSetting       PlatformSetting
-	DepositBalanceScript  *ScriptSetting
-	WithdrawBalanceScript *ScriptSetting
-	LogSetting            *LogSetting
+	stack                                *Stack
+	Name                                 string
+	CurrencyUsagePriority                NamespaceCurrencyUsagePriority
+	Description                          *string
+	SharedFreeCurrency                   bool
+	PlatformSetting                      PlatformSetting
+	DepositBalanceScript                 *ScriptSetting
+	WithdrawBalanceScript                *ScriptSetting
+	SubscribeScript                      *string
+	RenewScript                          *string
+	UnsubscribeScript                    *string
+	TakeOverScript                       *ScriptSetting
+	ChangeSubscriptionStatusNotification *NotificationSetting
+	LogSetting                           *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description           *string
-	DepositBalanceScript  *ScriptSetting
-	WithdrawBalanceScript *ScriptSetting
-	LogSetting            *LogSetting
+	Description                          *string
+	DepositBalanceScript                 *ScriptSetting
+	WithdrawBalanceScript                *ScriptSetting
+	SubscribeScript                      *string
+	RenewScript                          *string
+	UnsubscribeScript                    *string
+	TakeOverScript                       *ScriptSetting
+	ChangeSubscriptionStatusNotification *NotificationSetting
+	LogSetting                           *LogSetting
 }
 
 func NewNamespace(
@@ -60,15 +70,20 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:                 stack,
-		Name:                  name,
-		CurrencyUsagePriority: currencyUsagePriority,
-		SharedFreeCurrency:    sharedFreeCurrency,
-		PlatformSetting:       platformSetting,
-		Description:           options.Description,
-		DepositBalanceScript:  options.DepositBalanceScript,
-		WithdrawBalanceScript: options.WithdrawBalanceScript,
-		LogSetting:            options.LogSetting,
+		stack:                                stack,
+		Name:                                 name,
+		CurrencyUsagePriority:                currencyUsagePriority,
+		SharedFreeCurrency:                   sharedFreeCurrency,
+		PlatformSetting:                      platformSetting,
+		Description:                          options.Description,
+		DepositBalanceScript:                 options.DepositBalanceScript,
+		WithdrawBalanceScript:                options.WithdrawBalanceScript,
+		SubscribeScript:                      options.SubscribeScript,
+		RenewScript:                          options.RenewScript,
+		UnsubscribeScript:                    options.UnsubscribeScript,
+		TakeOverScript:                       options.TakeOverScript,
+		ChangeSubscriptionStatusNotification: options.ChangeSubscriptionStatusNotification,
+		LogSetting:                           options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
 	stack.AddResource(&data.CdkResource)
@@ -98,6 +113,21 @@ func (p *Namespace) Properties() map[string]interface{} {
 	if p.WithdrawBalanceScript != nil {
 		properties["WithdrawBalanceScript"] = p.WithdrawBalanceScript.Properties()
 	}
+	if p.SubscribeScript != nil {
+		properties["SubscribeScript"] = p.SubscribeScript
+	}
+	if p.RenewScript != nil {
+		properties["RenewScript"] = p.RenewScript
+	}
+	if p.UnsubscribeScript != nil {
+		properties["UnsubscribeScript"] = p.UnsubscribeScript
+	}
+	if p.TakeOverScript != nil {
+		properties["TakeOverScript"] = p.TakeOverScript.Properties()
+	}
+	if p.ChangeSubscriptionStatusNotification != nil {
+		properties["ChangeSubscriptionStatusNotification"] = p.ChangeSubscriptionStatusNotification.Properties()
+	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
 	}
@@ -119,12 +149,14 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 
 func (p *Namespace) MasterData(
 	storeContentModels []StoreContentModel,
+	storeSubscriptionContentModels []StoreSubscriptionContentModel,
 
 ) *Namespace {
 	NewCurrentMasterData(
 		p.stack,
 		p.Name,
 		storeContentModels,
+		storeSubscriptionContentModels,
 	).AddDependsOn(
 		p,
 	)

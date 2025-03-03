@@ -22,39 +22,33 @@ import (
 
 var _ = AcquireAction{}
 
-type GooglePlaySetting struct {
-	PackageName     *string
-	PublicKey       *string
-	CredentialsJSON *string
+type GooglePlayRealtimeNotificationMessage struct {
+	Data        string
+	MessageId   string
+	PublishTime string
 }
 
-type GooglePlaySettingOptions struct {
-	PackageName     *string
-	PublicKey       *string
-	CredentialsJSON *string
+type GooglePlayRealtimeNotificationMessageOptions struct {
 }
 
-func NewGooglePlaySetting(
-	options GooglePlaySettingOptions,
-) GooglePlaySetting {
-	data := GooglePlaySetting{
-		PackageName:     options.PackageName,
-		PublicKey:       options.PublicKey,
-		CredentialsJSON: options.CredentialsJSON,
+func NewGooglePlayRealtimeNotificationMessage(
+	data string,
+	messageId string,
+	publishTime string,
+	options GooglePlayRealtimeNotificationMessageOptions,
+) GooglePlayRealtimeNotificationMessage {
+	data := GooglePlayRealtimeNotificationMessage{
+		Data:        data,
+		MessageId:   messageId,
+		PublishTime: publishTime,
 	}
 	return data
 }
 
-func (p *GooglePlaySetting) Properties() map[string]interface{} {
+func (p *GooglePlayRealtimeNotificationMessage) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	if p.PackageName != nil {
-		properties["PackageName"] = p.PackageName
-	}
-	if p.PublicKey != nil {
-		properties["PublicKey"] = p.PublicKey
-	}
-	if p.CredentialsJSON != nil {
-		properties["CredentialsJSON"] = p.CredentialsJSON
-	}
+	properties["Data"] = p.Data
+	properties["MessageId"] = p.MessageId
+	properties["PublishTime"] = p.PublishTime
 	return properties
 }

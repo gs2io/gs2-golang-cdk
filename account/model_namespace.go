@@ -33,6 +33,7 @@ type Namespace struct {
 	AuthenticationScript                    *ScriptSetting
 	CreateTakeOverScript                    *ScriptSetting
 	DoTakeOverScript                        *ScriptSetting
+	BanScript                               *ScriptSetting
 	LogSetting                              *LogSetting
 }
 
@@ -44,6 +45,7 @@ type NamespaceOptions struct {
 	AuthenticationScript                    *ScriptSetting
 	CreateTakeOverScript                    *ScriptSetting
 	DoTakeOverScript                        *ScriptSetting
+	BanScript                               *ScriptSetting
 	LogSetting                              *LogSetting
 }
 
@@ -62,6 +64,7 @@ func NewNamespace(
 		AuthenticationScript:                    options.AuthenticationScript,
 		CreateTakeOverScript:                    options.CreateTakeOverScript,
 		DoTakeOverScript:                        options.DoTakeOverScript,
+		BanScript:                               options.BanScript,
 		LogSetting:                              options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
@@ -96,6 +99,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.DoTakeOverScript != nil {
 		properties["DoTakeOverScript"] = p.DoTakeOverScript.Properties()
+	}
+	if p.BanScript != nil {
+		properties["BanScript"] = p.BanScript.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
