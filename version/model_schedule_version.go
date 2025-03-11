@@ -39,13 +39,13 @@ func NewScheduleVersion(
 	errorVersion Version,
 	options ScheduleVersionOptions,
 ) ScheduleVersion {
-	data := ScheduleVersion{
+	_data := ScheduleVersion{
 		CurrentVersion:  currentVersion,
 		WarningVersion:  warningVersion,
 		ErrorVersion:    errorVersion,
 		ScheduleEventId: options.ScheduleEventId,
 	}
-	return data
+	return _data
 }
 
 func (p *ScheduleVersion) Properties() map[string]interface{} {

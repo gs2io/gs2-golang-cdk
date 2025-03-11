@@ -35,11 +35,11 @@ func NewInGameLogTag(
 	value string,
 	options InGameLogTagOptions,
 ) InGameLogTag {
-	data := InGameLogTag{
+	_data := InGameLogTag{
 		Key:   key,
 		Value: value,
 	}
-	return data
+	return _data
 }
 
 func (p *InGameLogTag) Properties() map[string]interface{} {

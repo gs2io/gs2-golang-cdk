@@ -53,7 +53,7 @@ func NewGuildModel(
 	rejoinCoolTimeMinutes int32,
 	options GuildModelOptions,
 ) GuildModel {
-	data := GuildModel{
+	_data := GuildModel{
 		Name:                          name,
 		DefaultMaximumMemberCount:     defaultMaximumMemberCount,
 		MaximumMemberCount:            maximumMemberCount,
@@ -66,7 +66,7 @@ func NewGuildModel(
 		MaxConcurrentJoinGuilds:       options.MaxConcurrentJoinGuilds,
 		MaxConcurrentGuildMasterCount: options.MaxConcurrentGuildMasterCount,
 	}
-	return data
+	return _data
 }
 
 func (p *GuildModel) Properties() map[string]interface{} {

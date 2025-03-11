@@ -35,11 +35,11 @@ func NewStatus(
 	versionModel VersionModel,
 	options StatusOptions,
 ) Status {
-	data := Status{
+	_data := Status{
 		VersionModel:   versionModel,
 		CurrentVersion: options.CurrentVersion,
 	}
-	return data
+	return _data
 }
 
 func (p *Status) Properties() map[string]interface{} {

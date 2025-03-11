@@ -45,7 +45,7 @@ func NewRandomDisplayItemModel(
 	weight int32,
 	options RandomDisplayItemModelOptions,
 ) RandomDisplayItemModel {
-	data := RandomDisplayItemModel{
+	_data := RandomDisplayItemModel{
 		Name:           name,
 		AcquireActions: acquireActions,
 		Stock:          stock,
@@ -54,7 +54,7 @@ func NewRandomDisplayItemModel(
 		VerifyActions:  options.VerifyActions,
 		ConsumeActions: options.ConsumeActions,
 	}
-	return data
+	return _data
 }
 
 func (p *RandomDisplayItemModel) Properties() map[string]interface{} {

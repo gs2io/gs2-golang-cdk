@@ -50,14 +50,14 @@ func NewBalanceParameterModel(
 	parameters []BalanceParameterValueModel,
 	options BalanceParameterModelOptions,
 ) BalanceParameterModel {
-	data := BalanceParameterModel{
+	_data := BalanceParameterModel{
 		Name:                 name,
 		TotalValue:           totalValue,
 		InitialValueStrategy: initialValueStrategy,
 		Parameters:           parameters,
 		Metadata:             options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *BalanceParameterModel) Properties() map[string]interface{} {

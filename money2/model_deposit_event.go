@@ -37,12 +37,12 @@ func NewDepositEvent(
 	status WalletSummary,
 	options DepositEventOptions,
 ) DepositEvent {
-	data := DepositEvent{
+	_data := DepositEvent{
 		Slot:                slot,
 		Status:              status,
 		DepositTransactions: options.DepositTransactions,
 	}
-	return data
+	return _data
 }
 
 func (p *DepositEvent) Properties() map[string]interface{} {

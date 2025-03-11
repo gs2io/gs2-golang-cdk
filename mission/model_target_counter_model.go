@@ -62,14 +62,14 @@ func NewTargetCounterModel(
 	value int64,
 	options TargetCounterModelOptions,
 ) TargetCounterModel {
-	data := TargetCounterModel{
+	_data := TargetCounterModel{
 		CounterName:   counterName,
 		ScopeType:     scopeType,
 		Value:         value,
 		ResetType:     options.ResetType,
 		ConditionName: options.ConditionName,
 	}
-	return data
+	return _data
 }
 
 type TargetCounterModelScopeTypeIsResetTimingOptions struct {

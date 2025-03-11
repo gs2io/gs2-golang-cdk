@@ -35,11 +35,11 @@ func NewNotificationType(
 	enableTransferMobilePushNotification bool,
 	options NotificationTypeOptions,
 ) NotificationType {
-	data := NotificationType{
+	_data := NotificationType{
 		Category:                             category,
 		EnableTransferMobilePushNotification: enableTransferMobilePushNotification,
 	}
-	return data
+	return _data
 }
 
 func (p *NotificationType) Properties() map[string]interface{} {

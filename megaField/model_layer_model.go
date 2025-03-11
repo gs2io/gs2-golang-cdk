@@ -35,11 +35,11 @@ func NewLayerModel(
 	name string,
 	options LayerModelOptions,
 ) LayerModel {
-	data := LayerModel{
+	_data := LayerModel{
 		Name:     name,
 		Metadata: options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *LayerModel) Properties() map[string]interface{} {

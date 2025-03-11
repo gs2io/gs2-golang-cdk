@@ -45,13 +45,13 @@ func NewReward(
 	value int32,
 	options RewardOptions,
 ) Reward {
-	data := Reward{
+	_data := Reward{
 		Action:  action,
 		Request: request,
 		ItemId:  itemId,
 		Value:   value,
 	}
-	return data
+	return _data
 }
 
 func (p *Reward) Properties() map[string]interface{} {

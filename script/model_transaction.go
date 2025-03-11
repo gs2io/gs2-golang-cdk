@@ -39,13 +39,13 @@ type TransactionOptions struct {
 func NewTransaction(
 	options TransactionOptions,
 ) Transaction {
-	data := Transaction{
+	_data := Transaction{
 		TransactionId:  options.TransactionId,
 		VerifyActions:  options.VerifyActions,
 		ConsumeActions: options.ConsumeActions,
 		AcquireActions: options.AcquireActions,
 	}
-	return data
+	return _data
 }
 
 func (p *Transaction) Properties() map[string]interface{} {

@@ -41,14 +41,14 @@ func NewPlayer(
 	createdAt int64,
 	options PlayerOptions,
 ) Player {
-	data := Player{
+	_data := Player{
 		UserId:      userId,
 		RoleName:    roleName,
 		CreatedAt:   createdAt,
 		Attributes:  options.Attributes,
 		DenyUserIds: options.DenyUserIds,
 	}
-	return data
+	return _data
 }
 
 func (p *Player) Properties() map[string]interface{} {

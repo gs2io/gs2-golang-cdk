@@ -49,13 +49,13 @@ func NewRefundEvent(
 	platform RefundEventPlatform,
 	options RefundEventOptions,
 ) RefundEvent {
-	data := RefundEvent{
+	_data := RefundEvent{
 		ContentName:              contentName,
 		Platform:                 platform,
 		AppleAppStoreRefundEvent: options.AppleAppStoreRefundEvent,
 		GooglePlayRefundEvent:    options.GooglePlayRefundEvent,
 	}
-	return data
+	return _data
 }
 
 func (p *RefundEvent) Properties() map[string]interface{} {

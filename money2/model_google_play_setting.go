@@ -23,26 +23,23 @@ import (
 var _ = AcquireAction{}
 
 type GooglePlaySetting struct {
-	PackageName     *string
-	PublicKey       *string
-	CredentialsJSON *string
+	PackageName *string
+	PublicKey   *string
 }
 
 type GooglePlaySettingOptions struct {
-	PackageName     *string
-	PublicKey       *string
-	CredentialsJSON *string
+	PackageName *string
+	PublicKey   *string
 }
 
 func NewGooglePlaySetting(
 	options GooglePlaySettingOptions,
 ) GooglePlaySetting {
-	data := GooglePlaySetting{
-		PackageName:     options.PackageName,
-		PublicKey:       options.PublicKey,
-		CredentialsJSON: options.CredentialsJSON,
+	_data := GooglePlaySetting{
+		PackageName: options.PackageName,
+		PublicKey:   options.PublicKey,
 	}
-	return data
+	return _data
 }
 
 func (p *GooglePlaySetting) Properties() map[string]interface{} {
@@ -52,9 +49,6 @@ func (p *GooglePlaySetting) Properties() map[string]interface{} {
 	}
 	if p.PublicKey != nil {
 		properties["PublicKey"] = p.PublicKey
-	}
-	if p.CredentialsJSON != nil {
-		properties["CredentialsJSON"] = p.CredentialsJSON
 	}
 	return properties
 }

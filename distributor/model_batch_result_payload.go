@@ -37,12 +37,12 @@ func NewBatchResultPayload(
 	resultPayload string,
 	options BatchResultPayloadOptions,
 ) BatchResultPayload {
-	data := BatchResultPayload{
+	_data := BatchResultPayload{
 		RequestId:     requestId,
 		StatusCode:    statusCode,
 		ResultPayload: resultPayload,
 	}
-	return data
+	return _data
 }
 
 func (p *BatchResultPayload) Properties() map[string]interface{} {

@@ -37,12 +37,12 @@ func NewVersion(
 	micro int32,
 	options VersionOptions,
 ) Version {
-	data := Version{
+	_data := Version{
 		Major: major,
 		Minor: minor,
 		Micro: micro,
 	}
-	return data
+	return _data
 }
 
 func (p *Version) Properties() map[string]interface{} {

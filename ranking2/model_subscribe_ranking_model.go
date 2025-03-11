@@ -56,7 +56,7 @@ func NewSubscribeRankingModel(
 	orderDirection SubscribeRankingModelOrderDirection,
 	options SubscribeRankingModelOptions,
 ) SubscribeRankingModel {
-	data := SubscribeRankingModel{
+	_data := SubscribeRankingModel{
 		Name:                name,
 		Sum:                 sum,
 		OrderDirection:      orderDirection,
@@ -66,7 +66,7 @@ func NewSubscribeRankingModel(
 		EntryPeriodEventId:  options.EntryPeriodEventId,
 		AccessPeriodEventId: options.AccessPeriodEventId,
 	}
-	return data
+	return _data
 }
 
 func (p *SubscribeRankingModel) Properties() map[string]interface{} {

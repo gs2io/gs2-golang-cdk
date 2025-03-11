@@ -33,10 +33,10 @@ type AppleAppStoreContentOptions struct {
 func NewAppleAppStoreContent(
 	options AppleAppStoreContentOptions,
 ) AppleAppStoreContent {
-	data := AppleAppStoreContent{
+	_data := AppleAppStoreContent{
 		ProductId: options.ProductId,
 	}
-	return data
+	return _data
 }
 
 func (p *AppleAppStoreContent) Properties() map[string]interface{} {

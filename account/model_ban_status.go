@@ -37,12 +37,12 @@ func NewBanStatus(
 	releaseTimestamp int64,
 	options BanStatusOptions,
 ) BanStatus {
-	data := BanStatus{
+	_data := BanStatus{
 		Name:             name,
 		Reason:           reason,
 		ReleaseTimestamp: releaseTimestamp,
 	}
-	return data
+	return _data
 }
 
 func (p *BanStatus) Properties() map[string]interface{} {

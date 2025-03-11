@@ -45,7 +45,7 @@ func NewNodeModel(
 	restrainReturnRate float32,
 	options NodeModelOptions,
 ) NodeModel {
-	data := NodeModel{
+	_data := NodeModel{
 		Name:                  name,
 		ReleaseConsumeActions: releaseConsumeActions,
 		RestrainReturnRate:    restrainReturnRate,
@@ -54,7 +54,7 @@ func NewNodeModel(
 		ReturnAcquireActions:  options.ReturnAcquireActions,
 		PremiseNodeNames:      options.PremiseNodeNames,
 	}
-	return data
+	return _data
 }
 
 func (p *NodeModel) Properties() map[string]interface{} {

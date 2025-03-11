@@ -35,11 +35,11 @@ type ViewOptions struct {
 func NewView(
 	options ViewOptions,
 ) View {
-	data := View{
+	_data := View{
 		Contents:       options.Contents,
 		RemoveContents: options.RemoveContents,
 	}
-	return data
+	return _data
 }
 
 func (p *View) Properties() map[string]interface{} {

@@ -39,13 +39,13 @@ func NewDistributorModel(
 	name string,
 	options DistributorModelOptions,
 ) DistributorModel {
-	data := DistributorModel{
+	_data := DistributorModel{
 		Name:               name,
 		Metadata:           options.Metadata,
 		InboxNamespaceId:   options.InboxNamespaceId,
 		WhiteListTargetIds: options.WhiteListTargetIds,
 	}
-	return data
+	return _data
 }
 
 func (p *DistributorModel) Properties() map[string]interface{} {

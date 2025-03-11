@@ -42,10 +42,10 @@ func NewAppleAppStoreVerifyReceiptEvent(
 	environment AppleAppStoreVerifyReceiptEventEnvironment,
 	options AppleAppStoreVerifyReceiptEventOptions,
 ) AppleAppStoreVerifyReceiptEvent {
-	data := AppleAppStoreVerifyReceiptEvent{
+	_data := AppleAppStoreVerifyReceiptEvent{
 		Environment: environment,
 	}
-	return data
+	return _data
 }
 
 func (p *AppleAppStoreVerifyReceiptEvent) Properties() map[string]interface{} {

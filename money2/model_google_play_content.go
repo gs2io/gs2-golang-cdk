@@ -33,10 +33,10 @@ type GooglePlayContentOptions struct {
 func NewGooglePlayContent(
 	options GooglePlayContentOptions,
 ) GooglePlayContent {
-	data := GooglePlayContent{
+	_data := GooglePlayContent{
 		ProductId: options.ProductId,
 	}
-	return data
+	return _data
 }
 
 func (p *GooglePlayContent) Properties() map[string]interface{} {

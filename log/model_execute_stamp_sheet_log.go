@@ -45,7 +45,7 @@ func NewExecuteStampSheetLog(
 	args string,
 	options ExecuteStampSheetLogOptions,
 ) ExecuteStampSheetLog {
-	data := ExecuteStampSheetLog{
+	_data := ExecuteStampSheetLog{
 		Timestamp:     timestamp,
 		TransactionId: transactionId,
 		Service:       service,
@@ -54,7 +54,7 @@ func NewExecuteStampSheetLog(
 		Action:        action,
 		Args:          args,
 	}
-	return data
+	return _data
 }
 
 func (p *ExecuteStampSheetLog) Properties() map[string]interface{} {

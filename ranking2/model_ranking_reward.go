@@ -37,12 +37,12 @@ func NewRankingReward(
 	thresholdRank int32,
 	options RankingRewardOptions,
 ) RankingReward {
-	data := RankingReward{
+	_data := RankingReward{
 		ThresholdRank:  thresholdRank,
 		Metadata:       options.Metadata,
 		AcquireActions: options.AcquireActions,
 	}
-	return data
+	return _data
 }
 
 func (p *RankingReward) Properties() map[string]interface{} {

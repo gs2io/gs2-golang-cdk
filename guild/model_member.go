@@ -39,13 +39,13 @@ func NewMember(
 	joinedAt int64,
 	options MemberOptions,
 ) Member {
-	data := Member{
+	_data := Member{
 		UserId:   userId,
 		RoleName: roleName,
 		JoinedAt: joinedAt,
 		Metadata: options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *Member) Properties() map[string]interface{} {

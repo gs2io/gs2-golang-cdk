@@ -37,12 +37,12 @@ func NewLogCost(
 	adds []float64,
 	options LogCostOptions,
 ) LogCost {
-	data := LogCost{
+	_data := LogCost{
 		Base: base,
 		Adds: adds,
 		Subs: options.Subs,
 	}
-	return data
+	return _data
 }
 
 func (p *LogCost) Properties() map[string]interface{} {

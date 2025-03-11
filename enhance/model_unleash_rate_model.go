@@ -43,7 +43,7 @@ func NewUnleashRateModel(
 	gradeEntries []UnleashRateEntryModel,
 	options UnleashRateModelOptions,
 ) UnleashRateModel {
-	data := UnleashRateModel{
+	_data := UnleashRateModel{
 		Name:                   name,
 		TargetInventoryModelId: targetInventoryModelId,
 		GradeModelId:           gradeModelId,
@@ -51,7 +51,7 @@ func NewUnleashRateModel(
 		Description:            options.Description,
 		Metadata:               options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *UnleashRateModel) Properties() map[string]interface{} {

@@ -33,10 +33,10 @@ type ProjectTokenOptions struct {
 func NewProjectToken(
 	options ProjectTokenOptions,
 ) ProjectToken {
-	data := ProjectToken{
+	_data := ProjectToken{
 		Token: options.Token,
 	}
-	return data
+	return _data
 }
 
 func (p *ProjectToken) Properties() map[string]interface{} {

@@ -33,10 +33,10 @@ type GooglePlayVerifyReceiptEventOptions struct {
 func NewGooglePlayVerifyReceiptEvent(
 	options GooglePlayVerifyReceiptEventOptions,
 ) GooglePlayVerifyReceiptEvent {
-	data := GooglePlayVerifyReceiptEvent{
+	_data := GooglePlayVerifyReceiptEvent{
 		PurchaseToken: options.PurchaseToken,
 	}
-	return data
+	return _data
 }
 
 func (p *GooglePlayVerifyReceiptEvent) Properties() map[string]interface{} {

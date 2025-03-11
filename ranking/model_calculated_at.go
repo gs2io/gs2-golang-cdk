@@ -35,11 +35,11 @@ func NewCalculatedAt(
 	calculatedAt int64,
 	options CalculatedAtOptions,
 ) CalculatedAt {
-	data := CalculatedAt{
+	_data := CalculatedAt{
 		CategoryName: categoryName,
 		CalculatedAt: calculatedAt,
 	}
-	return data
+	return _data
 }
 
 func (p *CalculatedAt) Properties() map[string]interface{} {

@@ -37,12 +37,12 @@ func NewAreaModel(
 	name string,
 	options AreaModelOptions,
 ) AreaModel {
-	data := AreaModel{
+	_data := AreaModel{
 		Name:        name,
 		Metadata:    options.Metadata,
 		LayerModels: options.LayerModels,
 	}
-	return data
+	return _data
 }
 
 func (p *AreaModel) Properties() map[string]interface{} {

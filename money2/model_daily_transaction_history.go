@@ -47,7 +47,7 @@ func NewDailyTransactionHistory(
 	updatedAt int64,
 	options DailyTransactionHistoryOptions,
 ) DailyTransactionHistory {
-	data := DailyTransactionHistory{
+	_data := DailyTransactionHistory{
 		Year:           year,
 		Month:          month,
 		Day:            day,
@@ -57,7 +57,7 @@ func NewDailyTransactionHistory(
 		UpdatedAt:      updatedAt,
 		Revision:       options.Revision,
 	}
-	return data
+	return _data
 }
 
 func (p *DailyTransactionHistory) Properties() map[string]interface{} {

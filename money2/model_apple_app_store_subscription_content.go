@@ -33,10 +33,10 @@ type AppleAppStoreSubscriptionContentOptions struct {
 func NewAppleAppStoreSubscriptionContent(
 	options AppleAppStoreSubscriptionContentOptions,
 ) AppleAppStoreSubscriptionContent {
-	data := AppleAppStoreSubscriptionContent{
+	_data := AppleAppStoreSubscriptionContent{
 		SubscriptionGroupIdentifier: options.SubscriptionGroupIdentifier,
 	}
-	return data
+	return _data
 }
 
 func (p *AppleAppStoreSubscriptionContent) Properties() map[string]interface{} {

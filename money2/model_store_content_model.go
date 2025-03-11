@@ -39,13 +39,13 @@ func NewStoreContentModel(
 	name string,
 	options StoreContentModelOptions,
 ) StoreContentModel {
-	data := StoreContentModel{
+	_data := StoreContentModel{
 		Name:          name,
 		Metadata:      options.Metadata,
 		AppleAppStore: options.AppleAppStore,
 		GooglePlay:    options.GooglePlay,
 	}
-	return data
+	return _data
 }
 
 func (p *StoreContentModel) Properties() map[string]interface{} {

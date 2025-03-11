@@ -47,7 +47,7 @@ func NewIssueStampSheetLog(
 	args string,
 	options IssueStampSheetLogOptions,
 ) IssueStampSheetLog {
-	data := IssueStampSheetLog{
+	_data := IssueStampSheetLog{
 		Timestamp:     timestamp,
 		TransactionId: transactionId,
 		Service:       service,
@@ -57,7 +57,7 @@ func NewIssueStampSheetLog(
 		Args:          args,
 		Tasks:         options.Tasks,
 	}
-	return data
+	return _data
 }
 
 func (p *IssueStampSheetLog) Properties() map[string]interface{} {

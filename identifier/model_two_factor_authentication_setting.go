@@ -44,11 +44,11 @@ func NewTwoFactorAuthenticationSetting(
 	status TwoFactorAuthenticationSettingStatus,
 	options TwoFactorAuthenticationSettingOptions,
 ) TwoFactorAuthenticationSetting {
-	data := TwoFactorAuthenticationSetting{
+	_data := TwoFactorAuthenticationSetting{
 		AuthenticationKey: authenticationKey,
 		Status:            status,
 	}
-	return data
+	return _data
 }
 
 func (p *TwoFactorAuthenticationSetting) Properties() map[string]interface{} {

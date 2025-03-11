@@ -35,11 +35,11 @@ func NewRandomUsed(
 	used int64,
 	options RandomUsedOptions,
 ) RandomUsed {
-	data := RandomUsed{
+	_data := RandomUsed{
 		Category: category,
 		Used:     used,
 	}
-	return data
+	return _data
 }
 
 func (p *RandomUsed) Properties() map[string]interface{} {

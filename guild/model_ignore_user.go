@@ -35,11 +35,11 @@ func NewIgnoreUser(
 	createdAt int64,
 	options IgnoreUserOptions,
 ) IgnoreUser {
-	data := IgnoreUser{
+	_data := IgnoreUser{
 		UserId:    userId,
 		CreatedAt: createdAt,
 	}
-	return data
+	return _data
 }
 
 func (p *IgnoreUser) Properties() map[string]interface{} {

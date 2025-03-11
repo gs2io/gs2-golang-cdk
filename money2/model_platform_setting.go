@@ -37,12 +37,12 @@ type PlatformSettingOptions struct {
 func NewPlatformSetting(
 	options PlatformSettingOptions,
 ) PlatformSetting {
-	data := PlatformSetting{
+	_data := PlatformSetting{
 		AppleAppStore: options.AppleAppStore,
 		GooglePlay:    options.GooglePlay,
 		Fake:          options.Fake,
 	}
-	return data
+	return _data
 }
 
 func (p *PlatformSetting) Properties() map[string]interface{} {

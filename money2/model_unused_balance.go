@@ -39,13 +39,13 @@ func NewUnusedBalance(
 	updatedAt int64,
 	options UnusedBalanceOptions,
 ) UnusedBalance {
-	data := UnusedBalance{
+	_data := UnusedBalance{
 		Currency:  currency,
 		Balance:   balance,
 		UpdatedAt: updatedAt,
 		Revision:  options.Revision,
 	}
-	return data
+	return _data
 }
 
 func (p *UnusedBalance) Properties() map[string]interface{} {

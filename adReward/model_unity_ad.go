@@ -33,10 +33,10 @@ type UnityAdOptions struct {
 func NewUnityAd(
 	options UnityAdOptions,
 ) UnityAd {
-	data := UnityAd{
+	_data := UnityAd{
 		Keys: options.Keys,
 	}
-	return data
+	return _data
 }
 
 func (p *UnityAd) Properties() map[string]interface{} {

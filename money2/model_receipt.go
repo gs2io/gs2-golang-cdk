@@ -47,12 +47,12 @@ func NewReceipt(
 	payload string,
 	options ReceiptOptions,
 ) Receipt {
-	data := Receipt{
+	_data := Receipt{
 		Store:         store,
 		TransactionID: transactionID,
 		Payload:       payload,
 	}
-	return data
+	return _data
 }
 
 func (p *Receipt) Properties() map[string]interface{} {

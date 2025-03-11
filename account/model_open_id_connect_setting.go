@@ -49,7 +49,7 @@ func NewOpenIdConnectSetting(
 	clientId string,
 	options OpenIdConnectSettingOptions,
 ) OpenIdConnectSetting {
-	data := OpenIdConnectSetting{
+	_data := OpenIdConnectSetting{
 		ConfigurationPath:      configurationPath,
 		ClientId:               clientId,
 		ClientSecret:           options.ClientSecret,
@@ -60,7 +60,7 @@ func NewOpenIdConnectSetting(
 		AdditionalScopeValues:  options.AdditionalScopeValues,
 		AdditionalReturnValues: options.AdditionalReturnValues,
 	}
-	return data
+	return _data
 }
 
 func (p *OpenIdConnectSetting) Properties() map[string]interface{} {

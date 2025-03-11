@@ -35,11 +35,11 @@ func NewDrawnPrize(
 	prizeId string,
 	options DrawnPrizeOptions,
 ) DrawnPrize {
-	data := DrawnPrize{
+	_data := DrawnPrize{
 		PrizeId:        prizeId,
 		AcquireActions: options.AcquireActions,
 	}
-	return data
+	return _data
 }
 
 func (p *DrawnPrize) Properties() map[string]interface{} {

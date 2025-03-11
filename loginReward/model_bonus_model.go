@@ -78,7 +78,7 @@ func NewBonusModel(
 	missedReceiveRelief BonusModelMissedReceiveRelief,
 	options BonusModelOptions,
 ) BonusModel {
-	data := BonusModel{
+	_data := BonusModel{
 		Name:                              name,
 		Mode:                              mode,
 		MissedReceiveRelief:               missedReceiveRelief,
@@ -90,7 +90,7 @@ func NewBonusModel(
 		MissedReceiveReliefVerifyActions:  options.MissedReceiveReliefVerifyActions,
 		MissedReceiveReliefConsumeActions: options.MissedReceiveReliefConsumeActions,
 	}
-	return data
+	return _data
 }
 
 type BonusModelModeIsScheduleOptions struct {

@@ -41,14 +41,14 @@ func NewRepeatSchedule(
 	repeatCount int32,
 	options RepeatScheduleOptions,
 ) RepeatSchedule {
-	data := RepeatSchedule{
+	_data := RepeatSchedule{
 		RepeatCount:          repeatCount,
 		CurrentRepeatStartAt: options.CurrentRepeatStartAt,
 		CurrentRepeatEndAt:   options.CurrentRepeatEndAt,
 		LastRepeatEndAt:      options.LastRepeatEndAt,
 		NextRepeatStartAt:    options.NextRepeatStartAt,
 	}
-	return data
+	return _data
 }
 
 func (p *RepeatSchedule) Properties() map[string]interface{} {

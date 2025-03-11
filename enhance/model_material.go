@@ -35,11 +35,11 @@ func NewMaterial(
 	count int32,
 	options MaterialOptions,
 ) Material {
-	data := Material{
+	_data := Material{
 		MaterialItemSetId: materialItemSetId,
 		Count:             count,
 	}
-	return data
+	return _data
 }
 
 func (p *Material) Properties() map[string]interface{} {

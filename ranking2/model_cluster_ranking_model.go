@@ -81,7 +81,7 @@ func NewClusterRankingModel(
 	rewardCalculationIndex ClusterRankingModelRewardCalculationIndex,
 	options ClusterRankingModelOptions,
 ) ClusterRankingModel {
-	data := ClusterRankingModel{
+	_data := ClusterRankingModel{
 		Name:                   name,
 		ClusterType:            clusterType,
 		Sum:                    sum,
@@ -94,7 +94,7 @@ func NewClusterRankingModel(
 		RankingRewards:         options.RankingRewards,
 		AccessPeriodEventId:    options.AccessPeriodEventId,
 	}
-	return data
+	return _data
 }
 
 func (p *ClusterRankingModel) Properties() map[string]interface{} {

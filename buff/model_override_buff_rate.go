@@ -35,11 +35,11 @@ func NewOverrideBuffRate(
 	rate float32,
 	options OverrideBuffRateOptions,
 ) OverrideBuffRate {
-	data := OverrideBuffRate{
+	_data := OverrideBuffRate{
 		Name: name,
 		Rate: rate,
 	}
-	return data
+	return _data
 }
 
 func (p *OverrideBuffRate) Properties() map[string]interface{} {

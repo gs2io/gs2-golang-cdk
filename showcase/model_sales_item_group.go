@@ -37,12 +37,12 @@ func NewSalesItemGroup(
 	salesItems []SalesItem,
 	options SalesItemGroupOptions,
 ) SalesItemGroup {
-	data := SalesItemGroup{
+	_data := SalesItemGroup{
 		Name:       name,
 		SalesItems: salesItems,
 		Metadata:   options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *SalesItemGroup) Properties() map[string]interface{} {

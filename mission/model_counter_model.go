@@ -39,13 +39,13 @@ func NewCounterModel(
 	scopes []CounterScopeModel,
 	options CounterModelOptions,
 ) CounterModel {
-	data := CounterModel{
+	_data := CounterModel{
 		Name:                   name,
 		Scopes:                 scopes,
 		Metadata:               options.Metadata,
 		ChallengePeriodEventId: options.ChallengePeriodEventId,
 	}
-	return data
+	return _data
 }
 
 func (p *CounterModel) Properties() map[string]interface{} {

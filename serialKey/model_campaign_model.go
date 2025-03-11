@@ -37,12 +37,12 @@ func NewCampaignModel(
 	enableCampaignCode bool,
 	options CampaignModelOptions,
 ) CampaignModel {
-	data := CampaignModel{
+	_data := CampaignModel{
 		Name:               name,
 		EnableCampaignCode: enableCampaignCode,
 		Metadata:           options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *CampaignModel) Properties() map[string]interface{} {

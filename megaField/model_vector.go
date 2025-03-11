@@ -37,12 +37,12 @@ func NewVector(
 	z float32,
 	options VectorOptions,
 ) Vector {
-	data := Vector{
+	_data := Vector{
 		X: x,
 		Y: y,
 		Z: z,
 	}
-	return data
+	return _data
 }
 
 func (p *Vector) Properties() map[string]interface{} {

@@ -43,7 +43,7 @@ func NewGlobalMessage(
 	metadata string,
 	options GlobalMessageOptions,
 ) GlobalMessage {
-	data := GlobalMessage{
+	_data := GlobalMessage{
 		Name:                          name,
 		Metadata:                      metadata,
 		ReadAcquireActions:            options.ReadAcquireActions,
@@ -51,7 +51,7 @@ func NewGlobalMessage(
 		ExpiresAt:                     options.ExpiresAt,
 		MessageReceptionPeriodEventId: options.MessageReceptionPeriodEventId,
 	}
-	return data
+	return _data
 }
 
 func (p *GlobalMessage) Properties() map[string]interface{} {

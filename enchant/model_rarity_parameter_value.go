@@ -37,12 +37,12 @@ func NewRarityParameterValue(
 	resourceValue int64,
 	options RarityParameterValueOptions,
 ) RarityParameterValue {
-	data := RarityParameterValue{
+	_data := RarityParameterValue{
 		Name:          name,
 		ResourceName:  resourceName,
 		ResourceValue: resourceValue,
 	}
-	return data
+	return _data
 }
 
 func (p *RarityParameterValue) Properties() map[string]interface{} {

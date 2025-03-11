@@ -79,7 +79,7 @@ func NewSubscribeTransaction(
 	updatedAt int64,
 	options SubscribeTransactionOptions,
 ) SubscribeTransaction {
-	data := SubscribeTransaction{
+	_data := SubscribeTransaction{
 		ContentName:     contentName,
 		TransactionId:   transactionId,
 		Store:           store,
@@ -92,7 +92,7 @@ func NewSubscribeTransaction(
 		LastTakeOverAt:  options.LastTakeOverAt,
 		Revision:        options.Revision,
 	}
-	return data
+	return _data
 }
 
 func (p *SubscribeTransaction) Properties() map[string]interface{} {

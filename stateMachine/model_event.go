@@ -46,12 +46,12 @@ func NewEvent(
 	eventType EventEventType,
 	options EventOptions,
 ) Event {
-	data := Event{
+	_data := Event{
 		EventType:        eventType,
 		ChangeStateEvent: options.ChangeStateEvent,
 		EmitEvent:        options.EmitEvent,
 	}
-	return data
+	return _data
 }
 
 type EventEventTypeIsChangeStateOptions struct {

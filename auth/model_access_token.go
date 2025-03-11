@@ -47,7 +47,7 @@ func NewAccessToken(
 	timeOffset int32,
 	options AccessTokenOptions,
 ) AccessToken {
-	data := AccessToken{
+	_data := AccessToken{
 		OwnerId:                  ownerId,
 		Token:                    token,
 		UserId:                   userId,
@@ -57,7 +57,7 @@ func NewAccessToken(
 		FederationFromUserId:     options.FederationFromUserId,
 		FederationPolicyDocument: options.FederationPolicyDocument,
 	}
-	return data
+	return _data
 }
 
 func (p *AccessToken) Properties() map[string]interface{} {

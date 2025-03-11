@@ -54,7 +54,7 @@ func NewRateModel(
 	timingType RateModelTimingType,
 	options RateModelOptions,
 ) RateModel {
-	data := RateModel{
+	_data := RateModel{
 		Name:           name,
 		TimingType:     timingType,
 		Metadata:       options.Metadata,
@@ -63,7 +63,7 @@ func NewRateModel(
 		LockTime:       options.LockTime,
 		AcquireActions: options.AcquireActions,
 	}
-	return data
+	return _data
 }
 
 type RateModelTimingTypeIsImmediateOptions struct {

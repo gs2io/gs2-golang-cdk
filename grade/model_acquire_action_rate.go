@@ -48,13 +48,13 @@ func NewAcquireActionRate(
 	mode AcquireActionRateMode,
 	options AcquireActionRateOptions,
 ) AcquireActionRate {
-	data := AcquireActionRate{
+	_data := AcquireActionRate{
 		Name:     name,
 		Mode:     mode,
 		Rates:    options.Rates,
 		BigRates: options.BigRates,
 	}
-	return data
+	return _data
 }
 
 type AcquireActionRateModeIsDoubleOptions struct {

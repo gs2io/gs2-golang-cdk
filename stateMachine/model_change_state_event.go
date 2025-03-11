@@ -37,12 +37,12 @@ func NewChangeStateEvent(
 	timestamp int64,
 	options ChangeStateEventOptions,
 ) ChangeStateEvent {
-	data := ChangeStateEvent{
+	_data := ChangeStateEvent{
 		TaskName:  taskName,
 		Hash:      hash,
 		Timestamp: timestamp,
 	}
-	return data
+	return _data
 }
 
 func (p *ChangeStateEvent) Properties() map[string]interface{} {

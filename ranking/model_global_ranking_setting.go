@@ -43,7 +43,7 @@ func NewGlobalRankingSetting(
 	calculateIntervalMinutes int32,
 	options GlobalRankingSettingOptions,
 ) GlobalRankingSetting {
-	data := GlobalRankingSetting{
+	_data := GlobalRankingSetting{
 		UniqueByUserId:           uniqueByUserId,
 		CalculateIntervalMinutes: calculateIntervalMinutes,
 		CalculateFixedTiming:     options.CalculateFixedTiming,
@@ -51,7 +51,7 @@ func NewGlobalRankingSetting(
 		IgnoreUserIds:            options.IgnoreUserIds,
 		Generation:               options.Generation,
 	}
-	return data
+	return _data
 }
 
 func (p *GlobalRankingSetting) Properties() map[string]interface{} {

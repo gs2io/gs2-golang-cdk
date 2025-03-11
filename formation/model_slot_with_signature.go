@@ -51,14 +51,14 @@ func NewSlotWithSignature(
 	propertyType SlotWithSignaturePropertyType,
 	options SlotWithSignatureOptions,
 ) SlotWithSignature {
-	data := SlotWithSignature{
+	_data := SlotWithSignature{
 		Name:         name,
 		PropertyType: propertyType,
 		Body:         options.Body,
 		Signature:    options.Signature,
 		Metadata:     options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *SlotWithSignature) Properties() map[string]interface{} {

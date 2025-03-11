@@ -37,12 +37,12 @@ func NewAttributeRange(
 	max int32,
 	options AttributeRangeOptions,
 ) AttributeRange {
-	data := AttributeRange{
+	_data := AttributeRange{
 		Name: name,
 		Min:  min,
 		Max:  max,
 	}
-	return data
+	return _data
 }
 
 func (p *AttributeRange) Properties() map[string]interface{} {

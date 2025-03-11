@@ -41,14 +41,14 @@ func NewTierModel(
 	maximumChangePoint int32,
 	options TierModelOptions,
 ) TierModel {
-	data := TierModel{
+	_data := TierModel{
 		RaiseRankBonus:     raiseRankBonus,
 		EntryFee:           entryFee,
 		MinimumChangePoint: minimumChangePoint,
 		MaximumChangePoint: maximumChangePoint,
 		Metadata:           options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *TierModel) Properties() map[string]interface{} {

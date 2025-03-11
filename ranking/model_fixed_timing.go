@@ -35,11 +35,11 @@ type FixedTimingOptions struct {
 func NewFixedTiming(
 	options FixedTimingOptions,
 ) FixedTiming {
-	data := FixedTiming{
+	_data := FixedTiming{
 		Hour:   options.Hour,
 		Minute: options.Minute,
 	}
-	return data
+	return _data
 }
 
 func (p *FixedTiming) Properties() map[string]interface{} {

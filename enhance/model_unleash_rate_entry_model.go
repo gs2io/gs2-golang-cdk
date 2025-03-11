@@ -35,11 +35,11 @@ func NewUnleashRateEntryModel(
 	needCount int32,
 	options UnleashRateEntryModelOptions,
 ) UnleashRateEntryModel {
-	data := UnleashRateEntryModel{
+	_data := UnleashRateEntryModel{
 		GradeValue: gradeValue,
 		NeedCount:  needCount,
 	}
-	return data
+	return _data
 }
 
 func (p *UnleashRateEntryModel) Properties() map[string]interface{} {

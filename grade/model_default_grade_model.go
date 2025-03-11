@@ -35,11 +35,11 @@ func NewDefaultGradeModel(
 	defaultGradeValue int64,
 	options DefaultGradeModelOptions,
 ) DefaultGradeModel {
-	data := DefaultGradeModel{
+	_data := DefaultGradeModel{
 		PropertyIdRegex:   propertyIdRegex,
 		DefaultGradeValue: defaultGradeValue,
 	}
-	return data
+	return _data
 }
 
 func (p *DefaultGradeModel) Properties() map[string]interface{} {

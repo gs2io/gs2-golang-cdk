@@ -35,11 +35,11 @@ func NewSignedBallot(
 	signature string,
 	options SignedBallotOptions,
 ) SignedBallot {
-	data := SignedBallot{
+	_data := SignedBallot{
 		Body:      body,
 		Signature: signature,
 	}
-	return data
+	return _data
 }
 
 func (p *SignedBallot) Properties() map[string]interface{} {

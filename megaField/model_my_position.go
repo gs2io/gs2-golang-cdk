@@ -37,12 +37,12 @@ func NewMyPosition(
 	r float32,
 	options MyPositionOptions,
 ) MyPosition {
-	data := MyPosition{
+	_data := MyPosition{
 		Position: position,
 		Vector:   vector,
 		R:        r,
 	}
-	return data
+	return _data
 }
 
 func (p *MyPosition) Properties() map[string]interface{} {

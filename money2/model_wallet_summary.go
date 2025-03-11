@@ -37,12 +37,12 @@ func NewWalletSummary(
 	total int32,
 	options WalletSummaryOptions,
 ) WalletSummary {
-	data := WalletSummary{
+	_data := WalletSummary{
 		Paid:  paid,
 		Free:  free,
 		Total: total,
 	}
-	return data
+	return _data
 }
 
 func (p *WalletSummary) Properties() map[string]interface{} {

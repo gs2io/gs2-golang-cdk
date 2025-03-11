@@ -37,12 +37,12 @@ func NewTakeOverTypeModel(
 	openIdConnectSetting OpenIdConnectSetting,
 	options TakeOverTypeModelOptions,
 ) TakeOverTypeModel {
-	data := TakeOverTypeModel{
+	_data := TakeOverTypeModel{
 		Type:                 type_,
 		OpenIdConnectSetting: openIdConnectSetting,
 		Metadata:             options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *TakeOverTypeModel) Properties() map[string]interface{} {

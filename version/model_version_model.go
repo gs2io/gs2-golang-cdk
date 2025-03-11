@@ -80,7 +80,7 @@ func NewVersionModel(
 	type_ VersionModelType,
 	options VersionModelOptions,
 ) VersionModel {
-	data := VersionModel{
+	_data := VersionModel{
 		Name:               name,
 		Scope:              scope,
 		Type:               type_,
@@ -93,7 +93,7 @@ func NewVersionModel(
 		SignatureKeyId:     options.SignatureKeyId,
 		ApproveRequirement: options.ApproveRequirement,
 	}
-	return data
+	return _data
 }
 
 type VersionModelTypeIsSimpleOptions struct {

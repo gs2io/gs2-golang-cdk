@@ -37,12 +37,12 @@ func NewPrizeTable(
 	prizes []Prize,
 	options PrizeTableOptions,
 ) PrizeTable {
-	data := PrizeTable{
+	_data := PrizeTable{
 		Name:     name,
 		Prizes:   prizes,
 		Metadata: options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *PrizeTable) Properties() map[string]interface{} {

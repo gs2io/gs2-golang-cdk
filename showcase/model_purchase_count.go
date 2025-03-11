@@ -35,11 +35,11 @@ func NewPurchaseCount(
 	count int32,
 	options PurchaseCountOptions,
 ) PurchaseCount {
-	data := PurchaseCount{
+	_data := PurchaseCount{
 		Name:  name,
 		Count: count,
 	}
-	return data
+	return _data
 }
 
 func (p *PurchaseCount) Properties() map[string]interface{} {

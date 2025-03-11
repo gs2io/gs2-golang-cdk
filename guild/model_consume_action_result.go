@@ -45,13 +45,13 @@ func NewConsumeActionResult(
 	consumeRequest string,
 	options ConsumeActionResultOptions,
 ) ConsumeActionResult {
-	data := ConsumeActionResult{
+	_data := ConsumeActionResult{
 		Action:         action,
 		ConsumeRequest: consumeRequest,
 		StatusCode:     options.StatusCode,
 		ConsumeResult:  options.ConsumeResult,
 	}
-	return data
+	return _data
 }
 
 func (p *ConsumeActionResult) Properties() map[string]interface{} {

@@ -49,13 +49,13 @@ func NewVerifyReceiptEvent(
 	platform VerifyReceiptEventPlatform,
 	options VerifyReceiptEventOptions,
 ) VerifyReceiptEvent {
-	data := VerifyReceiptEvent{
+	_data := VerifyReceiptEvent{
 		ContentName:                     contentName,
 		Platform:                        platform,
 		AppleAppStoreVerifyReceiptEvent: options.AppleAppStoreVerifyReceiptEvent,
 		GooglePlayVerifyReceiptEvent:    options.GooglePlayVerifyReceiptEvent,
 	}
-	return data
+	return _data
 }
 
 func (p *VerifyReceiptEvent) Properties() map[string]interface{} {

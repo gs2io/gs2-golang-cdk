@@ -35,11 +35,11 @@ func NewGameResult(
 	userId string,
 	options GameResultOptions,
 ) GameResult {
-	data := GameResult{
+	_data := GameResult{
 		Rank:   rank,
 		UserId: userId,
 	}
-	return data
+	return _data
 }
 
 func (p *GameResult) Properties() map[string]interface{} {

@@ -39,13 +39,13 @@ func NewBoxItem(
 	initial int32,
 	options BoxItemOptions,
 ) BoxItem {
-	data := BoxItem{
+	_data := BoxItem{
 		PrizeId:        prizeId,
 		Remaining:      remaining,
 		Initial:        initial,
 		AcquireActions: options.AcquireActions,
 	}
-	return data
+	return _data
 }
 
 func (p *BoxItem) Properties() map[string]interface{} {

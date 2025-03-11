@@ -35,11 +35,11 @@ func NewAcquireCount(
 	count int64,
 	options AcquireCountOptions,
 ) AcquireCount {
-	data := AcquireCount{
+	_data := AcquireCount{
 		ItemName: itemName,
 		Count:    count,
 	}
-	return data
+	return _data
 }
 
 func (p *AcquireCount) Properties() map[string]interface{} {

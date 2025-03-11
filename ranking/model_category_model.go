@@ -83,7 +83,7 @@ func NewCategoryModel(
 	scope CategoryModelScope,
 	options CategoryModelOptions,
 ) CategoryModel {
-	data := CategoryModel{
+	_data := CategoryModel{
 		Name:                       name,
 		Sum:                        sum,
 		OrderDirection:             orderDirection,
@@ -102,7 +102,7 @@ func NewCategoryModel(
 		IgnoreUserIds:              options.IgnoreUserIds,
 		Generation:                 options.Generation,
 	}
-	return data
+	return _data
 }
 
 type CategoryModelScopeIsGlobalOptions struct {

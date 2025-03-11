@@ -49,7 +49,7 @@ func NewRateModel(
 	experienceModelId string,
 	options RateModelOptions,
 ) RateModel {
-	data := RateModel{
+	_data := RateModel{
 		Name:                       name,
 		TargetInventoryModelId:     targetInventoryModelId,
 		AcquireExperienceSuffix:    acquireExperienceSuffix,
@@ -60,7 +60,7 @@ func NewRateModel(
 		AcquireExperienceHierarchy: options.AcquireExperienceHierarchy,
 		BonusRates:                 options.BonusRates,
 	}
-	return data
+	return _data
 }
 
 func (p *RateModel) Properties() map[string]interface{} {

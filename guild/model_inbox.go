@@ -43,7 +43,7 @@ func NewInbox(
 	updatedAt int64,
 	options InboxOptions,
 ) Inbox {
-	data := Inbox{
+	_data := Inbox{
 		GuildName:             guildName,
 		CreatedAt:             createdAt,
 		UpdatedAt:             updatedAt,
@@ -51,7 +51,7 @@ func NewInbox(
 		ReceiveMemberRequests: options.ReceiveMemberRequests,
 		Revision:              options.Revision,
 	}
-	return data
+	return _data
 }
 
 func (p *Inbox) Properties() map[string]interface{} {

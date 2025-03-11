@@ -73,7 +73,7 @@ func NewLimitModel(
 	resetType LimitModelResetType,
 	options LimitModelOptions,
 ) LimitModel {
-	data := LimitModel{
+	_data := LimitModel{
 		Name:            name,
 		ResetType:       resetType,
 		Metadata:        options.Metadata,
@@ -83,7 +83,7 @@ func NewLimitModel(
 		AnchorTimestamp: options.AnchorTimestamp,
 		Days:            options.Days,
 	}
-	return data
+	return _data
 }
 
 type LimitModelResetTypeIsNotResetOptions struct {

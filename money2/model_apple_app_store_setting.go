@@ -23,35 +23,41 @@ import (
 var _ = AcquireAction{}
 
 type AppleAppStoreSetting struct {
-	BundleId      *string
-	IssuerId      *string
-	KeyId         *string
-	PrivateKeyPem *string
+	BundleId        *string
+	SharedSecretKey *string
+	IssuerId        *string
+	KeyId           *string
+	PrivateKeyPem   *string
 }
 
 type AppleAppStoreSettingOptions struct {
-	BundleId      *string
-	IssuerId      *string
-	KeyId         *string
-	PrivateKeyPem *string
+	BundleId        *string
+	SharedSecretKey *string
+	IssuerId        *string
+	KeyId           *string
+	PrivateKeyPem   *string
 }
 
 func NewAppleAppStoreSetting(
 	options AppleAppStoreSettingOptions,
 ) AppleAppStoreSetting {
-	data := AppleAppStoreSetting{
-		BundleId:      options.BundleId,
-		IssuerId:      options.IssuerId,
-		KeyId:         options.KeyId,
-		PrivateKeyPem: options.PrivateKeyPem,
+	_data := AppleAppStoreSetting{
+		BundleId:        options.BundleId,
+		SharedSecretKey: options.SharedSecretKey,
+		IssuerId:        options.IssuerId,
+		KeyId:           options.KeyId,
+		PrivateKeyPem:   options.PrivateKeyPem,
 	}
-	return data
+	return _data
 }
 
 func (p *AppleAppStoreSetting) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	if p.BundleId != nil {
 		properties["BundleId"] = p.BundleId
+	}
+	if p.SharedSecretKey != nil {
+		properties["SharedSecretKey"] = p.SharedSecretKey
 	}
 	if p.IssuerId != nil {
 		properties["IssuerId"] = p.IssuerId

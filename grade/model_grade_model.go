@@ -43,7 +43,7 @@ func NewGradeModel(
 	gradeEntries []GradeEntryModel,
 	options GradeModelOptions,
 ) GradeModel {
-	data := GradeModel{
+	_data := GradeModel{
 		Name:               name,
 		ExperienceModelId:  experienceModelId,
 		GradeEntries:       gradeEntries,
@@ -51,7 +51,7 @@ func NewGradeModel(
 		DefaultGrades:      options.DefaultGrades,
 		AcquireActionRates: options.AcquireActionRates,
 	}
-	return data
+	return _data
 }
 
 func (p *GradeModel) Properties() map[string]interface{} {

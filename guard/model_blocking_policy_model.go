@@ -155,7 +155,7 @@ func NewBlockingPolicyModel(
 	ipAddressesDetection BlockingPolicyModelIpAddressesDetection,
 	options BlockingPolicyModelOptions,
 ) BlockingPolicyModel {
-	data := BlockingPolicyModel{
+	_data := BlockingPolicyModel{
 		PassServices:                 passServices,
 		DefaultRestriction:           defaultRestriction,
 		LocationDetection:            locationDetection,
@@ -171,7 +171,7 @@ func NewBlockingPolicyModel(
 		IpAddresses:                  options.IpAddresses,
 		IpAddressRestriction:         options.IpAddressRestriction,
 	}
-	return data
+	return _data
 }
 
 type BlockingPolicyModelLocationDetectionIsEnableOptions struct {

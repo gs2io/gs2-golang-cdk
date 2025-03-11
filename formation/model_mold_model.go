@@ -41,14 +41,14 @@ func NewMoldModel(
 	formModel FormModel,
 	options MoldModelOptions,
 ) MoldModel {
-	data := MoldModel{
+	_data := MoldModel{
 		Name:               name,
 		InitialMaxCapacity: initialMaxCapacity,
 		MaxCapacity:        maxCapacity,
 		FormModel:          formModel,
 		Metadata:           options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *MoldModel) Properties() map[string]interface{} {

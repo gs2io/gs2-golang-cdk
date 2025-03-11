@@ -37,12 +37,12 @@ func NewRoleModel(
 	policyDocument string,
 	options RoleModelOptions,
 ) RoleModel {
-	data := RoleModel{
+	_data := RoleModel{
 		Name:           name,
 		PolicyDocument: policyDocument,
 		Metadata:       options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *RoleModel) Properties() map[string]interface{} {

@@ -35,11 +35,11 @@ func NewLogRate(
 	logs []float64,
 	options LogRateOptions,
 ) LogRate {
-	data := LogRate{
+	_data := LogRate{
 		Base: base,
 		Logs: logs,
 	}
-	return data
+	return _data
 }
 
 func (p *LogRate) Properties() map[string]interface{} {

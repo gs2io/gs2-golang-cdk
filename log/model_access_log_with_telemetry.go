@@ -60,7 +60,7 @@ func NewAccessLogWithTelemetry(
 	status AccessLogWithTelemetryStatus,
 	options AccessLogWithTelemetryOptions,
 ) AccessLogWithTelemetry {
-	data := AccessLogWithTelemetry{
+	_data := AccessLogWithTelemetry{
 		Timestamp:       timestamp,
 		SourceRequestId: sourceRequestId,
 		RequestId:       requestId,
@@ -72,7 +72,7 @@ func NewAccessLogWithTelemetry(
 		Status:          status,
 		UserId:          options.UserId,
 	}
-	return data
+	return _data
 }
 
 func (p *AccessLogWithTelemetry) Properties() map[string]interface{} {

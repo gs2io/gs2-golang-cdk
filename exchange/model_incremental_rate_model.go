@@ -61,7 +61,7 @@ func NewIncrementalRateModel(
 	maximumExchangeCount int32,
 	options IncrementalRateModelOptions,
 ) IncrementalRateModel {
-	data := IncrementalRateModel{
+	_data := IncrementalRateModel{
 		Name:                 name,
 		ConsumeAction:        consumeAction,
 		CalculateType:        calculateType,
@@ -73,7 +73,7 @@ func NewIncrementalRateModel(
 		CalculateScriptId:    options.CalculateScriptId,
 		AcquireActions:       options.AcquireActions,
 	}
-	return data
+	return _data
 }
 
 type IncrementalRateModelCalculateTypeIsLinearOptions struct {

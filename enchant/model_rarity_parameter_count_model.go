@@ -35,11 +35,11 @@ func NewRarityParameterCountModel(
 	weight int32,
 	options RarityParameterCountModelOptions,
 ) RarityParameterCountModel {
-	data := RarityParameterCountModel{
+	_data := RarityParameterCountModel{
 		Count:  count,
 		Weight: weight,
 	}
-	return data
+	return _data
 }
 
 func (p *RarityParameterCountModel) Properties() map[string]interface{} {

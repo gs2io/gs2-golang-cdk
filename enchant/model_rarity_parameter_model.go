@@ -41,14 +41,14 @@ func NewRarityParameterModel(
 	parameters []RarityParameterValueModel,
 	options RarityParameterModelOptions,
 ) RarityParameterModel {
-	data := RarityParameterModel{
+	_data := RarityParameterModel{
 		Name:                  name,
 		MaximumParameterCount: maximumParameterCount,
 		ParameterCounts:       parameterCounts,
 		Parameters:            parameters,
 		Metadata:              options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *RarityParameterModel) Properties() map[string]interface{} {

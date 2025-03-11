@@ -43,7 +43,7 @@ func NewInventoryModel(
 	itemModels []ItemModel,
 	options InventoryModelOptions,
 ) InventoryModel {
-	data := InventoryModel{
+	_data := InventoryModel{
 		Name:                  name,
 		InitialCapacity:       initialCapacity,
 		MaxCapacity:           maxCapacity,
@@ -51,7 +51,7 @@ func NewInventoryModel(
 		Metadata:              options.Metadata,
 		ProtectReferencedItem: options.ProtectReferencedItem,
 	}
-	return data
+	return _data
 }
 
 func (p *InventoryModel) Properties() map[string]interface{} {

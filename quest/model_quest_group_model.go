@@ -39,13 +39,13 @@ func NewQuestGroupModel(
 	name string,
 	options QuestGroupModelOptions,
 ) QuestGroupModel {
-	data := QuestGroupModel{
+	_data := QuestGroupModel{
 		Name:                   name,
 		Metadata:               options.Metadata,
 		Quests:                 options.Quests,
 		ChallengePeriodEventId: options.ChallengePeriodEventId,
 	}
-	return data
+	return _data
 }
 
 func (p *QuestGroupModel) Properties() map[string]interface{} {

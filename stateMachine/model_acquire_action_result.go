@@ -45,13 +45,13 @@ func NewAcquireActionResult(
 	acquireRequest string,
 	options AcquireActionResultOptions,
 ) AcquireActionResult {
-	data := AcquireActionResult{
+	_data := AcquireActionResult{
 		Action:         action,
 		AcquireRequest: acquireRequest,
 		StatusCode:     options.StatusCode,
 		AcquireResult:  options.AcquireResult,
 	}
-	return data
+	return _data
 }
 
 func (p *AcquireActionResult) Properties() map[string]interface{} {

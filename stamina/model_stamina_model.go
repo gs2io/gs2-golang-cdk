@@ -51,7 +51,7 @@ func NewStaminaModel(
 	isOverflow bool,
 	options StaminaModelOptions,
 ) StaminaModel {
-	data := StaminaModel{
+	_data := StaminaModel{
 		Name:                   name,
 		RecoverIntervalMinutes: recoverIntervalMinutes,
 		RecoverValue:           recoverValue,
@@ -63,7 +63,7 @@ func NewStaminaModel(
 		RecoverIntervalTable:   options.RecoverIntervalTable,
 		RecoverValueTable:      options.RecoverValueTable,
 	}
-	return data
+	return _data
 }
 
 func (p *StaminaModel) Properties() map[string]interface{} {

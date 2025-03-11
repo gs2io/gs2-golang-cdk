@@ -45,7 +45,7 @@ func NewAccessLog(
 	result string,
 	options AccessLogOptions,
 ) AccessLog {
-	data := AccessLog{
+	_data := AccessLog{
 		Timestamp: timestamp,
 		RequestId: requestId,
 		Service:   service,
@@ -54,7 +54,7 @@ func NewAccessLog(
 		Result:    result,
 		UserId:    options.UserId,
 	}
-	return data
+	return _data
 }
 
 func (p *AccessLog) Properties() map[string]interface{} {

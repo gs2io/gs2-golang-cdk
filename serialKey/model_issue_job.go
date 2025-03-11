@@ -54,7 +54,7 @@ func NewIssueJob(
 	createdAt int64,
 	options IssueJobOptions,
 ) IssueJob {
-	data := IssueJob{
+	_data := IssueJob{
 		Name:              name,
 		IssuedCount:       issuedCount,
 		IssueRequestCount: issueRequestCount,
@@ -63,7 +63,7 @@ func NewIssueJob(
 		Metadata:          options.Metadata,
 		Revision:          options.Revision,
 	}
-	return data
+	return _data
 }
 
 func (p *IssueJob) Properties() map[string]interface{} {

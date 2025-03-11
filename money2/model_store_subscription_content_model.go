@@ -22,11 +22,22 @@ import (
 
 var _ = AcquireAction{}
 
+type StoreSubscriptionContentModelTriggerExtendMode string
+
+const StoreSubscriptionContentModelTriggerExtendModeJust = StoreSubscriptionContentModelTriggerExtendMode("just")
+const StoreSubscriptionContentModelTriggerExtendModeRollupHour = StoreSubscriptionContentModelTriggerExtendMode("rollupHour")
+
+func (p StoreSubscriptionContentModelTriggerExtendMode) Pointer() *StoreSubscriptionContentModelTriggerExtendMode {
+	return &p
+}
+
 type StoreSubscriptionContentModel struct {
 	Name                string
 	Metadata            *string
 	ScheduleNamespaceId string
 	TriggerName         string
+	TriggerExtendMode   StoreSubscriptionContentModelTriggerExtendMode
+	RollupHour          *int32
 	ReallocateSpanDays  int32
 	AppleAppStore       *AppleAppStoreSubscriptionContent
 	GooglePlay          *GooglePlaySubscriptionContent
@@ -34,6 +45,7 @@ type StoreSubscriptionContentModel struct {
 
 type StoreSubscriptionContentModelOptions struct {
 	Metadata      *string
+	RollupHour    *int32
 	AppleAppStore *AppleAppStoreSubscriptionContent
 	GooglePlay    *GooglePlaySubscriptionContent
 }
@@ -42,19 +54,78 @@ func NewStoreSubscriptionContentModel(
 	name string,
 	scheduleNamespaceId string,
 	triggerName string,
+	triggerExtendMode StoreSubscriptionContentModelTriggerExtendMode,
 	reallocateSpanDays int32,
 	options StoreSubscriptionContentModelOptions,
 ) StoreSubscriptionContentModel {
-	data := StoreSubscriptionContentModel{
+	_data := StoreSubscriptionContentModel{
 		Name:                name,
 		ScheduleNamespaceId: scheduleNamespaceId,
 		TriggerName:         triggerName,
+		TriggerExtendMode:   triggerExtendMode,
 		ReallocateSpanDays:  reallocateSpanDays,
 		Metadata:            options.Metadata,
+		RollupHour:          options.RollupHour,
 		AppleAppStore:       options.AppleAppStore,
 		GooglePlay:          options.GooglePlay,
 	}
-	return data
+	return _data
+}
+
+type StoreSubscriptionContentModelTriggerExtendModeIsJustOptions struct {
+	Metadata      *string
+	AppleAppStore *AppleAppStoreSubscriptionContent
+	GooglePlay    *GooglePlaySubscriptionContent
+}
+
+func NewStoreSubscriptionContentModelTriggerExtendModeIsJust(
+	name string,
+	scheduleNamespaceId string,
+	triggerName string,
+	reallocateSpanDays int32,
+	options StoreSubscriptionContentModelTriggerExtendModeIsJustOptions,
+) StoreSubscriptionContentModel {
+	return NewStoreSubscriptionContentModel(
+		name,
+		scheduleNamespaceId,
+		triggerName,
+		StoreSubscriptionContentModelTriggerExtendModeJust,
+		reallocateSpanDays,
+		StoreSubscriptionContentModelOptions{
+			Metadata:      options.Metadata,
+			AppleAppStore: options.AppleAppStore,
+			GooglePlay:    options.GooglePlay,
+		},
+	)
+}
+
+type StoreSubscriptionContentModelTriggerExtendModeIsRollupHourOptions struct {
+	Metadata      *string
+	AppleAppStore *AppleAppStoreSubscriptionContent
+	GooglePlay    *GooglePlaySubscriptionContent
+}
+
+func NewStoreSubscriptionContentModelTriggerExtendModeIsRollupHour(
+	name string,
+	scheduleNamespaceId string,
+	triggerName string,
+	reallocateSpanDays int32,
+	rollupHour int32,
+	options StoreSubscriptionContentModelTriggerExtendModeIsRollupHourOptions,
+) StoreSubscriptionContentModel {
+	return NewStoreSubscriptionContentModel(
+		name,
+		scheduleNamespaceId,
+		triggerName,
+		StoreSubscriptionContentModelTriggerExtendModeRollupHour,
+		reallocateSpanDays,
+		StoreSubscriptionContentModelOptions{
+			Metadata:      options.Metadata,
+			RollupHour:    &rollupHour,
+			AppleAppStore: options.AppleAppStore,
+			GooglePlay:    options.GooglePlay,
+		},
+	)
 }
 
 func (p *StoreSubscriptionContentModel) Properties() map[string]interface{} {
@@ -65,6 +136,10 @@ func (p *StoreSubscriptionContentModel) Properties() map[string]interface{} {
 	}
 	properties["ScheduleNamespaceId"] = p.ScheduleNamespaceId
 	properties["TriggerName"] = p.TriggerName
+	properties["TriggerExtendMode"] = p.TriggerExtendMode
+	if p.RollupHour != nil {
+		properties["RollupHour"] = p.RollupHour
+	}
 	properties["ReallocateSpanDays"] = p.ReallocateSpanDays
 	if p.AppleAppStore != nil {
 		properties["AppleAppStore"] = p.AppleAppStore.Properties()

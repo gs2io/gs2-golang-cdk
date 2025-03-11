@@ -37,12 +37,12 @@ func NewContents(
 	weight int32,
 	options ContentsOptions,
 ) Contents {
-	data := Contents{
+	_data := Contents{
 		Weight:                 weight,
 		Metadata:               options.Metadata,
 		CompleteAcquireActions: options.CompleteAcquireActions,
 	}
-	return data
+	return _data
 }
 
 func (p *Contents) Properties() map[string]interface{} {

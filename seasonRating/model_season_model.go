@@ -41,14 +41,14 @@ func NewSeasonModel(
 	experienceModelId string,
 	options SeasonModelOptions,
 ) SeasonModel {
-	data := SeasonModel{
+	_data := SeasonModel{
 		Name:                   name,
 		Tiers:                  tiers,
 		ExperienceModelId:      experienceModelId,
 		Metadata:               options.Metadata,
 		ChallengePeriodEventId: options.ChallengePeriodEventId,
 	}
-	return data
+	return _data
 }
 
 func (p *SeasonModel) Properties() map[string]interface{} {

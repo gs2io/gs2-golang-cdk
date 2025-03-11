@@ -33,10 +33,10 @@ func NewReward(
 	acquireActions []AcquireAction,
 	options RewardOptions,
 ) Reward {
-	data := Reward{
+	_data := Reward{
 		AcquireActions: acquireActions,
 	}
-	return data
+	return _data
 }
 
 func (p *Reward) Properties() map[string]interface{} {

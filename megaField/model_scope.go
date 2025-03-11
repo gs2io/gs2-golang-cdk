@@ -37,12 +37,12 @@ func NewScope(
 	limit int32,
 	options ScopeOptions,
 ) Scope {
-	data := Scope{
+	_data := Scope{
 		LayerName: layerName,
 		R:         r,
 		Limit:     limit,
 	}
-	return data
+	return _data
 }
 
 func (p *Scope) Properties() map[string]interface{} {

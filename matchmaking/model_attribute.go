@@ -35,11 +35,11 @@ func NewAttribute(
 	value int32,
 	options AttributeOptions,
 ) Attribute {
-	data := Attribute{
+	_data := Attribute{
 		Name:  name,
 		Value: value,
 	}
-	return data
+	return _data
 }
 
 func (p *Attribute) Properties() map[string]interface{} {

@@ -1,4 +1,4 @@
-package money
+package stateMachine
 
 /*
 Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
@@ -22,29 +22,7 @@ import (
 
 var _ = AcquireAction{}
 
-type WalletDetail struct {
-	Price float32
-	Count int32
-}
-
-type WalletDetailOptions struct {
-}
-
-func NewWalletDetail(
-	price float32,
-	count int32,
-	options WalletDetailOptions,
-) WalletDetail {
-	_data := WalletDetail{
-		Price: price,
-		Count: count,
-	}
-	return _data
-}
-
-func (p *WalletDetail) Properties() map[string]interface{} {
-	properties := map[string]interface{}{}
-	properties["Price"] = p.Price
-	properties["Count"] = p.Count
-	return properties
+type StateMachineMasterRef struct {
+	NamespaceName string
+	version       int64
 }

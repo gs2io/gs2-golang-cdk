@@ -41,14 +41,14 @@ func NewSignTargetVersion(
 	version Version,
 	options SignTargetVersionOptions,
 ) SignTargetVersion {
-	data := SignTargetVersion{
+	_data := SignTargetVersion{
 		Region:        region,
 		OwnerId:       ownerId,
 		NamespaceName: namespaceName,
 		VersionName:   versionName,
 		Version:       version,
 	}
-	return data
+	return _data
 }
 
 func (p *SignTargetVersion) Properties() map[string]interface{} {

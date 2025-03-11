@@ -95,13 +95,13 @@ func NewBatchRequestPayload(
 	parameter string,
 	options BatchRequestPayloadOptions,
 ) BatchRequestPayload {
-	data := BatchRequestPayload{
+	_data := BatchRequestPayload{
 		RequestId:  requestId,
 		Service:    service,
 		MethodName: methodName,
 		Parameter:  parameter,
 	}
-	return data
+	return _data
 }
 
 func (p *BatchRequestPayload) Properties() map[string]interface{} {

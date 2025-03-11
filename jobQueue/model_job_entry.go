@@ -37,12 +37,12 @@ func NewJobEntry(
 	maxTryCount int32,
 	options JobEntryOptions,
 ) JobEntry {
-	data := JobEntry{
+	_data := JobEntry{
 		ScriptId:    scriptId,
 		Args:        args,
 		MaxTryCount: maxTryCount,
 	}
-	return data
+	return _data
 }
 
 func (p *JobEntry) Properties() map[string]interface{} {

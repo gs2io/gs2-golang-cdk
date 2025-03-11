@@ -37,12 +37,12 @@ func NewSimpleInventoryModel(
 	simpleItemModels []SimpleItemModel,
 	options SimpleInventoryModelOptions,
 ) SimpleInventoryModel {
-	data := SimpleInventoryModel{
+	_data := SimpleInventoryModel{
 		Name:             name,
 		SimpleItemModels: simpleItemModels,
 		Metadata:         options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *SimpleInventoryModel) Properties() map[string]interface{} {

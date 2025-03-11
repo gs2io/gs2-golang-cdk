@@ -35,11 +35,11 @@ func NewAppLovinMax(
 	eventKey string,
 	options AppLovinMaxOptions,
 ) AppLovinMax {
-	data := AppLovinMax{
+	_data := AppLovinMax{
 		AllowAdUnitId: allowAdUnitId,
 		EventKey:      eventKey,
 	}
-	return data
+	return _data
 }
 
 func (p *AppLovinMax) Properties() map[string]interface{} {

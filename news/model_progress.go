@@ -43,7 +43,7 @@ func NewProgress(
 	updatedAt int64,
 	options ProgressOptions,
 ) Progress {
-	data := Progress{
+	_data := Progress{
 		UploadToken:  uploadToken,
 		Generated:    generated,
 		PatternCount: patternCount,
@@ -51,7 +51,7 @@ func NewProgress(
 		UpdatedAt:    updatedAt,
 		Revision:     options.Revision,
 	}
-	return data
+	return _data
 }
 
 func (p *Progress) Properties() map[string]interface{} {

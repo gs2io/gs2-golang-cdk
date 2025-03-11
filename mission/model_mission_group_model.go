@@ -77,7 +77,7 @@ func NewMissionGroupModel(
 	resetType MissionGroupModelResetType,
 	options MissionGroupModelOptions,
 ) MissionGroupModel {
-	data := MissionGroupModel{
+	_data := MissionGroupModel{
 		Name:                            name,
 		ResetType:                       resetType,
 		Metadata:                        options.Metadata,
@@ -89,7 +89,7 @@ func NewMissionGroupModel(
 		AnchorTimestamp:                 options.AnchorTimestamp,
 		Days:                            options.Days,
 	}
-	return data
+	return _data
 }
 
 type MissionGroupModelResetTypeIsNotResetOptions struct {

@@ -39,13 +39,13 @@ func NewCapacityOfRole(
 	capacity int32,
 	options CapacityOfRoleOptions,
 ) CapacityOfRole {
-	data := CapacityOfRole{
+	_data := CapacityOfRole{
 		RoleName:     roleName,
 		Capacity:     capacity,
 		RoleAliases:  options.RoleAliases,
 		Participants: options.Participants,
 	}
-	return data
+	return _data
 }
 
 func (p *CapacityOfRole) Properties() map[string]interface{} {

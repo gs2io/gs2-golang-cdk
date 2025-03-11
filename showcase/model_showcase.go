@@ -39,13 +39,13 @@ func NewShowcase(
 	displayItems []DisplayItem,
 	options ShowcaseOptions,
 ) Showcase {
-	data := Showcase{
+	_data := Showcase{
 		Name:               name,
 		DisplayItems:       displayItems,
 		Metadata:           options.Metadata,
 		SalesPeriodEventId: options.SalesPeriodEventId,
 	}
-	return data
+	return _data
 }
 
 func (p *Showcase) Properties() map[string]interface{} {

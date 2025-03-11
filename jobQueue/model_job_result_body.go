@@ -39,13 +39,13 @@ func NewJobResultBody(
 	tryAt int64,
 	options JobResultBodyOptions,
 ) JobResultBody {
-	data := JobResultBody{
+	_data := JobResultBody{
 		TryNumber:  tryNumber,
 		StatusCode: statusCode,
 		Result:     result,
 		TryAt:      tryAt,
 	}
-	return data
+	return _data
 }
 
 func (p *JobResultBody) Properties() map[string]interface{} {

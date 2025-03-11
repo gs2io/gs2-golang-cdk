@@ -37,12 +37,12 @@ func NewReceiveMemberRequest(
 	targetGuildName string,
 	options ReceiveMemberRequestOptions,
 ) ReceiveMemberRequest {
-	data := ReceiveMemberRequest{
+	_data := ReceiveMemberRequest{
 		UserId:          userId,
 		TargetGuildName: targetGuildName,
 		Metadata:        options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *ReceiveMemberRequest) Properties() map[string]interface{} {

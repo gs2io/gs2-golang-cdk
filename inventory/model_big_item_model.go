@@ -35,11 +35,11 @@ func NewBigItemModel(
 	name string,
 	options BigItemModelOptions,
 ) BigItemModel {
-	data := BigItemModel{
+	_data := BigItemModel{
 		Name:     name,
 		Metadata: options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *BigItemModel) Properties() map[string]interface{} {

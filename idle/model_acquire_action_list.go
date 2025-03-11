@@ -33,10 +33,10 @@ type AcquireActionListOptions struct {
 func NewAcquireActionList(
 	options AcquireActionListOptions,
 ) AcquireActionList {
-	data := AcquireActionList{
+	_data := AcquireActionList{
 		AcquireActions: options.AcquireActions,
 	}
-	return data
+	return _data
 }
 
 func (p *AcquireActionList) Properties() map[string]interface{} {

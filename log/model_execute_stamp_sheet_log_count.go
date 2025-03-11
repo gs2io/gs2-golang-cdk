@@ -41,14 +41,14 @@ func NewExecuteStampSheetLogCount(
 	count int64,
 	options ExecuteStampSheetLogCountOptions,
 ) ExecuteStampSheetLogCount {
-	data := ExecuteStampSheetLogCount{
+	_data := ExecuteStampSheetLogCount{
 		Count:   count,
 		Service: options.Service,
 		Method:  options.Method,
 		UserId:  options.UserId,
 		Action:  options.Action,
 	}
-	return data
+	return _data
 }
 
 func (p *ExecuteStampSheetLogCount) Properties() map[string]interface{} {

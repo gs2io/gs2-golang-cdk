@@ -33,10 +33,10 @@ func NewAdMob(
 	allowAdUnitIds []string,
 	options AdMobOptions,
 ) AdMob {
-	data := AdMob{
+	_data := AdMob{
 		AllowAdUnitIds: allowAdUnitIds,
 	}
-	return data
+	return _data
 }
 
 func (p *AdMob) Properties() map[string]interface{} {

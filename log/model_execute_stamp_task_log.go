@@ -45,7 +45,7 @@ func NewExecuteStampTaskLog(
 	args string,
 	options ExecuteStampTaskLogOptions,
 ) ExecuteStampTaskLog {
-	data := ExecuteStampTaskLog{
+	_data := ExecuteStampTaskLog{
 		Timestamp: timestamp,
 		TaskId:    taskId,
 		Service:   service,
@@ -54,7 +54,7 @@ func NewExecuteStampTaskLog(
 		Action:    action,
 		Args:      args,
 	}
-	return data
+	return _data
 }
 
 func (p *ExecuteStampTaskLog) Properties() map[string]interface{} {

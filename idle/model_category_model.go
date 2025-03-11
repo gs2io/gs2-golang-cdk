@@ -45,7 +45,7 @@ func NewCategoryModel(
 	acquireActions []AcquireActionList,
 	options CategoryModelOptions,
 ) CategoryModel {
-	data := CategoryModel{
+	_data := CategoryModel{
 		Name:                      name,
 		RewardIntervalMinutes:     rewardIntervalMinutes,
 		DefaultMaximumIdleMinutes: defaultMaximumIdleMinutes,
@@ -54,7 +54,7 @@ func NewCategoryModel(
 		IdlePeriodScheduleId:      options.IdlePeriodScheduleId,
 		ReceivePeriodScheduleId:   options.ReceivePeriodScheduleId,
 	}
-	return data
+	return _data
 }
 
 func (p *CategoryModel) Properties() map[string]interface{} {

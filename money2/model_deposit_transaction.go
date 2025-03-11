@@ -39,13 +39,13 @@ func NewDepositTransaction(
 	count int32,
 	options DepositTransactionOptions,
 ) DepositTransaction {
-	data := DepositTransaction{
+	_data := DepositTransaction{
 		Price:       price,
 		Count:       count,
 		Currency:    options.Currency,
 		DepositedAt: options.DepositedAt,
 	}
-	return data
+	return _data
 }
 
 func (p *DepositTransaction) Properties() map[string]interface{} {

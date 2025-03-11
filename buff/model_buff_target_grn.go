@@ -35,11 +35,11 @@ func NewBuffTargetGrn(
 	targetGrn string,
 	options BuffTargetGrnOptions,
 ) BuffTargetGrn {
-	data := BuffTargetGrn{
+	_data := BuffTargetGrn{
 		TargetModelName: targetModelName,
 		TargetGrn:       targetGrn,
 	}
-	return data
+	return _data
 }
 
 func (p *BuffTargetGrn) Properties() map[string]interface{} {

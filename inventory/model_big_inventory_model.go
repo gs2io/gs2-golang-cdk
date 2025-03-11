@@ -37,12 +37,12 @@ func NewBigInventoryModel(
 	bigItemModels []BigItemModel,
 	options BigInventoryModelOptions,
 ) BigInventoryModel {
-	data := BigInventoryModel{
+	_data := BigInventoryModel{
 		Name:          name,
 		BigItemModels: bigItemModels,
 		Metadata:      options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *BigInventoryModel) Properties() map[string]interface{} {

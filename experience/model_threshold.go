@@ -35,11 +35,11 @@ func NewThreshold(
 	values []int64,
 	options ThresholdOptions,
 ) Threshold {
-	data := Threshold{
+	_data := Threshold{
 		Values:   values,
 		Metadata: options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *Threshold) Properties() map[string]interface{} {

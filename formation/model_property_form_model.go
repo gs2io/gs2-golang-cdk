@@ -37,12 +37,12 @@ func NewPropertyFormModel(
 	slots []SlotModel,
 	options PropertyFormModelOptions,
 ) PropertyFormModel {
-	data := PropertyFormModel{
+	_data := PropertyFormModel{
 		Name:     name,
 		Slots:    slots,
 		Metadata: options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *PropertyFormModel) Properties() map[string]interface{} {

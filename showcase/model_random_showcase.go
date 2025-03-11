@@ -45,7 +45,7 @@ func NewRandomShowcase(
 	resetIntervalHours int32,
 	options RandomShowcaseOptions,
 ) RandomShowcase {
-	data := RandomShowcase{
+	_data := RandomShowcase{
 		Name:                  name,
 		MaximumNumberOfChoice: maximumNumberOfChoice,
 		DisplayItems:          displayItems,
@@ -54,7 +54,7 @@ func NewRandomShowcase(
 		Metadata:              options.Metadata,
 		SalesPeriodEventId:    options.SalesPeriodEventId,
 	}
-	return data
+	return _data
 }
 
 func (p *RandomShowcase) Properties() map[string]interface{} {

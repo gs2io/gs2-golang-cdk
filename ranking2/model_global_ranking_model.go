@@ -69,7 +69,7 @@ func NewGlobalRankingModel(
 	rewardCalculationIndex GlobalRankingModelRewardCalculationIndex,
 	options GlobalRankingModelOptions,
 ) GlobalRankingModel {
-	data := GlobalRankingModel{
+	_data := GlobalRankingModel{
 		Name:                   name,
 		Sum:                    sum,
 		OrderDirection:         orderDirection,
@@ -81,7 +81,7 @@ func NewGlobalRankingModel(
 		RankingRewards:         options.RankingRewards,
 		AccessPeriodEventId:    options.AccessPeriodEventId,
 	}
-	return data
+	return _data
 }
 
 func (p *GlobalRankingModel) Properties() map[string]interface{} {

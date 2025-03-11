@@ -35,11 +35,11 @@ func NewBalanceParameterValueModel(
 	name string,
 	options BalanceParameterValueModelOptions,
 ) BalanceParameterValueModel {
-	data := BalanceParameterValueModel{
+	_data := BalanceParameterValueModel{
 		Name:     name,
 		Metadata: options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *BalanceParameterValueModel) Properties() map[string]interface{} {

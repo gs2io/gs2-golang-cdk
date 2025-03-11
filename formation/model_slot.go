@@ -37,12 +37,12 @@ func NewSlot(
 	name string,
 	options SlotOptions,
 ) Slot {
-	data := Slot{
+	_data := Slot{
 		Name:       name,
 		PropertyId: options.PropertyId,
 		Metadata:   options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *Slot) Properties() map[string]interface{} {

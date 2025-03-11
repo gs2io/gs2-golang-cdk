@@ -39,13 +39,13 @@ func NewGradeEntryModel(
 	gradeUpPropertyIdRegex string,
 	options GradeEntryModelOptions,
 ) GradeEntryModel {
-	data := GradeEntryModel{
+	_data := GradeEntryModel{
 		RankCapValue:           rankCapValue,
 		PropertyIdRegex:        propertyIdRegex,
 		GradeUpPropertyIdRegex: gradeUpPropertyIdRegex,
 		Metadata:               options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *GradeEntryModel) Properties() map[string]interface{} {

@@ -35,11 +35,11 @@ func NewBonusRate(
 	weight int32,
 	options BonusRateOptions,
 ) BonusRate {
-	data := BonusRate{
+	_data := BonusRate{
 		Rate:   rate,
 		Weight: weight,
 	}
-	return data
+	return _data
 }
 
 func (p *BonusRate) Properties() map[string]interface{} {

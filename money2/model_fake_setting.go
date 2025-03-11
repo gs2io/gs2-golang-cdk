@@ -42,10 +42,10 @@ func NewFakeSetting(
 	acceptFakeReceipt FakeSettingAcceptFakeReceipt,
 	options FakeSettingOptions,
 ) FakeSetting {
-	data := FakeSetting{
+	_data := FakeSetting{
 		AcceptFakeReceipt: acceptFakeReceipt,
 	}
-	return data
+	return _data
 }
 
 func (p *FakeSetting) Properties() map[string]interface{} {

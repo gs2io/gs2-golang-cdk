@@ -66,7 +66,7 @@ func NewBuffEntryModel(
 	priority int32,
 	options BuffEntryModelOptions,
 ) BuffEntryModel {
-	data := BuffEntryModel{
+	_data := BuffEntryModel{
 		Name:                       name,
 		Expression:                 expression,
 		TargetType:                 targetType,
@@ -76,7 +76,7 @@ func NewBuffEntryModel(
 		TargetAction:               options.TargetAction,
 		ApplyPeriodScheduleEventId: options.ApplyPeriodScheduleEventId,
 	}
-	return data
+	return _data
 }
 
 type BuffEntryModelTargetTypeIsModelOptions struct {

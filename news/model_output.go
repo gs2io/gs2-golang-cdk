@@ -39,13 +39,13 @@ func NewOutput(
 	createdAt int64,
 	options OutputOptions,
 ) Output {
-	data := Output{
+	_data := Output{
 		Name:      name,
 		Text:      text,
 		CreatedAt: createdAt,
 		Revision:  options.Revision,
 	}
-	return data
+	return _data
 }
 
 func (p *Output) Properties() map[string]interface{} {

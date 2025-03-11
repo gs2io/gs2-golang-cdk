@@ -39,13 +39,13 @@ func NewRatingModel(
 	volatility int32,
 	options RatingModelOptions,
 ) RatingModel {
-	data := RatingModel{
+	_data := RatingModel{
 		Name:         name,
 		InitialValue: initialValue,
 		Volatility:   volatility,
 		Metadata:     options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *RatingModel) Properties() map[string]interface{} {

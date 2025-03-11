@@ -54,7 +54,7 @@ func NewPrize(
 	weight int32,
 	options PrizeOptions,
 ) Prize {
-	data := Prize{
+	_data := Prize{
 		PrizeId:              prizeId,
 		Type:                 type_,
 		Weight:               weight,
@@ -63,7 +63,7 @@ func NewPrize(
 		LimitFailOverPrizeId: options.LimitFailOverPrizeId,
 		PrizeTableName:       options.PrizeTableName,
 	}
-	return data
+	return _data
 }
 
 type PrizeTypeIsActionOptions struct {

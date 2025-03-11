@@ -84,7 +84,7 @@ func NewCounterScopeModel(
 	scopeType CounterScopeModelScopeType,
 	options CounterScopeModelOptions,
 ) CounterScopeModel {
-	data := CounterScopeModel{
+	_data := CounterScopeModel{
 		ScopeType:       scopeType,
 		ResetType:       options.ResetType,
 		ResetDayOfMonth: options.ResetDayOfMonth,
@@ -95,7 +95,7 @@ func NewCounterScopeModel(
 		AnchorTimestamp: options.AnchorTimestamp,
 		Days:            options.Days,
 	}
-	return data
+	return _data
 }
 
 type CounterScopeModelScopeTypeIsResetTimingOptions struct {

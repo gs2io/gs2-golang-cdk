@@ -41,14 +41,14 @@ func NewSalesItem(
 	acquireActions []AcquireAction,
 	options SalesItemOptions,
 ) SalesItem {
-	data := SalesItem{
+	_data := SalesItem{
 		Name:           name,
 		AcquireActions: acquireActions,
 		Metadata:       options.Metadata,
 		VerifyActions:  options.VerifyActions,
 		ConsumeActions: options.ConsumeActions,
 	}
-	return data
+	return _data
 }
 
 func (p *SalesItem) Properties() map[string]interface{} {

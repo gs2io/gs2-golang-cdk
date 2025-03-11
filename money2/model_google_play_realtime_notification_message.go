@@ -37,12 +37,12 @@ func NewGooglePlayRealtimeNotificationMessage(
 	publishTime string,
 	options GooglePlayRealtimeNotificationMessageOptions,
 ) GooglePlayRealtimeNotificationMessage {
-	data := GooglePlayRealtimeNotificationMessage{
+	_data := GooglePlayRealtimeNotificationMessage{
 		Data:        data,
 		MessageId:   messageId,
 		PublishTime: publishTime,
 	}
-	return data
+	return _data
 }
 
 func (p *GooglePlayRealtimeNotificationMessage) Properties() map[string]interface{} {

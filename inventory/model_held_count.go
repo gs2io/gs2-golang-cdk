@@ -35,11 +35,11 @@ func NewHeldCount(
 	count int64,
 	options HeldCountOptions,
 ) HeldCount {
-	data := HeldCount{
+	_data := HeldCount{
 		ItemName: itemName,
 		Count:    count,
 	}
-	return data
+	return _data
 }
 
 func (p *HeldCount) Properties() map[string]interface{} {

@@ -41,11 +41,11 @@ func NewDistributeResource(
 	request string,
 	options DistributeResourceOptions,
 ) DistributeResource {
-	data := DistributeResource{
+	_data := DistributeResource{
 		Action:  action,
 		Request: request,
 	}
-	return data
+	return _data
 }
 
 func (p *DistributeResource) Properties() map[string]interface{} {

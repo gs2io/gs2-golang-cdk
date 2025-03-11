@@ -35,11 +35,11 @@ func NewLastGuildMasterActivity(
 	updatedAt int64,
 	options LastGuildMasterActivityOptions,
 ) LastGuildMasterActivity {
-	data := LastGuildMasterActivity{
+	_data := LastGuildMasterActivity{
 		UserId:    userId,
 		UpdatedAt: updatedAt,
 	}
-	return data
+	return _data
 }
 
 func (p *LastGuildMasterActivity) Properties() map[string]interface{} {

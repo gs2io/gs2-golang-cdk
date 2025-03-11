@@ -41,14 +41,14 @@ func NewPrizeLimit(
 	updatedAt int64,
 	options PrizeLimitOptions,
 ) PrizeLimit {
-	data := PrizeLimit{
+	_data := PrizeLimit{
 		PrizeId:    prizeId,
 		DrawnCount: drawnCount,
 		CreatedAt:  createdAt,
 		UpdatedAt:  updatedAt,
 		Revision:   options.Revision,
 	}
-	return data
+	return _data
 }
 
 func (p *PrizeLimit) Properties() map[string]interface{} {

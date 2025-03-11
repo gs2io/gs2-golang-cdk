@@ -37,12 +37,12 @@ func NewWithdrawEvent(
 	status WalletSummary,
 	options WithdrawEventOptions,
 ) WithdrawEvent {
-	data := WithdrawEvent{
+	_data := WithdrawEvent{
 		Slot:            slot,
 		Status:          status,
 		WithdrawDetails: options.WithdrawDetails,
 	}
-	return data
+	return _data
 }
 
 func (p *WithdrawEvent) Properties() map[string]interface{} {

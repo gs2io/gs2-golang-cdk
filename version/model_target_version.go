@@ -39,13 +39,13 @@ func NewTargetVersion(
 	versionName string,
 	options TargetVersionOptions,
 ) TargetVersion {
-	data := TargetVersion{
+	_data := TargetVersion{
 		VersionName: versionName,
 		Body:        options.Body,
 		Signature:   options.Signature,
 		Version:     options.Version,
 	}
-	return data
+	return _data
 }
 
 func (p *TargetVersion) Properties() map[string]interface{} {

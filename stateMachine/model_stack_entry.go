@@ -35,11 +35,11 @@ func NewStackEntry(
 	taskName string,
 	options StackEntryOptions,
 ) StackEntry {
-	data := StackEntry{
+	_data := StackEntry{
 		StateMachineName: stateMachineName,
 		TaskName:         taskName,
 	}
-	return data
+	return _data
 }
 
 func (p *StackEntry) Properties() map[string]interface{} {

@@ -37,12 +37,12 @@ func NewContent(
 	frontMatter string,
 	options ContentOptions,
 ) Content {
-	data := Content{
+	_data := Content{
 		Section:     section,
 		Content:     content,
 		FrontMatter: frontMatter,
 	}
-	return data
+	return _data
 }
 
 func (p *Content) Properties() map[string]interface{} {

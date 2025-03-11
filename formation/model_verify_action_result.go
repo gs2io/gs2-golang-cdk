@@ -45,13 +45,13 @@ func NewVerifyActionResult(
 	verifyRequest string,
 	options VerifyActionResultOptions,
 ) VerifyActionResult {
-	data := VerifyActionResult{
+	_data := VerifyActionResult{
 		Action:        action,
 		VerifyRequest: verifyRequest,
 		StatusCode:    options.StatusCode,
 		VerifyResult:  options.VerifyResult,
 	}
-	return data
+	return _data
 }
 
 func (p *VerifyActionResult) Properties() map[string]interface{} {

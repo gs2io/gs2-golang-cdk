@@ -45,7 +45,7 @@ func NewExperienceModel(
 	rankThreshold Threshold,
 	options ExperienceModelOptions,
 ) ExperienceModel {
-	data := ExperienceModel{
+	_data := ExperienceModel{
 		Name:               name,
 		DefaultExperience:  defaultExperience,
 		DefaultRankCap:     defaultRankCap,
@@ -54,7 +54,7 @@ func NewExperienceModel(
 		Metadata:           options.Metadata,
 		AcquireActionRates: options.AcquireActionRates,
 	}
-	return data
+	return _data
 }
 
 func (p *ExperienceModel) Properties() map[string]interface{} {

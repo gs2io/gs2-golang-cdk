@@ -39,13 +39,13 @@ func NewMaxStaminaTable(
 	values []int32,
 	options MaxStaminaTableOptions,
 ) MaxStaminaTable {
-	data := MaxStaminaTable{
+	_data := MaxStaminaTable{
 		Name:              name,
 		ExperienceModelId: experienceModelId,
 		Values:            values,
 		Metadata:          options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *MaxStaminaTable) Properties() map[string]interface{} {

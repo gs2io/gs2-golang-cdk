@@ -39,13 +39,13 @@ func NewRecoverValueTable(
 	values []int32,
 	options RecoverValueTableOptions,
 ) RecoverValueTable {
-	data := RecoverValueTable{
+	_data := RecoverValueTable{
 		Name:              name,
 		ExperienceModelId: experienceModelId,
 		Values:            values,
 		Metadata:          options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *RecoverValueTable) Properties() map[string]interface{} {

@@ -37,12 +37,12 @@ func NewPlatformUser(
 	userId string,
 	options PlatformUserOptions,
 ) PlatformUser {
-	data := PlatformUser{
+	_data := PlatformUser{
 		Type:           type_,
 		UserIdentifier: userIdentifier,
 		UserId:         userId,
 	}
-	return data
+	return _data
 }
 
 func (p *PlatformUser) Properties() map[string]interface{} {

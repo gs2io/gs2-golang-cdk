@@ -45,13 +45,13 @@ func NewBuffTargetAction(
 	rate float32,
 	options BuffTargetActionOptions,
 ) BuffTargetAction {
-	data := BuffTargetAction{
+	_data := BuffTargetAction{
 		TargetActionName: targetActionName,
 		TargetFieldName:  targetFieldName,
 		ConditionGrns:    conditionGrns,
 		Rate:             rate,
 	}
-	return data
+	return _data
 }
 
 func (p *BuffTargetAction) Properties() map[string]interface{} {

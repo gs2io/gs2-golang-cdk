@@ -37,12 +37,12 @@ func NewTimeSpan(
 	minutes int32,
 	options TimeSpanOptions,
 ) TimeSpan {
-	data := TimeSpan{
+	_data := TimeSpan{
 		Days:    days,
 		Hours:   hours,
 		Minutes: minutes,
 	}
-	return data
+	return _data
 }
 
 func (p *TimeSpan) Properties() map[string]interface{} {

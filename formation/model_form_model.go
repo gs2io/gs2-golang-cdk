@@ -37,12 +37,12 @@ func NewFormModel(
 	slots []SlotModel,
 	options FormModelOptions,
 ) FormModel {
-	data := FormModel{
+	_data := FormModel{
 		Name:     name,
 		Slots:    slots,
 		Metadata: options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *FormModel) Properties() map[string]interface{} {

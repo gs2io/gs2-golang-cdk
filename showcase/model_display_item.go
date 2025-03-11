@@ -50,14 +50,14 @@ func NewDisplayItem(
 	type_ DisplayItemType,
 	options DisplayItemOptions,
 ) DisplayItem {
-	data := DisplayItem{
+	_data := DisplayItem{
 		DisplayItemId:      displayItemId,
 		Type:               type_,
 		SalesItem:          options.SalesItem,
 		SalesItemGroup:     options.SalesItemGroup,
 		SalesPeriodEventId: options.SalesPeriodEventId,
 	}
-	return data
+	return _data
 }
 
 type DisplayItemTypeIsSalesItemOptions struct {

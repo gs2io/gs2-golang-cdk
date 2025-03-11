@@ -35,11 +35,11 @@ func NewScopeValue(
 	key string,
 	options ScopeValueOptions,
 ) ScopeValue {
-	data := ScopeValue{
+	_data := ScopeValue{
 		Key:   key,
 		Value: options.Value,
 	}
-	return data
+	return _data
 }
 
 func (p *ScopeValue) Properties() map[string]interface{} {

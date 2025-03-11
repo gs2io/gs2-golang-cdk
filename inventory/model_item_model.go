@@ -41,14 +41,14 @@ func NewItemModel(
 	sortValue int32,
 	options ItemModelOptions,
 ) ItemModel {
-	data := ItemModel{
+	_data := ItemModel{
 		Name:                name,
 		StackingLimit:       stackingLimit,
 		AllowMultipleStacks: allowMultipleStacks,
 		SortValue:           sortValue,
 		Metadata:            options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *ItemModel) Properties() map[string]interface{} {

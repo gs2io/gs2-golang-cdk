@@ -37,12 +37,12 @@ func NewEmitEvent(
 	timestamp int64,
 	options EmitEventOptions,
 ) EmitEvent {
-	data := EmitEvent{
+	_data := EmitEvent{
 		Event:      event,
 		Parameters: parameters,
 		Timestamp:  timestamp,
 	}
-	return data
+	return _data
 }
 
 func (p *EmitEvent) Properties() map[string]interface{} {

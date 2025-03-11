@@ -45,13 +45,13 @@ func NewBuffTargetModel(
 	rate float32,
 	options BuffTargetModelOptions,
 ) BuffTargetModel {
-	data := BuffTargetModel{
+	_data := BuffTargetModel{
 		TargetModelName: targetModelName,
 		TargetFieldName: targetFieldName,
 		ConditionGrns:   conditionGrns,
 		Rate:            rate,
 	}
-	return data
+	return _data
 }
 
 func (p *BuffTargetModel) Properties() map[string]interface{} {

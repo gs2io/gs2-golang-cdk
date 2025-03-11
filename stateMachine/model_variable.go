@@ -35,11 +35,11 @@ func NewVariable(
 	value string,
 	options VariableOptions,
 ) Variable {
-	data := Variable{
+	_data := Variable{
 		StateMachineName: stateMachineName,
 		Value:            value,
 	}
-	return data
+	return _data
 }
 
 func (p *Variable) Properties() map[string]interface{} {

@@ -37,12 +37,12 @@ func NewSlotModel(
 	propertyRegex string,
 	options SlotModelOptions,
 ) SlotModel {
-	data := SlotModel{
+	_data := SlotModel{
 		Name:          name,
 		PropertyRegex: propertyRegex,
 		Metadata:      options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *SlotModel) Properties() map[string]interface{} {

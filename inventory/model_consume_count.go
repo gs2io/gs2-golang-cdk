@@ -35,11 +35,11 @@ func NewConsumeCount(
 	count int64,
 	options ConsumeCountOptions,
 ) ConsumeCount {
-	data := ConsumeCount{
+	_data := ConsumeCount{
 		ItemName: itemName,
 		Count:    count,
 	}
-	return data
+	return _data
 }
 
 func (p *ConsumeCount) Properties() map[string]interface{} {

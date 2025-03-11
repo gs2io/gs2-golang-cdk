@@ -64,7 +64,7 @@ func NewScopedValue(
 	updatedAt int64,
 	options ScopedValueOptions,
 ) ScopedValue {
-	data := ScopedValue{
+	_data := ScopedValue{
 		ScopeType:     scopeType,
 		Value:         value,
 		UpdatedAt:     updatedAt,
@@ -72,7 +72,7 @@ func NewScopedValue(
 		ConditionName: options.ConditionName,
 		NextResetAt:   options.NextResetAt,
 	}
-	return data
+	return _data
 }
 
 type ScopedValueScopeTypeIsResetTimingOptions struct {

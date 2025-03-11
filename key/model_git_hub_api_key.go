@@ -45,7 +45,7 @@ func NewGitHubApiKey(
 	updatedAt int64,
 	options GitHubApiKeyOptions,
 ) GitHubApiKey {
-	data := GitHubApiKey{
+	_data := GitHubApiKey{
 		Name:              name,
 		ApiKey:            apiKey,
 		EncryptionKeyName: encryptionKeyName,
@@ -54,7 +54,7 @@ func NewGitHubApiKey(
 		Description:       options.Description,
 		Revision:          options.Revision,
 	}
-	return data
+	return _data
 }
 
 func (p *GitHubApiKey) Properties() map[string]interface{} {

@@ -39,13 +39,13 @@ func NewAccessLogCount(
 	count int64,
 	options AccessLogCountOptions,
 ) AccessLogCount {
-	data := AccessLogCount{
+	_data := AccessLogCount{
 		Count:   count,
 		Service: options.Service,
 		Method:  options.Method,
 		UserId:  options.UserId,
 	}
-	return data
+	return _data
 }
 
 func (p *AccessLogCount) Properties() map[string]interface{} {

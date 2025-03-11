@@ -35,11 +35,11 @@ func NewSimpleItemModel(
 	name string,
 	options SimpleItemModelOptions,
 ) SimpleItemModel {
-	data := SimpleItemModel{
+	_data := SimpleItemModel{
 		Name:     name,
 		Metadata: options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *SimpleItemModel) Properties() map[string]interface{} {

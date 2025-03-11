@@ -35,11 +35,11 @@ func NewScope(
 	targetDays int64,
 	options ScopeOptions,
 ) Scope {
-	data := Scope{
+	_data := Scope{
 		Name:       name,
 		TargetDays: targetDays,
 	}
-	return data
+	return _data
 }
 
 func (p *Scope) Properties() map[string]interface{} {

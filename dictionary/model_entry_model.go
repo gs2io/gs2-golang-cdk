@@ -35,11 +35,11 @@ func NewEntryModel(
 	name string,
 	options EntryModelOptions,
 ) EntryModel {
-	data := EntryModel{
+	_data := EntryModel{
 		Name:     name,
 		Metadata: options.Metadata,
 	}
-	return data
+	return _data
 }
 
 func (p *EntryModel) Properties() map[string]interface{} {

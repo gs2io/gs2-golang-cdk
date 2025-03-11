@@ -35,11 +35,11 @@ func NewBalanceParameterValue(
 	value int64,
 	options BalanceParameterValueOptions,
 ) BalanceParameterValue {
-	data := BalanceParameterValue{
+	_data := BalanceParameterValue{
 		Name:  name,
 		Value: value,
 	}
-	return data
+	return _data
 }
 
 func (p *BalanceParameterValue) Properties() map[string]interface{} {

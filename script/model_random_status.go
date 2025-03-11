@@ -35,11 +35,11 @@ func NewRandomStatus(
 	seed int64,
 	options RandomStatusOptions,
 ) RandomStatus {
-	data := RandomStatus{
+	_data := RandomStatus{
 		Seed: seed,
 		Used: options.Used,
 	}
-	return data
+	return _data
 }
 
 func (p *RandomStatus) Properties() map[string]interface{} {

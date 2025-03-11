@@ -88,21 +88,25 @@ func (p LogSetting) Properties() map[string]interface{} {
 	return properties
 }
 
+type NotificationSettingOptions struct {
+	GatewayNamespaceId               *string
+	EnableTransferMobileNotification *bool
+	Sound                            *string
+}
+
 type NotificationSetting struct {
-	GatewayNamespaceId               string
+	GatewayNamespaceId               *string
 	EnableTransferMobileNotification *bool
 	Sound                            *string
 }
 
 func NewNotificationSetting(
-	gatewayNamespaceId string,
-	enableTransferMobileNotification *bool,
-	sound *string,
+	options NotificationSettingOptions,
 ) NotificationSetting {
 	return NotificationSetting{
-		GatewayNamespaceId:               gatewayNamespaceId,
-		EnableTransferMobileNotification: enableTransferMobileNotification,
-		Sound:                            sound,
+		GatewayNamespaceId:               options.GatewayNamespaceId,
+		EnableTransferMobileNotification: options.EnableTransferMobileNotification,
+		Sound:                            options.Sound,
 	}
 }
 
@@ -160,35 +164,48 @@ func (p ScriptSetting) Properties() map[string]interface{} {
 	return properties
 }
 
+type TransactionSettingOptions struct {
+	EnableAtomicCommit        *bool
+	TransactionUseDistributor *bool
+	AcquireActionUseJobQueue  *bool
+	DistributorNamespaceId    *string
+	QueueNamespaceId          *string
+}
+
 type TransactionSetting struct {
-	EnableAutoRun          bool
-	DistributorNamespaceId *string
-	KeyId                  *string
-	QueueNamespaceId       *string
+	EnableAtomicCommit        *bool
+	TransactionUseDistributor *bool
+	AcquireActionUseJobQueue  *bool
+	DistributorNamespaceId    *string
+	QueueNamespaceId          *string
 }
 
 func NewTransactionSetting(
-	enableAutoRun bool,
-	distributorNamespaceId *string,
-	keyId *string,
-	queueNamespaceId *string,
+	options TransactionSettingOptions,
 ) TransactionSetting {
 	return TransactionSetting{
-		EnableAutoRun:          enableAutoRun,
-		DistributorNamespaceId: distributorNamespaceId,
-		KeyId:                  keyId,
-		QueueNamespaceId:       queueNamespaceId,
+		EnableAtomicCommit:        options.EnableAtomicCommit,
+		TransactionUseDistributor: options.TransactionUseDistributor,
+		AcquireActionUseJobQueue:  options.AcquireActionUseJobQueue,
+		DistributorNamespaceId:    options.DistributorNamespaceId,
+		QueueNamespaceId:          options.QueueNamespaceId,
 	}
 }
 
 func (p TransactionSetting) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	properties["EnableAutoRun"] = p.EnableAutoRun
+	properties["EnableAutoRun"] = true
+	if p.EnableAtomicCommit != nil {
+		properties["EnableAtomicCommit"] = *p.EnableAtomicCommit
+	}
+	if p.TransactionUseDistributor != nil {
+		properties["TransactionUseDistributor"] = *p.TransactionUseDistributor
+	}
+	if p.AcquireActionUseJobQueue != nil {
+		properties["AcquireActionUseJobQueue"] = *p.AcquireActionUseJobQueue
+	}
 	if p.DistributorNamespaceId != nil {
 		properties["DistributorNamespaceId"] = *p.DistributorNamespaceId
-	}
-	if p.KeyId != nil {
-		properties["KeyId"] = *p.KeyId
 	}
 	if p.QueueNamespaceId != nil {
 		properties["QueueNamespaceId"] = *p.QueueNamespaceId

@@ -45,7 +45,7 @@ func NewLayer(
 	createdAt int64,
 	options LayerOptions,
 ) Layer {
-	data := Layer{
+	_data := Layer{
 		AreaModelName:      areaModelName,
 		LayerModelName:     layerModelName,
 		NumberOfMinEntries: numberOfMinEntries,
@@ -54,7 +54,7 @@ func NewLayer(
 		CreatedAt:          createdAt,
 		Root:               options.Root,
 	}
-	return data
+	return _data
 }
 
 func (p *Layer) Properties() map[string]interface{} {

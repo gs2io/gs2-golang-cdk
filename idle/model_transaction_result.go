@@ -39,13 +39,13 @@ func NewTransactionResult(
 	transactionId string,
 	options TransactionResultOptions,
 ) TransactionResult {
-	data := TransactionResult{
+	_data := TransactionResult{
 		TransactionId:  transactionId,
 		VerifyResults:  options.VerifyResults,
 		ConsumeResults: options.ConsumeResults,
 		AcquireResults: options.AcquireResults,
 	}
-	return data
+	return _data
 }
 
 func (p *TransactionResult) Properties() map[string]interface{} {

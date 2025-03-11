@@ -49,7 +49,7 @@ func NewQuestModel(
 	contents []Contents,
 	options QuestModelOptions,
 ) QuestModel {
-	data := QuestModel{
+	_data := QuestModel{
 		Name:                        name,
 		Contents:                    contents,
 		Metadata:                    options.Metadata,
@@ -60,7 +60,7 @@ func NewQuestModel(
 		FailedAcquireActions:        options.FailedAcquireActions,
 		PremiseQuestNames:           options.PremiseQuestNames,
 	}
-	return data
+	return _data
 }
 
 func (p *QuestModel) Properties() map[string]interface{} {

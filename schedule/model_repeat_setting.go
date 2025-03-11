@@ -91,7 +91,7 @@ func NewRepeatSetting(
 	repeatType RepeatSettingRepeatType,
 	options RepeatSettingOptions,
 ) RepeatSetting {
-	data := RepeatSetting{
+	_data := RepeatSetting{
 		RepeatType:      repeatType,
 		BeginDayOfMonth: options.BeginDayOfMonth,
 		EndDayOfMonth:   options.EndDayOfMonth,
@@ -103,7 +103,7 @@ func NewRepeatSetting(
 		ActiveDays:      options.ActiveDays,
 		InactiveDays:    options.InactiveDays,
 	}
-	return data
+	return _data
 }
 
 type RepeatSettingRepeatTypeIsAlwaysOptions struct {

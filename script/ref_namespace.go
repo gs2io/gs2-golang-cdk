@@ -30,11 +30,13 @@ func (p *NamespaceRef) InvokeScript(
 	scriptId string,
 	args *string,
 	randomStatus *RandomStatus,
+	forceUseDistributor *bool,
 ) AcquireAction {
 	return InvokeScript(
 		scriptId,
 		args,
 		randomStatus,
+		forceUseDistributor,
 	)
 }
 
