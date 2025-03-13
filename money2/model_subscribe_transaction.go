@@ -57,6 +57,7 @@ type SubscribeTransaction struct {
 	ExpiresAt       int64
 	LastAllocatedAt *int64
 	LastTakeOverAt  *int64
+	TtlAt           int64
 	CreatedAt       int64
 	UpdatedAt       int64
 	Revision        *int64
@@ -75,6 +76,7 @@ func NewSubscribeTransaction(
 	store SubscribeTransactionStore,
 	statusDetail SubscribeTransactionStatusDetail,
 	expiresAt int64,
+	ttlAt int64,
 	createdAt int64,
 	updatedAt int64,
 	options SubscribeTransactionOptions,
@@ -85,6 +87,7 @@ func NewSubscribeTransaction(
 		Store:           store,
 		StatusDetail:    statusDetail,
 		ExpiresAt:       expiresAt,
+		TtlAt:           ttlAt,
 		CreatedAt:       createdAt,
 		UpdatedAt:       updatedAt,
 		UserId:          options.UserId,
@@ -111,6 +114,7 @@ func (p *SubscribeTransaction) Properties() map[string]interface{} {
 	if p.LastTakeOverAt != nil {
 		properties["LastTakeOverAt"] = p.LastTakeOverAt
 	}
+	properties["TtlAt"] = p.TtlAt
 	properties["CreatedAt"] = p.CreatedAt
 	properties["UpdatedAt"] = p.UpdatedAt
 	if p.Revision != nil {
