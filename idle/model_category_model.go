@@ -22,11 +22,21 @@ import (
 
 var _ = AcquireAction{}
 
+type CategoryModelRewardResetMode string
+
+const CategoryModelRewardResetModeReset = CategoryModelRewardResetMode("Reset")
+const CategoryModelRewardResetModeCarryOver = CategoryModelRewardResetMode("CarryOver")
+
+func (p CategoryModelRewardResetMode) Pointer() *CategoryModelRewardResetMode {
+	return &p
+}
+
 type CategoryModel struct {
 	Name                      string
 	Metadata                  *string
 	RewardIntervalMinutes     int32
 	DefaultMaximumIdleMinutes int32
+	RewardResetMode           CategoryModelRewardResetMode
 	AcquireActions            []AcquireActionList
 	IdlePeriodScheduleId      *string
 	ReceivePeriodScheduleId   *string
@@ -42,6 +52,7 @@ func NewCategoryModel(
 	name string,
 	rewardIntervalMinutes int32,
 	defaultMaximumIdleMinutes int32,
+	rewardResetMode CategoryModelRewardResetMode,
 	acquireActions []AcquireActionList,
 	options CategoryModelOptions,
 ) CategoryModel {
@@ -49,6 +60,7 @@ func NewCategoryModel(
 		Name:                      name,
 		RewardIntervalMinutes:     rewardIntervalMinutes,
 		DefaultMaximumIdleMinutes: defaultMaximumIdleMinutes,
+		RewardResetMode:           rewardResetMode,
 		AcquireActions:            acquireActions,
 		Metadata:                  options.Metadata,
 		IdlePeriodScheduleId:      options.IdlePeriodScheduleId,
@@ -65,6 +77,7 @@ func (p *CategoryModel) Properties() map[string]interface{} {
 	}
 	properties["RewardIntervalMinutes"] = p.RewardIntervalMinutes
 	properties["DefaultMaximumIdleMinutes"] = p.DefaultMaximumIdleMinutes
+	properties["RewardResetMode"] = p.RewardResetMode
 	{
 		values := make([]map[string]interface{}, len(p.AcquireActions))
 		for i, element := range p.AcquireActions {

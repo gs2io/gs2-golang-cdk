@@ -26,7 +26,6 @@ func InvokeScript(
 	scriptId string,
 	args *string,
 	randomStatus *RandomStatus,
-	forceUseDistributor *bool,
 ) AcquireAction {
 	properties := map[string]interface{}{
 		"userId": "#{userId}",
@@ -37,9 +36,6 @@ func InvokeScript(
 	}
 	if randomStatus != nil {
 		properties["randomStatus"] = randomStatus
-	}
-	if forceUseDistributor != nil {
-		properties["forceUseDistributor"] = forceUseDistributor
 	}
 	return AcquireAction{
 		Action:  "Gs2Script:InvokeScript",

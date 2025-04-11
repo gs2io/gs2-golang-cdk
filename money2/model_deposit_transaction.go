@@ -23,7 +23,7 @@ import (
 var _ = AcquireAction{}
 
 type DepositTransaction struct {
-	Price       float32
+	Price       float64
 	Currency    *string
 	Count       int32
 	DepositedAt *int64
@@ -35,7 +35,7 @@ type DepositTransactionOptions struct {
 }
 
 func NewDepositTransaction(
-	price float32,
+	price float64,
 	count int32,
 	options DepositTransactionOptions,
 ) DepositTransaction {

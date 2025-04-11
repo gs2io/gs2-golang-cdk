@@ -24,7 +24,7 @@ var _ = AcquireAction{}
 
 type UnusedBalance struct {
 	Currency  string
-	Balance   float32
+	Balance   float64
 	UpdatedAt int64
 	Revision  *int64
 }
@@ -35,7 +35,7 @@ type UnusedBalanceOptions struct {
 
 func NewUnusedBalance(
 	currency string,
-	balance float32,
+	balance float64,
 	updatedAt int64,
 	options UnusedBalanceOptions,
 ) UnusedBalance {

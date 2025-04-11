@@ -22,6 +22,121 @@ import (
 
 var _ = AcquireAction{}
 
+func VerifyStaminaValueByUserId(
+	namespaceName string,
+	staminaName string,
+	verifyType string,
+	value int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["staminaName"] = staminaName
+	properties["verifyType"] = verifyType
+	properties["value"] = value
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Stamina:VerifyStaminaValueByUserId",
+		Request: properties,
+	}
+}
+
+func VerifyStaminaMaxValueByUserId(
+	namespaceName string,
+	staminaName string,
+	verifyType string,
+	value int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["staminaName"] = staminaName
+	properties["verifyType"] = verifyType
+	properties["value"] = value
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Stamina:VerifyStaminaMaxValueByUserId",
+		Request: properties,
+	}
+}
+
+func VerifyStaminaRecoverIntervalMinutesByUserId(
+	namespaceName string,
+	staminaName string,
+	verifyType string,
+	value int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["staminaName"] = staminaName
+	properties["verifyType"] = verifyType
+	properties["value"] = value
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Stamina:VerifyStaminaRecoverIntervalMinutesByUserId",
+		Request: properties,
+	}
+}
+
+func VerifyStaminaRecoverValueByUserId(
+	namespaceName string,
+	staminaName string,
+	verifyType string,
+	value int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["staminaName"] = staminaName
+	properties["verifyType"] = verifyType
+	properties["value"] = value
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Stamina:VerifyStaminaRecoverValueByUserId",
+		Request: properties,
+	}
+}
+
+func VerifyStaminaOverflowValueByUserId(
+	namespaceName string,
+	staminaName string,
+	verifyType string,
+	value int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["staminaName"] = staminaName
+	properties["verifyType"] = verifyType
+	properties["value"] = value
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2Stamina:VerifyStaminaOverflowValueByUserId",
+		Request: properties,
+	}
+}
+
 func DecreaseMaxValueByUserId(
 	namespaceName string,
 	staminaName string,

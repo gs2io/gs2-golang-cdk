@@ -97,6 +97,76 @@ func (p *StaminaModelRef) ConsumeStamina(
 	)
 }
 
+func (p *StaminaModelRef) VerifyStaminaValue(
+	verifyType string,
+	value int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	return VerifyStaminaValueByUserId(
+		p.NamespaceName,
+		p.StaminaName,
+		verifyType,
+		value,
+		multiplyValueSpecifyingQuantity,
+	)
+}
+
+func (p *StaminaModelRef) VerifyStaminaMaxValue(
+	verifyType string,
+	value int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	return VerifyStaminaMaxValueByUserId(
+		p.NamespaceName,
+		p.StaminaName,
+		verifyType,
+		value,
+		multiplyValueSpecifyingQuantity,
+	)
+}
+
+func (p *StaminaModelRef) VerifyStaminaRecoverIntervalMinutes(
+	verifyType string,
+	value int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	return VerifyStaminaRecoverIntervalMinutesByUserId(
+		p.NamespaceName,
+		p.StaminaName,
+		verifyType,
+		value,
+		multiplyValueSpecifyingQuantity,
+	)
+}
+
+func (p *StaminaModelRef) VerifyStaminaRecoverValue(
+	verifyType string,
+	value int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	return VerifyStaminaRecoverValueByUserId(
+		p.NamespaceName,
+		p.StaminaName,
+		verifyType,
+		value,
+		multiplyValueSpecifyingQuantity,
+	)
+}
+
+func (p *StaminaModelRef) VerifyStaminaOverflowValue(
+	verifyType string,
+	value int32,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	return VerifyStaminaOverflowValueByUserId(
+		p.NamespaceName,
+		p.StaminaName,
+		verifyType,
+		value,
+		multiplyValueSpecifyingQuantity,
+	)
+}
+
 func (p *StaminaModelRef) Grn() string {
 	return NewJoin(
 		":",

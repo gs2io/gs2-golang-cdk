@@ -27,8 +27,10 @@ type DailyTransactionHistory struct {
 	Month          int32
 	Day            int32
 	Currency       string
-	DepositAmount  float32
-	WithdrawAmount float32
+	DepositAmount  float64
+	WithdrawAmount float64
+	IssueCount     int64
+	ConsumeCount   int64
 	UpdatedAt      int64
 	Revision       *int64
 }
@@ -42,8 +44,10 @@ func NewDailyTransactionHistory(
 	month int32,
 	day int32,
 	currency string,
-	depositAmount float32,
-	withdrawAmount float32,
+	depositAmount float64,
+	withdrawAmount float64,
+	issueCount int64,
+	consumeCount int64,
 	updatedAt int64,
 	options DailyTransactionHistoryOptions,
 ) DailyTransactionHistory {
@@ -54,6 +58,8 @@ func NewDailyTransactionHistory(
 		Currency:       currency,
 		DepositAmount:  depositAmount,
 		WithdrawAmount: withdrawAmount,
+		IssueCount:     issueCount,
+		ConsumeCount:   consumeCount,
 		UpdatedAt:      updatedAt,
 		Revision:       options.Revision,
 	}
@@ -68,6 +74,8 @@ func (p *DailyTransactionHistory) Properties() map[string]interface{} {
 	properties["Currency"] = p.Currency
 	properties["DepositAmount"] = p.DepositAmount
 	properties["WithdrawAmount"] = p.WithdrawAmount
+	properties["IssueCount"] = p.IssueCount
+	properties["ConsumeCount"] = p.ConsumeCount
 	properties["UpdatedAt"] = p.UpdatedAt
 	if p.Revision != nil {
 		properties["Revision"] = p.Revision
