@@ -32,31 +32,42 @@ func (p NamespaceType) Pointer() *NamespaceType {
 	return &p
 }
 
+type NamespaceFirehoseCompressData string
+
+const NamespaceFirehoseCompressDataNone = NamespaceFirehoseCompressData("none")
+const NamespaceFirehoseCompressDataGzip = NamespaceFirehoseCompressData("gzip")
+
+func (p NamespaceFirehoseCompressData) Pointer() *NamespaceFirehoseCompressData {
+	return &p
+}
+
 type Namespace struct {
 	CdkResource
-	stack               *Stack
-	Name                string
-	Description         *string
-	Type_               NamespaceType
-	GcpCredentialJson   *string
-	BigQueryDatasetName *string
-	LogExpireDays       *int32
-	AwsRegion           *string
-	AwsAccessKeyId      *string
-	AwsSecretAccessKey  *string
-	FirehoseStreamName  *string
+	stack                *Stack
+	Name                 string
+	Description          *string
+	Type_                NamespaceType
+	GcpCredentialJson    *string
+	BigQueryDatasetName  *string
+	LogExpireDays        *int32
+	AwsRegion            *string
+	AwsAccessKeyId       *string
+	AwsSecretAccessKey   *string
+	FirehoseStreamName   *string
+	FirehoseCompressData *NamespaceFirehoseCompressData
 }
 
 type NamespaceOptions struct {
-	Description         *string
-	Type_               NamespaceType
-	GcpCredentialJson   *string
-	BigQueryDatasetName *string
-	LogExpireDays       *int32
-	AwsRegion           *string
-	AwsAccessKeyId      *string
-	AwsSecretAccessKey  *string
-	FirehoseStreamName  *string
+	Description          *string
+	Type_                NamespaceType
+	GcpCredentialJson    *string
+	BigQueryDatasetName  *string
+	LogExpireDays        *int32
+	AwsRegion            *string
+	AwsAccessKeyId       *string
+	AwsSecretAccessKey   *string
+	FirehoseStreamName   *string
+	FirehoseCompressData *NamespaceFirehoseCompressData
 }
 
 func NewNamespace(
@@ -65,17 +76,18 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:               stack,
-		Name:                name,
-		Description:         options.Description,
-		Type_:               options.Type_,
-		GcpCredentialJson:   options.GcpCredentialJson,
-		BigQueryDatasetName: options.BigQueryDatasetName,
-		LogExpireDays:       options.LogExpireDays,
-		AwsRegion:           options.AwsRegion,
-		AwsAccessKeyId:      options.AwsAccessKeyId,
-		AwsSecretAccessKey:  options.AwsSecretAccessKey,
-		FirehoseStreamName:  options.FirehoseStreamName,
+		stack:                stack,
+		Name:                 name,
+		Description:          options.Description,
+		Type_:                options.Type_,
+		GcpCredentialJson:    options.GcpCredentialJson,
+		BigQueryDatasetName:  options.BigQueryDatasetName,
+		LogExpireDays:        options.LogExpireDays,
+		AwsRegion:            options.AwsRegion,
+		AwsAccessKeyId:       options.AwsAccessKeyId,
+		AwsSecretAccessKey:   options.AwsSecretAccessKey,
+		FirehoseStreamName:   options.FirehoseStreamName,
+		FirehoseCompressData: options.FirehoseCompressData,
 	}
 	data.CdkResource = NewCdkResource(&data)
 	stack.AddResource(&data.CdkResource)
@@ -117,6 +129,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.FirehoseStreamName != nil {
 		properties["FirehoseStreamName"] = p.FirehoseStreamName
+	}
+	if p.FirehoseCompressData != nil {
+		properties["FirehoseCompressData"] = p.FirehoseCompressData
 	}
 	return properties
 }
