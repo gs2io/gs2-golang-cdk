@@ -27,6 +27,7 @@ type TransactionResult struct {
 	VerifyResults  []VerifyActionResult
 	ConsumeResults []ConsumeActionResult
 	AcquireResults []AcquireActionResult
+	HasError       bool
 }
 
 type TransactionResultOptions struct {
@@ -37,10 +38,12 @@ type TransactionResultOptions struct {
 
 func NewTransactionResult(
 	transactionId string,
+	hasError bool,
 	options TransactionResultOptions,
 ) TransactionResult {
 	_data := TransactionResult{
 		TransactionId:  transactionId,
+		HasError:       hasError,
 		VerifyResults:  options.VerifyResults,
 		ConsumeResults: options.ConsumeResults,
 		AcquireResults: options.AcquireResults,
@@ -72,5 +75,6 @@ func (p *TransactionResult) Properties() map[string]interface{} {
 		}
 		properties["AcquireResults"] = values
 	}
+	properties["HasError"] = p.HasError
 	return properties
 }
