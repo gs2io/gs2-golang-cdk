@@ -83,6 +83,23 @@ func TriggerByUserId(
 	}
 }
 
+func ExtendTriggerByUserId(
+	namespaceName string,
+	triggerName string,
+	extendSeconds int32,
+) AcquireAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["triggerName"] = triggerName
+	properties["extendSeconds"] = extendSeconds
+	return AcquireAction{
+		Action:  "Gs2Schedule:ExtendTriggerByUserId",
+		Request: properties,
+	}
+}
+
 func VerifyEventByUserId(
 	namespaceName string,
 	eventName string,

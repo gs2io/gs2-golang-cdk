@@ -38,6 +38,7 @@ type Namespace struct {
 	JoinGuildScript            *ScriptSetting
 	LeaveGuildScript           *ScriptSetting
 	ChangeRoleScript           *ScriptSetting
+	DeleteGuildScript          *ScriptSetting
 	LogSetting                 *LogSetting
 }
 
@@ -54,6 +55,7 @@ type NamespaceOptions struct {
 	JoinGuildScript            *ScriptSetting
 	LeaveGuildScript           *ScriptSetting
 	ChangeRoleScript           *ScriptSetting
+	DeleteGuildScript          *ScriptSetting
 	LogSetting                 *LogSetting
 }
 
@@ -77,6 +79,7 @@ func NewNamespace(
 		JoinGuildScript:            options.JoinGuildScript,
 		LeaveGuildScript:           options.LeaveGuildScript,
 		ChangeRoleScript:           options.ChangeRoleScript,
+		DeleteGuildScript:          options.DeleteGuildScript,
 		LogSetting:                 options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
@@ -130,6 +133,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.ChangeRoleScript != nil {
 		properties["ChangeRoleScript"] = p.ChangeRoleScript.Properties()
+	}
+	if p.DeleteGuildScript != nil {
+		properties["DeleteGuildScript"] = p.DeleteGuildScript.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
