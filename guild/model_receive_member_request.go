@@ -26,6 +26,7 @@ type ReceiveMemberRequest struct {
 	UserId          string
 	TargetGuildName string
 	Metadata        *string
+	CreatedAt       int64
 }
 
 type ReceiveMemberRequestOptions struct {
@@ -35,11 +36,13 @@ type ReceiveMemberRequestOptions struct {
 func NewReceiveMemberRequest(
 	userId string,
 	targetGuildName string,
+	createdAt int64,
 	options ReceiveMemberRequestOptions,
 ) ReceiveMemberRequest {
 	_data := ReceiveMemberRequest{
 		UserId:          userId,
 		TargetGuildName: targetGuildName,
+		CreatedAt:       createdAt,
 		Metadata:        options.Metadata,
 	}
 	return _data
@@ -52,5 +55,6 @@ func (p *ReceiveMemberRequest) Properties() map[string]interface{} {
 	if p.Metadata != nil {
 		properties["Metadata"] = p.Metadata
 	}
+	properties["CreatedAt"] = p.CreatedAt
 	return properties
 }

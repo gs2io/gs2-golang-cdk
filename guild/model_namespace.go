@@ -36,6 +36,7 @@ type Namespace struct {
 	CreateGuildScript          *ScriptSetting
 	UpdateGuildScript          *ScriptSetting
 	JoinGuildScript            *ScriptSetting
+	ReceiveJoinRequestScript   *ScriptSetting
 	LeaveGuildScript           *ScriptSetting
 	ChangeRoleScript           *ScriptSetting
 	DeleteGuildScript          *ScriptSetting
@@ -53,6 +54,7 @@ type NamespaceOptions struct {
 	CreateGuildScript          *ScriptSetting
 	UpdateGuildScript          *ScriptSetting
 	JoinGuildScript            *ScriptSetting
+	ReceiveJoinRequestScript   *ScriptSetting
 	LeaveGuildScript           *ScriptSetting
 	ChangeRoleScript           *ScriptSetting
 	DeleteGuildScript          *ScriptSetting
@@ -77,6 +79,7 @@ func NewNamespace(
 		CreateGuildScript:          options.CreateGuildScript,
 		UpdateGuildScript:          options.UpdateGuildScript,
 		JoinGuildScript:            options.JoinGuildScript,
+		ReceiveJoinRequestScript:   options.ReceiveJoinRequestScript,
 		LeaveGuildScript:           options.LeaveGuildScript,
 		ChangeRoleScript:           options.ChangeRoleScript,
 		DeleteGuildScript:          options.DeleteGuildScript,
@@ -127,6 +130,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.JoinGuildScript != nil {
 		properties["JoinGuildScript"] = p.JoinGuildScript.Properties()
+	}
+	if p.ReceiveJoinRequestScript != nil {
+		properties["ReceiveJoinRequestScript"] = p.ReceiveJoinRequestScript.Properties()
 	}
 	if p.LeaveGuildScript != nil {
 		properties["LeaveGuildScript"] = p.LeaveGuildScript.Properties()
