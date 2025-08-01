@@ -22,20 +22,12 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
+type CategoryModelRef struct {
 	NamespaceName string
+	Category      string
 }
 
-func (p *NamespaceRef) CategoryModel(
-	category string,
-) *CategoryModelRef {
-	return &CategoryModelRef{
-		NamespaceName: p.NamespaceName,
-		Category:      category,
-	}
-}
-
-func (p *NamespaceRef) Grn() string {
+func (p *CategoryModelRef) Grn() string {
 	return NewJoin(
 		":",
 		[]string{
@@ -45,11 +37,13 @@ func (p *NamespaceRef) Grn() string {
 			NewGetAttrOwnerId().String(),
 			"chat",
 			p.NamespaceName,
+			"model",
+			p.Category,
 		},
 	).String()
 }
 
-func (p *NamespaceRef) GrnPointer() *string {
+func (p *CategoryModelRef) GrnPointer() *string {
 	grn := p.Grn()
 	return &grn
 }

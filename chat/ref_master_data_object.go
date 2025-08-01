@@ -22,34 +22,7 @@ import (
 
 var _ = AcquireAction{}
 
-type NamespaceRef struct {
+type MasterDataObjectRef struct {
 	NamespaceName string
-}
-
-func (p *NamespaceRef) CategoryModel(
-	category string,
-) *CategoryModelRef {
-	return &CategoryModelRef{
-		NamespaceName: p.NamespaceName,
-		Category:      category,
-	}
-}
-
-func (p *NamespaceRef) Grn() string {
-	return NewJoin(
-		":",
-		[]string{
-			"grn",
-			"gs2",
-			NewGetAttrRegion().String(),
-			NewGetAttrOwnerId().String(),
-			"chat",
-			p.NamespaceName,
-		},
-	).String()
-}
-
-func (p *NamespaceRef) GrnPointer() *string {
-	grn := p.Grn()
-	return &grn
+	ObjectKey     string
 }

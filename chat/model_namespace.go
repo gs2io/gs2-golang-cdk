@@ -125,3 +125,17 @@ func (p *Namespace) GetAttrNamespaceId() GetAttr {
 		"Item.NamespaceId",
 	)
 }
+
+func (p *Namespace) MasterData(
+	categoryModels []CategoryModel,
+
+) *Namespace {
+	NewCurrentMasterData(
+		p.stack,
+		p.Name,
+		categoryModels,
+	).AddDependsOn(
+		p,
+	)
+	return p
+}
