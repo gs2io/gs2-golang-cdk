@@ -24,21 +24,19 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack                    *Stack
-	Name                     string
-	Description              *string
-	TransactionSetting       TransactionSetting
-	LotteryTriggerScriptId   *string
-	ChoicePrizeTableScriptId *string
-	LogSetting               *LogSetting
+	stack                  *Stack
+	Name                   string
+	Description            *string
+	TransactionSetting     TransactionSetting
+	LotteryTriggerScriptId *string
+	LogSetting             *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description              *string
-	TransactionSetting       TransactionSetting
-	LotteryTriggerScriptId   *string
-	ChoicePrizeTableScriptId *string
-	LogSetting               *LogSetting
+	Description            *string
+	TransactionSetting     TransactionSetting
+	LotteryTriggerScriptId *string
+	LogSetting             *LogSetting
 }
 
 func NewNamespace(
@@ -47,13 +45,12 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:                    stack,
-		Name:                     name,
-		Description:              options.Description,
-		TransactionSetting:       options.TransactionSetting,
-		LotteryTriggerScriptId:   options.LotteryTriggerScriptId,
-		ChoicePrizeTableScriptId: options.ChoicePrizeTableScriptId,
-		LogSetting:               options.LogSetting,
+		stack:                  stack,
+		Name:                   name,
+		Description:            options.Description,
+		TransactionSetting:     options.TransactionSetting,
+		LotteryTriggerScriptId: options.LotteryTriggerScriptId,
+		LogSetting:             options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
 	stack.AddResource(&data.CdkResource)
@@ -77,9 +74,6 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	if p.LotteryTriggerScriptId != nil {
 		properties["LotteryTriggerScriptId"] = p.LotteryTriggerScriptId
-	}
-	if p.ChoicePrizeTableScriptId != nil {
-		properties["ChoicePrizeTableScriptId"] = p.ChoicePrizeTableScriptId
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
