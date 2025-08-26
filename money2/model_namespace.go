@@ -41,6 +41,7 @@ type Namespace struct {
 	PlatformSetting                      PlatformSetting
 	DepositBalanceScript                 *ScriptSetting
 	WithdrawBalanceScript                *ScriptSetting
+	VerifyReceiptScript                  *ScriptSetting
 	SubscribeScript                      *string
 	RenewScript                          *string
 	UnsubscribeScript                    *string
@@ -53,6 +54,7 @@ type NamespaceOptions struct {
 	Description                          *string
 	DepositBalanceScript                 *ScriptSetting
 	WithdrawBalanceScript                *ScriptSetting
+	VerifyReceiptScript                  *ScriptSetting
 	SubscribeScript                      *string
 	RenewScript                          *string
 	UnsubscribeScript                    *string
@@ -78,6 +80,7 @@ func NewNamespace(
 		Description:                          options.Description,
 		DepositBalanceScript:                 options.DepositBalanceScript,
 		WithdrawBalanceScript:                options.WithdrawBalanceScript,
+		VerifyReceiptScript:                  options.VerifyReceiptScript,
 		SubscribeScript:                      options.SubscribeScript,
 		RenewScript:                          options.RenewScript,
 		UnsubscribeScript:                    options.UnsubscribeScript,
@@ -112,6 +115,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.WithdrawBalanceScript != nil {
 		properties["WithdrawBalanceScript"] = p.WithdrawBalanceScript.Properties()
+	}
+	if p.VerifyReceiptScript != nil {
+		properties["VerifyReceiptScript"] = p.VerifyReceiptScript.Properties()
 	}
 	if p.SubscribeScript != nil {
 		properties["SubscribeScript"] = p.SubscribeScript
