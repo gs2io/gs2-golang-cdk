@@ -27,6 +27,7 @@ type Namespace struct {
 	stack                          *Stack
 	Name                           string
 	Description                    *string
+	TransactionSetting             *TransactionSetting
 	AssumeUserId                   *string
 	AutoRunStampSheetNotification  NotificationSetting
 	AutoRunTransactionNotification NotificationSetting
@@ -35,6 +36,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description                    *string
+	TransactionSetting             *TransactionSetting
 	AssumeUserId                   *string
 	AutoRunStampSheetNotification  NotificationSetting
 	AutoRunTransactionNotification NotificationSetting
@@ -50,6 +52,7 @@ func NewNamespace(
 		stack:                          stack,
 		Name:                           name,
 		Description:                    options.Description,
+		TransactionSetting:             options.TransactionSetting,
 		AssumeUserId:                   options.AssumeUserId,
 		AutoRunStampSheetNotification:  options.AutoRunStampSheetNotification,
 		AutoRunTransactionNotification: options.AutoRunTransactionNotification,
@@ -73,6 +76,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["Name"] = p.Name
 	if p.Description != nil {
 		properties["Description"] = p.Description
+	}
+	if p.TransactionSetting != nil {
+		properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	}
 	if p.AssumeUserId != nil {
 		properties["AssumeUserId"] = p.AssumeUserId

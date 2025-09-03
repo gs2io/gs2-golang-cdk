@@ -26,10 +26,11 @@ type Namespace struct {
 	CdkResource
 	stack                   *Stack
 	Name                    string
+	Description             *string
+	TransactionSetting      *TransactionSetting
 	Admob                   *AdMob
 	UnityAd                 *UnityAd
 	AppLovinMaxes           []AppLovinMax
-	Description             *string
 	AcquirePointScript      *ScriptSetting
 	ConsumePointScript      *ScriptSetting
 	ChangePointNotification NotificationSetting
@@ -37,10 +38,11 @@ type Namespace struct {
 }
 
 type NamespaceOptions struct {
+	Description             *string
+	TransactionSetting      *TransactionSetting
 	Admob                   *AdMob
 	UnityAd                 *UnityAd
 	AppLovinMaxes           []AppLovinMax
-	Description             *string
 	AcquirePointScript      *ScriptSetting
 	ConsumePointScript      *ScriptSetting
 	ChangePointNotification NotificationSetting
@@ -55,10 +57,11 @@ func NewNamespace(
 	data := Namespace{
 		stack:                   stack,
 		Name:                    name,
+		Description:             options.Description,
+		TransactionSetting:      options.TransactionSetting,
 		Admob:                   options.Admob,
 		UnityAd:                 options.UnityAd,
 		AppLovinMaxes:           options.AppLovinMaxes,
-		Description:             options.Description,
 		AcquirePointScript:      options.AcquirePointScript,
 		ConsumePointScript:      options.ConsumePointScript,
 		ChangePointNotification: options.ChangePointNotification,
@@ -80,6 +83,12 @@ func (p *Namespace) ResourceType() string {
 func (p *Namespace) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["Name"] = p.Name
+	if p.Description != nil {
+		properties["Description"] = p.Description
+	}
+	if p.TransactionSetting != nil {
+		properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	}
 	if p.Admob != nil {
 		properties["Admob"] = p.Admob.Properties()
 	}
@@ -92,9 +101,6 @@ func (p *Namespace) Properties() map[string]interface{} {
 			values[i] = element.Properties()
 		}
 		properties["AppLovinMaxes"] = values
-	}
-	if p.Description != nil {
-		properties["Description"] = p.Description
 	}
 	if p.AcquirePointScript != nil {
 		properties["AcquirePointScript"] = p.AcquirePointScript.Properties()

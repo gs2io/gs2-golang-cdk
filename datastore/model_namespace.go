@@ -24,17 +24,19 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack            *Stack
-	Name             string
-	Description      *string
-	LogSetting       *LogSetting
-	DoneUploadScript *ScriptSetting
+	stack              *Stack
+	Name               string
+	Description        *string
+	TransactionSetting *TransactionSetting
+	LogSetting         *LogSetting
+	DoneUploadScript   *ScriptSetting
 }
 
 type NamespaceOptions struct {
-	Description      *string
-	LogSetting       *LogSetting
-	DoneUploadScript *ScriptSetting
+	Description        *string
+	TransactionSetting *TransactionSetting
+	LogSetting         *LogSetting
+	DoneUploadScript   *ScriptSetting
 }
 
 func NewNamespace(
@@ -43,11 +45,12 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:            stack,
-		Name:             name,
-		Description:      options.Description,
-		LogSetting:       options.LogSetting,
-		DoneUploadScript: options.DoneUploadScript,
+		stack:              stack,
+		Name:               name,
+		Description:        options.Description,
+		TransactionSetting: options.TransactionSetting,
+		LogSetting:         options.LogSetting,
+		DoneUploadScript:   options.DoneUploadScript,
 	}
 	data.CdkResource = NewCdkResource(&data)
 	stack.AddResource(&data.CdkResource)
@@ -67,6 +70,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["Name"] = p.Name
 	if p.Description != nil {
 		properties["Description"] = p.Description
+	}
+	if p.TransactionSetting != nil {
+		properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()

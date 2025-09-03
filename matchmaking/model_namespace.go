@@ -65,6 +65,7 @@ type Namespace struct {
 	stack                                         *Stack
 	Name                                          string
 	Description                                   *string
+	TransactionSetting                            *TransactionSetting
 	EnableRating                                  bool
 	EnableDisconnectDetection                     NamespaceEnableDisconnectDetection
 	DisconnectDetectionTimeoutSeconds             *int32
@@ -87,6 +88,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description                                   *string
+	TransactionSetting                            *TransactionSetting
 	EnableRating                                  bool
 	EnableDisconnectDetection                     NamespaceEnableDisconnectDetection
 	DisconnectDetectionTimeoutSeconds             *int32
@@ -118,6 +120,7 @@ func NewNamespace(
 		CreateGatheringTriggerType:        createGatheringTriggerType,
 		CompleteMatchmakingTriggerType:    completeMatchmakingTriggerType,
 		Description:                       options.Description,
+		TransactionSetting:                options.TransactionSetting,
 		EnableRating:                      options.EnableRating,
 		EnableDisconnectDetection:         options.EnableDisconnectDetection,
 		DisconnectDetectionTimeoutSeconds: options.DisconnectDetectionTimeoutSeconds,
@@ -153,6 +156,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["Name"] = p.Name
 	if p.Description != nil {
 		properties["Description"] = p.Description
+	}
+	if p.TransactionSetting != nil {
+		properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	}
 	properties["EnableRating"] = p.EnableRating
 	properties["EnableDisconnectDetection"] = p.EnableDisconnectDetection

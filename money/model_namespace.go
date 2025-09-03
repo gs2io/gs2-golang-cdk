@@ -46,6 +46,7 @@ type Namespace struct {
 	stack              *Stack
 	Name               string
 	Description        *string
+	TransactionSetting *TransactionSetting
 	Priority           NamespacePriority
 	ShareFree          bool
 	Currency           NamespaceCurrency
@@ -60,6 +61,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description        *string
+	TransactionSetting *TransactionSetting
 	AppleKey           *string
 	GoogleKey          *string
 	EnableFakeReceipt  bool
@@ -84,6 +86,7 @@ func NewNamespace(
 		ShareFree:          shareFree,
 		Currency:           currency,
 		Description:        options.Description,
+		TransactionSetting: options.TransactionSetting,
 		AppleKey:           options.AppleKey,
 		GoogleKey:          options.GoogleKey,
 		EnableFakeReceipt:  options.EnableFakeReceipt,
@@ -110,6 +113,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["Name"] = p.Name
 	if p.Description != nil {
 		properties["Description"] = p.Description
+	}
+	if p.TransactionSetting != nil {
+		properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	}
 	properties["Priority"] = p.Priority
 	properties["ShareFree"] = p.ShareFree

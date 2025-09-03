@@ -43,6 +43,7 @@ type Namespace struct {
 	stack              *Stack
 	Name               string
 	Description        *string
+	TransactionSetting *TransactionSetting
 	ServerType         NamespaceServerType
 	ServerSpec         NamespaceServerSpec
 	CreateNotification *NotificationSetting
@@ -51,6 +52,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description        *string
+	TransactionSetting *TransactionSetting
 	CreateNotification *NotificationSetting
 	LogSetting         *LogSetting
 }
@@ -68,6 +70,7 @@ func NewNamespace(
 		ServerType:         serverType,
 		ServerSpec:         serverSpec,
 		Description:        options.Description,
+		TransactionSetting: options.TransactionSetting,
 		CreateNotification: options.CreateNotification,
 		LogSetting:         options.LogSetting,
 	}
@@ -89,6 +92,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["Name"] = p.Name
 	if p.Description != nil {
 		properties["Description"] = p.Description
+	}
+	if p.TransactionSetting != nil {
+		properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	}
 	properties["ServerType"] = p.ServerType
 	properties["ServerSpec"] = p.ServerSpec

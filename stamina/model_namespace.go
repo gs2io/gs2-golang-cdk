@@ -27,12 +27,14 @@ type Namespace struct {
 	stack                 *Stack
 	Name                  string
 	Description           *string
+	TransactionSetting    *TransactionSetting
 	OverflowTriggerScript *string
 	LogSetting            *LogSetting
 }
 
 type NamespaceOptions struct {
 	Description           *string
+	TransactionSetting    *TransactionSetting
 	OverflowTriggerScript *string
 	LogSetting            *LogSetting
 }
@@ -46,6 +48,7 @@ func NewNamespace(
 		stack:                 stack,
 		Name:                  name,
 		Description:           options.Description,
+		TransactionSetting:    options.TransactionSetting,
 		OverflowTriggerScript: options.OverflowTriggerScript,
 		LogSetting:            options.LogSetting,
 	}
@@ -67,6 +70,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["Name"] = p.Name
 	if p.Description != nil {
 		properties["Description"] = p.Description
+	}
+	if p.TransactionSetting != nil {
+		properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	}
 	if p.OverflowTriggerScript != nil {
 		properties["OverflowTriggerScript"] = p.OverflowTriggerScript

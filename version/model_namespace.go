@@ -27,6 +27,7 @@ type Namespace struct {
 	stack                       *Stack
 	Name                        string
 	Description                 *string
+	TransactionSetting          *TransactionSetting
 	AssumeUserId                string
 	AcceptVersionScript         *ScriptSetting
 	CheckVersionTriggerScriptId *string
@@ -35,6 +36,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description                 *string
+	TransactionSetting          *TransactionSetting
 	AcceptVersionScript         *ScriptSetting
 	CheckVersionTriggerScriptId *string
 	LogSetting                  *LogSetting
@@ -51,6 +53,7 @@ func NewNamespace(
 		Name:                        name,
 		AssumeUserId:                assumeUserId,
 		Description:                 options.Description,
+		TransactionSetting:          options.TransactionSetting,
 		AcceptVersionScript:         options.AcceptVersionScript,
 		CheckVersionTriggerScriptId: options.CheckVersionTriggerScriptId,
 		LogSetting:                  options.LogSetting,
@@ -73,6 +76,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["Name"] = p.Name
 	if p.Description != nil {
 		properties["Description"] = p.Description
+	}
+	if p.TransactionSetting != nil {
+		properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	}
 	properties["AssumeUserId"] = p.AssumeUserId
 	if p.AcceptVersionScript != nil {

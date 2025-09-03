@@ -37,6 +37,7 @@ type Namespace struct {
 	Name                                 string
 	CurrencyUsagePriority                NamespaceCurrencyUsagePriority
 	Description                          *string
+	TransactionSetting                   *TransactionSetting
 	SharedFreeCurrency                   bool
 	PlatformSetting                      PlatformSetting
 	DepositBalanceScript                 *ScriptSetting
@@ -52,6 +53,7 @@ type Namespace struct {
 
 type NamespaceOptions struct {
 	Description                          *string
+	TransactionSetting                   *TransactionSetting
 	DepositBalanceScript                 *ScriptSetting
 	WithdrawBalanceScript                *ScriptSetting
 	VerifyReceiptScript                  *ScriptSetting
@@ -78,6 +80,7 @@ func NewNamespace(
 		SharedFreeCurrency:                   sharedFreeCurrency,
 		PlatformSetting:                      platformSetting,
 		Description:                          options.Description,
+		TransactionSetting:                   options.TransactionSetting,
 		DepositBalanceScript:                 options.DepositBalanceScript,
 		WithdrawBalanceScript:                options.WithdrawBalanceScript,
 		VerifyReceiptScript:                  options.VerifyReceiptScript,
@@ -107,6 +110,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["CurrencyUsagePriority"] = p.CurrencyUsagePriority
 	if p.Description != nil {
 		properties["Description"] = p.Description
+	}
+	if p.TransactionSetting != nil {
+		properties["TransactionSetting"] = p.TransactionSetting.Properties()
 	}
 	properties["SharedFreeCurrency"] = p.SharedFreeCurrency
 	properties["PlatformSetting"] = p.PlatformSetting.Properties()
