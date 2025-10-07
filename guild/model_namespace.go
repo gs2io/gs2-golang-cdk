@@ -24,43 +24,45 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack                      *Stack
-	Name                       string
-	Description                *string
-	TransactionSetting         *TransactionSetting
-	ChangeNotification         *NotificationSetting
-	JoinNotification           *NotificationSetting
-	LeaveNotification          *NotificationSetting
-	ChangeMemberNotification   *NotificationSetting
-	ReceiveRequestNotification *NotificationSetting
-	RemoveRequestNotification  *NotificationSetting
-	CreateGuildScript          *ScriptSetting
-	UpdateGuildScript          *ScriptSetting
-	JoinGuildScript            *ScriptSetting
-	ReceiveJoinRequestScript   *ScriptSetting
-	LeaveGuildScript           *ScriptSetting
-	ChangeRoleScript           *ScriptSetting
-	DeleteGuildScript          *ScriptSetting
-	LogSetting                 *LogSetting
+	stack                                        *Stack
+	Name                                         string
+	Description                                  *string
+	TransactionSetting                           *TransactionSetting
+	ChangeNotification                           *NotificationSetting
+	JoinNotification                             *NotificationSetting
+	LeaveNotification                            *NotificationSetting
+	ChangeMemberNotification                     *NotificationSetting
+	ChangeMemberNotificationIgnoreChangeMetadata *bool
+	ReceiveRequestNotification                   *NotificationSetting
+	RemoveRequestNotification                    *NotificationSetting
+	CreateGuildScript                            *ScriptSetting
+	UpdateGuildScript                            *ScriptSetting
+	JoinGuildScript                              *ScriptSetting
+	ReceiveJoinRequestScript                     *ScriptSetting
+	LeaveGuildScript                             *ScriptSetting
+	ChangeRoleScript                             *ScriptSetting
+	DeleteGuildScript                            *ScriptSetting
+	LogSetting                                   *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description                *string
-	TransactionSetting         *TransactionSetting
-	ChangeNotification         *NotificationSetting
-	JoinNotification           *NotificationSetting
-	LeaveNotification          *NotificationSetting
-	ChangeMemberNotification   *NotificationSetting
-	ReceiveRequestNotification *NotificationSetting
-	RemoveRequestNotification  *NotificationSetting
-	CreateGuildScript          *ScriptSetting
-	UpdateGuildScript          *ScriptSetting
-	JoinGuildScript            *ScriptSetting
-	ReceiveJoinRequestScript   *ScriptSetting
-	LeaveGuildScript           *ScriptSetting
-	ChangeRoleScript           *ScriptSetting
-	DeleteGuildScript          *ScriptSetting
-	LogSetting                 *LogSetting
+	Description                                  *string
+	TransactionSetting                           *TransactionSetting
+	ChangeNotification                           *NotificationSetting
+	JoinNotification                             *NotificationSetting
+	LeaveNotification                            *NotificationSetting
+	ChangeMemberNotification                     *NotificationSetting
+	ChangeMemberNotificationIgnoreChangeMetadata *bool
+	ReceiveRequestNotification                   *NotificationSetting
+	RemoveRequestNotification                    *NotificationSetting
+	CreateGuildScript                            *ScriptSetting
+	UpdateGuildScript                            *ScriptSetting
+	JoinGuildScript                              *ScriptSetting
+	ReceiveJoinRequestScript                     *ScriptSetting
+	LeaveGuildScript                             *ScriptSetting
+	ChangeRoleScript                             *ScriptSetting
+	DeleteGuildScript                            *ScriptSetting
+	LogSetting                                   *LogSetting
 }
 
 func NewNamespace(
@@ -69,24 +71,25 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:                      stack,
-		Name:                       name,
-		Description:                options.Description,
-		TransactionSetting:         options.TransactionSetting,
-		ChangeNotification:         options.ChangeNotification,
-		JoinNotification:           options.JoinNotification,
-		LeaveNotification:          options.LeaveNotification,
-		ChangeMemberNotification:   options.ChangeMemberNotification,
-		ReceiveRequestNotification: options.ReceiveRequestNotification,
-		RemoveRequestNotification:  options.RemoveRequestNotification,
-		CreateGuildScript:          options.CreateGuildScript,
-		UpdateGuildScript:          options.UpdateGuildScript,
-		JoinGuildScript:            options.JoinGuildScript,
-		ReceiveJoinRequestScript:   options.ReceiveJoinRequestScript,
-		LeaveGuildScript:           options.LeaveGuildScript,
-		ChangeRoleScript:           options.ChangeRoleScript,
-		DeleteGuildScript:          options.DeleteGuildScript,
-		LogSetting:                 options.LogSetting,
+		stack:                    stack,
+		Name:                     name,
+		Description:              options.Description,
+		TransactionSetting:       options.TransactionSetting,
+		ChangeNotification:       options.ChangeNotification,
+		JoinNotification:         options.JoinNotification,
+		LeaveNotification:        options.LeaveNotification,
+		ChangeMemberNotification: options.ChangeMemberNotification,
+		ChangeMemberNotificationIgnoreChangeMetadata: options.ChangeMemberNotificationIgnoreChangeMetadata,
+		ReceiveRequestNotification:                   options.ReceiveRequestNotification,
+		RemoveRequestNotification:                    options.RemoveRequestNotification,
+		CreateGuildScript:                            options.CreateGuildScript,
+		UpdateGuildScript:                            options.UpdateGuildScript,
+		JoinGuildScript:                              options.JoinGuildScript,
+		ReceiveJoinRequestScript:                     options.ReceiveJoinRequestScript,
+		LeaveGuildScript:                             options.LeaveGuildScript,
+		ChangeRoleScript:                             options.ChangeRoleScript,
+		DeleteGuildScript:                            options.DeleteGuildScript,
+		LogSetting:                                   options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
 	stack.AddResource(&data.CdkResource)
@@ -121,6 +124,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.ChangeMemberNotification != nil {
 		properties["ChangeMemberNotification"] = p.ChangeMemberNotification.Properties()
+	}
+	if p.ChangeMemberNotificationIgnoreChangeMetadata != nil {
+		properties["ChangeMemberNotificationIgnoreChangeMetadata"] = p.ChangeMemberNotificationIgnoreChangeMetadata
 	}
 	if p.ReceiveRequestNotification != nil {
 		properties["ReceiveRequestNotification"] = p.ReceiveRequestNotification.Properties()
