@@ -28,12 +28,14 @@ type Namespace struct {
 	Name               string
 	Description        *string
 	TransactionSetting *TransactionSetting
+	CountUpScript      *ScriptSetting
 	LogSetting         *LogSetting
 }
 
 type NamespaceOptions struct {
 	Description        *string
 	TransactionSetting *TransactionSetting
+	CountUpScript      *ScriptSetting
 	LogSetting         *LogSetting
 }
 
@@ -47,6 +49,7 @@ func NewNamespace(
 		Name:               name,
 		Description:        options.Description,
 		TransactionSetting: options.TransactionSetting,
+		CountUpScript:      options.CountUpScript,
 		LogSetting:         options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
@@ -70,6 +73,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.TransactionSetting != nil {
 		properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	}
+	if p.CountUpScript != nil {
+		properties["CountUpScript"] = p.CountUpScript.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
