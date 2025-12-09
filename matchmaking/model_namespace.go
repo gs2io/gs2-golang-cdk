@@ -92,8 +92,10 @@ type NamespaceOptions struct {
 	EnableRating                                  bool
 	EnableDisconnectDetection                     NamespaceEnableDisconnectDetection
 	DisconnectDetectionTimeoutSeconds             *int32
+	CreateGatheringTriggerType                    NamespaceCreateGatheringTriggerType
 	CreateGatheringTriggerRealtimeNamespaceId     *string
 	CreateGatheringTriggerScriptId                *string
+	CompleteMatchmakingTriggerType                NamespaceCompleteMatchmakingTriggerType
 	CompleteMatchmakingTriggerRealtimeNamespaceId *string
 	CompleteMatchmakingTriggerScriptId            *string
 	EnableCollaborateSeasonRating                 NamespaceEnableCollaborateSeasonRating
@@ -110,22 +112,20 @@ type NamespaceOptions struct {
 func NewNamespace(
 	stack *Stack,
 	name string,
-	createGatheringTriggerType NamespaceCreateGatheringTriggerType,
-	completeMatchmakingTriggerType NamespaceCompleteMatchmakingTriggerType,
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
 		stack:                             stack,
 		Name:                              name,
-		CreateGatheringTriggerType:        createGatheringTriggerType,
-		CompleteMatchmakingTriggerType:    completeMatchmakingTriggerType,
 		Description:                       options.Description,
 		TransactionSetting:                options.TransactionSetting,
 		EnableRating:                      options.EnableRating,
 		EnableDisconnectDetection:         options.EnableDisconnectDetection,
 		DisconnectDetectionTimeoutSeconds: options.DisconnectDetectionTimeoutSeconds,
+		CreateGatheringTriggerType:        options.CreateGatheringTriggerType,
 		CreateGatheringTriggerRealtimeNamespaceId:     options.CreateGatheringTriggerRealtimeNamespaceId,
 		CreateGatheringTriggerScriptId:                options.CreateGatheringTriggerScriptId,
+		CompleteMatchmakingTriggerType:                options.CompleteMatchmakingTriggerType,
 		CompleteMatchmakingTriggerRealtimeNamespaceId: options.CompleteMatchmakingTriggerRealtimeNamespaceId,
 		CompleteMatchmakingTriggerScriptId:            options.CompleteMatchmakingTriggerScriptId,
 		EnableCollaborateSeasonRating:                 options.EnableCollaborateSeasonRating,
