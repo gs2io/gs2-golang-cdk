@@ -24,6 +24,33 @@ var _ = AcquireAction{}
 
 type BuffTargetModelTargetModelName string
 
+const BuffTargetModelTargetModelNameGs2ExchangeIncrementalRateModel = BuffTargetModelTargetModelName("Gs2Exchange:IncrementalRateModel")
+const BuffTargetModelTargetModelNameGs2ExchangeRateModel = BuffTargetModelTargetModelName("Gs2Exchange:RateModel")
+const BuffTargetModelTargetModelNameGs2ExperienceExperienceModel = BuffTargetModelTargetModelName("Gs2Experience:ExperienceModel")
+const BuffTargetModelTargetModelNameGs2ExperienceStatus = BuffTargetModelTargetModelName("Gs2Experience:Status")
+const BuffTargetModelTargetModelNameGs2FormationMold = BuffTargetModelTargetModelName("Gs2Formation:Mold")
+const BuffTargetModelTargetModelNameGs2IdleCategoryModel = BuffTargetModelTargetModelName("Gs2Idle:CategoryModel")
+const BuffTargetModelTargetModelNameGs2IdleStatus = BuffTargetModelTargetModelName("Gs2Idle:Status")
+const BuffTargetModelTargetModelNameGs2InventoryBigInventoryModel = BuffTargetModelTargetModelName("Gs2Inventory:BigInventoryModel")
+const BuffTargetModelTargetModelNameGs2InventoryBigItemModel = BuffTargetModelTargetModelName("Gs2Inventory:BigItemModel")
+const BuffTargetModelTargetModelNameGs2InventoryInventory = BuffTargetModelTargetModelName("Gs2Inventory:Inventory")
+const BuffTargetModelTargetModelNameGs2InventoryInventoryModel = BuffTargetModelTargetModelName("Gs2Inventory:InventoryModel")
+const BuffTargetModelTargetModelNameGs2InventoryItemModel = BuffTargetModelTargetModelName("Gs2Inventory:ItemModel")
+const BuffTargetModelTargetModelNameGs2InventorySimpleInventoryModel = BuffTargetModelTargetModelName("Gs2Inventory:SimpleInventoryModel")
+const BuffTargetModelTargetModelNameGs2InventorySimpleItemModel = BuffTargetModelTargetModelName("Gs2Inventory:SimpleItemModel")
+const BuffTargetModelTargetModelNameGs2LimitCounter = BuffTargetModelTargetModelName("Gs2Limit:Counter")
+const BuffTargetModelTargetModelNameGs2LimitLimitModel = BuffTargetModelTargetModelName("Gs2Limit:LimitModel")
+const BuffTargetModelTargetModelNameGs2LoginRewardBonusModel = BuffTargetModelTargetModelName("Gs2LoginReward:BonusModel")
+const BuffTargetModelTargetModelNameGs2MissionMissionTaskModel = BuffTargetModelTargetModelName("Gs2Mission:MissionTaskModel")
+const BuffTargetModelTargetModelNameGs2Money2Wallet = BuffTargetModelTargetModelName("Gs2Money2:Wallet")
+const BuffTargetModelTargetModelNameGs2MoneyWallet = BuffTargetModelTargetModelName("Gs2Money:Wallet")
+const BuffTargetModelTargetModelNameGs2QuestQuestModel = BuffTargetModelTargetModelName("Gs2Quest:QuestModel")
+const BuffTargetModelTargetModelNameGs2ShowcaseDisplayItem = BuffTargetModelTargetModelName("Gs2Showcase:DisplayItem")
+const BuffTargetModelTargetModelNameGs2ShowcaseRandomDisplayItemModel = BuffTargetModelTargetModelName("Gs2Showcase:RandomDisplayItemModel")
+const BuffTargetModelTargetModelNameGs2SkillTreeNodeModel = BuffTargetModelTargetModelName("Gs2SkillTree:NodeModel")
+const BuffTargetModelTargetModelNameGs2StaminaStamina = BuffTargetModelTargetModelName("Gs2Stamina:Stamina")
+const BuffTargetModelTargetModelNameGs2StaminaStaminaModel = BuffTargetModelTargetModelName("Gs2Stamina:StaminaModel")
+
 func (p BuffTargetModelTargetModelName) Pointer() *BuffTargetModelTargetModelName {
 	return &p
 }

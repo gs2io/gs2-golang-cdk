@@ -21,6 +21,6 @@ Follow the instructions in [GS2 Setup](https://docs.gs2.io/en/get_start/tutorial
 
 ### Requirements
 
-- Go 1.17+
+- Go 1.18+
 
 [⇒Start using GS2 - CDK](https://docs.gs2.io/en/get_start/#cdk)

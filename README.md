@@ -21,6 +21,6 @@ SDKを利用するには GS2 のクレデンシャルが必要です。
 
 ### 動作条件
 
-- Go 1.17+
+- Go 1.18+
 
 [⇒GS2の利用を開始 - CDK](https://docs.gs2.io/ja/get_start/#cdk)
