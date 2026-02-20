@@ -43,6 +43,8 @@ func NewIdentifier(
 		stack:    stack,
 		UserName: userName,
 	}
+	data.CdkResource = NewCdkResource(&data)
+	stack.AddResource(&data.CdkResource)
 	return &data
 }
 
