@@ -88,6 +88,11 @@ func (p LogSetting) Properties() map[string]interface{} {
 	return properties
 }
 
+type NotificationSettingEnable string
+
+const NotificationSettingEnableEnabled = NotificationSettingEnable("Enabled")
+const NotificationSettingEnableDisabled = NotificationSettingEnable("Disabled")
+
 type NotificationSettingOptions struct {
 	GatewayNamespaceId               *string
 	EnableTransferMobileNotification *bool
