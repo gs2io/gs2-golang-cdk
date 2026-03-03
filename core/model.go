@@ -93,16 +93,22 @@ type NotificationSettingEnable string
 const NotificationSettingEnableEnabled = NotificationSettingEnable("Enabled")
 const NotificationSettingEnableDisabled = NotificationSettingEnable("Disabled")
 
+func (p NotificationSettingEnable) Pointer() *NotificationSettingEnable {
+	return &p
+}
+
 type NotificationSettingOptions struct {
 	GatewayNamespaceId               *string
 	EnableTransferMobileNotification *bool
 	Sound                            *string
+	Enable                           *NotificationSettingEnable
 }
 
 type NotificationSetting struct {
 	GatewayNamespaceId               *string
 	EnableTransferMobileNotification *bool
 	Sound                            *string
+	Enable                           *NotificationSettingEnable
 }
 
 func NewNotificationSetting(
@@ -112,17 +118,23 @@ func NewNotificationSetting(
 		GatewayNamespaceId:               options.GatewayNamespaceId,
 		EnableTransferMobileNotification: options.EnableTransferMobileNotification,
 		Sound:                            options.Sound,
+		Enable:                           options.Enable,
 	}
 }
 
 func (p NotificationSetting) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
-	properties["GatewayNamespaceId"] = p.GatewayNamespaceId
+	if p.GatewayNamespaceId != nil {
+		properties["GatewayNamespaceId"] = *p.GatewayNamespaceId
+	}
 	if p.EnableTransferMobileNotification != nil {
 		properties["EnableTransferMobileNotification"] = *p.EnableTransferMobileNotification
 	}
 	if p.Sound != nil {
 		properties["Sound"] = *p.Sound
+	}
+	if p.Enable != nil {
+		properties["Enable"] = *p.Enable
 	}
 	return properties
 }
@@ -133,24 +145,32 @@ const ScriptSettingDoneTriggerTargetTypeNone = ScriptSettingDoneTriggerTargetTyp
 const ScriptSettingDoneTriggerTargetTypeGs2Script = ScriptSettingDoneTriggerTargetType("gs2_script")
 const ScriptSettingDoneTriggerTargetTypeAws = ScriptSettingDoneTriggerTargetType("aws")
 
+func (p ScriptSettingDoneTriggerTargetType) Pointer() *ScriptSettingDoneTriggerTargetType {
+	return &p
+}
+
+type ScriptSettingOptions struct {
+	TriggerScriptId             *string
+	DoneTriggerTargetType       *ScriptSettingDoneTriggerTargetType
+	DoneTriggerScriptId         *string
+	DoneTriggerQueueNamespaceId *string
+}
+
 type ScriptSetting struct {
 	TriggerScriptId             *string
-	DoneTriggerTargetType       ScriptSettingDoneTriggerTargetType
+	DoneTriggerTargetType       *ScriptSettingDoneTriggerTargetType
 	DoneTriggerScriptId         *string
 	DoneTriggerQueueNamespaceId *string
 }
 
 func NewScriptSetting(
-	triggerScriptId *string,
-	doneTriggerTargetType ScriptSettingDoneTriggerTargetType,
-	doneTriggerScriptId *string,
-	doneTriggerQueueNamespaceId *string,
+	options ScriptSettingOptions,
 ) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             triggerScriptId,
-		DoneTriggerTargetType:       doneTriggerTargetType,
-		DoneTriggerScriptId:         doneTriggerScriptId,
-		DoneTriggerQueueNamespaceId: doneTriggerQueueNamespaceId,
+		TriggerScriptId:             options.TriggerScriptId,
+		DoneTriggerTargetType:       options.DoneTriggerTargetType,
+		DoneTriggerScriptId:         options.DoneTriggerScriptId,
+		DoneTriggerQueueNamespaceId: options.DoneTriggerQueueNamespaceId,
 	}
 }
 
@@ -159,7 +179,9 @@ func (p ScriptSetting) Properties() map[string]interface{} {
 	if p.TriggerScriptId != nil {
 		properties["TriggerScriptId"] = *p.TriggerScriptId
 	}
-	properties["DoneTriggerTargetType"] = p.DoneTriggerTargetType
+	if p.DoneTriggerTargetType != nil {
+		properties["DoneTriggerTargetType"] = *p.DoneTriggerTargetType
+	}
 	if p.DoneTriggerScriptId != nil {
 		properties["DoneTriggerScriptId"] = *p.DoneTriggerScriptId
 	}
