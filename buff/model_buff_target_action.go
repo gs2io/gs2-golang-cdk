@@ -14,6 +14,8 @@ or in the "license" file accompanying this file. This file is distributed
 on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 express or implied. See the License for the specific language governing
 permissions and limitations under the License.
+
+deny overwrite
 */
 
 import (
@@ -53,7 +55,7 @@ func (p BuffTargetActionTargetActionName) Pointer() *BuffTargetActionTargetActio
 }
 
 type BuffTargetAction struct {
-	TargetActionName string
+	TargetActionName BuffTargetActionTargetActionName
 	TargetFieldName  string
 	ConditionGrns    []BuffTargetGrn
 	Rate             float32
@@ -63,7 +65,7 @@ type BuffTargetActionOptions struct {
 }
 
 func NewBuffTargetAction(
-	targetActionName string,
+	targetActionName BuffTargetActionTargetActionName,
 	targetFieldName string,
 	conditionGrns []BuffTargetGrn,
 	rate float32,
