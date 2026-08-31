@@ -25,9 +25,11 @@ var _ = AcquireAction{}
 type LastGuildMasterActivity struct {
 	UserId    string
 	UpdatedAt int64
+	Revision  *int64
 }
 
 type LastGuildMasterActivityOptions struct {
+	Revision *int64
 }
 
 func NewLastGuildMasterActivity(
@@ -38,6 +40,7 @@ func NewLastGuildMasterActivity(
 	_data := LastGuildMasterActivity{
 		UserId:    userId,
 		UpdatedAt: updatedAt,
+		Revision:  options.Revision,
 	}
 	return _data
 }
@@ -46,5 +49,8 @@ func (p *LastGuildMasterActivity) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["UserId"] = p.UserId
 	properties["UpdatedAt"] = p.UpdatedAt
+	if p.Revision != nil {
+		properties["Revision"] = p.Revision
+	}
 	return properties
 }
