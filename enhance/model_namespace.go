@@ -24,19 +24,27 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack              *Stack
-	Name               string
-	Description        *string
-	TransactionSetting TransactionSetting
-	EnhanceScript      *ScriptSetting
-	LogSetting         *LogSetting
+	stack       *Stack
+	Name        string
+	Description *string
+	// Deprecated: this field is deprecated.
+	TransactionSetting   TransactionSetting
+	TransactionSettingV2 *TransactionSettingV2
+	EnhanceScript        *ScriptSetting
+	LogSetting           *LogSetting
+	// Deprecated: this field is deprecated.
+	EnableDirectEnhance bool
 }
 
 type NamespaceOptions struct {
-	Description        *string
-	TransactionSetting TransactionSetting
-	EnhanceScript      *ScriptSetting
-	LogSetting         *LogSetting
+	Description *string
+	// Deprecated: this field is deprecated.
+	TransactionSetting   TransactionSetting
+	TransactionSettingV2 *TransactionSettingV2
+	EnhanceScript        *ScriptSetting
+	LogSetting           *LogSetting
+	// Deprecated: this field is deprecated.
+	EnableDirectEnhance bool
 }
 
 func NewNamespace(
@@ -45,12 +53,14 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:              stack,
-		Name:               name,
-		Description:        options.Description,
-		TransactionSetting: options.TransactionSetting,
-		EnhanceScript:      options.EnhanceScript,
-		LogSetting:         options.LogSetting,
+		stack:                stack,
+		Name:                 name,
+		Description:          options.Description,
+		TransactionSetting:   options.TransactionSetting,
+		TransactionSettingV2: options.TransactionSettingV2,
+		EnhanceScript:        options.EnhanceScript,
+		LogSetting:           options.LogSetting,
+		EnableDirectEnhance:  options.EnableDirectEnhance,
 	}
 	data.CdkResource = NewCdkResource(&data)
 	stack.AddResource(&data.CdkResource)
@@ -72,12 +82,16 @@ func (p *Namespace) Properties() map[string]interface{} {
 		properties["Description"] = p.Description
 	}
 	properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	if p.TransactionSettingV2 != nil {
+		properties["TransactionSettingV2"] = p.TransactionSettingV2.Properties()
+	}
 	if p.EnhanceScript != nil {
 		properties["EnhanceScript"] = p.EnhanceScript.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
 	}
+	properties["EnableDirectEnhance"] = p.EnableDirectEnhance
 	return properties
 }
 

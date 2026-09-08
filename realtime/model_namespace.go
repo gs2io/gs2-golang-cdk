@@ -40,21 +40,25 @@ func (p NamespaceServerSpec) Pointer() *NamespaceServerSpec {
 
 type Namespace struct {
 	CdkResource
-	stack              *Stack
-	Name               string
-	Description        *string
-	TransactionSetting *TransactionSetting
-	ServerType         NamespaceServerType
-	ServerSpec         NamespaceServerSpec
-	CreateNotification *NotificationSetting
-	LogSetting         *LogSetting
+	stack       *Stack
+	Name        string
+	Description *string
+	// Deprecated: this field is deprecated.
+	TransactionSetting   *TransactionSetting
+	TransactionSettingV2 *TransactionSettingV2
+	ServerType           NamespaceServerType
+	ServerSpec           NamespaceServerSpec
+	CreateNotification   *NotificationSetting
+	LogSetting           *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description        *string
-	TransactionSetting *TransactionSetting
-	CreateNotification *NotificationSetting
-	LogSetting         *LogSetting
+	Description *string
+	// Deprecated: this field is deprecated.
+	TransactionSetting   *TransactionSetting
+	TransactionSettingV2 *TransactionSettingV2
+	CreateNotification   *NotificationSetting
+	LogSetting           *LogSetting
 }
 
 func NewNamespace(
@@ -65,14 +69,15 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:              stack,
-		Name:               name,
-		ServerType:         serverType,
-		ServerSpec:         serverSpec,
-		Description:        options.Description,
-		TransactionSetting: options.TransactionSetting,
-		CreateNotification: options.CreateNotification,
-		LogSetting:         options.LogSetting,
+		stack:                stack,
+		Name:                 name,
+		ServerType:           serverType,
+		ServerSpec:           serverSpec,
+		Description:          options.Description,
+		TransactionSetting:   options.TransactionSetting,
+		TransactionSettingV2: options.TransactionSettingV2,
+		CreateNotification:   options.CreateNotification,
+		LogSetting:           options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
 	stack.AddResource(&data.CdkResource)
@@ -95,6 +100,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.TransactionSetting != nil {
 		properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	}
+	if p.TransactionSettingV2 != nil {
+		properties["TransactionSettingV2"] = p.TransactionSettingV2.Properties()
 	}
 	properties["ServerType"] = p.ServerType
 	properties["ServerSpec"] = p.ServerSpec

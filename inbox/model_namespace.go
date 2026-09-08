@@ -28,23 +28,27 @@ type Namespace struct {
 	Name                       string
 	Description                *string
 	IsAutomaticDeletingEnabled bool
-	TransactionSetting         *TransactionSetting
-	ReceiveMessageScript       *ScriptSetting
-	ReadMessageScript          *ScriptSetting
-	DeleteMessageScript        *ScriptSetting
-	ReceiveNotification        *NotificationSetting
-	LogSetting                 *LogSetting
+	// Deprecated: this field is deprecated.
+	TransactionSetting   *TransactionSetting
+	TransactionSettingV2 *TransactionSettingV2
+	ReceiveMessageScript *ScriptSetting
+	ReadMessageScript    *ScriptSetting
+	DeleteMessageScript  *ScriptSetting
+	ReceiveNotification  *NotificationSetting
+	LogSetting           *LogSetting
 }
 
 type NamespaceOptions struct {
 	Description                *string
 	IsAutomaticDeletingEnabled bool
-	TransactionSetting         *TransactionSetting
-	ReceiveMessageScript       *ScriptSetting
-	ReadMessageScript          *ScriptSetting
-	DeleteMessageScript        *ScriptSetting
-	ReceiveNotification        *NotificationSetting
-	LogSetting                 *LogSetting
+	// Deprecated: this field is deprecated.
+	TransactionSetting   *TransactionSetting
+	TransactionSettingV2 *TransactionSettingV2
+	ReceiveMessageScript *ScriptSetting
+	ReadMessageScript    *ScriptSetting
+	DeleteMessageScript  *ScriptSetting
+	ReceiveNotification  *NotificationSetting
+	LogSetting           *LogSetting
 }
 
 func NewNamespace(
@@ -58,6 +62,7 @@ func NewNamespace(
 		Description:                options.Description,
 		IsAutomaticDeletingEnabled: options.IsAutomaticDeletingEnabled,
 		TransactionSetting:         options.TransactionSetting,
+		TransactionSettingV2:       options.TransactionSettingV2,
 		ReceiveMessageScript:       options.ReceiveMessageScript,
 		ReadMessageScript:          options.ReadMessageScript,
 		DeleteMessageScript:        options.DeleteMessageScript,
@@ -86,6 +91,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["IsAutomaticDeletingEnabled"] = p.IsAutomaticDeletingEnabled
 	if p.TransactionSetting != nil {
 		properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	}
+	if p.TransactionSettingV2 != nil {
+		properties["TransactionSettingV2"] = p.TransactionSettingV2.Properties()
 	}
 	if p.ReceiveMessageScript != nil {
 		properties["ReceiveMessageScript"] = p.ReceiveMessageScript.Properties()

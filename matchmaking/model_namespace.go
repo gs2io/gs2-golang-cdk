@@ -62,10 +62,12 @@ func (p NamespaceEnableCollaborateSeasonRating) Pointer() *NamespaceEnableCollab
 
 type Namespace struct {
 	CdkResource
-	stack                                         *Stack
-	Name                                          string
-	Description                                   *string
+	stack       *Stack
+	Name        string
+	Description *string
+	// Deprecated: this field is deprecated.
 	TransactionSetting                            *TransactionSetting
+	TransactionSettingV2                          *TransactionSettingV2
 	EnableRating                                  bool
 	EnableDisconnectDetection                     NamespaceEnableDisconnectDetection
 	DisconnectDetectionTimeoutSeconds             *int32
@@ -87,8 +89,10 @@ type Namespace struct {
 }
 
 type NamespaceOptions struct {
-	Description                                   *string
+	Description *string
+	// Deprecated: this field is deprecated.
 	TransactionSetting                            *TransactionSetting
+	TransactionSettingV2                          *TransactionSettingV2
 	EnableRating                                  bool
 	EnableDisconnectDetection                     NamespaceEnableDisconnectDetection
 	DisconnectDetectionTimeoutSeconds             *int32
@@ -119,6 +123,7 @@ func NewNamespace(
 		Name:                              name,
 		Description:                       options.Description,
 		TransactionSetting:                options.TransactionSetting,
+		TransactionSettingV2:              options.TransactionSettingV2,
 		EnableRating:                      options.EnableRating,
 		EnableDisconnectDetection:         options.EnableDisconnectDetection,
 		DisconnectDetectionTimeoutSeconds: options.DisconnectDetectionTimeoutSeconds,
@@ -159,6 +164,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.TransactionSetting != nil {
 		properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	}
+	if p.TransactionSettingV2 != nil {
+		properties["TransactionSettingV2"] = p.TransactionSettingV2.Properties()
 	}
 	properties["EnableRating"] = p.EnableRating
 	properties["EnableDisconnectDetection"] = p.EnableDisconnectDetection

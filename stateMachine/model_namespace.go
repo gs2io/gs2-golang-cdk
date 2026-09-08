@@ -37,23 +37,27 @@ type Namespace struct {
 	Name                        string
 	Description                 *string
 	SupportSpeculativeExecution NamespaceSupportSpeculativeExecution
-	TransactionSetting          *TransactionSetting
-	StartScript                 *ScriptSetting
-	PassScript                  *ScriptSetting
-	ErrorScript                 *ScriptSetting
-	LowestStateMachineVersion   *int64
-	LogSetting                  *LogSetting
+	// Deprecated: this field is deprecated.
+	TransactionSetting        *TransactionSetting
+	TransactionSettingV2      *TransactionSettingV2
+	StartScript               *ScriptSetting
+	PassScript                *ScriptSetting
+	ErrorScript               *ScriptSetting
+	LowestStateMachineVersion *int64
+	LogSetting                *LogSetting
 }
 
 type NamespaceOptions struct {
 	Description                 *string
 	SupportSpeculativeExecution NamespaceSupportSpeculativeExecution
-	TransactionSetting          *TransactionSetting
-	StartScript                 *ScriptSetting
-	PassScript                  *ScriptSetting
-	ErrorScript                 *ScriptSetting
-	LowestStateMachineVersion   *int64
-	LogSetting                  *LogSetting
+	// Deprecated: this field is deprecated.
+	TransactionSetting        *TransactionSetting
+	TransactionSettingV2      *TransactionSettingV2
+	StartScript               *ScriptSetting
+	PassScript                *ScriptSetting
+	ErrorScript               *ScriptSetting
+	LowestStateMachineVersion *int64
+	LogSetting                *LogSetting
 }
 
 func NewNamespace(
@@ -67,6 +71,7 @@ func NewNamespace(
 		Description:                 options.Description,
 		SupportSpeculativeExecution: options.SupportSpeculativeExecution,
 		TransactionSetting:          options.TransactionSetting,
+		TransactionSettingV2:        options.TransactionSettingV2,
 		StartScript:                 options.StartScript,
 		PassScript:                  options.PassScript,
 		ErrorScript:                 options.ErrorScript,
@@ -95,6 +100,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["SupportSpeculativeExecution"] = p.SupportSpeculativeExecution
 	if p.TransactionSetting != nil {
 		properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	}
+	if p.TransactionSettingV2 != nil {
+		properties["TransactionSettingV2"] = p.TransactionSettingV2.Properties()
 	}
 	if p.StartScript != nil {
 		properties["StartScript"] = p.StartScript.Properties()

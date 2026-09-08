@@ -24,10 +24,12 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack                       *Stack
-	Name                        string
-	Description                 *string
+	stack       *Stack
+	Name        string
+	Description *string
+	// Deprecated: this field is deprecated.
 	TransactionSetting          *TransactionSetting
+	TransactionSettingV2        *TransactionSettingV2
 	AssumeUserId                string
 	AcceptVersionScript         *ScriptSetting
 	CheckVersionTriggerScriptId *string
@@ -35,8 +37,10 @@ type Namespace struct {
 }
 
 type NamespaceOptions struct {
-	Description                 *string
+	Description *string
+	// Deprecated: this field is deprecated.
 	TransactionSetting          *TransactionSetting
+	TransactionSettingV2        *TransactionSettingV2
 	AcceptVersionScript         *ScriptSetting
 	CheckVersionTriggerScriptId *string
 	LogSetting                  *LogSetting
@@ -54,6 +58,7 @@ func NewNamespace(
 		AssumeUserId:                assumeUserId,
 		Description:                 options.Description,
 		TransactionSetting:          options.TransactionSetting,
+		TransactionSettingV2:        options.TransactionSettingV2,
 		AcceptVersionScript:         options.AcceptVersionScript,
 		CheckVersionTriggerScriptId: options.CheckVersionTriggerScriptId,
 		LogSetting:                  options.LogSetting,
@@ -79,6 +84,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.TransactionSetting != nil {
 		properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	}
+	if p.TransactionSettingV2 != nil {
+		properties["TransactionSettingV2"] = p.TransactionSettingV2.Properties()
 	}
 	properties["AssumeUserId"] = p.AssumeUserId
 	if p.AcceptVersionScript != nil {

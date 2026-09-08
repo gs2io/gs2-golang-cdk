@@ -33,11 +33,13 @@ func (p NamespaceCurrencyUsagePriority) Pointer() *NamespaceCurrencyUsagePriorit
 
 type Namespace struct {
 	CdkResource
-	stack                                *Stack
-	Name                                 string
-	CurrencyUsagePriority                NamespaceCurrencyUsagePriority
-	Description                          *string
+	stack                 *Stack
+	Name                  string
+	CurrencyUsagePriority NamespaceCurrencyUsagePriority
+	Description           *string
+	// Deprecated: this field is deprecated.
 	TransactionSetting                   *TransactionSetting
+	TransactionSettingV2                 *TransactionSettingV2
 	SharedFreeCurrency                   bool
 	PlatformSetting                      PlatformSetting
 	DepositBalanceScript                 *ScriptSetting
@@ -52,8 +54,10 @@ type Namespace struct {
 }
 
 type NamespaceOptions struct {
-	Description                          *string
+	Description *string
+	// Deprecated: this field is deprecated.
 	TransactionSetting                   *TransactionSetting
+	TransactionSettingV2                 *TransactionSettingV2
 	DepositBalanceScript                 *ScriptSetting
 	WithdrawBalanceScript                *ScriptSetting
 	VerifyReceiptScript                  *ScriptSetting
@@ -81,6 +85,7 @@ func NewNamespace(
 		PlatformSetting:                      platformSetting,
 		Description:                          options.Description,
 		TransactionSetting:                   options.TransactionSetting,
+		TransactionSettingV2:                 options.TransactionSettingV2,
 		DepositBalanceScript:                 options.DepositBalanceScript,
 		WithdrawBalanceScript:                options.WithdrawBalanceScript,
 		VerifyReceiptScript:                  options.VerifyReceiptScript,
@@ -113,6 +118,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.TransactionSetting != nil {
 		properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	}
+	if p.TransactionSettingV2 != nil {
+		properties["TransactionSettingV2"] = p.TransactionSettingV2.Properties()
 	}
 	properties["SharedFreeCurrency"] = p.SharedFreeCurrency
 	properties["PlatformSetting"] = p.PlatformSetting.Properties()

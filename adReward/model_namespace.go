@@ -24,10 +24,12 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack                   *Stack
-	Name                    string
-	Description             *string
+	stack       *Stack
+	Name        string
+	Description *string
+	// Deprecated: this field is deprecated.
 	TransactionSetting      *TransactionSetting
+	TransactionSettingV2    *TransactionSettingV2
 	Admob                   *AdMob
 	UnityAd                 *UnityAd
 	AppLovinMaxes           []AppLovinMax
@@ -38,8 +40,10 @@ type Namespace struct {
 }
 
 type NamespaceOptions struct {
-	Description             *string
+	Description *string
+	// Deprecated: this field is deprecated.
 	TransactionSetting      *TransactionSetting
+	TransactionSettingV2    *TransactionSettingV2
 	Admob                   *AdMob
 	UnityAd                 *UnityAd
 	AppLovinMaxes           []AppLovinMax
@@ -59,6 +63,7 @@ func NewNamespace(
 		Name:                    name,
 		Description:             options.Description,
 		TransactionSetting:      options.TransactionSetting,
+		TransactionSettingV2:    options.TransactionSettingV2,
 		Admob:                   options.Admob,
 		UnityAd:                 options.UnityAd,
 		AppLovinMaxes:           options.AppLovinMaxes,
@@ -88,6 +93,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.TransactionSetting != nil {
 		properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	}
+	if p.TransactionSettingV2 != nil {
+		properties["TransactionSettingV2"] = p.TransactionSettingV2.Properties()
 	}
 	if p.Admob != nil {
 		properties["Admob"] = p.Admob.Properties()

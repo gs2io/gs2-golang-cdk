@@ -43,32 +43,36 @@ func (p NamespaceCurrency) Pointer() *NamespaceCurrency {
 
 type Namespace struct {
 	CdkResource
-	stack              *Stack
-	Name               string
-	Description        *string
-	TransactionSetting *TransactionSetting
-	Priority           NamespacePriority
-	ShareFree          bool
-	Currency           NamespaceCurrency
-	AppleKey           *string
-	GoogleKey          *string
-	EnableFakeReceipt  bool
-	CreateWalletScript *ScriptSetting
-	DepositScript      *ScriptSetting
-	WithdrawScript     *ScriptSetting
-	LogSetting         *LogSetting
+	stack       *Stack
+	Name        string
+	Description *string
+	// Deprecated: this field is deprecated.
+	TransactionSetting   *TransactionSetting
+	TransactionSettingV2 *TransactionSettingV2
+	Priority             NamespacePriority
+	ShareFree            bool
+	Currency             NamespaceCurrency
+	AppleKey             *string
+	GoogleKey            *string
+	EnableFakeReceipt    bool
+	CreateWalletScript   *ScriptSetting
+	DepositScript        *ScriptSetting
+	WithdrawScript       *ScriptSetting
+	LogSetting           *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description        *string
-	TransactionSetting *TransactionSetting
-	AppleKey           *string
-	GoogleKey          *string
-	EnableFakeReceipt  bool
-	CreateWalletScript *ScriptSetting
-	DepositScript      *ScriptSetting
-	WithdrawScript     *ScriptSetting
-	LogSetting         *LogSetting
+	Description *string
+	// Deprecated: this field is deprecated.
+	TransactionSetting   *TransactionSetting
+	TransactionSettingV2 *TransactionSettingV2
+	AppleKey             *string
+	GoogleKey            *string
+	EnableFakeReceipt    bool
+	CreateWalletScript   *ScriptSetting
+	DepositScript        *ScriptSetting
+	WithdrawScript       *ScriptSetting
+	LogSetting           *LogSetting
 }
 
 func NewNamespace(
@@ -80,20 +84,21 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:              stack,
-		Name:               name,
-		Priority:           priority,
-		ShareFree:          shareFree,
-		Currency:           currency,
-		Description:        options.Description,
-		TransactionSetting: options.TransactionSetting,
-		AppleKey:           options.AppleKey,
-		GoogleKey:          options.GoogleKey,
-		EnableFakeReceipt:  options.EnableFakeReceipt,
-		CreateWalletScript: options.CreateWalletScript,
-		DepositScript:      options.DepositScript,
-		WithdrawScript:     options.WithdrawScript,
-		LogSetting:         options.LogSetting,
+		stack:                stack,
+		Name:                 name,
+		Priority:             priority,
+		ShareFree:            shareFree,
+		Currency:             currency,
+		Description:          options.Description,
+		TransactionSetting:   options.TransactionSetting,
+		TransactionSettingV2: options.TransactionSettingV2,
+		AppleKey:             options.AppleKey,
+		GoogleKey:            options.GoogleKey,
+		EnableFakeReceipt:    options.EnableFakeReceipt,
+		CreateWalletScript:   options.CreateWalletScript,
+		DepositScript:        options.DepositScript,
+		WithdrawScript:       options.WithdrawScript,
+		LogSetting:           options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
 	stack.AddResource(&data.CdkResource)
@@ -116,6 +121,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.TransactionSetting != nil {
 		properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	}
+	if p.TransactionSettingV2 != nil {
+		properties["TransactionSettingV2"] = p.TransactionSettingV2.Properties()
 	}
 	properties["Priority"] = p.Priority
 	properties["ShareFree"] = p.ShareFree

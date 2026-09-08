@@ -24,23 +24,27 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack               *Stack
-	Name                string
-	Description         *string
-	TransactionSetting  TransactionSetting
-	StartQuestScript    *ScriptSetting
-	CompleteQuestScript *ScriptSetting
-	FailedQuestScript   *ScriptSetting
-	LogSetting          *LogSetting
+	stack       *Stack
+	Name        string
+	Description *string
+	// Deprecated: this field is deprecated.
+	TransactionSetting   TransactionSetting
+	TransactionSettingV2 *TransactionSettingV2
+	StartQuestScript     *ScriptSetting
+	CompleteQuestScript  *ScriptSetting
+	FailedQuestScript    *ScriptSetting
+	LogSetting           *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description         *string
-	TransactionSetting  TransactionSetting
-	StartQuestScript    *ScriptSetting
-	CompleteQuestScript *ScriptSetting
-	FailedQuestScript   *ScriptSetting
-	LogSetting          *LogSetting
+	Description *string
+	// Deprecated: this field is deprecated.
+	TransactionSetting   TransactionSetting
+	TransactionSettingV2 *TransactionSettingV2
+	StartQuestScript     *ScriptSetting
+	CompleteQuestScript  *ScriptSetting
+	FailedQuestScript    *ScriptSetting
+	LogSetting           *LogSetting
 }
 
 func NewNamespace(
@@ -49,14 +53,15 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:               stack,
-		Name:                name,
-		Description:         options.Description,
-		TransactionSetting:  options.TransactionSetting,
-		StartQuestScript:    options.StartQuestScript,
-		CompleteQuestScript: options.CompleteQuestScript,
-		FailedQuestScript:   options.FailedQuestScript,
-		LogSetting:          options.LogSetting,
+		stack:                stack,
+		Name:                 name,
+		Description:          options.Description,
+		TransactionSetting:   options.TransactionSetting,
+		TransactionSettingV2: options.TransactionSettingV2,
+		StartQuestScript:     options.StartQuestScript,
+		CompleteQuestScript:  options.CompleteQuestScript,
+		FailedQuestScript:    options.FailedQuestScript,
+		LogSetting:           options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
 	stack.AddResource(&data.CdkResource)
@@ -78,6 +83,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 		properties["Description"] = p.Description
 	}
 	properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	if p.TransactionSettingV2 != nil {
+		properties["TransactionSettingV2"] = p.TransactionSettingV2.Properties()
+	}
 	if p.StartQuestScript != nil {
 		properties["StartQuestScript"] = p.StartQuestScript.Properties()
 	}

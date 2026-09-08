@@ -24,12 +24,14 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack                     *Stack
-	Name                      string
-	Description               *string
-	EnableAwaitExchange       bool
-	EnableDirectExchange      bool
+	stack                *Stack
+	Name                 string
+	Description          *string
+	EnableAwaitExchange  bool
+	EnableDirectExchange bool
+	// Deprecated: this field is deprecated.
 	TransactionSetting        TransactionSetting
+	TransactionSettingV2      *TransactionSettingV2
 	ExchangeScript            *ScriptSetting
 	IncrementalExchangeScript *ScriptSetting
 	AcquireAwaitScript        *ScriptSetting
@@ -37,10 +39,12 @@ type Namespace struct {
 }
 
 type NamespaceOptions struct {
-	Description               *string
-	EnableAwaitExchange       bool
-	EnableDirectExchange      bool
+	Description          *string
+	EnableAwaitExchange  bool
+	EnableDirectExchange bool
+	// Deprecated: this field is deprecated.
 	TransactionSetting        TransactionSetting
+	TransactionSettingV2      *TransactionSettingV2
 	ExchangeScript            *ScriptSetting
 	IncrementalExchangeScript *ScriptSetting
 	AcquireAwaitScript        *ScriptSetting
@@ -59,6 +63,7 @@ func NewNamespace(
 		EnableAwaitExchange:       options.EnableAwaitExchange,
 		EnableDirectExchange:      options.EnableDirectExchange,
 		TransactionSetting:        options.TransactionSetting,
+		TransactionSettingV2:      options.TransactionSettingV2,
 		ExchangeScript:            options.ExchangeScript,
 		IncrementalExchangeScript: options.IncrementalExchangeScript,
 		AcquireAwaitScript:        options.AcquireAwaitScript,
@@ -86,6 +91,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	properties["EnableAwaitExchange"] = p.EnableAwaitExchange
 	properties["EnableDirectExchange"] = p.EnableDirectExchange
 	properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	if p.TransactionSettingV2 != nil {
+		properties["TransactionSettingV2"] = p.TransactionSettingV2.Properties()
+	}
 	if p.ExchangeScript != nil {
 		properties["ExchangeScript"] = p.ExchangeScript.Properties()
 	}

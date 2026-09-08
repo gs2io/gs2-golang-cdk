@@ -24,19 +24,23 @@ var _ = AcquireAction{}
 
 type Namespace struct {
 	CdkResource
-	stack              *Stack
-	Name               string
-	Description        *string
-	TransactionSetting *TransactionSetting
-	FirebaseSecret     *string
-	LogSetting         *LogSetting
+	stack       *Stack
+	Name        string
+	Description *string
+	// Deprecated: this field is deprecated.
+	TransactionSetting   *TransactionSetting
+	TransactionSettingV2 *TransactionSettingV2
+	FirebaseSecret       *string
+	LogSetting           *LogSetting
 }
 
 type NamespaceOptions struct {
-	Description        *string
-	TransactionSetting *TransactionSetting
-	FirebaseSecret     *string
-	LogSetting         *LogSetting
+	Description *string
+	// Deprecated: this field is deprecated.
+	TransactionSetting   *TransactionSetting
+	TransactionSettingV2 *TransactionSettingV2
+	FirebaseSecret       *string
+	LogSetting           *LogSetting
 }
 
 func NewNamespace(
@@ -45,12 +49,13 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:              stack,
-		Name:               name,
-		Description:        options.Description,
-		TransactionSetting: options.TransactionSetting,
-		FirebaseSecret:     options.FirebaseSecret,
-		LogSetting:         options.LogSetting,
+		stack:                stack,
+		Name:                 name,
+		Description:          options.Description,
+		TransactionSetting:   options.TransactionSetting,
+		TransactionSettingV2: options.TransactionSettingV2,
+		FirebaseSecret:       options.FirebaseSecret,
+		LogSetting:           options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
 	stack.AddResource(&data.CdkResource)
@@ -73,6 +78,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.TransactionSetting != nil {
 		properties["TransactionSetting"] = p.TransactionSetting.Properties()
+	}
+	if p.TransactionSettingV2 != nil {
+		properties["TransactionSettingV2"] = p.TransactionSettingV2.Properties()
 	}
 	if p.FirebaseSecret != nil {
 		properties["FirebaseSecret"] = p.FirebaseSecret
