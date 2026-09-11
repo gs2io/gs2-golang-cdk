@@ -29,10 +29,12 @@ type SendNotificationEntry struct {
 	Payload                          string
 	EnableTransferMobileNotification bool
 	Sound                            *string
+	MobileNotificationMessages       []MobileNotificationMessage
 }
 
 type SendNotificationEntryOptions struct {
-	Sound *string
+	Sound                      *string
+	MobileNotificationMessages []MobileNotificationMessage
 }
 
 func NewSendNotificationEntry(
@@ -50,6 +52,7 @@ func NewSendNotificationEntry(
 		Payload:                          payload,
 		EnableTransferMobileNotification: enableTransferMobileNotification,
 		Sound:                            options.Sound,
+		MobileNotificationMessages:       options.MobileNotificationMessages,
 	}
 	return _data
 }
@@ -63,6 +66,13 @@ func (p *SendNotificationEntry) Properties() map[string]interface{} {
 	properties["EnableTransferMobileNotification"] = p.EnableTransferMobileNotification
 	if p.Sound != nil {
 		properties["Sound"] = p.Sound
+	}
+	{
+		values := make([]map[string]interface{}, len(p.MobileNotificationMessages))
+		for i, element := range p.MobileNotificationMessages {
+			values[i] = element.Properties()
+		}
+		properties["MobileNotificationMessages"] = values
 	}
 	return properties
 }
