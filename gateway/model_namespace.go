@@ -30,8 +30,10 @@ type Namespace struct {
 	// Deprecated: this field is deprecated.
 	TransactionSetting   *TransactionSetting
 	TransactionSettingV2 *TransactionSettingV2
-	FirebaseSecret       *string
-	LogSetting           *LogSetting
+	// Deprecated: this field is deprecated.
+	FirebaseSecret    *string
+	FirebaseProjectId *string
+	LogSetting        *LogSetting
 }
 
 type NamespaceOptions struct {
@@ -39,8 +41,10 @@ type NamespaceOptions struct {
 	// Deprecated: this field is deprecated.
 	TransactionSetting   *TransactionSetting
 	TransactionSettingV2 *TransactionSettingV2
-	FirebaseSecret       *string
-	LogSetting           *LogSetting
+	// Deprecated: this field is deprecated.
+	FirebaseSecret    *string
+	FirebaseProjectId *string
+	LogSetting        *LogSetting
 }
 
 func NewNamespace(
@@ -55,6 +59,7 @@ func NewNamespace(
 		TransactionSetting:   options.TransactionSetting,
 		TransactionSettingV2: options.TransactionSettingV2,
 		FirebaseSecret:       options.FirebaseSecret,
+		FirebaseProjectId:    options.FirebaseProjectId,
 		LogSetting:           options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
@@ -84,6 +89,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.FirebaseSecret != nil {
 		properties["FirebaseSecret"] = p.FirebaseSecret
+	}
+	if p.FirebaseProjectId != nil {
+		properties["FirebaseProjectId"] = p.FirebaseProjectId
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
