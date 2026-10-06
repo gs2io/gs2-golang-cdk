@@ -22,29 +22,88 @@ import (
 
 var _ = AcquireAction{}
 
+type UnleashRateEntryModelType string
+
+const UnleashRateEntryModelTypeSimple = UnleashRateEntryModelType("simple")
+const UnleashRateEntryModelTypeRecipe = UnleashRateEntryModelType("recipe")
+
+func (p UnleashRateEntryModelType) Pointer() *UnleashRateEntryModelType {
+	return &p
+}
+
 type UnleashRateEntryModel struct {
 	GradeValue int64
-	NeedCount  int32
+	Type       UnleashRateEntryModelType
+	NeedCount  *int32
+	Recipes    []UnleashRecipe
 }
 
 type UnleashRateEntryModelOptions struct {
+	NeedCount *int32
+	Recipes   []UnleashRecipe
 }
 
 func NewUnleashRateEntryModel(
 	gradeValue int64,
-	needCount int32,
+	type_ UnleashRateEntryModelType,
 	options UnleashRateEntryModelOptions,
 ) UnleashRateEntryModel {
 	_data := UnleashRateEntryModel{
 		GradeValue: gradeValue,
-		NeedCount:  needCount,
+		Type:       type_,
+		NeedCount:  options.NeedCount,
+		Recipes:    options.Recipes,
 	}
 	return _data
+}
+
+type UnleashRateEntryModelTypeIsSimpleOptions struct {
+}
+
+func NewUnleashRateEntryModelTypeIsSimple(
+	gradeValue int64,
+	needCount int32,
+	options UnleashRateEntryModelTypeIsSimpleOptions,
+) UnleashRateEntryModel {
+	return NewUnleashRateEntryModel(
+		gradeValue,
+		UnleashRateEntryModelTypeSimple,
+		UnleashRateEntryModelOptions{
+			NeedCount: &needCount,
+		},
+	)
+}
+
+type UnleashRateEntryModelTypeIsRecipeOptions struct {
+}
+
+func NewUnleashRateEntryModelTypeIsRecipe(
+	gradeValue int64,
+	recipes []UnleashRecipe,
+	options UnleashRateEntryModelTypeIsRecipeOptions,
+) UnleashRateEntryModel {
+	return NewUnleashRateEntryModel(
+		gradeValue,
+		UnleashRateEntryModelTypeRecipe,
+		UnleashRateEntryModelOptions{
+			Recipes: recipes,
+		},
+	)
 }
 
 func (p *UnleashRateEntryModel) Properties() map[string]interface{} {
 	properties := map[string]interface{}{}
 	properties["GradeValue"] = p.GradeValue
-	properties["NeedCount"] = p.NeedCount
+	properties["Type"] = p.Type
+	if p.NeedCount != nil {
+		properties["NeedCount"] = p.NeedCount
+	}
+	{
+		values := make([]map[string]interface{}, len(p.Recipes))
+		for i, element := range p.Recipes {
+			values[i] = element.Properties()
+		}
+		properties["Recipes"] = values
+	}
 	return properties
 }

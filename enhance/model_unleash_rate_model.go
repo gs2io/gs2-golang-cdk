@@ -28,12 +28,14 @@ type UnleashRateModel struct {
 	Metadata               *string
 	TargetInventoryModelId string
 	GradeModelId           string
+	GroupKeyHierarchy      []string
 	GradeEntries           []UnleashRateEntryModel
 }
 
 type UnleashRateModelOptions struct {
-	Description *string
-	Metadata    *string
+	Description       *string
+	Metadata          *string
+	GroupKeyHierarchy []string
 }
 
 func NewUnleashRateModel(
@@ -50,6 +52,7 @@ func NewUnleashRateModel(
 		GradeEntries:           gradeEntries,
 		Description:            options.Description,
 		Metadata:               options.Metadata,
+		GroupKeyHierarchy:      options.GroupKeyHierarchy,
 	}
 	return _data
 }
@@ -65,6 +68,7 @@ func (p *UnleashRateModel) Properties() map[string]interface{} {
 	}
 	properties["TargetInventoryModelId"] = p.TargetInventoryModelId
 	properties["GradeModelId"] = p.GradeModelId
+	properties["GroupKeyHierarchy"] = p.GroupKeyHierarchy
 	{
 		values := make([]map[string]interface{}, len(p.GradeEntries))
 		for i, element := range p.GradeEntries {

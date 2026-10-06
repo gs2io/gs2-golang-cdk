@@ -49,7 +49,9 @@ func UnleashByUserId(
 	namespaceName string,
 	rateName string,
 	targetItemSetId string,
-	materials []string,
+	materials *[]string,
+	recipeName *string,
+	recipeMaterials *[]UnleashMaterialSelection,
 	config *[]Config,
 ) AcquireAction {
 	properties := map[string]interface{}{
@@ -58,7 +60,15 @@ func UnleashByUserId(
 	properties["namespaceName"] = namespaceName
 	properties["rateName"] = rateName
 	properties["targetItemSetId"] = targetItemSetId
-	properties["materials"] = materials
+	if materials != nil {
+		properties["materials"] = materials
+	}
+	if recipeName != nil {
+		properties["recipeName"] = recipeName
+	}
+	if recipeMaterials != nil {
+		properties["recipeMaterials"] = recipeMaterials
+	}
 	if config != nil {
 		properties["config"] = config
 	}
