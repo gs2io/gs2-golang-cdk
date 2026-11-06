@@ -25,6 +25,8 @@ var _ = AcquireAction{}
 type NamespaceServerType string
 
 const NamespaceServerTypeRelay = NamespaceServerType("relay")
+const NamespaceServerTypeSync = NamespaceServerType("sync")
+const NamespaceServerTypeStateMachine = NamespaceServerType("stateMachine")
 
 func (p NamespaceServerType) Pointer() *NamespaceServerType {
 	return &p
@@ -44,21 +46,27 @@ type Namespace struct {
 	Name        string
 	Description *string
 	// Deprecated: this field is deprecated.
-	TransactionSetting   *TransactionSetting
-	TransactionSettingV2 *TransactionSettingV2
-	ServerType           NamespaceServerType
-	ServerSpec           NamespaceServerSpec
-	CreateNotification   *NotificationSetting
-	LogSetting           *LogSetting
+	TransactionSetting      *TransactionSetting
+	TransactionSettingV2    *TransactionSettingV2
+	ServerType              NamespaceServerType
+	ServerSpec              NamespaceServerSpec
+	ObjectCatalog           *string
+	StateMachineNamespaceId *string
+	StateMachineVersion     *int64
+	CreateNotification      *NotificationSetting
+	LogSetting              *LogSetting
 }
 
 type NamespaceOptions struct {
 	Description *string
 	// Deprecated: this field is deprecated.
-	TransactionSetting   *TransactionSetting
-	TransactionSettingV2 *TransactionSettingV2
-	CreateNotification   *NotificationSetting
-	LogSetting           *LogSetting
+	TransactionSetting      *TransactionSetting
+	TransactionSettingV2    *TransactionSettingV2
+	ObjectCatalog           *string
+	StateMachineNamespaceId *string
+	StateMachineVersion     *int64
+	CreateNotification      *NotificationSetting
+	LogSetting              *LogSetting
 }
 
 func NewNamespace(
@@ -69,15 +77,18 @@ func NewNamespace(
 	options NamespaceOptions,
 ) *Namespace {
 	data := Namespace{
-		stack:                stack,
-		Name:                 name,
-		ServerType:           serverType,
-		ServerSpec:           serverSpec,
-		Description:          options.Description,
-		TransactionSetting:   options.TransactionSetting,
-		TransactionSettingV2: options.TransactionSettingV2,
-		CreateNotification:   options.CreateNotification,
-		LogSetting:           options.LogSetting,
+		stack:                   stack,
+		Name:                    name,
+		ServerType:              serverType,
+		ServerSpec:              serverSpec,
+		Description:             options.Description,
+		TransactionSetting:      options.TransactionSetting,
+		TransactionSettingV2:    options.TransactionSettingV2,
+		ObjectCatalog:           options.ObjectCatalog,
+		StateMachineNamespaceId: options.StateMachineNamespaceId,
+		StateMachineVersion:     options.StateMachineVersion,
+		CreateNotification:      options.CreateNotification,
+		LogSetting:              options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
 	stack.AddResource(&data.CdkResource)
@@ -106,6 +117,15 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	properties["ServerType"] = p.ServerType
 	properties["ServerSpec"] = p.ServerSpec
+	if p.ObjectCatalog != nil {
+		properties["ObjectCatalog"] = p.ObjectCatalog
+	}
+	if p.StateMachineNamespaceId != nil {
+		properties["StateMachineNamespaceId"] = p.StateMachineNamespaceId
+	}
+	if p.StateMachineVersion != nil {
+		properties["StateMachineVersion"] = p.StateMachineVersion
+	}
 	if p.CreateNotification != nil {
 		properties["CreateNotification"] = p.CreateNotification.Properties()
 	}
