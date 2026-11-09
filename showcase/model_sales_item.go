@@ -28,12 +28,14 @@ type SalesItem struct {
 	VerifyActions  []VerifyAction
 	ConsumeActions []ConsumeAction
 	AcquireActions []AcquireAction
+	Bonuses        []Bonus
 }
 
 type SalesItemOptions struct {
 	Metadata       *string
 	VerifyActions  []VerifyAction
 	ConsumeActions []ConsumeAction
+	Bonuses        []Bonus
 }
 
 func NewSalesItem(
@@ -47,6 +49,7 @@ func NewSalesItem(
 		Metadata:       options.Metadata,
 		VerifyActions:  options.VerifyActions,
 		ConsumeActions: options.ConsumeActions,
+		Bonuses:        options.Bonuses,
 	}
 	return _data
 }
@@ -77,6 +80,13 @@ func (p *SalesItem) Properties() map[string]interface{} {
 			values[i] = element.Properties()
 		}
 		properties["AcquireActions"] = values
+	}
+	{
+		values := make([]map[string]interface{}, len(p.Bonuses))
+		for i, element := range p.Bonuses {
+			values[i] = element.Properties()
+		}
+		properties["Bonuses"] = values
 	}
 	return properties
 }
