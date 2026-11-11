@@ -52,6 +52,7 @@ type Namespace struct {
 	ServerSpec           NamespaceServerSpec
 	SyncSetting          *SyncSetting
 	StateMachineSetting  *StateMachineSetting
+	ParticipantSetting   *ParticipantSetting
 	CreateNotification   *NotificationSetting
 	LogSetting           *LogSetting
 }
@@ -63,6 +64,7 @@ type NamespaceOptions struct {
 	TransactionSettingV2 *TransactionSettingV2
 	SyncSetting          *SyncSetting
 	StateMachineSetting  *StateMachineSetting
+	ParticipantSetting   *ParticipantSetting
 	CreateNotification   *NotificationSetting
 	LogSetting           *LogSetting
 }
@@ -84,6 +86,7 @@ func NewNamespace(
 		TransactionSettingV2: options.TransactionSettingV2,
 		SyncSetting:          options.SyncSetting,
 		StateMachineSetting:  options.StateMachineSetting,
+		ParticipantSetting:   options.ParticipantSetting,
 		CreateNotification:   options.CreateNotification,
 		LogSetting:           options.LogSetting,
 	}
@@ -119,6 +122,9 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.StateMachineSetting != nil {
 		properties["StateMachineSetting"] = p.StateMachineSetting.Properties()
+	}
+	if p.ParticipantSetting != nil {
+		properties["ParticipantSetting"] = p.ParticipantSetting.Properties()
 	}
 	if p.CreateNotification != nil {
 		properties["CreateNotification"] = p.CreateNotification.Properties()
