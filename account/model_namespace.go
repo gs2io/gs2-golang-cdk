@@ -38,6 +38,10 @@ type Namespace struct {
 	DoTakeOverScript                        *ScriptSetting
 	BanScript                               *ScriptSetting
 	UnBanScript                             *ScriptSetting
+	AccountDeletionSetting                  *AccountDeletionSetting
+	RequestDeletionScript                   *ScriptSetting
+	CancelDeletionScript                    *ScriptSetting
+	ExecuteDeletionScript                   *ScriptSetting
 	LogSetting                              *LogSetting
 }
 
@@ -54,6 +58,10 @@ type NamespaceOptions struct {
 	DoTakeOverScript                        *ScriptSetting
 	BanScript                               *ScriptSetting
 	UnBanScript                             *ScriptSetting
+	AccountDeletionSetting                  *AccountDeletionSetting
+	RequestDeletionScript                   *ScriptSetting
+	CancelDeletionScript                    *ScriptSetting
+	ExecuteDeletionScript                   *ScriptSetting
 	LogSetting                              *LogSetting
 }
 
@@ -76,6 +84,10 @@ func NewNamespace(
 		DoTakeOverScript:                        options.DoTakeOverScript,
 		BanScript:                               options.BanScript,
 		UnBanScript:                             options.UnBanScript,
+		AccountDeletionSetting:                  options.AccountDeletionSetting,
+		RequestDeletionScript:                   options.RequestDeletionScript,
+		CancelDeletionScript:                    options.CancelDeletionScript,
+		ExecuteDeletionScript:                   options.ExecuteDeletionScript,
 		LogSetting:                              options.LogSetting,
 	}
 	data.CdkResource = NewCdkResource(&data)
@@ -122,6 +134,18 @@ func (p *Namespace) Properties() map[string]interface{} {
 	}
 	if p.UnBanScript != nil {
 		properties["UnBanScript"] = p.UnBanScript.Properties()
+	}
+	if p.AccountDeletionSetting != nil {
+		properties["AccountDeletionSetting"] = p.AccountDeletionSetting.Properties()
+	}
+	if p.RequestDeletionScript != nil {
+		properties["RequestDeletionScript"] = p.RequestDeletionScript.Properties()
+	}
+	if p.CancelDeletionScript != nil {
+		properties["CancelDeletionScript"] = p.CancelDeletionScript.Properties()
+	}
+	if p.ExecuteDeletionScript != nil {
+		properties["ExecuteDeletionScript"] = p.ExecuteDeletionScript.Properties()
 	}
 	if p.LogSetting != nil {
 		properties["LogSetting"] = p.LogSetting.Properties()
