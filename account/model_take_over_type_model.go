@@ -22,27 +22,80 @@ import (
 
 var _ = AcquireAction{}
 
+type TakeOverTypeModelTakeOverMethod string
+
+const TakeOverTypeModelTakeOverMethodOpenIdConnect = TakeOverTypeModelTakeOverMethod("openIdConnect")
+const TakeOverTypeModelTakeOverMethodIssuedCode = TakeOverTypeModelTakeOverMethod("issuedCode")
+
+func (p TakeOverTypeModelTakeOverMethod) Pointer() *TakeOverTypeModelTakeOverMethod {
+	return &p
+}
+
 type TakeOverTypeModel struct {
 	Type                 int32
 	Metadata             *string
-	OpenIdConnectSetting OpenIdConnectSetting
+	TakeOverMethod       TakeOverTypeModelTakeOverMethod
+	OpenIdConnectSetting *OpenIdConnectSetting
+	IssuedCodeSetting    *IssuedCodeSetting
 }
 
 type TakeOverTypeModelOptions struct {
-	Metadata *string
+	Metadata             *string
+	OpenIdConnectSetting *OpenIdConnectSetting
+	IssuedCodeSetting    *IssuedCodeSetting
 }
 
 func NewTakeOverTypeModel(
 	type_ int32,
-	openIdConnectSetting OpenIdConnectSetting,
+	takeOverMethod TakeOverTypeModelTakeOverMethod,
 	options TakeOverTypeModelOptions,
 ) TakeOverTypeModel {
 	_data := TakeOverTypeModel{
 		Type:                 type_,
-		OpenIdConnectSetting: openIdConnectSetting,
+		TakeOverMethod:       takeOverMethod,
 		Metadata:             options.Metadata,
+		OpenIdConnectSetting: options.OpenIdConnectSetting,
+		IssuedCodeSetting:    options.IssuedCodeSetting,
 	}
 	return _data
+}
+
+type TakeOverTypeModelTakeOverMethodIsOpenIdConnectOptions struct {
+	Metadata *string
+}
+
+func NewTakeOverTypeModelTakeOverMethodIsOpenIdConnect(
+	type_ int32,
+	openIdConnectSetting OpenIdConnectSetting,
+	options TakeOverTypeModelTakeOverMethodIsOpenIdConnectOptions,
+) TakeOverTypeModel {
+	return NewTakeOverTypeModel(
+		type_,
+		TakeOverTypeModelTakeOverMethodOpenIdConnect,
+		TakeOverTypeModelOptions{
+			Metadata:             options.Metadata,
+			OpenIdConnectSetting: &openIdConnectSetting,
+		},
+	)
+}
+
+type TakeOverTypeModelTakeOverMethodIsIssuedCodeOptions struct {
+	Metadata *string
+}
+
+func NewTakeOverTypeModelTakeOverMethodIsIssuedCode(
+	type_ int32,
+	issuedCodeSetting IssuedCodeSetting,
+	options TakeOverTypeModelTakeOverMethodIsIssuedCodeOptions,
+) TakeOverTypeModel {
+	return NewTakeOverTypeModel(
+		type_,
+		TakeOverTypeModelTakeOverMethodIssuedCode,
+		TakeOverTypeModelOptions{
+			Metadata:          options.Metadata,
+			IssuedCodeSetting: &issuedCodeSetting,
+		},
+	)
 }
 
 func (p *TakeOverTypeModel) Properties() map[string]interface{} {
@@ -51,6 +104,12 @@ func (p *TakeOverTypeModel) Properties() map[string]interface{} {
 	if p.Metadata != nil {
 		properties["Metadata"] = p.Metadata
 	}
-	properties["OpenIdConnectSetting"] = p.OpenIdConnectSetting.Properties()
+	properties["TakeOverMethod"] = p.TakeOverMethod
+	if p.OpenIdConnectSetting != nil {
+		properties["OpenIdConnectSetting"] = p.OpenIdConnectSetting.Properties()
+	}
+	if p.IssuedCodeSetting != nil {
+		properties["IssuedCodeSetting"] = p.IssuedCodeSetting.Properties()
+	}
 	return properties
 }
