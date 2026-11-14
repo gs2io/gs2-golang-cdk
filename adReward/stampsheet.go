@@ -22,6 +22,27 @@ import (
 
 var _ = AcquireAction{}
 
+func VerifyPointByUserId(
+	namespaceName string,
+	verifyType string,
+	point int64,
+	multiplyValueSpecifyingQuantity *bool,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["verifyType"] = verifyType
+	properties["point"] = point
+	if multiplyValueSpecifyingQuantity != nil {
+		properties["multiplyValueSpecifyingQuantity"] = multiplyValueSpecifyingQuantity
+	}
+	return VerifyAction{
+		Action:  "Gs2AdReward:VerifyPointByUserId",
+		Request: properties,
+	}
+}
+
 func ConsumePointByUserId(
 	namespaceName string,
 	point int64,
