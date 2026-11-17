@@ -46,3 +46,22 @@ func VerifyIncludeParticipantByUserId(
 		Request: properties,
 	}
 }
+
+func VerifyRatingByUserId(
+	namespaceName string,
+	ratingName string,
+	verifyType string,
+	rateValue float32,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["ratingName"] = ratingName
+	properties["verifyType"] = verifyType
+	properties["rateValue"] = rateValue
+	return VerifyAction{
+		Action:  "Gs2Matchmaking:VerifyRatingByUserId",
+		Request: properties,
+	}
+}

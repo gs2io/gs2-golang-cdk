@@ -27,6 +27,18 @@ type RatingModelRef struct {
 	RatingName    string
 }
 
+func (p *RatingModelRef) VerifyRating(
+	verifyType string,
+	rateValue float32,
+) VerifyAction {
+	return VerifyRatingByUserId(
+		p.NamespaceName,
+		p.RatingName,
+		verifyType,
+		rateValue,
+	)
+}
+
 func (p *RatingModelRef) Grn() string {
 	return NewJoin(
 		":",
