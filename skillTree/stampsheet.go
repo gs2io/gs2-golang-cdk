@@ -22,6 +22,25 @@ import (
 
 var _ = AcquireAction{}
 
+func VerifyStatusByUserId(
+	namespaceName string,
+	propertyId string,
+	nodeModelName string,
+	verifyType string,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["propertyId"] = propertyId
+	properties["nodeModelName"] = nodeModelName
+	properties["verifyType"] = verifyType
+	return VerifyAction{
+		Action:  "Gs2SkillTree:VerifyStatusByUserId",
+		Request: properties,
+	}
+}
+
 func MarkRestrainByUserId(
 	namespaceName string,
 	propertyId string,
