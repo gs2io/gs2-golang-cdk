@@ -1,4 +1,4 @@
-[⇒README in English](README-en.md)
+**日本語** | [English](README-en.md) | [한국어](README-ko.md)
 
 # gs2-golang-cdk
 
