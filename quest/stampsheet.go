@@ -57,3 +57,22 @@ func CreateProgressByUserId(
 		Request: properties,
 	}
 }
+
+func VerifyCompletedQuestListByUserId(
+	namespaceName string,
+	questGroupName string,
+	questName string,
+	verifyType string,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["questGroupName"] = questGroupName
+	properties["questName"] = questName
+	properties["verifyType"] = verifyType
+	return VerifyAction{
+		Action:  "Gs2Quest:VerifyCompletedQuestListByUserId",
+		Request: properties,
+	}
+}
