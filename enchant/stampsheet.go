@@ -22,6 +22,29 @@ import (
 
 var _ = AcquireAction{}
 
+func VerifyBalanceParameterStatusByUserId(
+	namespaceName string,
+	parameterName string,
+	propertyId string,
+	parameterValueName string,
+	verifyType string,
+	parameterValue int64,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["parameterName"] = parameterName
+	properties["propertyId"] = propertyId
+	properties["parameterValueName"] = parameterValueName
+	properties["verifyType"] = verifyType
+	properties["parameterValue"] = parameterValue
+	return VerifyAction{
+		Action:  "Gs2Enchant:VerifyBalanceParameterStatusByUserId",
+		Request: properties,
+	}
+}
+
 func ReDrawBalanceParameterStatusByUserId(
 	namespaceName string,
 	parameterName string,

@@ -51,6 +51,22 @@ func (p *BalanceParameterModelRef) SetBalanceParameterStatus(
 	)
 }
 
+func (p *BalanceParameterModelRef) VerifyBalanceParameterStatus(
+	propertyId string,
+	parameterValueName string,
+	verifyType string,
+	parameterValue int64,
+) VerifyAction {
+	return VerifyBalanceParameterStatusByUserId(
+		p.NamespaceName,
+		p.ParameterName,
+		propertyId,
+		parameterValueName,
+		verifyType,
+		parameterValue,
+	)
+}
+
 func (p *BalanceParameterModelRef) Grn() string {
 	return NewJoin(
 		":",
