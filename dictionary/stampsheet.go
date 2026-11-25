@@ -39,6 +39,27 @@ func VerifyEntryByUserId(
 	}
 }
 
+func VerifyEntryCountByUserId(
+	namespaceName string,
+	verifyType string,
+	count int32,
+	entryModelNames *[]string,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	if entryModelNames != nil {
+		properties["entryModelNames"] = entryModelNames
+	}
+	properties["verifyType"] = verifyType
+	properties["count"] = count
+	return VerifyAction{
+		Action:  "Gs2Dictionary:VerifyEntryCountByUserId",
+		Request: properties,
+	}
+}
+
 func DeleteEntriesByUserId(
 	namespaceName string,
 	entryModelNames *[]string,

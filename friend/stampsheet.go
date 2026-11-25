@@ -46,3 +46,54 @@ func UpdateProfileByUserId(
 		Request: properties,
 	}
 }
+
+func VerifyFollowByUserId(
+	namespaceName string,
+	targetUserId string,
+	verifyType string,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["targetUserId"] = targetUserId
+	properties["verifyType"] = verifyType
+	return VerifyAction{
+		Action:  "Gs2Friend:VerifyFollowByUserId",
+		Request: properties,
+	}
+}
+
+func VerifyFriendByUserId(
+	namespaceName string,
+	targetUserId string,
+	verifyType string,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["targetUserId"] = targetUserId
+	properties["verifyType"] = verifyType
+	return VerifyAction{
+		Action:  "Gs2Friend:VerifyFriendByUserId",
+		Request: properties,
+	}
+}
+
+func VerifyFriendCountByUserId(
+	namespaceName string,
+	verifyType string,
+	count int32,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["verifyType"] = verifyType
+	properties["count"] = count
+	return VerifyAction{
+		Action:  "Gs2Friend:VerifyFriendCountByUserId",
+		Request: properties,
+	}
+}

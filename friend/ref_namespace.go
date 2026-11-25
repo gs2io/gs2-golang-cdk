@@ -26,6 +26,39 @@ type NamespaceRef struct {
 	NamespaceName string
 }
 
+func (p *NamespaceRef) VerifyFollow(
+	targetUserId string,
+	verifyType string,
+) VerifyAction {
+	return VerifyFollowByUserId(
+		p.NamespaceName,
+		targetUserId,
+		verifyType,
+	)
+}
+
+func (p *NamespaceRef) VerifyFriend(
+	targetUserId string,
+	verifyType string,
+) VerifyAction {
+	return VerifyFriendByUserId(
+		p.NamespaceName,
+		targetUserId,
+		verifyType,
+	)
+}
+
+func (p *NamespaceRef) VerifyFriendCount(
+	verifyType string,
+	count int32,
+) VerifyAction {
+	return VerifyFriendCountByUserId(
+		p.NamespaceName,
+		verifyType,
+		count,
+	)
+}
+
 func (p *NamespaceRef) Grn() string {
 	return NewJoin(
 		":",
