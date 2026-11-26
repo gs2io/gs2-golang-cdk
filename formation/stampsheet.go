@@ -73,6 +73,37 @@ func SetMoldCapacityByUserId(
 	}
 }
 
+func VerifyFormByUserId(
+	namespaceName string,
+	moldModelName string,
+	index int32,
+	propertyIdRegex string,
+	verifyType string,
+	count int32,
+	slotName *string,
+	countType *string,
+) VerifyAction {
+	properties := map[string]interface{}{
+		"userId": "#{userId}",
+	}
+	properties["namespaceName"] = namespaceName
+	properties["moldModelName"] = moldModelName
+	properties["index"] = index
+	if slotName != nil {
+		properties["slotName"] = slotName
+	}
+	properties["propertyIdRegex"] = propertyIdRegex
+	if countType != nil {
+		properties["countType"] = countType
+	}
+	properties["verifyType"] = verifyType
+	properties["count"] = count
+	return VerifyAction{
+		Action:  "Gs2Formation:VerifyFormByUserId",
+		Request: properties,
+	}
+}
+
 func AcquireActionsToFormProperties(
 	namespaceName string,
 	moldModelName string,

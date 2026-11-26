@@ -53,6 +53,26 @@ func (p *FormModelRef) SetForm(
 	)
 }
 
+func (p *FormModelRef) VerifyForm(
+	index int32,
+	propertyIdRegex string,
+	verifyType string,
+	count int32,
+	slotName *string,
+	countType *string,
+) VerifyAction {
+	return VerifyFormByUserId(
+		p.NamespaceName,
+		p.MoldModelName,
+		index,
+		propertyIdRegex,
+		verifyType,
+		count,
+		slotName,
+		countType,
+	)
+}
+
 func (p *FormModelRef) Grn() string {
 	return NewJoin(
 		":",
