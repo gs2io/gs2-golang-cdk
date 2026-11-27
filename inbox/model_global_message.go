@@ -29,6 +29,7 @@ type GlobalMessage struct {
 	ExpiresTimeSpan               *TimeSpan
 	ExpiresAt                     *int64
 	MessageReceptionPeriodEventId *string
+	VerifyActions                 []VerifyAction
 }
 
 type GlobalMessageOptions struct {
@@ -36,6 +37,7 @@ type GlobalMessageOptions struct {
 	ExpiresTimeSpan               *TimeSpan
 	ExpiresAt                     *int64
 	MessageReceptionPeriodEventId *string
+	VerifyActions                 []VerifyAction
 }
 
 func NewGlobalMessage(
@@ -50,6 +52,7 @@ func NewGlobalMessage(
 		ExpiresTimeSpan:               options.ExpiresTimeSpan,
 		ExpiresAt:                     options.ExpiresAt,
 		MessageReceptionPeriodEventId: options.MessageReceptionPeriodEventId,
+		VerifyActions:                 options.VerifyActions,
 	}
 	return _data
 }
@@ -73,6 +76,13 @@ func (p *GlobalMessage) Properties() map[string]interface{} {
 	}
 	if p.MessageReceptionPeriodEventId != nil {
 		properties["MessageReceptionPeriodEventId"] = p.MessageReceptionPeriodEventId
+	}
+	{
+		values := make([]map[string]interface{}, len(p.VerifyActions))
+		for i, element := range p.VerifyActions {
+			values[i] = element.Properties()
+		}
+		properties["VerifyActions"] = values
 	}
 	return properties
 }
